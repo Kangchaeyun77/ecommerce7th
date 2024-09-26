@@ -72,6 +72,7 @@
   <img src="https://img.shields.io/badge/github-181717?style=for-the-badge&logo=github&logoColor=white">
   <img src="https://img.shields.io/badge/git-F05032?style=for-the-badge&logo=git&logoColor=white">
 </div>
+
 ## 2. 프로젝트 헌장
 -  프로젝트명: 행복한 발걸음(Happy Steps)
 - 개요:<br>
