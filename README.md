@@ -85,7 +85,7 @@
     -  IV.진료가 어려운 소동물이 이용 가능한 병원에 대한 정보제공
 - 배경:<br>
 	https://www.mpmbc.co.kr/NewsArticle/1419128 <br>
-	https://www.ilyoseoul.co.kr/news/articleView.html?idxno=491423
+	https://www.ilyoseoul.co.kr/news/articleView.html?idxno=491423<br>
 	https://www.hankyung.com/article/2024022615107 
 	
 ## 3. 프로젝트 관리
