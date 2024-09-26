@@ -86,6 +86,7 @@
 - 배경:<br>
 	https://www.mpmbc.co.kr/NewsArticle/1419128 <br>
 	https://www.ilyoseoul.co.kr/news/articleView.html?idxno=491423
+	https://www.hankyung.com/article/2024022615107 
 	
 ## 3. 프로젝트 관리
 - 의견제시, 공유 및 취합 방법 선정:
