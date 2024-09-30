@@ -74,7 +74,7 @@ public class MainWeb {
 	 * @param response [응답 서블릿]
 	 * @return ModelAndView
 	 * 
-	 * @since 2024-06-26
+	 * @since 2024-09-30
 	 * <p>DESCRIPTION:</p>
 	 * <p>IMPORTANT:</p>
 	 * <p>EXAMPLE:</p>
