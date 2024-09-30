@@ -34,7 +34,7 @@
 	<meta http-equiv="pragma" content="no-cache" />
 	<meta http-equiv="expires" content="0" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>::: e-Commerce7th :::</title>
+	<title>:::HappySteps 행복한 발걸음 :::</title>
 	<link rel="shortcut icon" href="/image/favicon.ico" />
 	<link rel="apple-touch-icon" href="/image/apple-touch-icon.png" />
 	<link rel="stylesheet" type="text/css" title="common stylesheet" href="/css/common.css" />
