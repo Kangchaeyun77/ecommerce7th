@@ -17,7 +17,7 @@
 		<param name="encoding" value="UTF-8" />
 		<param name="threshold" value="debug" />
 		<param name="ImmediateFlush" value="true" />
-		<param name="File" value="D:/Business/Eclipse/dirLog/com.github.ecommerce7th.jupiter/com.github.ecommerce7th.jupiter.log" />
+		<param name="File" value="D:/Business/Eclipse/_dirLog/com.github.ecommerce7th.jupiter/com.github.ecommerce7th.jupiter.log" />
 		
 		
 		<param name="DatePattern" value="'.'yyyy-MM-dd" />
