@@ -18,7 +18,7 @@
  * History		: [NO][Programmer][Description]
  *				: [20240930171159][rkdcodbs77#naver.com][CREATE: Initial Release]
  */
-package front.main.controller;
+package com.happySteps.front.main.controller;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -29,7 +29,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-import front.main.controller.MainWeb;
+import com.happySteps.front.main.controller.MainWeb;
 
 /**
  * @version 1.0.0

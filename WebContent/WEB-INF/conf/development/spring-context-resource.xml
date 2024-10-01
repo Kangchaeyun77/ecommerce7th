@@ -52,7 +52,7 @@
 		</constructor-arg>
 	</bean>
 	
-	<context:component-scan base-package="kr.co.himedia.ecommerce">
+	<context:component-scan base-package="com.github.ecommerce7th.jupiter">
 		<context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller" />
 	</context:component-scan>
 	
@@ -69,7 +69,7 @@
 	</bean>	
 	<bean name="ssfSeller" class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="dataSource" ref="dsSeller" />
-		<property name="configLocation" value="classpath:kr/co/himedia/ecommerce/seller/mybatis/config.xml" />
+		<property name="configLocation" value="classpath:com/github/ecommerce7th/jupiter/seller/mybatis/config.xml" />
 	</bean>	
 	<bean name="sqlSessionSeller" class="org.mybatis.spring.SqlSessionTemplate">
 		<constructor-arg index="0" ref="ssfSeller" />
@@ -88,7 +88,7 @@
 	</bean>	
 	<bean name="ssfFront" class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="dataSource" ref="dsFront" />
-		<property name="configLocation" value="classpath:kr/co/himedia/ecommerce/front/mybatis/config.xml" />
+		<property name="configLocation" value="classpath:com/github/ecommerce7th/jupiter/front/mybatis/config.xml" />
 	</bean>	
 	<bean name="sqlSessionFront" class="org.mybatis.spring.SqlSessionTemplate">
 		<constructor-arg index="0" ref="ssfFront" />
@@ -107,7 +107,7 @@
 	</bean>	
 	<bean name="ssfBackoffice" class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="dataSource" ref="dsBackoffice" />
-		<property name="configLocation" value="classpath:kr/co/himedia/ecommerce/backoffice/mybatis/config.xml" />
+		<property name="configLocation" value="classpath:com/github/ecommerce7th/jupiter/backoffice/mybatis/config.xml" />
 	</bean>	
 	<bean name="sqlSessionBackoffice" class="org.mybatis.spring.SqlSessionTemplate">
 		<constructor-arg index="0" ref="ssfBackoffice" />
@@ -126,7 +126,7 @@
 	</bean>	
 	<bean name="ssfCommon" class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="dataSource" ref="dsCommon" />
-		<property name="configLocation" value="classpath:kr/co/himedia/ecommerce/common/mybatis/config.xml" />
+		<property name="configLocation" value="classpath:com/github/ecommerce7th/jupiter/src/com/happySteps/mybatis/config.xml" />
 	</bean>	
 	<bean name="sqlSessionCommon" class="org.mybatis.spring.SqlSessionTemplate">
 		<constructor-arg index="0" ref="ssfCommon" />
