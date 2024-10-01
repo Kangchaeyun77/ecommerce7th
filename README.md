@@ -1,5 +1,3 @@
-테스트
-
 # kr.co.himedia.sn.ecommerce7th
 
 ## 0. 팀 구성 및 저장소(GitHub)
