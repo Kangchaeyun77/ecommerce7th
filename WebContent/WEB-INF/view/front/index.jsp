@@ -1,31 +1,59 @@
+<%
+/**
+ * YOU ARE STRICTLY PROHIBITED TO COPY, DISCLOSE, DISTRIBUTE, MODIFY OR USE THIS PROGRAM
+ * IN PART OR AS A WHOLE WITHOUT THE PRIOR WRITTEN CONSENT OF HIMEDIA.CO.KR.
+ * HIMEDIA.CO.KR OWNS THE INTELLECTUAL PROPERTY RIGHTS IN AND TO THIS PROGRAM.
+ * COPYRIGHT (C) 2024 HIMEDIA.CO.KR ALL RIGHTS RESERVED.
+ *
+ * 하기 프로그램에 대한 저작권을 포함한 지적재산권은 himedia.co.kr에 있으며,
+ * himedia.co.kr이 명시적으로 허용하지 않는 사용, 복사, 변경 및 제 3자에 의한 공개, 배포는 엄격히 금지되며
+ * himedia.co.kr의 지적재산권 침해에 해당된다.
+ * Copyright (C) 2024 happySteps All Rights Reserved.
+ *
+ *
+ * Program		: com.happySteps
+ * Description	:
+ * Environment	: JRE 1.7 or more
+ * File			:
+ * Notes		:
+ * History		: [NO][Programmer][Description]
+ *				: [2024-10-01][rkdcodbs77#naevr.com][CREATE: Initial Release]
+ */
+%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" trimDirectiveWhitespaces="true" %>
+<%@ page info="/index.jsp" %>
 <!DOCTYPE html>
 <html>
 <head>
+	<meta charset="UTF-8">
+	<meta http-equiv="cache-control" content="no-cache" />
+	<meta http-equiv="pragma" content="no-cache" />
 	<%@ include file="/include/front/header.jsp" %>
 </head>
+<!-- 배너 영역 -->
 <section id="banner" style="background: #F9F3EC;">
 	<div class="container">
 		<div class="swiper main-swiper">
-		<div class="swiper-wrapper">
-		<div class="swiper-slide py-5">
-		<div class="row banner-content align-items-center">
-              <div class="img-wrapper col-md-5">
-                <img src="../images/banner-img.png" class="img-fluid">
-              </div>
-              <div class="content-wrapper col-md-7 p-5 mb-5">
-                <div class="secondary-font text-primary text-uppercase mb-4">Save 10 - 20 % off</div>
-                <h2 class="banner-title display-1 fw-normal">Best destination for <span class="text-primary">your
-                    pets</span>
-                </h2>
-                <a href="#" class="btn btn-outline-dark btn-lg text-uppercase fs-6 rounded-1">
-                  shop now
-                  <svg width="24" height="24" viewBox="0 0 24 24" class="mb-1">
-                    <use xlink:href="#arrow-right"></use>
-                  </svg></a>
-              </div>
-
-            </div>
-          </div>
+			<div class="swiper-wrapper">
+				<div class="swiper-slide py-5">
+					<div class="row banner-content align-items-center">
+						<div class="img-wrapper col-md-5">
+							<img src="../images/banner-img.png" class="img-fluid">
+						</div>
+						<div class="content-wrapper col-md-7 p-5 mb-5">
+							<div class="secondary-font text-primary text-uppercase mb-4">사랑하는 내 반려동물을 위해서</div>
+							<h2 class="banner-title display-1 fw-normal">Best destination for <span class="text-primary">your
+								pets</span>
+							</h2>
+							<a href="#" class="btn btn-outline-dark btn-lg text-uppercase fs-6 rounded-1">
+								shop now
+								<svg width="24" height="24" viewBox="0 0 24 24" class="mb-1">
+									<use xlink:href="#arrow-right"></use>
+								</svg>
+							</a>
+						</div>
+					</div>
+				</div>
           <div class="swiper-slide py-5">
             <div class="row banner-content align-items-center">
               <div class="img-wrapper col-md-5">
