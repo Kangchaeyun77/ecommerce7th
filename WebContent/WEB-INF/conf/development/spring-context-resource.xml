@@ -88,7 +88,7 @@
 	</bean>	
 	<bean name="ssfFront" class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="dataSource" ref="dsFront" />
-		<property name="configLocation" value="classpath:com/github/ecommerce7th/jupiter/front/mybatis/config.xml" />
+		<property name="configLocation" value="classpath:com/happySteps/front/mybatis/config.xml" />
 	</bean>	
 	<bean name="sqlSessionFront" class="org.mybatis.spring.SqlSessionTemplate">
 		<constructor-arg index="0" ref="ssfFront" />
@@ -107,7 +107,7 @@
 	</bean>	
 	<bean name="ssfBackoffice" class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="dataSource" ref="dsBackoffice" />
-		<property name="configLocation" value="classpath:com/github/ecommerce7th/jupiter/backoffice/mybatis/config.xml" />
+		<property name="configLocation" value="classpath:com/happySteps/backoffice/mybatis/config.xml" />
 	</bean>	
 	<bean name="sqlSessionBackoffice" class="org.mybatis.spring.SqlSessionTemplate">
 		<constructor-arg index="0" ref="ssfBackoffice" />
@@ -126,7 +126,7 @@
 	</bean>	
 	<bean name="ssfCommon" class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="dataSource" ref="dsCommon" />
-		<property name="configLocation" value="classpath:com/github/ecommerce7th/jupiter/src/com/happySteps/mybatis/config.xml" />
+		<property name="configLocation" value="classpath:com/happySteps/mybatis/config.xml" />
 	</bean>	
 	<bean name="sqlSessionCommon" class="org.mybatis.spring.SqlSessionTemplate">
 		<constructor-arg index="0" ref="ssfCommon" />
