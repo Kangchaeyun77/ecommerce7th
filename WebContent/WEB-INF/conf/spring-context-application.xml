@@ -63,6 +63,7 @@
 			<beans:bean class="com.happySteps.common.interceptor.BackofficeItrc" >
 			</beans:bean>
 		</interceptor>
+		<!-- 
 		<interceptor>
 			<mvc:mapping path="/seller/**" />
 			<exclude-mapping path="/seller/index.web" />
@@ -76,6 +77,7 @@
 			<beans:bean class="com.happySteps.seller.common.interceptor.SellerItrc" >
 			</beans:bean>
 		</interceptor>
+		 -->
 		<interceptor>
 			<mvc:mapping path="/front/**" />
 			<exclude-mapping path="/front/index.web" />
