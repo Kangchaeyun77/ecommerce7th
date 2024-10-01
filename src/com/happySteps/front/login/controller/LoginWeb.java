@@ -52,7 +52,7 @@ import com.happySteps.util.servlet.Request;
  * <p>DESCRIPTION: 로그인 컨트롤러</p>
  * <p>IMPORTANT:</p>
  */
-@Controller("kr.co.himedia.ecommerce.front.login.controller.LoginWeb")
+@Controller("com.happySteps.front.login.controller.LoginWeb")
 public class LoginWeb extends Common {
 	
 	@Autowired

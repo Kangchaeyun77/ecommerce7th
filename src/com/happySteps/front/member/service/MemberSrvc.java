@@ -41,7 +41,7 @@ import com.happySteps.front.member.dto.TermAgreeDto;
  * <p>DESCRIPTION:</p>
  * <p>IMPORTANT:</p>
  */
-@Service("kr.co.himedia.ecommerce.front.member.service.MemberSrvc")
+@Service("com.happySteps.front.member.service.MemberSrvc")
 public class MemberSrvc {
 	
 	@Inject

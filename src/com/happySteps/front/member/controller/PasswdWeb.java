@@ -47,7 +47,7 @@ import com.happySteps.util.security.HSwithSHA;
  * <p>DESCRIPTION:</p>
  * <p>IMPORTANT:</p>
  */
-@Controller("kr.co.himedia.ecommerce.front.member.controller.PasswdWeb")
+@Controller("com.happySteps.front.member.controller.PasswdWeb")
 public class PasswdWeb extends Common {
 	
 	/** Logger */

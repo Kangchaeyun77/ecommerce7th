@@ -52,7 +52,7 @@ import com.happySteps.util.security.SKwithAES;
  * <p>DESCRIPTION: 회원 컨트롤러</p>
  * <p>IMPORTANT:</p>
  */
-@Controller("kr.co.himedia.ecommerce.front.member.controller.MemberWeb")
+@Controller("com.happySteps.front.member.controller.MemberWeb")
 public class MemberWeb extends Common {
 	
 	/** Logger */

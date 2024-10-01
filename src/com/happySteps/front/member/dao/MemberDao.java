@@ -33,42 +33,42 @@ import com.happySteps.front.member.dto.MemberDto;
  * <p>DESCRIPTION:</p>
  * <p>IMPORTANT:</p>
  */
-@Repository("kr.co.himedia.ecommerce.front.member.dao.MemberDao")
+@Repository("com.happySteps.front.member.dao.MemberDao")
 public class MemberDao extends BaseDao {
 	
 	public int selectDuplicate(MemberDto memberDto) {
-		return sqlSessionFront.selectOne("kr.co.himedia.ecommerce.front.mybatis.member.Member.selectDuplicate", memberDto);
+		return sqlSessionFront.selectOne("com.happySteps.front.mybatis.member.Member.selectDuplicate", memberDto);
 	}
 	
 	public int sequence() {
-		return sqlSessionFront.selectOne("kr.co.himedia.ecommerce.front.mybatis.member.Member.sequence");
+		return sqlSessionFront.selectOne("com.happySteps.front.mybatis.member.Member.sequence");
 	}
 	
 	public int insertMaster(MemberDto memberDto) {
-		return sqlSessionFront.insert("kr.co.himedia.ecommerce.front.mybatis.member.Member.insertMaster", memberDto);
+		return sqlSessionFront.insert("com.happySteps.front.mybatis.member.Member.insertMaster", memberDto);
 	}
 	
 	public int insertDetail(MemberDto memberDto) {
-		return sqlSessionFront.insert("kr.co.himedia.ecommerce.front.mybatis.member.Member.insertDetail", memberDto);
+		return sqlSessionFront.insert("com.happySteps.mybatis.front.member.Member.insertDetail", memberDto);
 	}
 	
 	public int updateMaster(MemberDto memberDto) {
-		return sqlSessionFront.update("kr.co.himedia.ecommerce.front.mybatis.member.Member.updateMaster", memberDto);
+		return sqlSessionFront.update("com.happySteps.front.mybatis.member.Member.updateMaster", memberDto);
 	}
 	
 	public int updateDetail(MemberDto memberDto) {
-		return sqlSessionFront.update("kr.co.himedia.ecommerce.front.mybatis.member.Member.updateDetail", memberDto);
+		return sqlSessionFront.update("com.happySteps.front.mybatis.member.Member.updateDetail", memberDto);
 	}
 		
 	public MemberDto select(MemberDto memberDto) {
-		return sqlSessionFront.selectOne("kr.co.himedia.ecommerce.front.mybatis.member.Member.select", memberDto);
+		return sqlSessionFront.selectOne("com.happySteps.front.mybatis.member.Member.select", memberDto);
 	}
 	
 	public MemberDto selectPasswd(MemberDto memberDto) {
-		return sqlSessionFront.selectOne("kr.co.himedia.ecommerce.front.mybatis.member.Member.selectPasswd", memberDto);
+		return sqlSessionFront.selectOne("com.happySteps.front.mybatis.member.Member.selectPasswd", memberDto);
 	}
 	
 	public int updatePasswd(MemberDto memberDto) {
-		return sqlSessionFront.update("kr.co.himedia.ecommerce.front.mybatis.member.Member.updatePasswd", memberDto);
+		return sqlSessionFront.update("com.happySteps.front.mybatis.member.Member.updatePasswd", memberDto);
 	}
 }

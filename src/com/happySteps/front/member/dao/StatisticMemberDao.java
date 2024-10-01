@@ -33,10 +33,10 @@ import com.happySteps.front.member.dto.StatisticMemberDto;
  * <p>DESCRIPTION:</p>
  * <p>IMPORTANT:</p>
  */
-@Repository("kr.co.himedia.ecommerce.front.member.dao.StatisticMemberDao")
+@Repository("com.happySteps.front.member.dao.StatisticMemberDao")
 public class StatisticMemberDao extends BaseDao {
 	
 	public int insert(StatisticMemberDto statisticMemberDto) {
-		return sqlSessionFront.insert("kr.co.himedia.ecommerce.front.mybatis.member.StatisticMember.insert", statisticMemberDto); 
+		return sqlSessionFront.insert("com.happySteps.front.mybatis.member.StatisticMember.insert", statisticMemberDto); 
 	}
 }

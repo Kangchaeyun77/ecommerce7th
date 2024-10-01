@@ -40,7 +40,7 @@ import com.happySteps.util.servlet.Request;
  * <p>DESCRIPTION:</p>
  * <p>IMPORTANT:</p>
  */
-@Component("kr.co.himedia.ecommerce.front.common.component.SessionCmpn")
+@Component("com.happySteps.front.common.component.SessionCmpn")
 public class SessionCmpn {
 	
 	/** Logger */

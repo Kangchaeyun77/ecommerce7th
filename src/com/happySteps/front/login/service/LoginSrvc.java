@@ -38,7 +38,7 @@ import com.happySteps.front.member.dto.MemberDto;
  * <p>DESCRIPTION:</p>
  * <p>IMPORTANT:</p>
  */
-@Service("kr.co.himedia.ecommerce.front.login.service.LoginSrvc")
+@Service("com.happySteps.front.login.service.LoginSrvc")
 public class LoginSrvc {
 	
 	@Inject

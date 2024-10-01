@@ -33,14 +33,14 @@ import com.happySteps.front.member.dto.TermAgreeDto;
  * <p>DESCRIPTION:</p>
  * <p>IMPORTANT:</p>
  */
-@Repository("kr.co.himedia.ecommerce.front.member.dao.TermAgreeDao")
+@Repository("com.happySteps.front.member.dao.TermAgreeDao")
 public class TermAgreeDao extends BaseDao {
 	
 	public int sequence() {
-		return sqlSessionFront.selectOne("kr.co.himedia.ecommerce.front.mybatis.member.TermAgree.sequence");
+		return sqlSessionFront.selectOne("com.happySteps.front.mybatis.member.TermAgree.sequence");
 	}
 	
 	public int insert(TermAgreeDto termAgreeDto) {
-		return sqlSessionFront.insert("kr.co.himedia.ecommerce.front.mybatis.member.TermAgree.insert", termAgreeDto);
+		return sqlSessionFront.insert("com.happySteps.front.mybatis.member.TermAgree.insert", termAgreeDto);
 	}
 }

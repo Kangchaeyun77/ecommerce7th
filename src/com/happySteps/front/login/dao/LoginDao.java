@@ -34,16 +34,16 @@ import com.happySteps.front.member.dto.MemberDto;
  * <p>DESCRIPTION:</p>
  * <p>IMPORTANT:</p>
  */
-@Repository("kr.co.himedia.ecommerce.front.login.dao.LoginDao")
+@Repository("com.happySteps.front.login.dao.LoginDao")
 public class LoginDao extends BaseDao {
 	
 	public int updateLast(MemberDto memberDto) {
-		return sqlSessionFront.update("kr.co.himedia.ecommerce.front.mybatis.login.Login.updateLast", memberDto);
+		return sqlSessionFront.update("com.happySteps.front.mybatis.login.Login.updateLast", memberDto);
 	}
 	
 	public MemberDto exist(LoginDto loginDto) {
 		
-		return sqlSessionFront.selectOne("kr.co.himedia.ecommerce.front.mybatis.login.Login.exist", loginDto);
+		return sqlSessionFront.selectOne("com.happySteps.front.mybatis.login.Login.exist", loginDto);
 		
 		/*
 		MemberDto memberDto = null;

@@ -1,15 +1,14 @@
 <!DOCTYPE html>
 <html>
- <head>
-  	<%@ include file="/include/front/header.jsp" %>
- </head>
-  <section id="banner" style="background: #F9F3EC;">
-    <div class="container">
-      <div class="swiper main-swiper">
-        <div class="swiper-wrapper">
-
-          <div class="swiper-slide py-5">
-            <div class="row banner-content align-items-center">
+<head>
+	<%@ include file="/include/front/header.jsp" %>
+</head>
+<section id="banner" style="background: #F9F3EC;">
+	<div class="container">
+		<div class="swiper main-swiper">
+		<div class="swiper-wrapper">
+		<div class="swiper-slide py-5">
+		<div class="row banner-content align-items-center">
               <div class="img-wrapper col-md-5">
                 <img src="../images/banner-img.png" class="img-fluid">
               </div>
