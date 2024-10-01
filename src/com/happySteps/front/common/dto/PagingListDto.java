@@ -13,37 +13,37 @@
  * Program		: kr.co.himedia.ecommerce
  * Description	:
  * Environment	: JRE 1.7 or more
- * File			: LoginDto.java
+ * File			: PagingListDto.java
  * Notes		:
  * History		: [NO][Programmer][Description]
- *				: [20240617175126][pluto@himedia.co.kr][CREATE: Initial Release]
+ *				: [20240807120945][pluto@himedia.co.kr][CREATE: Initial Release]
  */
-package kr.co.himedia.ecommerce.front.login.dto;
+package com.happySteps.front.common.dto;
 
 /**
  * @version 1.0.0
  * @author pluto@himedia.co.kr
  * 
- * @since 2024-06-17
- * <p>DESCRIPTION: 로그인 빈(Bean)</p>
+ * @since 2024-08-07
+ * <p>DESCRIPTION:</p>
  * <p>IMPORTANT:</p>
  */
-public class LoginDto {
+public class PagingListDto {
 	
-	private String email	= "";
-	private String passwd	= "";
+	private PagingDto paging	= null;
+	private Object list			= null;
 	
 	
-	public String getEmail() {
-		return email;
+	public PagingDto getPaging() {
+		return paging;
 	}
-	public void setEmail(String email) {
-		this.email = email;
+	public void setPaging(PagingDto paging) {
+		this.paging = paging;
 	}
-	public String getPasswd() {
-		return passwd;
+	public Object getList() {
+		return list;
 	}
-	public void setPasswd(String passwd) {
-		this.passwd = passwd;
+	public void setList(Object list) {
+		this.list = list;
 	}
 }

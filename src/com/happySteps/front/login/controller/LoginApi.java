@@ -18,7 +18,7 @@
  * History		: [NO][Programmer][Description]
  *				: [20240820173018][pluto@himedia.co.kr][CREATE: Initial Release]
  */
-package kr.co.himedia.ecommerce.front.login.controller;
+package com.happySteps.front.login.controller;
 
 import java.util.Properties;
 
@@ -33,12 +33,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import kr.co.himedia.ecommerce.front.common.Common;
-import kr.co.himedia.ecommerce.front.login.dto.LoginDto;
-import kr.co.himedia.ecommerce.front.login.service.LoginSrvc;
-import kr.co.himedia.ecommerce.front.member.dto.MemberDto;
-import kr.co.himedia.ecommerce.util.security.HSwithSHA;
-import kr.co.himedia.ecommerce.util.security.SKwithAES;
+import com.happySteps.front.common.Common;
+import com.happySteps.front.login.dto.LoginDto;
+import com.happySteps.front.login.service.LoginSrvc;
+import com.happySteps.front.member.dto.MemberDto;
+import com.happySteps.util.security.HSwithSHA;
+import com.happySteps.util.security.SKwithAES;
 
 /**
  * @version 1.0.0

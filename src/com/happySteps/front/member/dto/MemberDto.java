@@ -18,7 +18,7 @@
  * History		: [NO][Programmer][Description]
  *				: [20240620130553][pluto@himedia.co.kr][CREATE: Initial Release]
  */
-package kr.co.himedia.ecommerce.front.member.dto;
+package com.happySteps.front.member.dto;
 
 /**
  * @version 1.0.0

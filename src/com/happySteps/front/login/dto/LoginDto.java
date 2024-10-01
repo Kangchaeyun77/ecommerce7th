@@ -13,34 +13,37 @@
  * Program		: kr.co.himedia.ecommerce
  * Description	:
  * Environment	: JRE 1.7 or more
- * File			: TermAgreeDao.java
+ * File			: LoginDto.java
  * Notes		:
  * History		: [NO][Programmer][Description]
- *				: [20240807163239][pluto@himedia.co.kr][CREATE: Initial Release]
+ *				: [20240617175126][pluto@himedia.co.kr][CREATE: Initial Release]
  */
-package kr.co.himedia.ecommerce.front.member.dao;
-
-import org.springframework.stereotype.Repository;
-
-import kr.co.himedia.ecommerce.front.common.dao.BaseDao;
-import kr.co.himedia.ecommerce.front.member.dto.TermAgreeDto;
+package com.happySteps.front.login.dto;
 
 /**
  * @version 1.0.0
  * @author pluto@himedia.co.kr
  * 
- * @since 2024-08-07
- * <p>DESCRIPTION:</p>
+ * @since 2024-06-17
+ * <p>DESCRIPTION: 로그인 빈(Bean)</p>
  * <p>IMPORTANT:</p>
  */
-@Repository("kr.co.himedia.ecommerce.front.member.dao.TermAgreeDao")
-public class TermAgreeDao extends BaseDao {
+public class LoginDto {
 	
-	public int sequence() {
-		return sqlSessionFront.selectOne("kr.co.himedia.ecommerce.front.mybatis.member.TermAgree.sequence");
+	private String email	= "";
+	private String passwd	= "";
+	
+	
+	public String getEmail() {
+		return email;
 	}
-	
-	public int insert(TermAgreeDto termAgreeDto) {
-		return sqlSessionFront.insert("kr.co.himedia.ecommerce.front.mybatis.member.TermAgree.insert", termAgreeDto);
+	public void setEmail(String email) {
+		this.email = email;
+	}
+	public String getPasswd() {
+		return passwd;
+	}
+	public void setPasswd(String passwd) {
+		this.passwd = passwd;
 	}
 }

@@ -13,65 +13,37 @@
  * Program		: kr.co.himedia.ecommerce
  * Description	:
  * Environment	: JRE 1.7 or more
- * File			: TermAgreeDto.java
+ * File			: StatisticMemberDto.java
  * Notes		:
  * History		: [NO][Programmer][Description]
- *				: [20240807162645][pluto@himedia.co.kr][CREATE: Initial Release]
+ *				: [20240813155732][pluto@himedia.co.kr][CREATE: Initial Release]
  */
-package kr.co.himedia.ecommerce.front.member.dto;
+package com.happySteps.front.member.dto;
 
 /**
  * @version 1.0.0
  * @author pluto@himedia.co.kr
  * 
- * @since 2024-08-07
+ * @since 2024-08-13
  * <p>DESCRIPTION:</p>
  * <p>IMPORTANT:</p>
  */
-public class TermAgreeDto {
-
-	private int		seq_trm_agr	= 0;
-	private int		seq_mbr		= 0;
-	private int		seq_trm		= 0;
-	private String	flg_agr		= "";
-	private String	dt_reg		= "";
-	private int		register	= 0;
+public class StatisticMemberDto {
+	
+	private int seq_mbr		= 0;
+	private String post		= "";
 	
 	
-	public int getSeq_trm_agr() {
-		return seq_trm_agr;
-	}
-	public void setSeq_trm_agr(int seq_trm_agr) {
-		this.seq_trm_agr = seq_trm_agr;
-	}
 	public int getSeq_mbr() {
 		return seq_mbr;
 	}
 	public void setSeq_mbr(int seq_mbr) {
 		this.seq_mbr = seq_mbr;
 	}
-	public int getSeq_trm() {
-		return seq_trm;
+	public String getPost() {
+		return post;
 	}
-	public void setSeq_trm(int seq_trm) {
-		this.seq_trm = seq_trm;
-	}
-	public String getFlg_agr() {
-		return flg_agr;
-	}
-	public void setFlg_agr(String flg_agr) {
-		this.flg_agr = flg_agr;
-	}
-	public String getDt_reg() {
-		return dt_reg;
-	}
-	public void setDt_reg(String dt_reg) {
-		this.dt_reg = dt_reg;
-	}
-	public int getRegister() {
-		return register;
-	}
-	public void setRegister(int register) {
-		this.register = register;
+	public void setPost(String post) {
+		this.post = post;
 	}
 }

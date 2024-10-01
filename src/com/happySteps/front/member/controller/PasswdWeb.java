@@ -18,7 +18,7 @@
  * History		: [NO][Programmer][Description]
  *				: [20240801164940][whslsl88@gmail.com][CREATE: Initial Release]
  */
-package kr.co.himedia.ecommerce.front.member.controller;
+package com.happySteps.front.member.controller;
 
 
 
@@ -27,22 +27,16 @@ import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 import org.springframework.stereotype.Controller;
-
 import org.springframework.web.bind.annotation.RequestMapping;
-
 import org.springframework.web.servlet.ModelAndView;
 
-
-import kr.co.himedia.ecommerce.front.common.Common;
-
-import kr.co.himedia.ecommerce.front.member.dto.MemberDto;
-import kr.co.himedia.ecommerce.front.member.service.MemberSrvc;
-import kr.co.himedia.ecommerce.util.security.HSwithSHA;
+import com.happySteps.front.common.Common;
+import com.happySteps.front.member.dto.MemberDto;
+import com.happySteps.front.member.service.MemberSrvc;
+import com.happySteps.util.security.HSwithSHA;
 
 
 /**

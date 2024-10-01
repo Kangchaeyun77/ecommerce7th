@@ -18,7 +18,7 @@
  * History		: [NO][Programmer][Description]
  *				: [20240624162606][pluto#himedia.co.kr][CREATE: Initial Release]
  */
-package kr.co.himedia.ecommerce.front.login.service;
+package com.happySteps.front.login.service;
 
 import javax.inject.Inject;
 
@@ -26,9 +26,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.interceptor.TransactionAspectSupport;
 
-import kr.co.himedia.ecommerce.front.login.dao.LoginDao;
-import kr.co.himedia.ecommerce.front.login.dto.LoginDto;
-import kr.co.himedia.ecommerce.front.member.dto.MemberDto;
+import com.happySteps.front.login.dao.LoginDao;
+import com.happySteps.front.login.dto.LoginDto;
+import com.happySteps.front.member.dto.MemberDto;
 
 /**
  * @version 1.0.0

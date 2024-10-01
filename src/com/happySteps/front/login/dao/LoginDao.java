@@ -18,13 +18,13 @@
  * History		: [NO][Programmer][Description]
  *				: [20240624162713][pluto#himedia.co.kr][CREATE: Initial Release]
  */
-package kr.co.himedia.ecommerce.front.login.dao;
+package com.happySteps.front.login.dao;
 
 import org.springframework.stereotype.Repository;
 
-import kr.co.himedia.ecommerce.front.common.dao.BaseDao;
-import kr.co.himedia.ecommerce.front.login.dto.LoginDto;
-import kr.co.himedia.ecommerce.front.member.dto.MemberDto;
+import com.happySteps.front.common.dao.BaseDao;
+import com.happySteps.front.login.dto.LoginDto;
+import com.happySteps.front.member.dto.MemberDto;
 
 /**
  * @version 1.0.0

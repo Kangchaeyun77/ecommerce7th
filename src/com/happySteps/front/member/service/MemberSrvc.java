@@ -18,7 +18,7 @@
  * History		: [NO][Programmer][Description]
  *				: [20240625105426][one4027one#himedia.co.kr][CREATE: Initial Release]
  */
-package kr.co.himedia.ecommerce.front.member.service;
+package com.happySteps.front.member.service;
 
 import javax.inject.Inject;
 
@@ -26,12 +26,12 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.interceptor.TransactionAspectSupport;
 
-import kr.co.himedia.ecommerce.front.member.dao.MemberDao;
-import kr.co.himedia.ecommerce.front.member.dao.StatisticMemberDao;
-import kr.co.himedia.ecommerce.front.member.dao.TermAgreeDao;
-import kr.co.himedia.ecommerce.front.member.dto.MemberDto;
-import kr.co.himedia.ecommerce.front.member.dto.StatisticMemberDto;
-import kr.co.himedia.ecommerce.front.member.dto.TermAgreeDto;
+import com.happySteps.front.member.dao.MemberDao;
+import com.happySteps.front.member.dao.StatisticMemberDao;
+import com.happySteps.front.member.dao.TermAgreeDao;
+import com.happySteps.front.member.dto.MemberDto;
+import com.happySteps.front.member.dto.StatisticMemberDto;
+import com.happySteps.front.member.dto.TermAgreeDto;
 
 /**
  * @version 1.0.0
