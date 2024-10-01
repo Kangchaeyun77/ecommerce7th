@@ -60,7 +60,7 @@
 			<exclude-mapping path="/console/login/logout.web" />
 			<exclude-mapping path="/console/**/*.json" />
 			<exclude-mapping path="/console/**/*.api" />
-			<beans:bean class="com.github.ecommerce7th.jupiter.src.com.happySteps.common.interceptor.BackofficeItrc" >
+			<beans:bean class="com.happySteps.common.interceptor.BackofficeItrc" >
 			</beans:bean>
 		</interceptor>
 		<interceptor>
@@ -73,7 +73,7 @@
 			<exclude-mapping path="/seller/login/logout.web" />
 			<exclude-mapping path="/seller/**/*.json" />
 			<exclude-mapping path="/seller/**/*.api" />
-			<beans:bean class="com.github.ecommerce7th.jupiter.src.com.happySteps.seller.common.interceptor.SellerItrc" >
+			<beans:bean class="com.happySteps.seller.common.interceptor.SellerItrc" >
 			</beans:bean>
 		</interceptor>
 		<interceptor>
@@ -94,7 +94,7 @@
 			<exclude-mapping path="/front/login/logout.web" />
 			<exclude-mapping path="/front/**/*.json" />
 			<exclude-mapping path="/front/**/*.api" />
-			<beans:bean class="com.github.ecommerce7th.jupiter.src.com.happySteps.front.common.interceptor.FrontItrc" >
+			<beans:bean class="com.happySteps.front.common.interceptor.FrontItrc" >
 			</beans:bean>
 		</interceptor>
 	</mvc:interceptors>
