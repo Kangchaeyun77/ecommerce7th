@@ -39,7 +39,7 @@ import com.happySteps.front.main.controller.MainWeb;
  * <p>DESCRIPTION:</p>
  * <p>IMPORTANT:</p>
  */
-@Controller("front.main.controller.MainWeb")
+@Controller("com.happySteps.front.main.controller.MainWeb")
 public class MainWeb {
 	/** Logger */
 	private static Logger logger = LoggerFactory.getLogger(MainWeb.class);

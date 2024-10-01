@@ -49,6 +49,21 @@
 		<context:include-filter type="regex" expression="com.happySteps..*Web.*" />
 	</context:component-scan>
 	
-
+	<mvc:interceptors>
+	<interceptor>
+			<mvc:mapping path="/front/**" />
+			<exclude-mapping path="/front/index.web" />
+			<exclude-mapping path="/front/member/registerForm.web" />
+			<exclude-mapping path="/front/member/registerProc.web" />
+			<exclude-mapping path="/front/member/confirmEmail.web" />
+			<exclude-mapping path="/front/login/loginForm.web" />
+			<exclude-mapping path="/front/login/loginProc.web" />
+			<exclude-mapping path="/front/login/logout.web" />
+			<exclude-mapping path="/front/**/*.json" />
+			<exclude-mapping path="/front/**/*.api" />
+			<beans:bean class="com.happySteps.front.common.interceptor.FrontItrc" >
+			</beans:bean>
+	</interceptor>
+	</mvc:interceptors>
 	
 </beans:beans>
