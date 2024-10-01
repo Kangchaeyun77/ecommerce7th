@@ -30,7 +30,7 @@
 	<meta http-equiv="pragma" content="no-cache" />
 	<%@ include file="/include/front/header.jsp" %>
 </head>
-<!-- 배너 영역 -->
+<!-- 슬라이드 배너 영역(첫페이지) -->
 <section id="banner" style="background: #F9F3EC;">
 	<div class="container">
 		<div class="swiper main-swiper">
@@ -41,12 +41,12 @@
 							<img src="../images/banner-img.png" class="img-fluid">
 						</div>
 						<div class="content-wrapper col-md-7 p-5 mb-5">
-							<div class="secondary-font text-primary text-uppercase mb-4">사랑하는 내 반려동물을 위해서</div>
-							<h2 class="banner-title display-1 fw-normal">Best destination for <span class="text-primary">your
-								pets</span>
+							<div class="secondary-font text-primary text-uppercase mb-4">사랑하는 내 강아지를 위해서</div>
+							<h2 class="banner-title display-1 fw-normal">Best choice <br>
+							<span class="text-primary">강아지 용품</span>
 							</h2>
 							<a href="#" class="btn btn-outline-dark btn-lg text-uppercase fs-6 rounded-1">
-								shop now
+								바로가기
 								<svg width="24" height="24" viewBox="0 0 24 24" class="mb-1">
 									<use xlink:href="#arrow-right"></use>
 								</svg>
@@ -54,45 +54,66 @@
 						</div>
 					</div>
 				</div>
-          <div class="swiper-slide py-5">
-            <div class="row banner-content align-items-center">
-              <div class="img-wrapper col-md-5">
-                <img src="../images//banner-img3.png" class="img-fluid">
-              </div>
-              <div class="content-wrapper col-md-7 p-5 mb-5">
-                <div class="secondary-font text-primary text-uppercase mb-4">Save 10 - 20 % off</div>
-                <h2 class="banner-title display-1 fw-normal">Best destination for <span class="text-primary">your
-                    pets</span>
-                </h2>
-                <a href="#" class="btn btn-outline-dark btn-lg text-uppercase fs-6 rounded-1">
-                  shop now
-                  <svg width="24" height="24" viewBox="0 0 24 24" class="mb-1">
-                    <use xlink:href="#arrow-right"></use>
-                  </svg></a>
-              </div>
-
-            </div>
-          </div>
-          <div class="swiper-slide py-5">
-            <div class="row banner-content align-items-center">
-              <div class="img-wrapper col-md-5">
-                <img src="../images/banner-img4.png" class="img-fluid">
-              </div>
-              <div class="content-wrapper col-md-7 p-5 mb-5">
-                <div class="secondary-font text-primary text-uppercase mb-4">Save 10 - 20 % off</div>
-                <h2 class="banner-title display-1 fw-normal">Best destination for <span class="text-primary">your
-                    pets</span>
-                </h2>
-                <a href="#" class="btn btn-outline-dark btn-lg text-uppercase fs-6 rounded-1">
-                  shop now
-                  <svg width="24" height="24" viewBox="0 0 24 24" class="mb-1">
-                    <use xlink:href="#arrow-right"></use>
-                  </svg></a>
-              </div>
-
-            </div>
-          </div>
-        </div>
+<!-- 슬라이드 배너 영역(두번째 페이지) -->
+<div class="swiper-slide py-5">
+	<div class="row banner-content align-items-center">
+		<div class="img-wrapper col-md-5">
+			<img src="../images//banner-img3.png" class="img-fluid">
+		</div>
+		<div class="content-wrapper col-md-7 p-5 mb-5">
+			<div class="secondary-font text-primary text-uppercase mb-4">사랑하는 내 고양이를 위해서</div>
+			<h2 class="banner-title display-1 fw-normal">Best choice <br>
+				<span class="text-primary">고양이 용품</span>
+			</h2>
+			<a href="#" class="btn btn-outline-dark btn-lg text-uppercase fs-6 rounded-1">
+				바로가기
+				<svg width="24" height="24" viewBox="0 0 24 24" class="mb-1">
+					<use xlink:href="#arrow-right"></use>
+				</svg>
+			</a>
+		</div>
+	</div>
+</div>
+<!-- 슬라이드 배너 영역(세번째 페이지) -->
+<div class="swiper-slide py-5">
+	<div class="row banner-content align-items-center">
+		<div class="img-wrapper col-md-5">
+			<img src="../images/banner-img4.png" class="img-fluid">
+		</div>
+		<div class="content-wrapper col-md-7 p-5 mb-5">
+			<div class="secondary-font text-primary text-uppercase mb-4">사랑하는 내 물고기를 위해서</div>
+			<h2 class="banner-title display-1 fw-normal">Best choice <br>
+				<span class="text-primary">물고기 용품</span>
+			</h2>
+			<a href="#" class="btn btn-outline-dark btn-lg text-uppercase fs-6 rounded-1">
+				바로가기
+				<svg width="24" height="24" viewBox="0 0 24 24" class="mb-1">
+					<use xlink:href="#arrow-right"></use>
+				</svg>
+			</a>
+		</div>
+	</div>
+</div>
+<!-- 슬라이드 배너 영역(다섯번째 페이지) -->
+<div class="swiper-slide py-5">
+	<div class="row banner-content align-items-center">
+		<div class="img-wrapper col-md-5">
+			<img src="../images/banner-img5.png" class="img-fluid">
+		</div>
+		<div class="content-wrapper col-md-7 p-5 mb-5">
+			<div class="secondary-font text-primary text-uppercase mb-4">사랑하는 내 파충류를 위해서</div>
+			<h2 class="banner-title display-1 fw-normal">Best choice <br>
+				<span class="text-primary">파충류 용품</span>
+			</h2>
+			<a href="#" class="btn btn-outline-dark btn-lg text-uppercase fs-6 rounded-1">
+				바로가기
+				<svg width="24" height="24" viewBox="0 0 24 24" class="mb-1">
+					<use xlink:href="#arrow-right"></use>
+				</svg>
+			</a>
+		</div>
+	</div>
+</div>
 
         <div class="swiper-pagination mb-5"></div>
 
