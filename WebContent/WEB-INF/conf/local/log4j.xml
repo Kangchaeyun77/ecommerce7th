@@ -13,7 +13,7 @@
 	</appender>
 	
 	<!-- 1-2. COM.PLUOZONE.CORE File Appender -->
-	<appender name="KR.CO.HIMEDIA" class="org.apache.log4j.DailyRollingFileAppender">
+	<appender name="COM.HAPPYSTEPS" class="org.apache.log4j.DailyRollingFileAppender">
 		<param name="encoding" value="UTF-8" />
 		<param name="threshold" value="debug" />
 		<param name="ImmediateFlush" value="true" />
@@ -26,9 +26,9 @@
 	</appender>	
 	
 	<!-- 2-1. This Application Loggers -->
-	<logger name="kr.co.himedia">
+	<logger name="com.happysteps">
 		<level value="debug" />
-		<appender-ref ref="KR.CO.HIMEDIA" />
+		<appender-ref ref="COM.HAPPYSTEPS" />
 	</logger>	
 	<!-- 2-2. Other 3rdparty Loggers -->
 	<logger name="org.apache">

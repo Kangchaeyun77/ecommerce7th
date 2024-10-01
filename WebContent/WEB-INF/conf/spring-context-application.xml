@@ -49,56 +49,6 @@
 		<context:include-filter type="regex" expression="com.happySteps..*Web.*" />
 	</context:component-scan>
 	
-	<mvc:interceptors>
-		<interceptor>
-			<mvc:mapping path="/console/**" />
-			<exclude-mapping path="/console/index.web" />
-			<exclude-mapping path="/console/manager/registerForm.web" />
-			<exclude-mapping path="/console/manager/registerProc.web" />
-			<exclude-mapping path="/console/login/loginForm.web" />
-			<exclude-mapping path="/console/login/loginProc.web" />
-			<exclude-mapping path="/console/login/logout.web" />
-			<exclude-mapping path="/console/**/*.json" />
-			<exclude-mapping path="/console/**/*.api" />
-			<beans:bean class="com.happySteps.common.interceptor.BackofficeItrc" >
-			</beans:bean>
-		</interceptor>
-		<!-- 
-		<interceptor>
-			<mvc:mapping path="/seller/**" />
-			<exclude-mapping path="/seller/index.web" />
-			<exclude-mapping path="/seller/sellers/registerForm.web" />
-			<exclude-mapping path="/seller/sellers/registerProc.web" />
-			<exclude-mapping path="/seller/login/loginForm.web" />
-			<exclude-mapping path="/seller/login/loginProc.web" />
-			<exclude-mapping path="/seller/login/logout.web" />
-			<exclude-mapping path="/seller/**/*.json" />
-			<exclude-mapping path="/seller/**/*.api" />
-			<beans:bean class="com.happySteps.seller.common.interceptor.SellerItrc" >
-			</beans:bean>
-		</interceptor>
-		 -->
-		<interceptor>
-			<mvc:mapping path="/front/**" />
-			<exclude-mapping path="/front/index.web" />
-			<exclude-mapping path="/front/intro/**" />
-			<exclude-mapping path="/front/sale/**" />
-			<exclude-mapping path="/front/buy/writeForm.web" />
-			<exclude-mapping path="/front/center/index.web" />
-			<exclude-mapping path="/front/center/**/list.web" />
-			<exclude-mapping path="/front/center/**/view.web" />
-			<exclude-mapping path="/front/center/board/download.web" />
-			<exclude-mapping path="/front/member/registerForm.web" />
-			<exclude-mapping path="/front/member/registerProc.web" />
-			<exclude-mapping path="/front/member/confirmEmail.web" />
-			<exclude-mapping path="/front/login/loginForm.web" />
-			<exclude-mapping path="/front/login/loginProc.web" />
-			<exclude-mapping path="/front/login/logout.web" />
-			<exclude-mapping path="/front/**/*.json" />
-			<exclude-mapping path="/front/**/*.api" />
-			<beans:bean class="com.happySteps.common.interceptor.FrontItrc" >
-			</beans:bean>
-		</interceptor>
-	</mvc:interceptors>
+
 	
 </beans:beans>
