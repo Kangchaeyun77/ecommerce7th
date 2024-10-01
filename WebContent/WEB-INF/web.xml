@@ -63,7 +63,7 @@
 	
 	<servlet>
 		<servlet-name>result</servlet-name>
-		<servlet-class>kr.co.himedia.ecommerce.util.servlet.Result</servlet-class>
+		<servlet-class>com.happySteps.util.servlet.Result</servlet-class>
 	</servlet>  
 	<servlet-mapping>
 		<servlet-name>result</servlet-name>
@@ -72,7 +72,7 @@
 	
 	<servlet>
 		<servlet-name>config</servlet-name>
-		<servlet-class>kr.co.himedia.ecommerce.util.servlet.Config</servlet-class>
+		<servlet-class>com.happySteps.util.servlet.Config</servlet-class>
 		<init-param>
 			<param-name>pageNavigator</param-name>
 			<param-value>/WEB-INF/conf/pageNavigator.xml</param-value>
