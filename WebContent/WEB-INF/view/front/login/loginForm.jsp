@@ -125,9 +125,12 @@
 <body>
 <form id="frmMain" name="frmMain" method="POST">
 <!-- <form id="frmMain" method="POST" action="/loginProc.jsp"> -->
-<div class="container" style="background: url('/images/background-img.png') no-repeat; background-size: cover;">
+<div class="container">
 	<header style="display: flex; justify-content: center; align-items: center; height: 120px;">
-		<a href="/front/"><img src="/image/login.jpg" alt="로고" width="200px" style="margin-top: 200px;"/></a>
+<div style="position: relative; height: 200px; overflow: hidden;">
+		<img src="/images/logo3.png" alt="로고" style="width: 300px; height: 250px; object-fit: cover;"/>
+
+</div>
 	</header>
 	
 	<section class="content" style="display: flex; justify-content: center; align-items: flex-start; height: 100vh;" >
@@ -147,7 +150,14 @@
 					<td colspan="2" style="text-align:center;border-bottom:0px;padding-top: 10px"><input type="checkbox" id="saveid" name="saveid" style="width:20px" onClick=""/>아이디 저장</td>
 				</tr>
 				<tr>
-					<td colspan="2" style="text-align:center;border-bottom:0px;padding-top: 10px"><input type="button" value="로그인" style="width:100px" onClick="checkForm();"/></td>
+				<td colspan="2" style="text-align:center;border-bottom:0px;padding-top: 10px">
+					<input type="button" 
+						value="로그인" 
+						style="width:100%; padding:10px; background-color:#dead6f; color:white; border:none; border-radius:5px; cursor:pointer; font-size:16px;"
+						onMouseOver="this.style.backgroundColor='#d9c88c';" 
+						onMouseOut="this.style.backgroundColor='#dead6f';" 
+						onClick="checkForm();"/>
+				</td>
 				</tr>
 			</table>
 			<table>
@@ -161,6 +171,7 @@
 		<aside></aside>
 	</section>
 	<footer>
+		<%@ include file="/include/front/login_footer.jsp" %>
 	</footer>
 </div>
 </form>
