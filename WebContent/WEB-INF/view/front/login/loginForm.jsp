@@ -11,13 +11,13 @@
  * Copyright (C) 2024 himedia.co.kr All Rights Reserved.
  *
  *
- * Program		: kr.co.himedia.ecommerce
+ * Program		: com.github.ecommerce7th
  * Description	:
  * Environment	: JRE 1.7 or more
  * File			:
  * Notes		:
  * History		: [NO][Programmer][Description]
- *				: [20240626130000][pluto@himedia.co.kr][CREATE: Initial Release]
+ *				: [20241002100000][hyeen103#gmail.com][CREATE: Initial Release]
  */
 %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" trimDirectiveWhitespaces="true" %>
@@ -127,9 +127,8 @@
 <!-- <form id="frmMain" method="POST" action="/loginProc.jsp"> -->
 <div class="container">
 	<header style="display: flex; justify-content: center; align-items: center; height: 120px;">
-<div style="position: relative; height: 200px; overflow: hidden;">
-		<img src="/images/logo3.png" alt="로고" style="width: 300px; height: 250px; object-fit: cover;"/>
-
+<div style="position: relative; height: 200px; overflow: hidden; margin-top: 50px;">
+		<a href="/front/"><img src="/images/logo3.png" alt="로고" style="width: 300px; height: 250px; object-fit: cover; "/></a>
 </div>
 	</header>
 	
@@ -152,7 +151,7 @@
 				<tr>
 				<td colspan="2" style="text-align:center;border-bottom:0px;padding-top: 10px">
 					<input type="button" 
-						value="로그인" 
+						value="로그인 하기" 
 						style="width:100%; padding:10px; background-color:#dead6f; color:white; border:none; border-radius:5px; cursor:pointer; font-size:16px;"
 						onMouseOver="this.style.backgroundColor='#d9c88c';" 
 						onMouseOut="this.style.backgroundColor='#dead6f';" 
@@ -163,7 +162,7 @@
 			<table>
 				<tr>
 					<td style="text-align:center;border-top:0px; padding: 5px; white-space: nowrap;"><a href="/front/member/findIdForm.web">[아이디 찾기]</a></td>
-					<td style="text-align:center;border-top:0px; padding: 5px; white-space: nowrap;"><a href="#">[비밀번호 찾기]</a></td>
+					<td style="text-align:center;border-top:0px; padding: 5px; white-space: nowrap;"><a href="/front/member/findPasswdForm.web">[비밀번호 찾기]</a></td>
 					<td style="text-align:center;border-top:0px; padding: 5px; white-space: nowrap;"><a href="/front/member/registerForm.web">[회원 가입]</a></td>
 				</tr>
 			</table>
