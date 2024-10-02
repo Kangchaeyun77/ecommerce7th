@@ -417,7 +417,7 @@ a.categories-item:hover iconify-icon.category-icon {
 
 
 
-/* pet clothing */
+/* pet 인기상품 */
 .card {
   --bs-card-inner-border-radius: none;
   --bs-card-bg: transparent;
@@ -437,7 +437,7 @@ a.btn-wishlist {
 }
 
 
-/* pet foodies style  */
+/* pet Popular products style  */
 button.filter-button {
   letter-spacing: 0.02125rem;
   border: none;

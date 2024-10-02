@@ -185,7 +185,7 @@
         <div class="col-sm-4 col-lg-3 text-center text-sm-start">
           <div class="main-logo">
             <a href="/front/index.web">
-              <img src="/images/logo.png" alt="logo" class="img-fluid">
+              <img src="/images/logo3.png" alt="logo" class="img-fluid">
             </a>
           </div>
         </div>

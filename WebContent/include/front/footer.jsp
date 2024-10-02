@@ -28,7 +28,7 @@
 
         <div class="col-md-3">
           <div class="footer-menu">
-            <img src="/images/logo.png" alt="logo">
+            <img src="/images/logo2.png" alt="logo">
             <p class="blog-paragraph fs-6 mt-3">방문해주셔서 감사합니다</p>
             <div class="social-links">
               <ul class="d-flex list-unstyled gap-2">
