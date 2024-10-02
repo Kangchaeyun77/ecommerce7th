@@ -244,8 +244,7 @@
 				<tr>
 					<th>이메일</th>
 					<td>
-					<input type="text" id="frontEmail" name="frontEmail" placeholder="이메일주소" required>
-					@
+					<input type="text" id="frontEmail" name="frontEmail" placeholder="이메일주소" required>@
 					<input type="text" id="customEmailDomain" name="customEmailDomain" placeholder="직접 입력" style="display:none;">
 					<select id="emailDomain" name="emailDomain" onchange="checkCustomDomain()">
 						<option value="gmail.com">gmail.com</option>
