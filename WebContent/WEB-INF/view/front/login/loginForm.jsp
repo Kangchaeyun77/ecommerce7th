@@ -25,8 +25,17 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<%@ include file="/include/front/header.jsp" %>
-	<style></style>
+	<style>
+		table {
+		  width: 100%;
+		}
+		td {
+		  padding: 5px;
+		}
+		.left, .center, .right {
+		  width: 33%;
+		}
+	</style>
 	<script>
 		window.onload = function () {
 			if ("${url}") {
@@ -46,10 +55,9 @@
 					+ "비밀번호=" + document.frmMain.passwd.value);
 			*/
 			// if (document.getElementById("email").value == "") {
-			if (document.getElementById("email").value.length < 6
-					|| document.getElementById("email").value.length > 32) {
-				alert("이메일(아이디)를 6 ~ 16자 이내로 입력하세요!");
-				document.getElementById("email").focus();
+			if (document.getElementById("id").value == "") {
+				alert("아이디를 6 ~ 10자 이내로 입력하세요!");
+				document.getElementById("id").focus();
 				// document.getElementById("email").select();
 				return;
 			}
@@ -117,37 +125,42 @@
 <body>
 <form id="frmMain" name="frmMain" method="POST">
 <!-- <form id="frmMain" method="POST" action="/loginProc.jsp"> -->
-<div class="container">
-<!--	<header>
-		<%@ include file="/include/front/top.jsp" %>
+<div class="container" style="background: url('/images/background-img.png') no-repeat; background-size: cover;">
+	<header style="display: flex; justify-content: center; align-items: center; height: 120px;">
+		<a href="/front/"><img src="/image/login.jpg" alt="로고" width="200px" style="margin-top: 200px;"/></a>
 	</header>
-	<nav>
-		<%@ include file="/include/front/gnb.jsp" %>
-	</nav>-->
-	<section class="content">
+	
+	<section class="content" style="display: flex; justify-content: center; align-items: flex-start; height: 100vh;" >
 		<nav></nav>
 		<article class="txtCenter">
-			<table class="headLeft_01" style="width: 320px; margin-left: auto; margin-right: auto">
+			<table class="headLeft_01" style="margin-top: 120px;" >
 				<tr>
 					<th>아이디</th>
-					<td><input type="text" id="email" name="email" value="plutomsw@gmail.com" maxlength="32" required /></td>
+					<td><input type="text" id="id" name="id" value="plutomsw" maxlength="15" required style="border: none; border-left: 2px solid #dead6f; padding: 5px; outline: none; width: 200px;"/></td>
+					
 				</tr>
 				<tr>
 					<th>비밀번호</th>
-					<td><input type="password" id="passwd" name="passwd" value="12345678!a" maxlength="16" required /></td>
+					<td><input type="password" id="passwd" name="passwd" value="12345678!a" maxlength="16" required style="border: none; border-left: 2px solid #dead6f; padding: 5px; outline: none; width: 200px;"/></td>
+				</tr>
+				<tr>
+					<td colspan="2" style="text-align:center;border-bottom:0px;padding-top: 10px"><input type="checkbox" id="saveid" name="saveid" style="width:20px" onClick=""/>아이디 저장</td>
 				</tr>
 				<tr>
 					<td colspan="2" style="text-align:center;border-bottom:0px;padding-top: 10px"><input type="button" value="로그인" style="width:100px" onClick="checkForm();"/></td>
 				</tr>
+			</table>
+			<table>
 				<tr>
-					<td colspan="2" style="text-align:center;border-top:0px;"><a href="#">[아이디/비밀번호 찾기]</a> <a href="/front/member/registerForm.web">[회원 가입]</a></td>
+					<td style="text-align:center;border-top:0px; padding: 5px; white-space: nowrap;"><a href="/front/member/findIdForm.web">[아이디 찾기]</a></td>
+					<td style="text-align:center;border-top:0px; padding: 5px; white-space: nowrap;"><a href="#">[비밀번호 찾기]</a></td>
+					<td style="text-align:center;border-top:0px; padding: 5px; white-space: nowrap;"><a href="/front/member/registerForm.web">[회원 가입]</a></td>
 				</tr>
 			</table>
 		</article>
 		<aside></aside>
 	</section>
 	<footer>
-		<%@ include file="/include/front/footer.jsp" %>
 	</footer>
 </div>
 </form>
