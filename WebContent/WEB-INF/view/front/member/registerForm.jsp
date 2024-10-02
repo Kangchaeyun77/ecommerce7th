@@ -33,8 +33,9 @@
 	<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 	<style></style>
 	<script>
-		// 이메일 중복 여부
-		var isDuplicate = true;
+		
+		// 아이디 중복 여부
+		var idDuplicate = true;
 		
 		$(function() {
 			var $frm = $("#frmMain");
@@ -42,27 +43,17 @@
 			$("#btnId").on("click", function(e) {
 				
 				// 이메일이 7자리 이하 또는 @가 없으면
-				if ($("#email").val().length <=7 || $("#email").val().indexOf("@") <= 0) {
-					alert("이메일/아이디를(@ 포함) 8자리 이상으로 입력하세요!");
+				if ($("#id").val().length <=3) {
+					alert("아이디를 4자리 이상으로 입력하세요!");
 					return false;
 				}
 				
-				// var myData = $frm.serialize();
-				// var myData = "email=" + $("#email").val();
-				
-				// var myData = {email: "plutomsw@gmail.com", passwd: "123456"};
-				var myData = {email: $("#email").val()};
-				//alert(JSON.stringify(myData));
-				
-				/*
-				var myData = "{\"email\": \"plutomsw@gmail.com\", \"passwd\": \"12345678\"}";
-				alert(myData);
-				*/
+				var myData = {아이디: $("#id").val()};
 				
 				$.ajax({
 					type: "POST",
 					async: false,
-					url: "/front/member/checkDuplicate.json",
+					url: "/front/member/checkIdDuplicate.json",
 					dataType: "json",
 					contentType: "application/json; charset=UTF-8",
 					data: JSON.stringify(myData),
@@ -71,58 +62,136 @@
 						// var jsonData = JSON.parse(res);
 						// 중복이 안 될 경우
 						if (res != true) {
-							isDuplicate = false;
-							$("#email").attr("readonly",true);
-							alert($("#email").val() + "는 사용 가능하며 변경할 수 없습니다.");
-							document.getElementById("btnConfirm").disabled = false;
-							document.getElementById("btnId").disabled = true;
-							document.getElementById("emailPw").hidden = false;
-							document.getElementById("matchPw").hidden = false;
+							idDuplicate = false;
+							$("#id").attr("readonly",true);
+							$("#id").css("background-color", "#d3d3d3");
+							alert($("#id").val() + "는 사용 가능하며 변경할 수 없습니다.");
 						}
 						else {
-							alert($("#email").val() + "는 사용 불가능! 다른 이메일을 입력하세요!");
-							$("#email").val("");
-							$("#email").focus();
+							alert($("#id").val() + "는 사용 불가능! 다른 아이디 입력하세요!");
+							$("#id").val("");
+							$("#id").focus();
 						}
 					}
 				});
 			});
 		});
+		
 	</script>
+	
 	<script>
-	    function togglePetOptions() {
-	        var petYes = document.getElementById('btnPet').checked;
-	        var petOptions = document.getElementById('petOptions');
-	        if (petYes) {
-	            petOptions.style.display = 'block';
-	        } else {
-	            petOptions.style.display = 'none';
-	        }
+		// 닉네임 중복 여부
+		var nickDuplicate = true;
+		
+		$(function() {
+			var $frm = $("#frmMain");
+			
+			$("#btnNick").on("click", function(e) {
+				
+				// 이메일이 7자리 이하 또는 @가 없으면
+				if ($("#nickname").val().length <=1) {
+					alert("닉네임을 2자리 이상으로 입력하세요!");
+					return false;
+				}
+				
+				var nickData = {닉네임: $("#nickname").val()};
+				
+				$.ajax({
+					type: "POST",
+					async: false,
+					url: "/front/member/checkNickDuplicate.json",
+					dataType: "json",
+					contentType: "application/json; charset=UTF-8",
+					data: JSON.stringify(nickData),
+					success:function(res) {
+						// 중복이 안 될 경우
+						if (res != true) {
+							nickDuplicate = false;
+							$("#nickname").attr("readonly",true);
+							$("#nickname").css("background-color", "#d3d3d3");
+							alert($("#nickname").val() + "는 사용 가능하며 변경할 수 없습니다.");
+						}
+						else {
+							alert($("#nickname").val() + "는 사용 불가능! 다른 아이디 입력하세요!");
+							$("#nickname").val("");
+							$("#nickname").focus();
+						}
+					}
+				});
+			});
+		});
+		
+	</script>
+	
+
+	<script>
+	//펫 유/무 클릭시 종류선택이 가능하게하는 코드
+	function togglePetOptions() {
+		var isPetSelected = document.getElementById("btnPetYes").checked;
+
+	// 체크박스를 활성화 또는 비활성화
+		document.getElementById("pet1").disabled = !isPetSelected; //강아지
+		document.getElementById("pet2").disabled = !isPetSelected; //고양이
+		document.getElementById("pet3").disabled = !isPetSelected; //햄스터
+		document.getElementById("pet4").disabled = !isPetSelected; //파충류
+		document.getElementById("pet5").disabled = !isPetSelected; //기타
+	}
+	</script>
+	
+	
+	<script>
+	//이메일 직접입력
+		function checkCustomDomain() {
+			var emailDomainSelect = document.getElementById("emailDomain");
+			var customEmailDomain = document.getElementById("customEmailDomain");
+
+		if (emailDomainSelect.value === "custom") {
+	      customEmailDomain.style.display = "inline";  // 기타 선택 시 직접 입력란 표시
+	      customEmailDomain.required = true;           // 필수 입력 설정
+	    } else {
+	      customEmailDomain.style.display = "none";    // 선택 해제 시 입력란 숨기기
+	      customEmailDomain.required = false;          // 필수 입력 해제
 	    }
+	  }
+	//이메일 합치기
+	  function combineEmail() {
+	    var frontEmail = document.getElementById("frontEmail").value;
+	    var emailDomain = document.getElementById("emailDomain").value;
+	    var customEmailDomain = document.getElementById("customEmailDomain").value;
+
+	    var email = '';
+
+	    // 이메일 도메인이 'custom'일 경우, customEmailDomain 값 사용
+	    if (emailDomain === "custom" && customEmailDomain) {
+	      email = frontEmail + "@" + customEmailDomain;
+	    } else {
+	      email = frontEmail + "@" + emailDomain;
+	    }
+
+	    // 최종 이메일을 hidden input에 저장
+	    document.getElementById("email").value = email;
+
+	    // 디버그 용 콘솔 로그 (필요시 제거)
+	    console.log("최종 이메일:", email);
+
+	    return true; // 폼이 정상적으로 제출되도록 반환
+	  }
 	</script>
 </head>
 <body>
 <form id="frmMain" method="POST">
 <input type="hidden" name="phone" id="phone" />
-<input type="hidden" name="hobbys" id="hobbys" />
+<input type="hidden" name="pets" id="pets" />
+<input type="hidden" name="email" id="email" />
 <div class="container">
 	<section class="content">
 		<nav></nav>
 		<article class="txtCenter">
 			(*) 표시는 필수 입력 사항입니다.
-<!--			<table class="headLeft_01" style="width: 900px; margin-left: auto; margin-right: auto">
-				<tr>
-					<th style="width: 150px;">서비스 약관</th>
-					<td>
-						<input type="checkbox" id="term_1" name="term_1" value="Y" required /> [필수]이용 약관
-						<input type="checkbox" id="term_2" name="term_2" value="Y" /> [선택]마케팅 수신 동의
-						<input type="checkbox" id="term_3" name="term_3" value="Y"  /> [선택]제 3자 개인 정보 제공 동의
-					</td>
-				</tr>
-			</table>-->
+			
 			<table class="headLeft_01" style="width: 900px; margin-left: auto; margin-right: auto; ">
 				<tr>
-					<th style="width: 150px;">아이디</th>
+					<th style="width: 150px;">아이디(*)</th>
 					<td>
 						<input value="plutomsw" type="text" id="id" name="id" required />
 						 <input type="button" value="중복 찾기" style="width:100px" id="btnId" />
@@ -137,10 +206,10 @@
 					<td><input value="12345678!a" type="password" id="passwd_" name="passwd_" required /></td>
 				</tr>
 				<tr>
-					<th style="width: 150px;">닉네임</th>
+					<th style="width: 150px;">닉네임(*)</th>
 					<td>
 						<input value="귀여운냥이" type="text" id="nickname" name="nickname" required />
-						 <input type="button" value="중복 찾기" style="width:100px" id="btnNick" />
+						<input type="button" value="중복 찾기" style="width:100px" id="btnNick" />
 					</td>
 				</tr>
 				<tr>
@@ -154,7 +223,7 @@
 				<tr>
 					<th>연락처(*)</th>
 					<td>
-						<input value="010" type="text" id="phone1" name="phone1" maxlength="3"     style="text-align:center;width:50px" required oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" />
+						<input value="010" type="text" id="phone1" name="phone1" maxlength="3"	   style="text-align:center;width:50px" required oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" />
 						 - <input value="9947" type="text" id="phone2" name="phone2" maxlength="4" style="text-align:center;width:60px" required oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" />
 						 - <input value="1973" type="text" id="phone3" name="phone3" maxlength="4" style="text-align:center;width:60px" required oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" />
 					</td>
@@ -173,24 +242,45 @@
 						 </td>
 				</tr>
 				<tr>
-					<tr>
-					    <th>반려동물 유/무</th>
-					    <td>
-					        <input type="radio" name="havePet" value="Y" id="btnPet" onclick="togglePetOptions()"/> 있음 
-					        <input type="radio" name="havePet" value="N" checked onclick="togglePetOptions()"/> 없음 
-							<select id="petOptions" style="display:none;" name="petType"> 반려동물 종류
-							    <option value="dog">강아지</option>
-							    <option value="cat">고양이</option>
-							    <option value="hamster">햄스터</option>
-							    <option value="reptile">파충류</option>
-							    <option value="other">기타</option>
-							</select>
-					    </td>
-					</tr>
+					<th>이메일</th>
+					<td>
+					<input type="text" id="frontEmail" name="frontEmail" placeholder="이메일주소" required>
+					@
+					<input type="text" id="customEmailDomain" name="customEmailDomain" placeholder="직접 입력" style="display:none;">
+					<select id="emailDomain" name="emailDomain" onchange="checkCustomDomain()">
+						<option value="gmail.com">gmail.com</option>
+						<option value="naver.com">naver.com</option>
+						<option value="daum.net">daum.net</option>
+						<option value="custom">기타 (직접 입력)</option>
+					</select>
+				
+					</td>
+				</tr>
+				
+				<tr>
+					<th>반려동물 유/무</th>
+					<td>
+						<input type="radio" name="flg_pets" value="Y" id="btnPetYes" onclick="togglePetOptions()"/> 있음
+						<input type="radio" name="flg_pets" value="N" id="btnPetNo" checked onclick="togglePetOptions()"/> 없음
+					</td>
+				</tr>
+
+				<tr id="petOptions">
+					<th>반려동물 종류</th>
+					<td>
+						<input type="checkbox" name="pets" id="pet1" disabled /> 강아지 &nbsp;&nbsp;
+						<input type="checkbox" name="pets" id="pet2" disabled /> 고양이 &nbsp;&nbsp;
+						<input type="checkbox" name="pets" id="pet3" disabled /> 햄스터 &nbsp;&nbsp;
+						<input type="checkbox" name="pets" id="pet4" disabled /> 파충류 &nbsp;&nbsp;
+						<input type="checkbox" name="pets" id="pet5" disabled /> 기타
+					</td>
+				</tr>
+				
+				<tr>
 					<th>마케팅 수신 동의</th>
 					<td>
 						SMS <input type="checkbox" name="flg_sms" value="Y" />
-						 Email <input type="checkbox" name="flg_email" value="Y" /></td>
+						Email <input type="checkbox" name="flg_email" value="Y" /></td>
 				</tr>
 				<tr>
 					<td colspan="2" style="text-align:center;padding-top: 10px;padding-bottom: 10px">
