@@ -127,7 +127,7 @@ public class MemberWeb extends Common {
 			if (memberDto.getFlg_email().equals(_flg_email)) memberDto.setFlg_email("");
 			if (memberDto.getFlg_sms().equals(_flg_sms)) memberDto.setFlg_sms("");
 			
-			if(memberDto.getHobbys().equals(_hobbys)) memberDto.setHobbys("");
+			//if(memberDto.getHobbys().equals(_hobbys)) memberDto.setHobbys("");
 			
 			String staticKey	= staticProperties.getProperty("front.enc.user.aes256.key", "[UNDEFINED]");
 			SKwithAES aes		= new SKwithAES(staticKey);
