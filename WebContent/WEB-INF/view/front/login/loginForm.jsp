@@ -137,16 +137,16 @@
 		<article class="txtCenter">
 			<table class="headLeft_01" style="margin-top: 120px;" >
 				<tr>
-					<th>아이디</th>
+					<th style="text-align: left;">아이디</th>
 					<td><input type="text" id="id" name="id" value="plutomsw" maxlength="15" required style="border: none; border-left: 2px solid #dead6f; padding: 5px; outline: none; width: 200px;"/></td>
 					
 				</tr>
 				<tr>
-					<th>비밀번호</th>
+					<th style="text-align: left;">비밀번호</th>
 					<td><input type="password" id="passwd" name="passwd" value="12345678!a" maxlength="16" required style="border: none; border-left: 2px solid #dead6f; padding: 5px; outline: none; width: 200px;"/></td>
 				</tr>
 				<tr>
-					<td colspan="2" style="text-align:center;border-bottom:0px;padding-top: 10px"><input type="checkbox" id="saveid" name="saveid" style="width:20px" onClick=""/>아이디 저장</td>
+					<td colspan="2" style="text-align:left;border-bottom:0px;padding-top: 10px"><input type="checkbox" id="rememberMe" name="rememberMe" style="width:20px" onClick="rememberId()"/>아이디 저장</td>
 				</tr>
 				<tr>
 				<td colspan="2" style="text-align:center;border-bottom:0px;padding-top: 10px">
