@@ -67,6 +67,58 @@ public class MemberWeb extends Common {
 	@Inject
 	private MemberSrvc memberSrvc;
 	
+	/**
+	 * @param request [요청 서블릿]
+	 * @param response [응답 서블릿]
+	 * @return ModelAndView
+	 * 
+	 * @since 2024-10-04
+	 * <p>DESCRIPTION: 비밀번호 찾기 폼</p>
+	 * <p>IMPORTANT:</p>
+	 * <p>EXAMPLE:</p>
+	 */
+	@RequestMapping(value = "/front/member/findPasswdForm.web")
+	public ModelAndView findPasswdForm(HttpServletRequest request, HttpServletResponse response) {
+		
+		ModelAndView mav = new ModelAndView("redirect:/error.web");
+		
+		try {
+			mav.setViewName("front/member/findPasswdForm");
+		}
+		catch (Exception e) {
+			logger.error("[" + this.getClass().getName() + ".findPasswdForm()] " + e.getMessage(), e);
+		}
+		finally {}
+		
+		return mav;
+	}
+	
+	/**
+	 * @param request [요청 서블릿]
+	 * @param response [응답 서블릿]
+	 * @return ModelAndView
+	 * 
+	 * @since 2024-10-04
+	 * <p>DESCRIPTION: 아이디 찾기 폼</p>
+	 * <p>IMPORTANT:</p>
+	 * <p>EXAMPLE:</p>
+	 */
+	@RequestMapping(value = "/front/member/findIdForm.web")
+	public ModelAndView findIdForm(HttpServletRequest request, HttpServletResponse response) {
+		
+		ModelAndView mav = new ModelAndView("redirect:/error.web");
+		
+		try {
+			mav.setViewName("front/member/findIdForm");
+		}
+		catch (Exception e) {
+			logger.error("[" + this.getClass().getName() + ".findIdForm()] " + e.getMessage(), e);
+		}
+		finally {}
+		
+		return mav;
+	}
+	
 	// 약관페이지
 	@RequestMapping(value = "/front/member/termAgreeForm.web")
 	public ModelAndView termAgreeForm(HttpServletRequest request, HttpServletResponse response) {
