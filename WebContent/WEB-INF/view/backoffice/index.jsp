@@ -19,6 +19,7 @@
  * History		: [NO][Programmer][Description]
  *				: [20241004044802][son062121#gmail.com][CREATE: Initial Release]
  */
+ 
 %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" trimDirectiveWhitespaces="true" %>
 <%@ page info="/WEB-INF/view/backoffice/index.jsp" %>
