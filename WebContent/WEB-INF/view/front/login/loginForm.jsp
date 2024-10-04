@@ -163,7 +163,7 @@
 				<tr>
 					<td style="text-align:center;border-top:0px; padding: 5px; white-space: nowrap;"><a href="/front/member/findIdForm.web">[아이디 찾기]</a></td>
 					<td style="text-align:center;border-top:0px; padding: 5px; white-space: nowrap;"><a href="/front/member/findPasswdForm.web">[비밀번호 찾기]</a></td>
-					<td style="text-align:center;border-top:0px; padding: 5px; white-space: nowrap;"><a href="/front/member/registerForm.web">[회원 가입]</a></td>
+					<td style="text-align:center;border-top:0px; padding: 5px; white-space: nowrap;"><a href="/front/member/termAgreeForm.web">[회원 가입]</a></td>
 				</tr>
 			</table>
 		</article>

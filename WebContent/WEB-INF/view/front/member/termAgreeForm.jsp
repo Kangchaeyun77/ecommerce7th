@@ -1,14 +1,30 @@
+<%
+/**
+ * YOU ARE STRICTLY PROHIBITED TO COPY, DISCLOSE, DISTRIBUTE, MODIFY OR USE THIS PROGRAM
+ * IN PART OR AS A WHOLE WITHOUT THE PRIOR WRITTEN CONSENT OF HAPPYSTEPS.COM.
+ * HIMEDIA.CO.KR OWNS THE INTELLECTUAL PROPERTY RIGHTS IN AND TO THIS PROGRAM.
+ * COPYRIGHT (C) 2024 HAPPYSTEPS.COM ALL RIGHTS RESERVED.
+ *
+ * 하기 프로그램에 대한 저작권을 포함한 지적재산권은 HAPPYSTEPS.COM 에 있으며,
+ * himedia.co.kr이 명시적으로 허용하지 않는 사용, 복사, 변경 및 제 3자에 의한 공개, 배포는 엄격히 금지되며
+ * himedia.co.kr의 지적재산권 침해에 해당된다.
+ * Copyright (C) 2024 HAPPYSTEPS.COM All Rights Reserved.
+ *
+ *
+ * Program		: com.github.ecommerce7th
+ * Description	:
+ * Environment	: JRE 1.7 or more
+ * File			:
+ * Notes		:
+ * History		: [NO][Programmer][Description]
+ *				: [20241004134100][kbs@>_<.com][CREATE: Initial Release]
+ */
+%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" trimDirectiveWhitespaces="true" %>
 <%@ page info="/WEB-INF/view/front/member/termAgreeForm.jsp" %>
 <!DOCTYPE html>
 <html>
 <head>
-	<%@ include file="/include/front/header.jsp" %>
-	<link rel="stylesheet" type="text/css" title="common stylesheet" href="/css/layoutMain.css" />
-	<link rel="stylesheet" type="text/css" title="common stylesheet" href="/css/table.css" />
-	<script type="text/javascript" src="/js/front.js"></script>
-	<script type="text/javascript" src="/js/jquery-3.7.1.min.js"></script>
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<title>약관 페이지</title>
 		<style>
 			.accordion {
@@ -63,30 +79,33 @@
 
 			.panel {
 				padding: 1px 1px;
-				display: none;
 				background-color: white;
 				overflow: hidden;
+				display: none;
+				height: 10%;
+				width: 100%;
 			}
+			
 		</style>
 		
-	<script>
-		window.onload = function () {
-			// alert(getNow());
-		}
-	</script>
 </head>
 <body>
 	
 <form action="registerForm.web" id="frmMain" method="POST">
 	<div class="container">
-		<section class="content">
+		<header style="display: flex; justify-content: center; align-items: center; height: 120px;">
+			<div style="position: relative; height: 200px; overflow: hidden; margin-top: 50px;">
+				<a href="/front/"><img src="/images/logo3.png" alt="로고" style="width: 300px; height: 250px; object-fit: cover; "/></a>
+			</div>
+		</header>
+		<section class="content" style="display: flex; justify-content: center; align-items: flex-start; height: 50vh; padding: 100px;" >
 			<nav></nav>
 			<article class="txtCenter">
 				서비스 이용 약관
 					<!-- 폼 시작 -->
 					<form >
 						<!-- 첫 번째 아코디언 -->
-						<button class="accordion" type="button">1. 필수 약관 (+)</button>
+						<button class="accordion" type="button">1. 필수 약관 (*)</button>
 						<div class="panel">
 							<textarea class="accordion2" readonly> 여기에 서비스 이용에 대한 일반 사항을 설명합니다. 여기에 서비스 이용에 대한 일반 사항을 설명합니다.여기에 서비스 이용에 대한 일반 사항을 설명합니다.여기에 서비스 이용에 대한 일반 사항을 설명합니다.여기에 서비스 이용에 대한 일반 사항을 설명합니다.여기에 서비스 이용에 대한 일반 사항을 설명합니다.여기에 서비스 이용에 대한 일반 사항을 설명합니다.여기에 서비스 이용에 대한 일반 사항을 설명합니다.여기에 서비스 이용에 대한 일반 사항을 설명합니다.여기에 서비스 이용에 대한 일반 사항을 설명합니다.여기에 서비스 이용에 대한 일반 사항을 설명합니다.여기에 서비스 이용에 대한 일반 사항을 설명합니다.여기에 서비스 이용에 대한 일반 사항을 설명합니다.여기에 서비스 이용에 대한 일반 사항을 설명합니다.여기에 서비스 이용에 대한 일반 사항을 설명합니다.여기에 서비스 이용에 대한 일반 사항을 설명합니다.여기에 서비스 이용에 대한 일반 사항을 설명합니다.여기에 서비스 이용에 대한 일반 사항을 설명합니다.여기에 서비스 이용에 대한 일반 사항을 설명합니다.여기에 서비스 이용에 대한 일반 사항을 설명합니다.여기에 서비스 이용에 대한 일반 사항을 설명합니다.여기에 서비스 이용에 대한 일반 사항을 설명합니다.여기에 서비스 이용에 대한 일반 사항을 설명합니다.여기에 서비스 이용에 대한 일반 사항을 설명합니다.여기에 서비스 이용에 대한 일반 사항을 설명합니다.여기에 서비스 이용에 대한 일반 사항을 설명합니다.여기에 서비스 이용에 대한 일반 사항을 설명합니다.여기에 서비스 이용에 대한 일반 사항을 설명합니다.</textarea>
 							<label for="agree">약관에 동의합니다</label>
@@ -133,7 +152,7 @@
 		</section>
 	</div>
 	<footer>
-		<%@ include file="/include/front/footer.jsp" %>
+		<%@ include file="/include/front/login_footer.jsp" %>
 	</footer>
 </div>
 </form>

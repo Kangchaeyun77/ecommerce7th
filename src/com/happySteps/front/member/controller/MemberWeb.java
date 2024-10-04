@@ -29,7 +29,6 @@ import javax.servlet.http.HttpServletResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.support.MessageSourceAccessor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -37,8 +36,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.happySteps.common.component.EmailCmpn;
-import com.happySteps.common.dto.EmailDto;
 import com.happySteps.front.common.Common;
 import com.happySteps.front.member.dto.MemberDto;
 import com.happySteps.front.member.service.MemberSrvc;
@@ -61,41 +58,58 @@ public class MemberWeb extends Common {
 	@Autowired
 	Properties staticProperties;
 	
-	@Autowired
-	private MessageSourceAccessor dynamicProperties;
-	
-	@Inject
-	private EmailCmpn emailCmpn;
+	/*
+	 * @Autowired private MessageSourceAccessor dynamicProperties;
+	 * 
+	 * @Inject private EmailCmpn emailCmpn;
+	 */
 	
 	@Inject
 	private MemberSrvc memberSrvc;
 	
-	@RequestMapping(value = "/front/member/emailConfirm.web", method = RequestMethod.POST)
-	public ModelAndView emailConfirm(HttpServletRequest request, HttpServletResponse response, MemberDto memberDto) {
+	// 약관페이지
+	@RequestMapping(value = "/front/member/termAgreeForm.web")
+	public ModelAndView termAgreeForm(HttpServletRequest request, HttpServletResponse response) {
 		
 		ModelAndView mav = new ModelAndView("redirect:/error.web");
 		
 		try {
-			
-			EmailDto emailDto = new EmailDto();
-			
-			emailDto.setSender(dynamicProperties.getMessage("email.sender.mail"));
-			emailDto.setTo(new String[] {memberDto.getEmail()});
-			emailDto.setSubject("인증 메일");
-			emailDto.setMessage("인증 번호" + "???");
-			
-			emailCmpn.send(emailDto);
-			
-			mav.setViewName("forward:/servlet/result.web");
+			mav.setViewName("front/member/termAgreeForm");
 		}
 		catch (Exception e) {
-			logger.error("[" + this.getClass().getName() + ".emailConfirm()] " + e.getMessage(), e);
+			logger.error("[" + this.getClass().getName() + ".termAgreeForm()] " + e.getMessage(), e);
 		}
 		finally {}
 		
 		return mav;
-		
 	}
+	
+	//인증 이메일 발송
+	/*
+	 * @RequestMapping(value = "/front/member/emailConfirm.web", method =
+	 * RequestMethod.POST) public ModelAndView emailConfirm(HttpServletRequest
+	 * request, HttpServletResponse response, MemberDto memberDto) {
+	 * 
+	 * ModelAndView mav = new ModelAndView("redirect:/error.web");
+	 * 
+	 * try {
+	 * 
+	 * EmailDto emailDto = new EmailDto();
+	 * 
+	 * emailDto.setSender(dynamicProperties.getMessage("email.sender.mail"));
+	 * emailDto.setTo(new String[] {memberDto.getEmail()});
+	 * emailDto.setSubject("인증 메일"); emailDto.setMessage("인증 번호" + "???");
+	 * 
+	 * emailCmpn.send(emailDto);
+	 * 
+	 * mav.setViewName("forward:/servlet/result.web"); } catch (Exception e) {
+	 * logger.error("[" + this.getClass().getName() + ".emailConfirm()] " +
+	 * e.getMessage(), e); } finally {}
+	 * 
+	 * return mav;
+	 * 
+	 * }
+	 */
 			
 	/**
 	 * @param request [요청 서블릿]
@@ -110,7 +124,7 @@ public class MemberWeb extends Common {
 	 */
 	
 	@RequestMapping(value = "/front/member/modifyProc.web")
-	public ModelAndView modifyProc(HttpServletRequest request, HttpServletResponse response, MemberDto memberDto, String _hobbys, String _flg_sms, String _flg_email) {
+	public ModelAndView modifyProc(HttpServletRequest request, HttpServletResponse response, MemberDto memberDto, String _Pets, String _flg_sms, String _flg_email) {
 
 		ModelAndView mav = new ModelAndView("redirect:/error.web");
 		
@@ -127,7 +141,7 @@ public class MemberWeb extends Common {
 			if (memberDto.getFlg_email().equals(_flg_email)) memberDto.setFlg_email("");
 			if (memberDto.getFlg_sms().equals(_flg_sms)) memberDto.setFlg_sms("");
 			
-			//if(memberDto.getHobbys().equals(_hobbys)) memberDto.setHobbys("");
+			if(memberDto.getPets().equals(_Pets)) memberDto.setPets("");
 			
 			String staticKey	= staticProperties.getProperty("front.enc.user.aes256.key", "[UNDEFINED]");
 			SKwithAES aes		= new SKwithAES(staticKey);
@@ -211,30 +225,58 @@ public class MemberWeb extends Common {
 	 * <p>IMPORTANT:</p>
 	 * <p>EXAMPLE:</p>
 	 */
-	@RequestMapping(value = "/front/member/checkDuplicate.json", method = RequestMethod.POST, headers = {"content-type=application/json; charset=UTF-8", "accept=application/json"}, consumes="application/json; charset=UTF-8", produces="application/json; charset=UTF-8")
-	public @ResponseBody boolean checkDuplicate(@RequestBody MemberDto memberDto) {
+	@RequestMapping(value = "/front/member/checkIdDuplicate.json", method = RequestMethod.POST, 
+					headers = {"content-type=application/json; charset=UTF-8", "accept=application/json"}, 
+					consumes="application/json; charset=UTF-8", produces="application/json; charset=UTF-8")
+	public @ResponseBody boolean checkIdDuplicate(@RequestBody MemberDto memberDto) {
 		
-		boolean isDuplicate = true;
+		boolean idDuplicate = true;
 		
 		try {
 			// 대칭키 암호화(AES-256)
 			String staticKey	= staticProperties.getProperty("front.enc.user.aes256.key", "[UNDEFINED]");
 			SKwithAES aes		= new SKwithAES(staticKey);
 			
-			memberDto.setEmail(aes.encode(memberDto.getEmail()));
+			memberDto.setId(aes.encode(memberDto.getId()));
 			
-			int count = memberSrvc.selectDuplicate(memberDto);
+			int count = memberSrvc.selectIdDuplicate(memberDto);
 			
-			if (count == 0) isDuplicate = false;
+			if (count == 0) idDuplicate = false;
 			
 		}
 		catch (Exception e) {
-			logger.error("[" + this.getClass().getName() + ".checkDuplicate()] " + e.getMessage(), e);
+			logger.error("[" + this.getClass().getName() + ".checkIdDuplicate()] " + e.getMessage(), e);
 		}
 		finally {}
 		
-		return isDuplicate;
+		return idDuplicate;
 	}
+	@RequestMapping(value = "/front/member/checkNickDuplicate.json", method = RequestMethod.POST, 
+					headers = {"content-type=application/json; charset=UTF-8", "accept=application/json"}, 
+					consumes="application/json; charset=UTF-8", produces="application/json; charset=UTF-8")
+		public @ResponseBody boolean checkNickDuplicate(@RequestBody MemberDto memberDto) {
+		
+		boolean nickDuplicate = true;
+		
+		try {
+			// 대칭키 암호화(AES-256)
+			String staticKey	= staticProperties.getProperty("front.enc.user.aes256.key", "[UNDEFINED]");
+			SKwithAES aes		= new SKwithAES(staticKey);
+			
+			memberDto.setNickname(aes.encode(memberDto.getNickname()));
+			
+			int count = memberSrvc.selectNickDuplicate(memberDto);
+			
+			if (count == 0) nickDuplicate = false;
+			
+		}
+		catch (Exception e) {
+			logger.error("[" + this.getClass().getName() + ".checkNickDuplicate()] " + e.getMessage(), e);
+		}
+		finally {}
+		
+		return nickDuplicate;
+		}
 	
 	/**
 	 * @param request [요청 서블릿]
@@ -274,26 +316,28 @@ public class MemberWeb extends Common {
 	 * <p>EXAMPLE:</p>
 	 */
 	@RequestMapping(value = "/front/member/registerProc.web", method = RequestMethod.POST)
-	public ModelAndView registerProc(HttpServletRequest request, HttpServletResponse response
-			, MemberDto memberDto
-			, String term_1
-			, String term_2
-			, String term_3) {
+	/*
+	 * public ModelAndView registerProc(HttpServletRequest request,
+	 * HttpServletResponse response , MemberDto memberDto , String term_1 , String
+	 * term_2 , String term_3)) {
+	 */
+		public ModelAndView registerProc(HttpServletRequest request, HttpServletResponse response
+				, MemberDto memberDto) {
 		
 		ModelAndView mav = new ModelAndView("redirect:/error.web");
 		
 		try {
 			
-			if (term_1 == null || term_1.equals("")) term_1 = "N";
-			if (term_2 == null || term_2.equals("")) term_2 = "N";
-			if (term_3 == null || term_3.equals("")) term_3 = "N";
+			//if (term_1 == null || term_1.equals("")) term_1 = "N";
+			//if (term_2 == null || term_2.equals("")) term_2 = "N";
+			//if (term_3 == null || term_3.equals("")) term_3 = "N";
 			
 			//logger.debug(term_1);
 			//logger.debug(term_2);
 			//logger.debug(term_3);
 			
 			// [2024-08-07][pluto@himedia.co.kr][TODO: 약관 갯수(JSP)에 무관하게 처리될 수 있도록 개선]
-			String[] arrTermAgreement = {term_1, term_2, term_3};
+			//String[] arrTermAgreement = {term_1, term_2, term_3};
 			
 			/*
 			logger.debug("암호화 전: " + memberDto.getEmail());
@@ -310,6 +354,10 @@ public class MemberWeb extends Common {
 			//logger.debug(memberDto.getFlg_email());
 			//logger.debug(memberDto.getFlg_sms());
 			
+			if (memberDto.getFlg_pets() == null || memberDto.getFlg_pets().equals("")) memberDto.setFlg_pets("N");
+			
+			if (memberDto.getPets() == null || memberDto.getPets().equals("")) memberDto.setPets("NNNNN");
+			
 			// 해쉬 암호화(SHA-256)
 			memberDto.setPasswd(HSwithSHA.encode(memberDto.getPasswd()));
 			//logger.debug("암호화 후(Passwd): " + memberDto.getPasswd());
@@ -318,7 +366,7 @@ public class MemberWeb extends Common {
 			String staticKey	= staticProperties.getProperty("front.enc.user.aes256.key", "[UNDEFINED]");
 			SKwithAES aes		= new SKwithAES(staticKey);
 			
-			memberDto.setEmail(aes.encode(memberDto.getEmail()));
+			memberDto.setId(aes.encode(memberDto.getId()));
 			memberDto.setMbr_nm(aes.encode(memberDto.getMbr_nm()));
 			memberDto.setPhone(aes.encode(memberDto.getPhone()));
 			memberDto.setPost(aes.encode(memberDto.getPost()));
@@ -329,20 +377,20 @@ public class MemberWeb extends Common {
 			//logger.debug("암호화 후(Phone): " + memberDto.getPhone());
 			//logger.debug("암호화 후(Post + Addr1 + Addr2): " + memberDto.getPost() + " " + memberDto.getAddr1() + " " + memberDto.getAddr2());
 			
-			boolean insert = memberSrvc.insert(memberDto, arrTermAgreement, aes.decode(memberDto.getPost()));
-			
+			//boolean insert = memberSrvc.insert(memberDto, arrTermAgreement, aes.decode(memberDto.getPost()));
+			boolean insert = memberSrvc.insert(memberDto);
 			if (insert) {
 				logger.debug("가입 성공");
 				
-				// 가입 축하 이메일 발송
-				EmailDto emailDto = new EmailDto();
-				
-				emailDto.setSender(dynamicProperties.getMessage("email.sender.mail"));
-				emailDto.setTo(new String[] {memberDto.getEmail()});
-				emailDto.setSubject("가입 축하 메일");
-				emailDto.setMessage("<b>가입</b>을 축하합니다.");
-				
-				emailCmpn.send(emailDto);
+				/*
+				 * // 가입 축하 이메일 발송 EmailDto emailDto = new EmailDto();
+				 * 
+				 * emailDto.setSender(dynamicProperties.getMessage("email.sender.mail"));
+				 * emailDto.setTo(new String[] {memberDto.getEmail()});
+				 * emailDto.setSubject("가입 축하 메일"); emailDto.setMessage("<b>가입</b>을 축하합니다.");
+				 * 
+				 * emailCmpn.send(emailDto);
+				 */
 				
 			}
 			else logger.debug("가입 실패");

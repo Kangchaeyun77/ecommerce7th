@@ -53,12 +53,15 @@ public class MemberSrvc {
 	@Inject
 	StatisticMemberDao statisticMemberDao;
 	
-	public int selectDuplicate(MemberDto memberDto) {
-		return memberDao.selectDuplicate(memberDto);
+	public int selectIdDuplicate(MemberDto memberDto) {
+		return memberDao.selectIdDuplicate(memberDto);
+	}
+	public int selectNickDuplicate(MemberDto memberDto) {
+		return memberDao.selectNickDuplicate(memberDto);
 	}
 	
 	@Transactional("txFront")
-	public boolean insert(MemberDto memberDto, String[] arrTermAgreement, String post) {
+	public boolean insert(MemberDto memberDto) {
 		
 		int result = 0;
 		
@@ -70,34 +73,47 @@ public class MemberSrvc {
 		result += memberDao.insertMaster(memberDto);
 		result += memberDao.insertDetail(memberDto);
 		
-		// 약관 정보
-		TermAgreeDto termAgreeDto = new TermAgreeDto();
-			
-		for (int loop = 0; loop < 3; loop++) {
-			
-			termAgreeDto.setSeq_trm_agr(termAgreeDao.sequence());
-			termAgreeDto.setSeq_mbr(memberDto.getSeq_mbr());
-			termAgreeDto.setSeq_trm(loop + 1);
-			termAgreeDto.setFlg_agr(arrTermAgreement[loop]);
-			termAgreeDto.setRegister(memberDto.getSeq_mbr());
-			
-			result += termAgreeDao.insert(termAgreeDto);
-		}
-		
-		// 통계 정보
-		// [2024-08-13][pluto@himedia.co.kir][TODO: 추후 통계 정보가 확장될 경우 로직 개선필요]
-		StatisticMemberDto statisticMemberDto = new StatisticMemberDto();
-		statisticMemberDto.setSeq_mbr(memberDto.getSeq_mbr());
-		statisticMemberDto.setPost(post);
-		result += statisticMemberDao.insert(statisticMemberDto);
-		
-		// 회원(2개) + 약관(3개) + 통계(1개)
-		if (result == 2 + 3 + 1) return true;
+		// 회원(2개) 
+		if (result == 2) return true;
 		else {
 			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
 			return false;
 		}
 	}
+	
+	/*
+	 * @Transactional("txFront") public boolean insert(MemberDto memberDto, String[]
+	 * arrTermAgreement, String post) {
+	 * 
+	 * int result = 0;
+	 * 
+	 * // 신규 회원 번호(seq_mbr) memberDto.setSeq_mbr(memberDao.sequence());
+	 * memberDto.setRegister(memberDto.getSeq_mbr());
+	 * 
+	 * // 회원 정보 result += memberDao.insertMaster(memberDto); result +=
+	 * memberDao.insertDetail(memberDto);
+	 * 
+	 * // 약관 정보 TermAgreeDto termAgreeDto = new TermAgreeDto();
+	 * 
+	 * for (int loop = 0; loop < 3; loop++) {
+	 * 
+	 * termAgreeDto.setSeq_trm_agr(termAgreeDao.sequence());
+	 * termAgreeDto.setSeq_mbr(memberDto.getSeq_mbr()); termAgreeDto.setSeq_trm(loop
+	 * + 1); termAgreeDto.setFlg_agr(arrTermAgreement[loop]);
+	 * termAgreeDto.setRegister(memberDto.getSeq_mbr());
+	 * 
+	 * result += termAgreeDao.insert(termAgreeDto); }
+	 * 
+	 * // 통계 정보 // [2024-08-13][pluto@himedia.co.kir][TODO: 추후 통계 정보가 확장될 경우 로직
+	 * 개선필요] StatisticMemberDto statisticMemberDto = new StatisticMemberDto();
+	 * statisticMemberDto.setSeq_mbr(memberDto.getSeq_mbr());
+	 * statisticMemberDto.setPost(post); result +=
+	 * statisticMemberDao.insert(statisticMemberDto);
+	 * 
+	 * // 회원(2개) + 약관(3개) + 통계(1개) if (result == 2 + 3 + 1) return true; else {
+	 * TransactionAspectSupport.currentTransactionStatus().setRollbackOnly(); return
+	 * false; } }
+	 */
 	
 	public MemberDto selectPasswd(MemberDto memberDto) {
 		return memberDao.selectPasswd(memberDto);

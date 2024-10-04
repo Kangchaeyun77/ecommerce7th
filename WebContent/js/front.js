@@ -1,6 +1,6 @@
 /**
- * @author hyebongssss@himedia.co.kr
- * @since 2024-08-02
+ * @author kbs@happySteps.com
+ * @since 2024-10-02
  *
  * <p>DESCRIPTION: 개인정보 수정
  * <p>IMPORTANT:</p>
@@ -28,16 +28,20 @@ function checkModify() {
 		isSubmit = false;
 	}
 	
-	var hobbys = "";
+	var pets = "";
 	
-	if (document.getElementById("hobby1").checked) hobbys += "Y";
+	if (document.getElementById("pet1").checked) hobbys += "Y";
 	else hobbys += "N";
-	if (document.getElementById("hobby2").checked) hobbys += "Y";
+	if (document.getElementById("pet2").checked) hobbys += "Y";
 	else hobbys += "N";
-	if (document.getElementById("hobby3").checked) hobbys += "Y";
+	if (document.getElementById("pet3").checked) hobbys += "Y";
+	else hobbys += "N";
+	if (document.getElementById("pet4").checked) hobbys += "Y";
+	else hobbys += "N";
+	if (document.getElementById("pet5").checked) hobbys += "Y";
 	else hobbys += "N";
 	
-	document.getElementById("hobbys").value = hobbys;
+	document.getElementById("pets").value = pets;
 	
 	if (isSubmit) {
 	
@@ -52,8 +56,8 @@ function checkModify() {
 }
 
 /**
- * @author pluto@himedia.co.kr
- * @since 2023-11-02
+ * @author kbs@happySteps.com
+ * @since 2024-10-02
  *
  * <p>DESCRIPTION: 다음 우편번호 찾기(https://postcode.map.daum.net/guide)</p>
  * <p>IMPORTANT:</p>
@@ -126,8 +130,8 @@ function execDaumPostcode() {
 }
 
 /**
- * @author pluto@himedia.co.kr
- * @since 2024-05-28
+ * @author kbs@happySteps.com
+ * @since 2024-10-02
  *
  * <p>DESCRIPTION:</p>
  * <p>IMPORTANT:</p>
@@ -150,7 +154,7 @@ function checkEmail(email) {
 	if (email.indexOf("@") <= 0) return false;
 	
 	// 3. 도메인
-	var isExist = false;
+/*	var isExist = false;
 	var arrDomain	= [".co.kr", ".com", ".net", ".or.kr", ".go.kr"];
 	for (var i = 0; i < arrDomain.length; i++) {
 		if (email.indexOf(arrDomain[i]) > 0 ) {
@@ -159,7 +163,7 @@ function checkEmail(email) {
 			break;
 		}
 	}
-	if (!isExist) return false;
+	if (!isExist) return false;*/
 	
 	var arrValue = email.split("@");
 	//alert("ID=" + arrValue[0].toLowerCase());
@@ -186,8 +190,40 @@ function checkEmail(email) {
 	return isEmail;
 }
 
+function checkId (id) {
+	
+	var isId = true;
+	
+	// 0. 정규식
+	var regExpId = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i;
+	if (!regExpId.test(id)) return false;
+	
+	// 1. 자리수
+	if (id.length <= 3) return false;
+	
+	// 2. 아이디에 처음시작 1자리는 영문, 4자이상 12자 이하, 영문, 영문+숫자, 특수문자는 '_'만 가능
+	var regularExpression = /^[a-zA-Z]{1}[a-zA-Z0-9_]{3,11}$/;
+	var isExist = regularExpression.test(arrValue[0]) ? false : true;
+	//alert("특수문자 여부=" + isExist);
+	if (isExist) return false;
+	
+	// 3. 제외할 아이디(소문자 기준)
+	isExist = false;
+	var IRREGULAR_KEYWORD = "super|root|administrator|admin|console"
+	+ "|sys|system|sa|owner"
+	+ "|document|html|iframe|div|span|img|src|type"
+	+ "|javascript|vbscript|script|alert"
+	+ "|id|member|customer|www";
+	if (IRREGULAR_KEYWORD.indexOf(arrValue[0].toLowerCase()) >= 0 ) {
+		//alert("제외할 아이디=" + arrValue[0].toLowerCase());
+		isExist = true;
+	}
+	if (isExist) return false;
+	
+	return isId;
+}
 /**
- * @author pluto@himedia.co.kr
+ * @author kbs@happySteps.com
  * @since 2024-05-28
  *
  * <p>DESCRIPTION:</p>
@@ -198,12 +234,12 @@ function checkRegister() {
 	var isSubmit	= true;
 	var frmMain		= document.getElementById("frmMain");
 	
-	if (!document.getElementById("term_1").checked) {
+/*	if (!document.getElementById("term_1").checked) {
 		alert("필수 약관에 동의하셔야 합니다!");
 		return;
-	}
+	}*/
 	
-	var email = document.getElementById("email").value;
+/*	var email = document.getElementById("email").value;
 	//alert("이메일=" + email);
 	
 	// 정상적인 이메일이 아니면(checkEmail = false)
@@ -211,12 +247,22 @@ function checkRegister() {
 		alert("이메일을 확인하세요!");
 		document.getElementById("email").focus();
 		return;
+	}*/
+	
+
+	// 아이디 중복 여부 확인
+	var id = document.getElementById("id").value;
+	if (idDuplicate) {
+		alert("아이디 중복을 확인하세요!");
+		document.getElementById("btnId").focus();
+		return;
 	}
 	
-	// 이메일 중복 여부 확인
-	if (isDuplicate) {
-		alert("이메일 중복을 확인하세요!");
-		document.getElementById("btnId").focus();
+	// 닉네임 중복 여부 확인
+	var nickname = document.getElementById("nickname").value;
+	if (nickDuplicate) {
+		alert("닉네임 중복을 확인하세요!");
+		document.getElementById("btnNick").focus();
 		return;
 	}
 	
@@ -249,18 +295,34 @@ function checkRegister() {
 		isSubmit = false;
 	}
 	
-	var hobbys = "";
+	// 이메일 확인
+	function validateEmail(email) {
+		var emailPattern = /^[a-zA-Z0-9]+@[a-zA-Z0-9]+\.[a-zA-Z]{2,}$/;
+		return emailPattern.test(email);
+	}
+
+	var email = document.getElementById("email").value
+	if (validateEmail(email)) {
+		alert("올바른 이메일 형식입니다.");
+	} else {
+		alert("잘못된 이메일 형식입니다.");
+	}
 	
-	if (document.getElementById("hobby1").checked) hobbys += "Y";
-	else hobbys += "N";
+	//펫 유무
+	var pets = "";
 	
-	if (document.getElementById("hobby2").checked) hobbys += "Y";
-	else hobbys += "N";
+	if (document.getElementById("pet1").checked) pets += "Y";
+	else pets += "N";
+	if (document.getElementById("pet2").checked) pets += "Y";
+	else pets += "N";
+	if (document.getElementById("pet3").checked) pets += "Y";
+	else pets += "N";
+	if (document.getElementById("pet4").checked) pets += "Y";
+	else pets += "N";
+	if (document.getElementById("pet5").checked) pets += "Y";
+	else pets += "N";
 	
-	if (document.getElementById("hobby3").checked) hobbys += "Y";
-	else hobbys += "N";
-	
-	document.getElementById("hobbys").value = hobbys;
+	document.getElementById("pets").value = pets;
 	
 	if (document.getElementById("mbr_nm").value == ""
 			|| document.getElementById("phone1").value == ""
@@ -274,13 +336,24 @@ function checkRegister() {
 	}
 	
 	if (isSubmit) {
-		alert("정상적으로 "
-				+ email
-				+ "로 인증 URL이 전송되었습니다.\n반드시 가입 후 10분 이내에 인증 URL을 클릭하셔야 정상적으로 서비스를 이용할 수 있습니다.");
 		document.getElementById("phone").value = 
-			document.getElementById("phone1").value
-			+ "-" + document.getElementById("phone2").value
-			+ "-" + document.getElementById("phone3").value;
+					document.getElementById("phone1").value
+					+ "-" + document.getElementById("phone2").value
+					+ "-" + document.getElementById("phone3").value;
+		if(customEmailDomain){
+		document.getElementById("email").value = 
+					document.getElementById("frontEmail").value
+					+ "@" + document.getElementById("customEmailDomain").value;}
+		else{
+		document.getElementById("email").value = 
+							document.getElementById("frontEmail").value
+							+ "@" + document.getElementById("emailDomain").value
+		}
+		alert("가입완료");
+/*		alert("정상적으로 "
+				+ email
+				+ "로 인증 URL이 전송되었습니다.\n반드시 가입 후 10분 이내에 인증 URL을 클릭하셔야 정상적으로 서비스를 이용할 수 있습니다.");*/
+		
 			
 		frmMain.action = "/front/member/registerProc.web";
 		frmMain.submit();
