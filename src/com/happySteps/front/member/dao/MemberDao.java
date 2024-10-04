@@ -49,7 +49,7 @@ public class MemberDao extends BaseDao {
 	}
 	
 	public int insertDetail(MemberDto memberDto) {
-		return sqlSessionFront.insert("com.happySteps.mybatis.front.member.Member.insertDetail", memberDto);
+		return sqlSessionFront.insert("com.happySteps.front.mybatis.member.Member.insertDetail", memberDto);
 	}
 	
 	public int updateMaster(MemberDto memberDto) {
