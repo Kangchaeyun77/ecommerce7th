@@ -176,7 +176,7 @@ public class LoginWeb extends Common {
 			String staticKey	= staticProperties.getProperty("front.enc.user.aes256.key", "[UNDEFINED]");
 			SKwithAES aes		= new SKwithAES(staticKey);
 			
-			loginDto.setEmail(aes.encode(loginDto.getEmail()));
+			loginDto.setId(aes.encode(loginDto.getId()));
 			//logger.debug("암호화 후(Email): " + loginDto.getEmail());
 			
 			MemberDto memberDto = loginSrvc.exist(loginDto);
@@ -201,7 +201,7 @@ public class LoginWeb extends Common {
 				//logger.debug("복호화 후(Email): " + aes.decode(memberDto.getEmail()));
 				session.setAttribute("SEQ_MBR", Integer.toString(memberDto.getSeq_mbr()));
 				session.setAttribute("NAME", aes.decode(memberDto.getMbr_nm()));
-				session.setAttribute("EMAIL", aes.decode(memberDto.getEmail()));
+				session.setAttribute("ID", aes.decode(memberDto.getId()));
 				session.setAttribute("DT_LOGIN", Datetime.getNow("yyyy-MM-dd HH:mm:ss"));
 				
 				request.setAttribute("script", "alert('" + session.getAttribute("NAME")
@@ -212,7 +212,7 @@ public class LoginWeb extends Common {
 			}
 			else {
 				// logger.debug("해당 회원이 없거나 암호가 일치하지 않음");
-				request.setAttribute("script", "alert('이메일(아이디)과 비밀번호를 확인하세요!')");
+				request.setAttribute("script", "alert('아이디와 비밀번호를 확인하세요!')");
 			}
 			
 			request.setAttribute("redirect"	, "/front/");

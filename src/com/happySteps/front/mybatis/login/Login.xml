@@ -7,11 +7,11 @@
 			SEQ_MBR
 			, PASSWD
 			, MBR_NM
-			, EMAIL
+			, ID
 		FROM
 			TB_MBR_MST
 		WHERE
-			EMAIL			= #{email}
+			ID			= #{id}
 			AND CD_STATE	= 1
 			AND ROWNUM		= 1
 	</select>
