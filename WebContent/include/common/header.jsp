@@ -35,7 +35,7 @@
 	<link rel="stylesheet" href="/css/common.css" type="text/css" title="common stylesheet" />
 	<link rel="stylesheet" href="/css/layoutMain.css" type="text/css" title="common stylesheet" />
 	<script type="text/javascript" src="/js/common.js"></script>
-	<!-- Google tag (gtag.js) [2024-06-27][pluto@himedia.co.kr][INSERT: Google GA] -->
+	<!-- Google tag (gtag.js) [2024-06-27][pluto@HAPPYSTEPS.COM][INSERT: Google GA] -->
 	<script async=true src="https://www.googletagmanager.com/gtag/js?id=G-WKLKPH7FVD"></script>
 	<script>
 		window.dataLayer = window.dataLayer || [];

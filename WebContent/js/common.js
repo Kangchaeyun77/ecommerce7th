@@ -8,7 +8,7 @@ function commaValue(object){
 }
 
 /**
- * @author pluto@himedia.co.kr
+ * @author pluto@HAPPYSTEPS.COM
  * @since 2024-08-26
  *
  * <p>DESCRIPTION:
@@ -24,7 +24,7 @@ function setCookie(cookieName, value, days) {
 }
 
 /**
- * @author pluto@himedia.co.kr
+ * @author pluto@HAPPYSTEPS.COM
  * @since 2024-08-26
  *
  * <p>DESCRIPTION:

@@ -1,13 +1,13 @@
 /**
  * YOU ARE STRICTLY PROHIBITED TO COPY, DISCLOSE, DISTRIBUTE, MODIFY OR USE THIS PROGRAM
- * IN PART OR AS A WHOLE WITHOUT THE PRIOR WRITTEN CONSENT OF HIMEDIA.CO.KR.
- * HIMEDIA.CO.KR OWNS THE INTELLECTUAL PROPERTY RIGHTS IN AND TO THIS PROGRAM.
- * COPYRIGHT (C) 2023 HIMEDIA.CO.KR ALL RIGHTS RESERVED.
+ * IN PART OR AS A WHOLE WITHOUT THE PRIOR WRITTEN CONSENT OF HAPPYSTEPS.COM.
+ * HAPPYSTEPS.COM OWNS THE INTELLECTUAL PROPERTY RIGHTS IN AND TO THIS PROGRAM.
+ * COPYRIGHT (C) 2023 HAPPYSTEPS.COM ALL RIGHTS RESERVED.
  *
- * 하기 프로그램에 대한 저작권을 포함한 지적재산권은 himedia.co.kr에 있으며,
- * himedia.co.kr이 명시적으로 허용하지 않는 사용, 복사, 변경 및 제 3자에 의한 공개, 배포는 엄격히 금지되며
- * himedia.co.kr의 지적재산권 침해에 해당된다.
- * Copyright (C) 2023 himedia.co.kr All Rights Reserved.
+ * 하기 프로그램에 대한 저작권을 포함한 지적재산권은 HAPPYSTEPS.COM에 있으며,
+ * HAPPYSTEPS.COM이 명시적으로 허용하지 않는 사용, 복사, 변경 및 제 3자에 의한 공개, 배포는 엄격히 금지되며
+ * HAPPYSTEPS.COM의 지적재산권 침해에 해당된다.
+ * Copyright (C) 2023 HAPPYSTEPS.COM All Rights Reserved.
  *
  *
  * Program		: kr.co.himedia.ecommerce
@@ -16,7 +16,7 @@
  * File			: Request.java
  * Notes		:
  * History		: [NO][Programmer][Description]
- *				: [20231128164828][pluto@himedia.co.kr][CREATE: Initial Release]
+ *				: [20231128164828][pluto@HAPPYSTEPS.COM][CREATE: Initial Release]
  */
 package com.happySteps.util.servlet;
 
@@ -30,7 +30,7 @@ import com.happySteps.util.Strings;
 
 /**
  * @version 1.0.0
- * @author pluto@himedia.co.kr
+ * @author pluto@HAPPYSTEPS.COM
  * 
  * @since 2023-11-28
  * <p>DESCRIPTION:</p>
@@ -44,7 +44,7 @@ public class Request {
 	 * 
 	 * @since 2024-06-28
 	 * <p>DESCRIPTION: HttpServletRequest 객체(request)를 이용하여 Client OS 문자열 얻기</p>
-	 * <p>IMPORTANT: [2024-06-28][pluto#himedia.co.kr][TODO: 하기 로직 검증 필요]</p>
+	 * <p>IMPORTANT: [2024-06-28][pluto#HAPPYSTEPS.COM][TODO: 하기 로직 검증 필요]</p>
 	 * <p>EXAMPLE:</p>
 	 */
 	public static String getOs(HttpServletRequest request) {
@@ -114,7 +114,7 @@ public class Request {
 	 * 
 	 * @since 2024-06-28
 	 * <p>DESCRIPTION: HttpServletRequest 객체(request)를 이용하여 Client Browser 문자열 얻기</p>
-	 * <p>IMPORTANT: [2024-06-28][pluto#himedia.co.kr][TODO: 하기 로직 검증 필요]</p>
+	 * <p>IMPORTANT: [2024-06-28][pluto#HAPPYSTEPS.COM][TODO: 하기 로직 검증 필요]</p>
 	 * <p>EXAMPLE:</p>
 	 */
 	public static String getBrowser(HttpServletRequest request) {
@@ -150,7 +150,7 @@ public class Request {
 	 * 
 	 * @since 2024-06-28
 	 * <p>DESCRIPTION: HttpServletRequest 객체(request)를 이용하여 Client IP 문자열 얻기</p>
-	 * <p>IMPORTANT: [2024-06-28][pluto#himedia.co.kr][TODO: 하기 로직 검증 필요]</p>
+	 * <p>IMPORTANT: [2024-06-28][pluto#HAPPYSTEPS.COM][TODO: 하기 로직 검증 필요]</p>
 	 * <p>EXAMPLE:</p>
 	 */
 	public static String getRemoteAddr(HttpServletRequest request) {

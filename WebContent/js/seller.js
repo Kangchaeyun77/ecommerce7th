@@ -1,5 +1,5 @@
 /**
- * @author pluto@himedia.co.kr
+ * @author pluto@HAPPYSTEPS.COM
  * @since 2023-11-02
  *
  * <p>DESCRIPTION: 다음 우편번호 찾기(https://postcode.map.daum.net/guide)</p>
@@ -73,7 +73,7 @@ function execDaumPostcode() {
 }
 
 /**
- * @author pluto@himedia.co.kr
+ * @author pluto@HAPPYSTEPS.COM
  * @since 2024-05-28
  *
  * <p>DESCRIPTION:</p>
@@ -134,7 +134,7 @@ function checkEmail(email) {
 }
 
 /**
- * @author cyd@himedia.co.kr
+ * @author cyd@HAPPYSTEPS.COM
  * @since 2024-07-31
  *
  * <p>DESCRIPTION:</p>
@@ -155,7 +155,7 @@ function checkId(id) {
 }
 
 /**
- * @author cyd@himedia.co.kr
+ * @author cyd@HAPPYSTEPS.COM
  * @since 2024-07-31
  *
  * <p>DESCRIPTION:</p>

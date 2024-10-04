@@ -1,13 +1,13 @@
 /**
  * YOU ARE STRICTLY PROHIBITED TO COPY, DISCLOSE, DISTRIBUTE, MODIFY OR USE THIS PROGRAM
- * IN PART OR AS A WHOLE WITHOUT THE PRIOR WRITTEN CONSENT OF HIMEDIA.CO.KR.
- * HIMEDIA.CO.KR OWNS THE INTELLECTUAL PROPERTY RIGHTS IN AND TO THIS PROGRAM.
- * COPYRIGHT (C) 2024 HIMEDIA.CO.KR ALL RIGHTS RESERVED.
+ * IN PART OR AS A WHOLE WITHOUT THE PRIOR WRITTEN CONSENT OF HAPPYSTEPS.COM.
+ * HAPPYSTEPS.COM OWNS THE INTELLECTUAL PROPERTY RIGHTS IN AND TO THIS PROGRAM.
+ * COPYRIGHT (C) 2024 HAPPYSTEPS.COM ALL RIGHTS RESERVED.
  *
- * 하기 프로그램에 대한 저작권을 포함한 지적재산권은 himedia.co.kr에 있으며,
- * himedia.co.kr이 명시적으로 허용하지 않는 사용, 복사, 변경 및 제 3자에 의한 공개, 배포는 엄격히 금지되며
- * himedia.co.kr의 지적재산권 침해에 해당된다.
- * Copyright (C) 2024 himedia.co.kr All Rights Reserved.
+ * 하기 프로그램에 대한 저작권을 포함한 지적재산권은 HAPPYSTEPS.COM에 있으며,
+ * HAPPYSTEPS.COM이 명시적으로 허용하지 않는 사용, 복사, 변경 및 제 3자에 의한 공개, 배포는 엄격히 금지되며
+ * HAPPYSTEPS.COM의 지적재산권 침해에 해당된다.
+ * Copyright (C) 2024 HAPPYSTEPS.COM All Rights Reserved.
  *
  *
  * Program		: kr.co.himedia.ecommerce
@@ -16,7 +16,7 @@
  * File			: LoginWeb.java
  * Notes		:
  * History		: [NO][Programmer][Description]
- *				: [20240618160606][pluto@himedia.co.kr][CREATE: Initial Release]
+ *				: [20240618160606][pluto@HAPPYSTEPS.COM][CREATE: Initial Release]
  */
 package com.happySteps.front.login.controller;
 
@@ -46,7 +46,7 @@ import com.happySteps.util.servlet.Request;
 
 /**
  * @version 1.0.0
- * @author pluto@himedia.co.kr
+ * @author pluto@HAPPYSTEPS.COM
  * 
  * @since 2024-06-18
  * <p>DESCRIPTION: 로그인 컨트롤러</p>
@@ -85,7 +85,7 @@ public class LoginWeb extends Common {
 		try {
 			HttpSession session = request.getSession(false);
 			
-			// [2024-07-25][pluto@himedia.co.kr][TODO: 세션 만료 시 처리 추가]
+			// [2024-07-25][pluto@HAPPYSTEPS.COM][TODO: 세션 만료 시 처리 추가]
 			String name		= (String) session.getAttribute("NAME");
 			String dt_login	= (String) session.getAttribute("DT_LOGIN");
 			session.invalidate();
@@ -149,7 +149,7 @@ public class LoginWeb extends Common {
 		
 		try {
 			
-			/** [2024-07-01][pluto@himedia.co.kr][TODO: 추후 로그인 접속 정보 개발 예정]
+			/** [2024-07-01][pluto@HAPPYSTEPS.COM][TODO: 추후 로그인 접속 정보 개발 예정]
 			LoginAccessDto loginAccessDto = new LoginAccessDto();
 			
 			loginAccessDto.setDt_login(Datetime.getNow("yyyy-MM-dd HH:mm:ss"));

@@ -1,22 +1,22 @@
 /**
  * YOU ARE STRICTLY PROHIBITED TO COPY, DISCLOSE, DISTRIBUTE, MODIFY OR USE THIS PROGRAM
- * IN PART OR AS A WHOLE WITHOUT THE PRIOR WRITTEN CONSENT OF HIMEDIA.CO.KR.
- * HIMEDIA.CO.KR OWNS THE INTELLECTUAL PROPERTY RIGHTS IN AND TO THIS PROGRAM.
- * COPYRIGHT (C) 2024 HIMEDIA.CO.KR ALL RIGHTS RESERVED.
+ * IN PART OR AS A WHOLE WITHOUT THE PRIOR WRITTEN CONSENT OF HAPPYSTEPS.COM.
+ * HAPPYSTEPS.COM OWNS THE INTELLECTUAL PROPERTY RIGHTS IN AND TO THIS PROGRAM.
+ * COPYRIGHT (C) 2024 HAPPYSTEPS.COM ALL RIGHTS RESERVED.
  *
- * 하기 프로그램에 대한 저작권을 포함한 지적재산권은 himedia.co.kr에 있으며,
- * himedia.co.kr이 명시적으로 허용하지 않는 사용, 복사, 변경 및 제 3자에 의한 공개, 배포는 엄격히 금지되며
- * himedia.co.kr의 지적재산권 침해에 해당된다.
- * Copyright (C) 2024 himedia.co.kr All Rights Reserved.
+ * 하기 프로그램에 대한 저작권을 포함한 지적재산권은 happysteps.com에 있으며,
+ * happysteps.com이 명시적으로 허용하지 않는 사용, 복사, 변경 및 제 3자에 의한 공개, 배포는 엄격히 금지되며
+ * happysteps.com의 지적재산권 침해에 해당된다.
+ * Copyright (C) 2024 happysteps.com All Rights Reserved.
  *
  *
- * Program		: kr.co.himedia.ecommerce
+ * Program		: com.happysteps
  * Description	:
  * Environment	: JRE 1.7 or more
  * File			: MemberWeb.java
  * Notes		:
  * History		: [NO][Programmer][Description]
- *				: [20240620143410][pluto@himedia.co.kr][CREATE: Initial Release]
+ *				: [20240620143410][kbs@happySteps.com][CREATE: Initial Release]
  */
 package com.happySteps.front.member.controller;
 
@@ -43,7 +43,7 @@ import com.happySteps.util.security.HSwithSHA;
 import com.happySteps.util.security.SKwithAES;
 /**
  * @version 1.0.0
- * @author pluto@himedia.co.kr
+ * @author kbs@happySteps.com
  * 
  * @since 2024-06-20
  * <p>DESCRIPTION: 회원 컨트롤러</p>
@@ -117,7 +117,7 @@ public class MemberWeb extends Common {
 	 * @param boardDto [게시판 빈]
 	 * @return ModelAndView
 	 * 
-	 * @since 2024-08-02
+	 * @since 2024-10-04
 	 * <p>DESCRIPTION: 마이페이지 수정 처리</p>
 	 * <p>IMPORTANT:</p>
 	 * <p>EXAMPLE:</p>
@@ -176,7 +176,7 @@ public class MemberWeb extends Common {
 	 * @param boardDto [게시판 빈]
 	 * @return ModelAndView
 	 * 
-	 * @since 2024-08-02
+	 * @since 2024-10-04
 	 * <p>DESCRIPTION: 마이페이지 수정 폼</p>
 	 * <p>IMPORTANT:</p>
 	 * <p>EXAMPLE:</p>
@@ -220,7 +220,7 @@ public class MemberWeb extends Common {
 	 * @param response [응답 서블릿]
 	 * @return ModelAndView
 	 * 
-	 * @since 2024-06-21
+	 * @since 2024-10-04
 	 * <p>DESCRIPTION:</p>
 	 * <p>IMPORTANT:</p>
 	 * <p>EXAMPLE:</p>
@@ -283,7 +283,7 @@ public class MemberWeb extends Common {
 	 * @param response [응답 서블릿]
 	 * @return ModelAndView
 	 * 
-	 * @since 2024-06-21
+	 * @since 2024-10-04
 	 * <p>DESCRIPTION: 회원 가입 폼</p>
 	 * <p>IMPORTANT:</p>
 	 * <p>EXAMPLE:</p>
@@ -336,7 +336,7 @@ public class MemberWeb extends Common {
 			//logger.debug(term_2);
 			//logger.debug(term_3);
 			
-			// [2024-08-07][pluto@himedia.co.kr][TODO: 약관 갯수(JSP)에 무관하게 처리될 수 있도록 개선]
+			// [2024-10-04][kbs@happySteps.com]
 			//String[] arrTermAgreement = {term_1, term_2, term_3};
 			
 			/*
