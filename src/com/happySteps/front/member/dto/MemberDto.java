@@ -10,50 +10,46 @@
  * Copyright (C) 2024 himedia.co.kr All Rights Reserved.
  *
  *
- * Program		: com.happySteps
+ * Program		: kr.co.himedia.ecommerce
  * Description	:
  * Environment	: JRE 1.7 or more
  * File			: MemberDto.java
  * Notes		:
  * History		: [NO][Programmer][Description]
- *				: [20240620130553][rkdcodbs77#naver.com][CREATE: Initial Release]
+ *				: [20240620130553][pluto@himedia.co.kr][CREATE: Initial Release]
  */
 package com.happySteps.front.member.dto;
 
 /**
  * @version 1.0.0
- * @author rkdcodbs77#naver.com
+ * @author pluto@himedia.co.kr
  * 
- * @since 2024-10-04
+ * @since 2024-06-20
  * <p>DESCRIPTION:</p>
  * <p>IMPORTANT:</p>
  */
 public class MemberDto {
 	
-	private int seq_mbr		= 0;	// 회원 일련번호
-	private String id			= "";	// 아이디
-	private String nickname		= "";	// 닉네임
-	private String email		= "";	// 이메일
-	private String passwd		= "";	// 비밀번호
-	private String flg_pets		= "";	// 반려동물여부
-	private String pets			= null;	// 반려동물(ex.YYYYY)
-	private int cd_state		= 0;	// 회원 상태코드:대기(0)정상(1)탈퇴(8)강퇴(9)
-	private String gender		= "";	// 성별
-	private String mbr_nm		= "";	// 성명
-	private String phone		= "";	// 연락처
-	private String post			= "";	// 우편번호
-	private String addr1		= "";	// 메인주소
-	private String addr2		= "";	// 상세주소
-	private String flg_sms		= "";	// 수신여부 SMS
-	private String flg_email	= "";	// 수신여부 EMAIL
-	private String dt_sms		= "";	// 수신일시 SMS
-	private String dt_email		= "";	// 수신일시 EMAIL
-	private String last_ip		= "";	// 마지막 로그인 IP
-	private String last_dt		= "";	// 마지막 로그인 일시
-	private String dt_reg		= "";	// 등록 일시
-	private int register		= 0;	// 아이디
-	private String dt_upt		= "";	// 수정일시
+	private int seq_mbr		= 0;
+	private String id			= "";
+	private String nickname		= "";
+	private String email		= "";
+	private String passwd		= "";
+	private String flg_pets		= "";
+	private String pets			= null;
+	private String mbr_nm		= "";
+	private String gender		= "";
+	private String phone		= "";
+	private String post			= "";
+	private String addr1		= "";
+	private String addr2		= "";
+	private String flg_sms		= "";
+	private String flg_email	= "";
+	private String last_ip		= "";
+	private String last_dt		= "";
+	private int register		= 0;
 	private int updater		= 0;
+	
 	
 	public int getSeq_mbr() {
 		return seq_mbr;
@@ -97,23 +93,17 @@ public class MemberDto {
 	public void setPets(String pets) {
 		this.pets = pets;
 	}
-	public int getCd_state() {
-		return cd_state;
+	public String getMbr_nm() {
+		return mbr_nm;
 	}
-	public void setCd_state(int cd_state) {
-		this.cd_state = cd_state;
+	public void setMbr_nm(String mbr_nm) {
+		this.mbr_nm = mbr_nm;
 	}
 	public String getGender() {
 		return gender;
 	}
 	public void setGender(String gender) {
 		this.gender = gender;
-	}
-	public String getMbr_nm() {
-		return mbr_nm;
-	}
-	public void setMbr_nm(String mbr_nm) {
-		this.mbr_nm = mbr_nm;
 	}
 	public String getPhone() {
 		return phone;
@@ -151,18 +141,6 @@ public class MemberDto {
 	public void setFlg_email(String flg_email) {
 		this.flg_email = flg_email;
 	}
-	public String getDt_sms() {
-		return dt_sms;
-	}
-	public void setDt_sms(String dt_sms) {
-		this.dt_sms = dt_sms;
-	}
-	public String getDt_email() {
-		return dt_email;
-	}
-	public void setDt_email(String dt_email) {
-		this.dt_email = dt_email;
-	}
 	public String getLast_ip() {
 		return last_ip;
 	}
@@ -175,23 +153,11 @@ public class MemberDto {
 	public void setLast_dt(String last_dt) {
 		this.last_dt = last_dt;
 	}
-	public String getDt_reg() {
-		return dt_reg;
-	}
-	public void setDt_reg(String dt_reg) {
-		this.dt_reg = dt_reg;
-	}
 	public int getRegister() {
 		return register;
 	}
 	public void setRegister(int register) {
 		this.register = register;
-	}
-	public String getDt_upt() {
-		return dt_upt;
-	}
-	public void setDt_upt(String dt_upt) {
-		this.dt_upt = dt_upt;
 	}
 	public int getUpdater() {
 		return updater;
@@ -199,4 +165,4 @@ public class MemberDto {
 	public void setUpdater(int updater) {
 		this.updater = updater;
 	}
-}	
+}

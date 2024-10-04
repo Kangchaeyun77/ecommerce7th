@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.happySteps.front.mybatis.member.Member">
 
-	<update id="updateState" parameterType="memberDto">
+<!--	<update id="updateState" parameterType="memberDto">
 		UPDATE
 			TB_MBR_MST
 		SET
@@ -13,15 +13,24 @@
 			<![CDATA[
 			AND DT_REG >= SYSDATE - INTERVAL '10' MINUTE
 			]]> 
-	</update>
+	</update>-->
 	
-	<select id="selectDuplicate" parameterType="memberDto" resultType="java.lang.Integer">
+	<select id="selectIdDuplicate" parameterType="memberDto" resultType="java.lang.Integer">
 		SELECT
-			COUNT(EMAIL)
+			COUNT(ID)
 		FROM
 			TB_MBR_MST
 		WHERE
-			EMAIL = #{email}
+			ID = #{id}
+	</select>
+	
+	<select id="selectNickDuplicate" parameterType="memberDto" resultType="java.lang.Integer">
+		SELECT
+			COUNT(NICKNAME)
+		FROM
+			TB_MBR_MST
+		WHERE
+			NICKNAME = #{nickname}
 	</select>
 	
 	<select id="selectPasswd" parameterType="memberDto" resultType="memberDto">
@@ -33,7 +42,7 @@
 			SEQ_MBR = #{seq_mbr}
 	</select>
 	
-	<update id="updatePasswd" parameterType="memberDto">
+<!--	<update id="updatePasswd" parameterType="memberDto">
 		UPDATE
 			TB_MBR_MST
 		SET
@@ -72,8 +81,8 @@
 			<if test="addr2 != null and addr2 != ''">
 			, ADDR2		= #{addr2}
 			</if>
-			<if test="hobbys != null and hobbys != ''">
-			, HOBBYS	= #{hobbys}
+			<if test="pets != null and pets != ''">
+			, PETS	= #{pets}
 			</if>
 			<if test="flg_sms != null and flg_sms != ''">
 			, FLG_SMS	= #{flg_sms}
@@ -97,7 +106,7 @@
 			, dtl.POST
 			, dtl.ADDR1
 			, dtl.ADDR2
-			, dtl.HOBBYS
+			, dtl.PETS
 			, dtl.INTRO
 			, dtl.FLG_EMAIL
 			, dtl.FLG_SMS
@@ -109,20 +118,20 @@
 			mst.SEQ_MBR = dtl.SEQ_MBR
 		WHERE
 			mst.SEQ_MBR = #{seq_mbr}
-	</select>
+	</select>-->
 	
 	<insert id="insertMaster" parameterType="memberDto">
 		INSERT INTO TB_MBR_MST
-			(SEQ_MBR, EMAIL, PASSWD, CD_STATE, MBR_NM, GENDER, PHONE, DT_REG, REGISTER)
+			(SEQ_MBR, ID, PASSWD, NICKNAME, CD_STATE, FLG_PETS, PETS, EMAIL, MBR_NM, GENDER, PHONE, DT_REG, REGISTER)
 		VALUES
-			(#{seq_mbr}, #{email}, #{passwd}, 0, #{mbr_nm}, #{gender}, #{phone}, SYSDATE, #{register})
+			(#{seq_mbr}, #{id}, #{passwd}, #{nickname}, 0, #{flg_pets}, #{pets}, #{email}, #{mbr_nm}, #{gender}, #{phone}, SYSDATE, #{register})
 	</insert>
 	
 	<insert id="insertDetail" parameterType="memberDto">
 		INSERT INTO TB_MBR_DTL
-			(SEQ_MBR, POST, ADDR1, ADDR2, HOBBYS, INTRO, FLG_SMS, DT_SMS, FLG_EMAIL, DT_EMAIL)
+			(SEQ_MBR, POST, ADDR1, ADDR2, FLG_SMS, DT_SMS, FLG_EMAIL, DT_EMAIL)
 		VALUES
-			(#{seq_mbr}, #{post}, #{addr1}, #{addr2}, #{hobbys}, #{intro}, #{flg_sms}, SYSDATE, #{flg_email}, SYSDATE)
+			(#{seq_mbr}, #{post}, #{addr1}, #{addr2}, #{flg_sms}, SYSDATE, #{flg_email}, SYSDATE)
 	</insert>
 	
 	<select id="sequence" resultType="java.lang.Integer">
