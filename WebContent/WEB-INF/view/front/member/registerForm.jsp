@@ -48,7 +48,7 @@
 					return false;
 				}
 				
-				var myData = {아이디: $("#id").val()};
+				var myData = {id: $("#id").val()};
 				
 				$.ajax({
 					type: "POST",
@@ -94,7 +94,7 @@
 					return false;
 				}
 				
-				var nickData = {닉네임: $("#nickname").val()};
+				var nickData = {nickname: $("#nickname").val()};
 				
 				$.ajax({
 					type: "POST",
