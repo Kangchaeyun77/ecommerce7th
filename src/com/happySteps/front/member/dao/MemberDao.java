@@ -27,7 +27,7 @@ import com.happySteps.front.member.dto.MemberDto;
 
 /**
  * @version 1.0.0
- * @author one4027one#himedia.co.kr
+ * @author hyeen103#gmail.com
  * 
  * @since 2024-08-01
  * <p>DESCRIPTION:</p>
