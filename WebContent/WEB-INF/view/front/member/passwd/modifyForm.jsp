@@ -1,14 +1,14 @@
 <%
 /**
  * YOU ARE STRICTLY PROHIBITED TO COPY, DISCLOSE, DISTRIBUTE, MODIFY OR USE THIS PROGRAM
- * IN PART OR AS A WHOLE WITHOUT THE PRIOR WRITTEN CONSENT OF HAPPYSTEPS.COM.
- * HAPPYSTEPS.COM OWNS THE INTELLECTUAL PROPERTY RIGHTS IN AND TO THIS PROGRAM.
- * COPYRIGHT (C) 2024 HAPPYSTEPS.COM ALL RIGHTS RESERVED.
+ * IN PART OR AS A WHOLE WITHOUT THE PRIOR WRITTEN CONSENT OF HIMEDIA.CO.KR.
+ * HIMEDIA.CO.KR OWNS THE INTELLECTUAL PROPERTY RIGHTS IN AND TO THIS PROGRAM.
+ * COPYRIGHT (C) 2024 HIMEDIA.CO.KR ALL RIGHTS RESERVED.
  *
- * 하기 프로그램에 대한 저작권을 포함한 지적재산권은 HAPPYSTEPS.COM에 있으며,
- * HAPPYSTEPS.COM이 명시적으로 허용하지 않는 사용, 복사, 변경 및 제 3자에 의한 공개, 배포는 엄격히 금지되며
- * HAPPYSTEPS.COM의 지적재산권 침해에 해당된다.
- * Copyright (C) 2024 HAPPYSTEPS.COM All Rights Reserved.
+ * 하기 프로그램에 대한 저작권을 포함한 지적재산권은 himedia.co.kr에 있으며,
+ * himedia.co.kr이 명시적으로 허용하지 않는 사용, 복사, 변경 및 제 3자에 의한 공개, 배포는 엄격히 금지되며
+ * himedia.co.kr의 지적재산권 침해에 해당된다.
+ * Copyright (C) 2024 himedia.co.kr All Rights Reserved.
  *
  *
  * Program		: kr.co.himedia.ecommerce
@@ -25,7 +25,6 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<%@ include file="/include/front/header.jsp" %>
 	<link rel="stylesheet" type="text/css" title="common stylesheet" href="/css/layoutSubmain.css" />
 	<link rel="stylesheet" type="text/css" title="common stylesheet" href="/css/table.css" />
 	<script type="text/javascript" src="/js/jquery-3.7.1.min.js"></script>
@@ -76,43 +75,57 @@
 <body>
 <form id="frmMain" method="POST"  action="/front/member/passwd/modifyProc.web">
 <div class="container">
+	<a href="/front/"><img src="/images/logo3.png" alt="로고" style="width: 300px; height: 250px; object-fit: cover; "/></a>
 	<header>
-		<%@ include file="/include/front/top.jsp" %>
 	</header>
 	<nav>
-		<%@ include file="/include/front/gnb.jsp" %>
 	</nav>
 	<section class="content">
 		<nav>
-			<%@ include file="/include/front/lnbMyPage.jsp" %>
 		</nav>
 		<article class="txtCenter">
 			(*) 표시는 필수 입력 사항입니다.
-			<table class="headLeft_01" style="width: 500px; margin-left: auto; margin-right: auto">
-				<tr>
-					<th>현재 비밀번호(*)</th>
-					<td><input type="password" id="passwd" name="passwd" value="12345678!a" /></td>
-				</tr>
-				<tr>
-					<th>신규 비밀번호(*)</th>
-					<td><input type="password" id="confirmPasswd" name="confirmPasswd" value="123456789!a" /></td>
-				</tr>
-				<tr>
-					<th>신규 비밀번호 확인(*)</th>
-					<td><input type="password" id="confirmPasswd_" name="confirmPasswd_" value="123456789!a" /></td>
-				</tr>
-				<tr>
-					<td colspan="2" style="text-align:center;padding-top: 10px;padding-bottom: 10px">
-						<input type="reset" value="다시 쓰기" style="width:100px"/>
-						 <input type="button" value="수정 하기" style="width:100px" onClick="checkModify();"/>
-					</td>
-				</tr>
-			</table>
-		</article>
-		<aside></aside>
-	</section>
+<table style="width: 500px; margin-left: auto; margin-right: auto; border-collapse: collapse;">
+	<tr>
+		<th style="padding: 8px; color: black; padding-right: 10px; position: relative;">
+			현재 비밀번호(*)
+			<div style="position: absolute; left: 100%; top: 50%; transform: translateY(-50%); height: 30px; width: 2px; background-color: #d9c88c; margin-left: 0px;"></div>
+		</th>
+		<td style="padding: 8px;">
+			<input type="password" id="passwd" name="passwd" value="12345678!a" required style="border: none; padding: 5px; outline: none; width: 100%; color: black;"/>
+		</td>
+	</tr>
+	<tr>
+		<th style="padding: 8px; color: black; padding-right: 10px; position: relative;">
+			신규 비밀번호(*)
+			<div style="position: absolute; left: 100%; top: 50%; transform: translateY(-50%); height: 30px; width: 2px; background-color: #d9c88c; margin-left: 0px;"></div>
+		</th>
+		<td style="padding: 8px;">
+			<input type="password" id="newPasswd" name="newPasswd" value="123456789!a" required style="border: none; padding: 5px; outline: none; width: 100%; color: black;"/>
+		</td>
+	</tr>
+	<tr>
+		<th style="padding: 8px; color: black; padding-right: 10px; position: relative;">
+			신규 비밀번호 확인(*)
+			<div style="position: absolute; left: 100%; top: 50%; transform: translateY(-50%); height: 30px; width: 2px; background-color: #d9c88c; margin-left: 0px;"></div>
+		</th>
+		<td style="padding: 8px;">
+			<input type="password" id="confirmPasswd" name="confirmPasswd" value="123456789!a" required style="border: none; padding: 5px; outline: none; width: 100%; color: black;"/>
+		</td>
+	</tr>
+	<tr>
+	<td colspan="2" style="text-align:center; padding-top: 10px; padding-bottom: 10px;">
+			<input type="button" 
+				value="수정 하기" 
+				style="width:430px; padding:10px; background-color:#dead6f; color:white; border:none; border-radius:5px; cursor:pointer; font-size:16px;" 
+				onMouseOver="this.style.backgroundColor='#d9c88c';" 
+				onMouseOut="this.style.backgroundColor='#dead6f';" 
+				onClick="checkModify();"/>
+		</td>
+	</tr>
+</table>
 	<footer>
-		<%@ include file="/include/front/footer.jsp" %>
+		<%@ include file="/include/front/login_footer.jsp" %>
 	</footer>
 </div>
 </form>
