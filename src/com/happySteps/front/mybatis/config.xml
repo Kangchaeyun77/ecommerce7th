@@ -7,9 +7,14 @@
 	<typeAliases>
 	<typeAlias type="com.happySteps.front.login.dto.LoginDto"				alias="loginDto" />
 	<typeAlias type="com.happySteps.front.member.dto.MemberDto"				alias="memberDto" />
+	<typeAlias type="com.happySteps.front.buy.dto.BuyMasterDto"				alias="buymasterdto" />
+	<typeAlias type="com.happySteps.front.buy.dto.BuyDto"					alias="buydto" />
+	<typeAlias type="com.happySteps.front.buy.dto.BuyDetailDto"				alias="buydetaildto" />
+	<typeAlias type="com.happySteps.front.buy.dto.BuyDetailListDto"			alias="buydetaillistdto" />
 	</typeAliases>
 	<mappers>
 		<mapper resource="com/happySteps/front/mybatis/login/Login.xml" />
 		<mapper resource="com/happySteps/front/mybatis/member/Member.xml" />
+		<mapper resource="com/happySteps/front/mybatis/buy/Buy.xml" />
 	</mappers>
 </configuration>

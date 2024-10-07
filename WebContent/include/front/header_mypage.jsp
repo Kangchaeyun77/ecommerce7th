@@ -323,7 +323,7 @@
 <div id="fixedElement" class="d-none d-lg-flex align-items-end" style="position: fixed; top: 10px; right: 100px; z-index: 1000; transition: opacity 0.3s ease; opacity: 1;">
 	<ul class="d-flex justify-content-end list-unstyled m-0" style="align-items: center;">
 		<li style="display: flex; align-items: center; margin: 0 8px;">
-			<img src="/images/loginlogo.png" alt="login" style="width: 26px; height: 28px; object-fit: contain; vertical-align: middle;">
+			<img src="/images/logo/loginlogo.png" alt="login" style="width: 26px; height: 28px; object-fit: contain; vertical-align: middle;">
 		</li>
 		<li style="display: flex; align-items: center; margin: 0 8px;">
 			<iconify-icon icon="healthicons:person" style="width: 24px; height: 24px; color: #000; vertical-align: middle; margin-top: 4px;"></iconify-icon>

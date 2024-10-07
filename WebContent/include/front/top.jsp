@@ -74,7 +74,7 @@
 				<c:if test="${not empty sessionScope.SEQ_MBR}"><%--로그아웃--%>
 					<a href="/front/login/loginForm.web"><img src= "/images/logoutlogo.png" style="width: 26px; height: 28px; object-fit: contain; vertical-align: middle;"></a>
 				</c:if>
-				<a href="/front/myPage/"><%--마이페이지--%>
+				<a href="/front/myPage/index.web"><%--마이페이지--%>
 				<iconify-icon icon="healthicons:person" class="fs-4" style="width: 24px; height: 24px; color: #000; vertical-align: middle; margin-top: 4px;"></iconify-icon>
 				</a>
 				<a href="#"><%--찜--%>
