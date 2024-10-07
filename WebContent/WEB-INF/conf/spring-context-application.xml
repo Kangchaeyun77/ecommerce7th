@@ -48,7 +48,7 @@
 		<context:include-filter type="regex" expression="com.happySteps..*Api.*" />
 		<context:include-filter type="regex" expression="com.happySteps..*Web.*" />
 	</context:component-scan>
-	
+	<!-- 
 	<mvc:interceptors>
 	<interceptor>
 			<mvc:mapping path="/front/**" />
@@ -65,5 +65,5 @@
 			</beans:bean>
 	</interceptor>
 	</mvc:interceptors>
-	
+	 -->
 </beans:beans>

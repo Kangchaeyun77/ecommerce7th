@@ -30,8 +30,8 @@ import com.happySteps.front.member.dao.MemberDao;
 import com.happySteps.front.member.dao.StatisticMemberDao;
 import com.happySteps.front.member.dao.TermAgreeDao;
 import com.happySteps.front.member.dto.MemberDto;
-import com.happySteps.front.member.dto.StatisticMemberDto;
-import com.happySteps.front.member.dto.TermAgreeDto;
+//import com.happySteps.front.member.dto.StatisticMemberDto;
+//import com.happySteps.front.member.dto.TermAgreeDto;
 
 /**
  * @version 1.0.0
