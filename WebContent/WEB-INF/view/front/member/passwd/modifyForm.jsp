@@ -125,13 +125,15 @@
 				onMouseOver="this.style.backgroundColor='#d9c88c';" 
 				onMouseOut="this.style.backgroundColor='#dead6f';" 
 				onClick="checkModify();"/>
-		</td>
-	</tr>
-</table>
-	<footer>
-		<%@ include file="/include/front/login_footer.jsp" %>
-	</footer>
-</div>
-</form>
+						</td>
+					</tr>
+				</table>
+			</article>
+		</section>
+		<footer>
+			<jsp:include page="/include/front/login_footer.jsp" />
+		</footer>
+	</div>
+	</form>
 </body>
 </html>
