@@ -144,6 +144,8 @@
 			</div>
 			<div class="col text-center">
 				<a href="#" class="categories-item">
+					<img src="../images/categories-item/hamsterShop.png" class="img-fluid">
+					<h5></h5>
 				</a>
 			</div>
 			<div class="col text-center">
