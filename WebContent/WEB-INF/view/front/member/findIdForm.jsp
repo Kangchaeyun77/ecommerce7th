@@ -44,8 +44,8 @@
 <form id="frmMain" name="frmMain" method="POST">
 <!-- <form id="frmMain" method="POST" action="/loginProc.jsp"> -->
 <div class="container">
-	<header style="display: flex; justify-content: center; align-items: center; height: 120px;">
-		<a href="/front/"><img src="/image/logo.jpg2" alt="로고" width="200px" style="margin-top: 200px;"/></a>
+	<header style="display: flex; justify-content: center; align-items: center; height: 120px margin-top = 50px;">
+		<a href="/front/"><img src="/images/logo/logo3.png" alt="로고" style="width: 300px; height: 250px; object-fit: cover; "/></a>
 	</header>
 	
 	<section class="content" style="display: flex; justify-content: center; align-items: flex-start; height: 100vh;">
