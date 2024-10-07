@@ -65,28 +65,39 @@
 <div class="container py-2">
 	<div class="row py-4 pb-0 pb-sm-4 align-items-center ">
 		<div class="col-sm-4 col-lg-3 text-center text-sm-start">
-		<span style="position: absolute; top: 0; right: 0; line-height: 43px; vertical-align: middle;">
-		
-			<div>
+<span style="position: absolute; top: 0; right: 0; line-height: 43px; vertical-align: middle;">
+	<div>
+		<ul class="list-unstyled d-flex m-0">
+			<li style="margin: 0 8px;">
 				<c:if test="${empty sessionScope.SEQ_MBR}"><%--로그인--%>
-				<a href="/front/login/loginForm.web">
-					<iconify-icon icon="uis:lock-alt" style="width: 24px; height: 24px; color: #000; vertical-align: middle; margin-top: 4px;"></iconify-icon>
-				</a>
+					<a href="/front/login/loginForm.web">
+						<iconify-icon icon="uis:lock-alt" style="width: 24px; height: 50px; color: #000; vertical-align: middle; margin-top: 4px;"></iconify-icon>
+					</a>
 				</c:if>
 				<c:if test="${not empty sessionScope.SEQ_MBR}"><%--로그아웃--%>
-					<a href="/front/login/loginForm.web"><img src= "/images/logoutlogo.png" style="width: 26px; height: 28px; object-fit: contain; vertical-align: middle;"></a>
+					<a href="/front/login/loginForm.web">
+						<img src="/images/logoutlogo.png" style="width: 26px; height: 28px; object-fit: contain; vertical-align: middle;">
+					</a>
 				</c:if>
+			</li>
+			<li style="margin: 0 8px;">
 				<a href="/front/myPage/index.web"><%--마이페이지--%>
-				<iconify-icon icon="healthicons:person" class="fs-4" style="width: 24px; height: 24px; color: #000; vertical-align: middle; margin-top: 4px;"></iconify-icon>
+					<iconify-icon icon="healthicons:person" class="fs-4" style="width: 24px; height: 24px; color: #000; vertical-align: middle; margin-top: 4px;"></iconify-icon>
 				</a>
+			</li>
+			<li style="margin: 0 8px;">
 				<a href="#"><%--찜--%>
-				<iconify-icon icon="mdi:heart" class="fs-4" style="width: 24px; height: 24px; color: #000; vertical-align: middle; margin-top: 4px;"></iconify-icon>
+					<iconify-icon icon="mdi:heart" class="fs-4" style="width: 24px; height: 24px; color: #000; vertical-align: middle; margin-top: 4px;"></iconify-icon>
 				</a>
+			</li>
+			<li style="margin: 0 8px;">
 				<a href="#"><%--장바구니--%>
-				<iconify-icon icon="mdi:cart" class="fs-4 position-relative" style="width: 24px; height: 24px; color: #000; vertical-align: middle; margin-top: 4px;"></iconify-icon>
+					<iconify-icon icon="mdi:cart" class="fs-4 position-relative" style="width: 24px; height: 24px; color: #000; vertical-align: middle; margin-top: 4px;"></iconify-icon>
 				</a>
-			</div>
-		</span>
+			</li>
+		</ul>
+	</div>
+</span>
 			<div class="main-logo">
 				<a href="/front/index.web">
 					<img src="/images/logo/logo3.png" alt="logo" class="img-fluid">
