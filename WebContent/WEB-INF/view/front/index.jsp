@@ -37,7 +37,6 @@
 <section id="banner" style="background: #F9F3EC;">
 	<div class="container">
 		<div class="swiper main-swiper">
-	</div>
 <div class="swiper-wrapper">
 				<div class="swiper-slide py-5">
 					<div class="row banner-content align-items-center">
@@ -51,9 +50,11 @@
 							</h2>
 							<a href="#" class="btn btn-outline-dark btn-lg text-uppercase fs-6 rounded-1">
 								바로가기
+								<!-- 
 								<svg width="24" height="24" viewBox="0 0 24 24" class="mb-1">
 									<use xlink:href="#arrow-right"></use>
 								</svg>
+								 -->
 							</a>
 						</div>
 					</div>
@@ -71,9 +72,6 @@
 			</h2>
 			<a href="#" class="btn btn-outline-dark btn-lg text-uppercase fs-6 rounded-1">
 				바로가기
-				<svg width="24" height="24" viewBox="0 0 24 24" class="mb-1">
-					<use xlink:href="#arrow-right"></use>
-				</svg>
 			</a>
 		</div>
 	</div>
@@ -91,14 +89,11 @@
 			</h2>
 			<a href="#" class="btn btn-outline-dark btn-lg text-uppercase fs-6 rounded-1">
 				바로가기
-				<svg width="24" height="24" viewBox="0 0 24 24" class="mb-1">
-					<use xlink:href="#arrow-right"></use>
-				</svg>
 			</a>
 		</div>
 	</div>
 </div>
-<!-- 슬라이드 배너 영역(다섯번째 페이지) -->
+<!-- 슬라이드 배너 영역(네번째 페이지) -->
 <div class="swiper-slide py-5">
 	<div class="row banner-content align-items-center">
 		<div class="img-wrapper col-md-5">
@@ -111,15 +106,14 @@
 			</h2>
 			<a href="#" class="btn btn-outline-dark btn-lg text-uppercase fs-6 rounded-1">
 				바로가기
-				<svg width="24" height="24" viewBox="0 0 24 24" class="mb-1">
-					<use xlink:href="#arrow-right"></use>
-				</svg>
 			</a>
+			</div>
 		</div>
 	</div>
 </div>
 <!-- swiper 라이브러리 -->
 <div class="swiper-pagination mb-5"></div>
+	</div>
 	</div>
 </section>
 <!-- 카테고리영역 -->
