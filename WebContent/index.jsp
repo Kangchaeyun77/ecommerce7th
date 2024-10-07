@@ -35,8 +35,6 @@
 	<meta http-equiv="expires" content="0" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>:::HappySteps 행복한 발걸음 :::</title>
-	<link rel="shortcut icon" href="/image/favicon.ico" />
-	<link rel="apple-touch-icon" href="/image/apple-touch-icon.png" />
 	<link rel="stylesheet" type="text/css" title="common stylesheet" href="/css/common.css" />
 	<link rel="stylesheet" type="text/css" title="common stylesheet" href="/css/layoutMain.css" />
 	<script type="text/javascript" src="/js/common.js"></script>
@@ -53,7 +51,7 @@
 <form id="frmMain" method="POST">
 <div class="container">
 	<header>
-		<a href="/"><img src="/image/logo.jpg" alt="로고" width="200px" /></a>
+		<a href="/"><img src="/images/logo/logo.jpg" alt="로고" width="200px" /></a>
 	</header>
 	<nav>
 	</nav>
