@@ -128,7 +128,7 @@
 <div class="container">
 	<header style="display: flex; justify-content: center; align-items: center; height: 120px;">
 <div style="position: relative; height: 200px; overflow: hidden; margin-top: 50px;">
-		<a href="/front/"><img src="/images/logo3.png" alt="로고" style="width: 300px; height: 250px; object-fit: cover; "/></a>
+		<a href="/front/"><img src="/images/logo/logo3.png" alt="로고" style="width: 300px; height: 250px; object-fit: cover; "/></a>
 </div>
 	</header>
 	
