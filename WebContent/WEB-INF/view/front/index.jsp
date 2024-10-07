@@ -95,7 +95,7 @@
 		</div>
 	</div>
 </div>
-<!-- 슬라이드 배너 영역(다섯번째 페이지) -->
+<!-- 슬라이드 배너 영역(네번째 페이지) -->
 <div class="swiper-slide py-5">
 	<div class="row banner-content align-items-center">
 		<div class="img-wrapper col-md-5">
@@ -112,11 +112,13 @@
 					<use xlink:href="#arrow-right"></use>
 				</svg>
 			</a>
+			</div>
 		</div>
 	</div>
 </div>
 <!-- swiper 라이브러리 -->
 <div class="swiper-pagination mb-5"></div>
+	</div>
 	</div>
 </section>
 <!-- 카테고리영역 -->
