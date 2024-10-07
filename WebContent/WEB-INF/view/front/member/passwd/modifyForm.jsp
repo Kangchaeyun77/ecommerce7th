@@ -75,7 +75,11 @@
 <body>
 <form id="frmMain" method="POST"  action="/front/member/passwd/modifyProc.web">
 <div class="container">
-	<a href="/front/"><img src="/images/logo3.png" alt="로고" style="width: 300px; height: 250px; object-fit: cover; "/></a>
+<div style="text-align: center; margin-left: 55px;">
+	<a href="/front/">
+		<img src="/images/logo3.png" alt="로고" style="width: 300px; height: 250px; object-fit: cover;"/>
+	</a>
+</div>
 	<header>
 	</header>
 	<nav>
