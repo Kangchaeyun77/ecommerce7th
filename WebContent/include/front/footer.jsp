@@ -28,7 +28,7 @@
 
  			<div class="col-md-3">
  				<div class="footer-menu">
- 					<img src="/images/logo2.png" alt="logo">
+ 					<img src="/images/logo/logo2.png" alt="logo">
  					<p class="blog-paragraph fs-6 mt-3">방문해주셔서 감사합니다</p>
  					<div class="social-links">
  						<ul class="d-flex list-unstyled gap-2">
@@ -128,12 +128,12 @@
  		<div class="row mt-3">
  			<div class="col-md-6 copyright">
  				<p class="secondary-font">© 2024 행복한발걸음. All rights reserved.</p>
- 				<p class="secondary-font">© 2023 Waggy. All rights reserved.</p>
  			</div>
  			<div class="col-md-6 text-md-end">
- 				<p class="secondary-font">Free HTML Template by <a href="https://templatesjungle.com/" target="_blank"
- 						class="text-decoration-underline fw-bold text-black-50"> TemplatesJungle</a> Distributed by <a href="https://themewagon.com/" target="_blank"
- 						class="text-decoration-underline fw-bold text-black-50"> ThemeWagon</a></p>
+ 				<p class="secondary-font">Free HTML Template by
+					<a href="https://templatesjungle.com/" target="_blank" class="text-decoration-underline fw-bold text-black-50"> TemplatesJungle</a>
+					Distributed by 
+					<a href="https://themewagon.com/" target="_blank" class="text-decoration-underline fw-bold text-black-50"> ThemeWagon</a></p>
  			</div>
  		</div>
  	</div>
