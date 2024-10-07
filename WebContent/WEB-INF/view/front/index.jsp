@@ -28,13 +28,16 @@
 	<meta charset="UTF-8">
 	<meta http-equiv="cache-control" content="no-cache" />
 	<meta http-equiv="pragma" content="no-cache" />
+	<%@ include file="/include/front/top.jsp" %>
 	<%@ include file="/include/front/header.jsp" %>
+	
 </head>
 <body>
 <!-- 슬라이드 배너 영역(첫페이지) -->
 <section id="banner" style="background: #F9F3EC;">
 	<div class="container">
 		<div class="swiper main-swiper">
+	</div>
 <div class="swiper-wrapper">
 				<div class="swiper-slide py-5">
 					<div class="row banner-content align-items-center">
@@ -95,7 +98,7 @@
 		</div>
 	</div>
 </div>
-<!-- 슬라이드 배너 영역(네번째 페이지) -->
+<!-- 슬라이드 배너 영역(다섯번째 페이지) -->
 <div class="swiper-slide py-5">
 	<div class="row banner-content align-items-center">
 		<div class="img-wrapper col-md-5">
@@ -112,13 +115,11 @@
 					<use xlink:href="#arrow-right"></use>
 				</svg>
 			</a>
-			</div>
 		</div>
 	</div>
 </div>
 <!-- swiper 라이브러리 -->
 <div class="swiper-pagination mb-5"></div>
-	</div>
 	</div>
 </section>
 <!-- 카테고리영역 -->
@@ -127,19 +128,14 @@
 		<div class="row my-5">
 			<div class="col text-center">
 				<a href="#" class="categories-item">
-				<img src="../images/categories-item/all.png" class="img-fluid">
-				<!--이전코드
-					<iconify-icon class="category-icon" icon="ph:cat"></iconify-icon> -->
-				</a>
-			</div>
-			<div class="col text-center">
-				<a href="#" class="categories-item">
-					<img src="../images/categories-item/dogShop.png" class="img-fluid">	
+					<img src="../images/categories-item/dogShop.png" class="img-fluid">
+					<h5></h5>
 				</a>
 			</div>
 			<div class="col text-center">
 				<a href="#" class="categories-item">
 					<img src="../images/categories-item/catShop.png" class="img-fluid">
+					<h5></h5>
 				</a>
 			</div>
 			<div class="col text-center">
@@ -151,6 +147,16 @@
 			<div class="col text-center">
 				<a href="#" class="categories-item">
 					<img src="../images/categories-item/reptilesShop.png" class="img-fluid">
+					<h5></h5>
+				</a>
+			</div>
+			<div class="col text-center">
+				<a href="#" class="categories-item">
+				<img src="../images/categories-item/all.png" class="img-fluid">
+					<h5></h5>
+				<!--이전코드
+					<iconify-icon class="category-icon" icon="ph:cat"></iconify-icon> -->
+					<h5></h5>
 				</a>
 			</div>
 		</div>
