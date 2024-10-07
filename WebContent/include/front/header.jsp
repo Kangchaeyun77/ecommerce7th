@@ -304,25 +304,23 @@
 		</nav>
 	</div>
 </header>
-
+<!-- 상단 로그인,마이페이지,카트 관련 아이콘 조정관련 코드 -->
 <div id="fixedElement" class="d-none d-lg-flex align-items-end" style="position: fixed; top: 10px; right: 100px; z-index: 1000; transition: opacity 0.3s ease; opacity: 1;">
-	<ul class="d-flex justify-content-end list-unstyled m-0">
-		<li>
-			<a href="/front/login/loginForm.web" class="mx-3">
-				<iconify-icon icon="healthicons:person" class="fs-4"></iconify-icon>
+	<ul class="d-flex justify-content-end list-unstyled m-0" style="align-items: center;">
+		<li style="display: flex; align-items: center; margin: 0 8px;">
+			<img src="/images/loginlogo.png" alt="login" style="width: 26px; height: 28px; object-fit: contain; vertical-align: middle;">
+		</li>
+		<li style="display: flex; align-items: center; margin: 0 8px;">
+			<iconify-icon icon="healthicons:person" style="width: 24px; height: 24px; color: #000; vertical-align: middle; margin-top: 4px;"></iconify-icon>
+		</li>
+		<li style="display: flex; align-items: center; margin: 0 8px;">
+			<a href="index.html">
+				<iconify-icon icon="mdi:heart" style="width: 24px; height: 24px; color: #000; vertical-align: middle;"></iconify-icon>
 			</a>
 		</li>
-		<li>
-			<a href="index.html" class="mx-3">
-				<iconify-icon icon="mdi:heart" class="fs-4"></iconify-icon>
-			</a>
-		</li>
-		<li class="">
-			<a href="index.html" class="mx-3" data-bs-toggle="offcanvas" data-bs-target="#offcanvasCart" aria-controls="offcanvasCart">
-				<iconify-icon icon="mdi:cart" class="fs-4 position-relative"></iconify-icon>
-				<span class="position-absolute translate-middle badge rounded-circle bg-primary pt-2">
-					03
-				</span>
+		<li style="display: flex; align-items: center; margin: 0 8px;">
+			<a href="index.html" data-bs-toggle="offcanvas" data-bs-target="#offcanvasCart" aria-controls="offcanvasCart">
+				<iconify-icon icon="mdi:cart" style="width: 24px; height: 24px; color: #000; vertical-align: middle;"></iconify-icon>
 			</a>
 		</li>
 	</ul>
