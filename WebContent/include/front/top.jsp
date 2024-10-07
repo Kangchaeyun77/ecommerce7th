@@ -42,7 +42,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Chilanka&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
 	
 	<script>
-	
+	<!--
 	document.addEventListener("DOMContentLoaded", function() {
 		let lastScrollTop = 0;
 		const fixedElement = document.getElementById('fixedElement');
@@ -60,6 +60,7 @@
 			lastScrollTop = scrollTop;
 		});
 	});
+	-->
 </script>
 
 <div class="container py-2">
@@ -71,7 +72,7 @@
 			<li style="margin: 0 8px;">
 				<c:if test="${empty sessionScope.SEQ_MBR}"><%--로그인--%>
 					<a href="/front/login/loginForm.web">
-						<iconify-icon icon="uis:lock-alt" style="width: 24px; height: 50px; color: #000; vertical-align: middle; margin-top: 4px;"></iconify-icon>
+						<iconify-icon icon="uis:lock-alt" style="width: 28px; height: 24px; color: #000; vertical-align: middle; margin-top: 8px;"></iconify-icon> <!-- 자물쇠 아이콘을 아래로 이동 -->
 					</a>
 				</c:if>
 				<c:if test="${not empty sessionScope.SEQ_MBR}"><%--로그아웃--%>
