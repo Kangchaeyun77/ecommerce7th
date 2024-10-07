@@ -56,7 +56,7 @@
 			linkElement.href = 'js/css/style.css';
 		};
 		-->
-		<!--
+		<%--
 		document.addEventListener("DOMContentLoaded", function() {
 			let lastScrollTop = 0;
 			const fixedElement = document.getElementById('fixedElement');
@@ -74,7 +74,7 @@
 				lastScrollTop = scrollTop;
 			});
 		});
-		-->
+		--%>
 	</script>
 	
 </head>

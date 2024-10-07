@@ -42,7 +42,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Chilanka&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
 	
 	<script>
-	<!--
+	<%--
 	document.addEventListener("DOMContentLoaded", function() {
 		let lastScrollTop = 0;
 		const fixedElement = document.getElementById('fixedElement');
@@ -60,7 +60,7 @@
 			lastScrollTop = scrollTop;
 		});
 	});
-	-->
+	--%>
 </script>
 
 <div class="container py-2">
