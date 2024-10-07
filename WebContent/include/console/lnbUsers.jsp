@@ -11,15 +11,15 @@
  * Copyright (C) 2024 HAPPYSTEPS.COM All Rights Reserved.
  *
  *
- * Program		: kr.co.himedia.ecommerce
+ * Program		: com.happySteps
  * Description	:
  * Environment	: JRE 1.7 or more
  * File			:
  * Notes		:
  * History		: [NO][Programmer][Description]
- *				: [20240726150000][pluto@HAPPYSTEPS.COM][CREATE: Initial Release]
+ *				: [20241007][rkdcodbs77#naver.com][CREATE: Initial Release]
  */
-%>
+ %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" trimDirectiveWhitespaces="true" %>
 			<ul>
 				<li><a href="/console/users/member/list.web" class="menuLnb">구매자</a></li>

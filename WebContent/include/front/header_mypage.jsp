@@ -1,3 +1,25 @@
+<%
+/**
+ * YOU ARE STRICTLY PROHIBITED TO COPY, DISCLOSE, DISTRIBUTE, MODIFY OR USE THIS PROGRAM
+ * IN PART OR AS A WHOLE WITHOUT THE PRIOR WRITTEN CONSENT OF HAPPYSTEPS.COM.
+ * HAPPYSTEPS.COM OWNS THE INTELLECTUAL PROPERTY RIGHTS IN AND TO THIS PROGRAM.
+ * COPYRIGHT (C) 2024 HAPPYSTEPS.COM ALL RIGHTS RESERVED.
+ *
+ * 하기 프로그램에 대한 저작권을 포함한 지적재산권은 HAPPYSTEPS.COM에 있으며,
+ * HAPPYSTEPS.COM이 명시적으로 허용하지 않는 사용, 복사, 변경 및 제 3자에 의한 공개, 배포는 엄격히 금지되며
+ * HAPPYSTEPS.COM의 지적재산권 침해에 해당된다.
+ * Copyright (C) 2024 HAPPYSTEPS.COM All Rights Reserved.
+ *
+ *
+ * Program		: com.happySteps
+ * Description	:
+ * Environment	: JRE 1.7 or more
+ * File			:
+ * Notes		:
+ * History		: [NO][Programmer][Description]
+ *				: [20241007][rkdcodbs77#naver.com][CREATE: Initial Release]
+ */
+ %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" trimDirectiveWhitespaces="true" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
@@ -297,24 +319,23 @@
 	</div>
 </header>
 
+<!-- 상단 로그인,마이페이지,카트 관련 아이콘 조정관련 코드 -->
 <div id="fixedElement" class="d-none d-lg-flex align-items-end" style="position: fixed; top: 10px; right: 100px; z-index: 1000; transition: opacity 0.3s ease; opacity: 1;">
-	<ul class="d-flex justify-content-end list-unstyled m-0">
-		<li>
-			<a href="/front/login/loginForm.web" class="mx-3">
-				<iconify-icon icon="healthicons:person" class="fs-4"></iconify-icon>
+	<ul class="d-flex justify-content-end list-unstyled m-0" style="align-items: center;">
+		<li style="display: flex; align-items: center; margin: 0 8px;">
+			<img src="/images/loginlogo.png" alt="login" style="width: 26px; height: 28px; object-fit: contain; vertical-align: middle;">
+		</li>
+		<li style="display: flex; align-items: center; margin: 0 8px;">
+			<iconify-icon icon="healthicons:person" style="width: 24px; height: 24px; color: #000; vertical-align: middle; margin-top: 4px;"></iconify-icon>
+		</li>
+		<li style="display: flex; align-items: center; margin: 0 8px;">
+			<a href="index.html">
+				<iconify-icon icon="mdi:heart" style="width: 24px; height: 24px; color: #000; vertical-align: middle;"></iconify-icon>
 			</a>
 		</li>
-		<li>
-			<a href="index.html" class="mx-3">
-				<iconify-icon icon="mdi:heart" class="fs-4"></iconify-icon>
-			</a>
-		</li>
-		<li class="">
-			<a href="index.html" class="mx-3" data-bs-toggle="offcanvas" data-bs-target="#offcanvasCart" aria-controls="offcanvasCart">
-				<iconify-icon icon="mdi:cart" class="fs-4 position-relative"></iconify-icon>
-				<span class="position-absolute translate-middle badge rounded-circle bg-primary pt-2">
-					03
-				</span>
+		<li style="display: flex; align-items: center; margin: 0 8px;">
+			<a href="index.html" data-bs-toggle="offcanvas" data-bs-target="#offcanvasCart" aria-controls="offcanvasCart">
+				<iconify-icon icon="mdi:cart" style="width: 24px; height: 24px; color: #000; vertical-align: middle;"></iconify-icon>
 			</a>
 		</li>
 	</ul>

@@ -11,14 +11,14 @@
  * Copyright (C) 2024 HAPPYSTEPS.COM All Rights Reserved.
  *
  *
- * Program		: kr.co.himedia.ecommerce
+ * Program		: com.happySteps
  * Description	:
  * Environment	: JRE 1.7 or more
  * File			:
  * Notes		:
  * History		: [NO][Programmer][Description]
- *				: [20240726150000][pluto@HAPPYSTEPS.COM][CREATE: Initial Release]
+ *				: [20241007][rkdcodbs77#naver.com][CREATE: Initial Release]
  */
-%>
+ %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" trimDirectiveWhitespaces="true" %>
 Copyright &copy; 2024 by ㈜하이미디어컴퓨터학원 All Rights Reserved
