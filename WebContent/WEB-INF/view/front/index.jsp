@@ -127,35 +127,28 @@
 		<div class="row my-5">
 			<div class="col text-center">
 				<a href="#" class="categories-item">
-					<img src="../images/categories-item/dogShop.png" class="img-fluid">
-					<h5></h5>
+				<img src="../images/categories-item/all.png" class="img-fluid">
+				<!--이전코드
+					<iconify-icon class="category-icon" icon="ph:cat"></iconify-icon> -->
+				</a>
+			</div>
+			<div class="col text-center">
+				<a href="#" class="categories-item">
+					<img src="../images/categories-item/dogShop.png" class="img-fluid">	
 				</a>
 			</div>
 			<div class="col text-center">
 				<a href="#" class="categories-item">
 					<img src="../images/categories-item/catShop.png" class="img-fluid">
-					<h5></h5>
 				</a>
 			</div>
 			<div class="col text-center">
 				<a href="#" class="categories-item">
-					<img src="../images/categories-item/hamsterShop.png" class="img-fluid">
-					<h5></h5>
 				</a>
 			</div>
 			<div class="col text-center">
 				<a href="#" class="categories-item">
 					<img src="../images/categories-item/reptilesShop.png" class="img-fluid">
-					<h5></h5>
-				</a>
-			</div>
-			<div class="col text-center">
-				<a href="#" class="categories-item">
-				<img src="../images/categories-item/all.png" class="img-fluid">
-					<h5></h5>
-				<!--이전코드
-					<iconify-icon class="category-icon" icon="ph:cat"></iconify-icon> -->
-					<h5></h5>
 				</a>
 			</div>
 		</div>
