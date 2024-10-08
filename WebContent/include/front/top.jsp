@@ -41,7 +41,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Chilanka&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
 	
-<script>
+<!--<script>
 	document.addEventListener("DOMContentLoaded", function() {
 		let lastScrollTop = 0;
 		const fixedElement = document.getElementById('fixedElement');
@@ -59,7 +59,7 @@
 			lastScrollTop = scrollTop;
 		});
 	});
-</script>
+</script>-->
 
 <div class="container py-2" style="height: 270px;">
 	<div class="row py-4 pb-0 pb-sm-4 align-items-center ">
@@ -84,36 +84,37 @@
 		</div>
 		<div class="col-sm-8 col-lg-4 d-flex justify-content-end gap-5 align-items-center mt-4 mt-sm-0 justify-content-center justify-content-sm-end">
 			<ul class="list-unstyled d-flex m-0">
-			<li style="margin: 0 8px;">
 				<c:if test="${empty sessionScope.SEQ_MBR}"><%--로그인--%>
-					<a href="/front/login/loginForm.web">
-						<img src="/images/login.png" style="width: 30px; height: 28px; object-fit: contain; vertical-align: middle;">
-					</a>
+					<li style="margin: 0 8px;">
+						<a href="/front/login/loginForm.web">
+							<iconify-icon icon="uis:lock-alt" style="width: 22px; height: 22px; color: #000; vertical-align: middle; margin-top: 8px;"></iconify-icon>
+						</a>
+					</li>
+				</c:if>	
+				<c:if test="${not empty sessionScope.SEQ_MBR}">
+					<li style="margin: 0 8px;">
+						<a href="/front/login/logout.web"> <%--로그아웃--%>
+							<iconify-icon icon="bxs:log-out" style="width: 37px; height: 20px; color: #000; vertical-align: middle; margin-top: 4px;></iconify-icon>
+						</a>
+					</li>
+					<li style="margin: 0 8px;">
+						<a href="/front/myPage/index.web"><%--마이페이지--%>
+							<iconify-icon icon="healthicons:person" class="fs-4" style="width: 24px; height: 24px; color: #000; vertical-align: middle; margin-top: 4px;"></iconify-icon>
+						</a>
+					</li>
+					<li style="margin: 0 8px;">
+						<a href="#"><%--찜--%>
+							<iconify-icon icon="mdi:heart" class="fs-4" style="width: 24px; height: 24px; color: #000; vertical-align: middle; margin-top: 4px;"></iconify-icon>
+						</a>
+					</li>
+					<li style="margin: 0 8px;">
+						<a href="/front/basket"><%--장바구니--%>
+							<iconify-icon icon="mdi:cart" class="fs-4 position-relative" style="width: 24px; height: 24px; color: #000; vertical-align: middle; margin-top: 4px;"></iconify-icon>
+						</a>
+					</li>
 				</c:if>
-				<c:if test="${not empty sessionScope.SEQ_MBR}"><%--로그아웃--%>
-					<a href="/front/login/loginForm.web">
-						<img src="/images/logoutlogo.png" style="width: 32px; height: 34px; object-fit: contain; vertical-align: middle;">
-					</a>
-				</c:if>
-			</li>
-			<li style="margin: 0 8px;">
-				<a href="/front/myPage/index.web"><%--마이페이지--%>
-					<iconify-icon icon="healthicons:person" class="fs-4" style="width: 32px; height: 32px; color: #000; vertical-align: middle; margin-top: 4px;"></iconify-icon>
-				</a>
-			</li>
-			<li style="margin: 0 8px;">
-				<a href="#"><%--찜--%>
-					<iconify-icon icon="mdi:heart" class="fs-4" style="width: 32px; height: 32px; color: #000; vertical-align: middle; margin-top: 4px;"></iconify-icon>
-				</a>
-			</li>
-			<li style="margin: 0 8px;">
-				<a href="#"><%--장바구니--%>
-					<iconify-icon icon="mdi:cart" class="fs-4 position-relative" style="width: 32px; height: 32px; color: #000; vertical-align: middle; margin-top: 4px;"></iconify-icon>
-				</a>
-			</li>
-		</ul>
+			</ul>
 		</div>
-		
 	</div>
 </div>
 
