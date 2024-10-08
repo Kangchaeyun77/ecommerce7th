@@ -124,7 +124,7 @@
 		INSERT INTO TB_MBR_MST
 			(SEQ_MBR, ID, PASSWD, NICKNAME, CD_STATE, FLG_PETS, PETS, EMAIL, MBR_NM, GENDER, PHONE, DT_REG, REGISTER)
 		VALUES
-			(#{seq_mbr}, #{id}, #{passwd}, #{nickname}, 0, #{flg_pets}, #{pets}, #{email}, #{mbr_nm}, #{gender}, #{phone}, SYSDATE, #{register})
+			(#{seq_mbr}, #{id}, #{passwd}, #{nickname}, 1, #{flg_pets}, #{pets}, #{email}, #{mbr_nm}, #{gender}, #{phone}, SYSDATE, #{register})
 	</insert>
 	
 	<insert id="insertDetail" parameterType="memberDto">

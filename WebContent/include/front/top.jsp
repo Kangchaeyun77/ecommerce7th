@@ -41,7 +41,8 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Chilanka&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
 	
-<script>
+	<script>
+	
 	document.addEventListener("DOMContentLoaded", function() {
 		let lastScrollTop = 0;
 		const fixedElement = document.getElementById('fixedElement');
@@ -61,16 +62,47 @@
 	});
 </script>
 
-<div class="container py-2" style="height: 270px;">
+<div class="container py-2">
 	<div class="row py-4 pb-0 pb-sm-4 align-items-center ">
 		<div class="col-sm-4 col-lg-3 text-center text-sm-start">
-		<span style="position: absolute; top: 0; right: 0; line-height: 43px; vertical-align: middle;"></span>
-
-		<div class="main-logo">
-			<a href="/front/index.web">
-				<img src="/images/logo/logo3.png" alt="logo" class="img-fluid">
-			</a>
-		</div>
+<span style="position: absolute; top: 0; right: 0; line-height: 43px; vertical-align: middle;">
+	<div>
+		<ul class="list-unstyled d-flex m-0">
+			<li style="margin: 0 8px;">
+				<c:if test="${empty sessionScope.SEQ_MBR}"><%--로그인--%>
+					<a href="/front/login/loginForm.web">
+						<iconify-icon icon="uis:lock-alt" style="width: 24px; height: 50px; color: #000; vertical-align: middle; margin-top: 4px;"></iconify-icon>
+					</a>
+				</c:if>
+				<c:if test="${not empty sessionScope.SEQ_MBR}"><%--로그아웃--%>
+					<a href="/front/login/loginForm.web">
+						<img src="/images/logoutlogo.png" style="width: 26px; height: 28px; object-fit: contain; vertical-align: middle;">
+					</a>
+				</c:if>
+			</li>
+			<li style="margin: 0 8px;">
+				<a href="/front/myPage/index.web"><%--마이페이지--%>
+					<iconify-icon icon="healthicons:person" class="fs-4" style="width: 24px; height: 24px; color: #000; vertical-align: middle; margin-top: 4px;"></iconify-icon>
+				</a>
+			</li>
+			<li style="margin: 0 8px;">
+				<a href="#"><%--찜--%>
+					<iconify-icon icon="mdi:heart" class="fs-4" style="width: 24px; height: 24px; color: #000; vertical-align: middle; margin-top: 4px;"></iconify-icon>
+				</a>
+			</li>
+			<li style="margin: 0 8px;">
+				<a href="#"><%--장바구니--%>
+					<iconify-icon icon="mdi:cart" class="fs-4 position-relative" style="width: 24px; height: 24px; color: #000; vertical-align: middle; margin-top: 4px;"></iconify-icon>
+				</a>
+			</li>
+		</ul>
+	</div>
+</span>
+			<div class="main-logo">
+				<a href="/front/index.web">
+					<img src="/images/logo/logo3.png" alt="logo" class="img-fluid">
+				</a>
+			</div>
 		</div>
 		<div class="col-sm-6 offset-sm-2 offset-md-0 col-lg-5 d-none d-lg-block">
 			<div class="search-bar border rounded-2 px-3 border-dark-subtle">
@@ -83,35 +115,14 @@
 			</div>
 		</div>
 		<div class="col-sm-8 col-lg-4 d-flex justify-content-end gap-5 align-items-center mt-4 mt-sm-0 justify-content-center justify-content-sm-end">
-			<ul class="list-unstyled d-flex m-0">
-			<li style="margin: 0 8px;">
-				<c:if test="${empty sessionScope.SEQ_MBR}"><%--로그인--%>
-					<a href="/front/login/loginForm.web">
-						<img src="/images/login.png" style="width: 30px; height: 28px; object-fit: contain; vertical-align: middle;">
-					</a>
-				</c:if>
-				<c:if test="${not empty sessionScope.SEQ_MBR}"><%--로그아웃--%>
-					<a href="/front/login/loginForm.web">
-						<img src="/images/logoutlogo.png" style="width: 32px; height: 34px; object-fit: contain; vertical-align: middle;">
-					</a>
-				</c:if>
-			</li>
-			<li style="margin: 0 8px;">
-				<a href="/front/myPage/index.web"><%--마이페이지--%>
-					<iconify-icon icon="healthicons:person" class="fs-4" style="width: 32px; height: 32px; color: #000; vertical-align: middle; margin-top: 4px;"></iconify-icon>
-				</a>
-			</li>
-			<li style="margin: 0 8px;">
-				<a href="#"><%--찜--%>
-					<iconify-icon icon="mdi:heart" class="fs-4" style="width: 32px; height: 32px; color: #000; vertical-align: middle; margin-top: 4px;"></iconify-icon>
-				</a>
-			</li>
-			<li style="margin: 0 8px;">
-				<a href="#"><%--장바구니--%>
-					<iconify-icon icon="mdi:cart" class="fs-4 position-relative" style="width: 32px; height: 32px; color: #000; vertical-align: middle; margin-top: 4px;"></iconify-icon>
-				</a>
-			</li>
-		</ul>
+			<div class="support-box text-end d-none d-xl-block">
+				<span class="fs-6 secondary-font text-muted">Phone</span>
+				<h5 class="mb-0">010-1234-5678</h5>
+			</div>
+			<div class="support-box text-end d-none d-xl-block">
+				<span class="fs-6 secondary-font text-muted">Email</span>
+				<h5 class="mb-0">HappySteps@gmail.com</h5>
+			</div>
 		</div>
 		
 	</div>

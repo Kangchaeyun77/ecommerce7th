@@ -341,11 +341,17 @@ public class MemberWeb extends Common {
 	 * <p>EXAMPLE:</p>
 	 */
 	@RequestMapping(value = "/front/member/registerForm.web")
-	public ModelAndView registerForm(HttpServletRequest request, HttpServletResponse response) {
+	public ModelAndView registerForm(HttpServletRequest request, HttpServletResponse response, String term1 ,String
+			  term2 , String term3 ) {
+		
 		
 		ModelAndView mav = new ModelAndView("redirect:/error.web");
 		
 		try {
+			
+			mav.addObject("term1", term1);
+			mav.addObject("term2", term2);
+			mav.addObject("term3", term3);
 			mav.setViewName("front/member/registerForm");
 		}
 		catch (Exception e) {
@@ -362,75 +368,56 @@ public class MemberWeb extends Common {
 	 * @param mebmerDto [회원 빈]
 	 * @return ModelAndView
 	 * 
-	 * @since 2024-06-20
+	 * @since 2024-10-08
 	 * <p>DESCRIPTION: 회원 가입 처리</p>
 	 * <p>IMPORTANT:</p>
 	 * <p>EXAMPLE:</p>
 	 */
 	@RequestMapping(value = "/front/member/registerProc.web", method = RequestMethod.POST)
-	/*
-	 * public ModelAndView registerProc(HttpServletRequest request,
-	 * HttpServletResponse response , MemberDto memberDto , String term_1 , String
-	 * term_2 , String term_3)) {
-	 */
-		public ModelAndView registerProc(HttpServletRequest request, HttpServletResponse response
-				, MemberDto memberDto) {
+
+	public ModelAndView registerProc(HttpServletRequest request,
+	HttpServletResponse response , MemberDto memberDto , String term1 , String
+	term2 , String term3) {
 		
 		ModelAndView mav = new ModelAndView("redirect:/error.web");
 		
 		try {
 			
-			//if (term_1 == null || term_1.equals("")) term_1 = "N";
-			//if (term_2 == null || term_2.equals("")) term_2 = "N";
-			//if (term_3 == null || term_3.equals("")) term_3 = "N";
+			if (term1 == null || term1.equals("")) term1 = "N";
+			if (term2 == null || term2.equals("")) term2 = "N";
+			if (term3 == null || term3.equals("")) term3 = "N";
 			
-			//logger.debug(term_1);
-			//logger.debug(term_2);
-			//logger.debug(term_3);
+			logger.debug("term1="+term1);
+			logger.debug("term2="+term2);
+			logger.debug("term3="+term3);
 			
 			// [2024-10-04][kbs@happySteps.com]
-			//String[] arrTermAgreement = {term_1, term_2, term_3};
+			String[] arrTermAgreement = {term1, term2, term3};
 			
-			/*
-			logger.debug("암호화 전: " + memberDto.getEmail());
-			logger.debug("암호화 전: " + memberDto.getPasswd());
-			logger.debug("암호화 전: " + memberDto.getMbr_nm());
-			logger.debug("암호화 전: " + memberDto.getGender());
-			logger.debug("암호화 전: " + memberDto.getPhone());
-			logger.debug("암호화 전: " + memberDto.getPost() + " " + memberDto.getAddr1() + " " + memberDto.getAddr2());
-			logger.debug(memberDto.getIntro());
-			*/
 			if (memberDto.getFlg_email() == null || memberDto.getFlg_email().equals("")) memberDto.setFlg_email("N");
 			if (memberDto.getFlg_sms() == null || memberDto.getFlg_sms().equals("")) memberDto.setFlg_sms("N");
-			
-			//logger.debug(memberDto.getFlg_email());
-			//logger.debug(memberDto.getFlg_sms());
-			
 			if (memberDto.getFlg_pets() == null || memberDto.getFlg_pets().equals("")) memberDto.setFlg_pets("N");
 			
-			if (memberDto.getPets() == null || memberDto.getPets().equals("")) memberDto.setPets("NNNNN");
+			if (memberDto.getPets() == null || memberDto.getPets().equals("")) memberDto.setPets("N");
+			logger.debug("pets=" + memberDto.getPets());
 			
 			// 해쉬 암호화(SHA-256)
 			memberDto.setPasswd(HSwithSHA.encode(memberDto.getPasswd()));
-			//logger.debug("암호화 후(Passwd): " + memberDto.getPasswd());
 			
 			// 대칭키 암호화(AES-256)
 			String staticKey	= staticProperties.getProperty("front.enc.user.aes256.key", "[UNDEFINED]");
 			SKwithAES aes		= new SKwithAES(staticKey);
 			
 			memberDto.setId(aes.encode(memberDto.getId()));
+			memberDto.setNickname(aes.encode(memberDto.getNickname()));
 			memberDto.setMbr_nm(aes.encode(memberDto.getMbr_nm()));
 			memberDto.setPhone(aes.encode(memberDto.getPhone()));
+			memberDto.setEmail(aes.encode(memberDto.getEmail()));
 			memberDto.setPost(aes.encode(memberDto.getPost()));
 			memberDto.setAddr1(aes.encode(memberDto.getAddr1()));
 			memberDto.setAddr2(aes.encode(memberDto.getAddr2()));
-			//logger.debug("암호화 후(Email): " + memberDto.getEmail());
-			//logger.debug("암호화 후(Name): " + memberDto.getName());
-			//logger.debug("암호화 후(Phone): " + memberDto.getPhone());
-			//logger.debug("암호화 후(Post + Addr1 + Addr2): " + memberDto.getPost() + " " + memberDto.getAddr1() + " " + memberDto.getAddr2());
 			
-			//boolean insert = memberSrvc.insert(memberDto, arrTermAgreement, aes.decode(memberDto.getPost()));
-			boolean insert = memberSrvc.insert(memberDto);
+			boolean insert = memberSrvc.insert(memberDto, arrTermAgreement, aes.decode(memberDto.getPost()));
 			if (insert) {
 				logger.debug("가입 성공");
 				
