@@ -29,19 +29,23 @@ function checkModify() {
 	}
 	
 	var pets = "";
-	
-	if (document.getElementById("pet1").checked) hobbys += "Y";
-	else hobbys += "N";
-	if (document.getElementById("pet2").checked) hobbys += "Y";
-	else hobbys += "N";
-	if (document.getElementById("pet3").checked) hobbys += "Y";
-	else hobbys += "N";
-	if (document.getElementById("pet4").checked) hobbys += "Y";
-	else hobbys += "N";
-	if (document.getElementById("pet5").checked) hobbys += "Y";
-	else hobbys += "N";
-	
-	document.getElementById("pets").value = pets;
+		
+		if (document.getElementById("pet1").checked) pets += "Y";
+		else pets += "N";
+		
+		if (document.getElementById("pet2").checked) pets += "Y";
+		else pets += "N";
+		
+		if (document.getElementById("pet3").checked) pets += "Y";
+		else pets += "N";
+		
+		if (document.getElementById("pet4").checked) pets += "Y";
+		else pets += "N";
+		
+		if (document.getElementById("pet5").checked) pets += "Y";
+		else pets += "N";
+		
+		document.getElementById("pets").value = pets;
 	
 	if (isSubmit) {
 	
@@ -233,22 +237,6 @@ function checkRegister() {
 	
 	var isSubmit	= true;
 	var frmMain		= document.getElementById("frmMain");
-	
-/*	if (!document.getElementById("term_1").checked) {
-		alert("필수 약관에 동의하셔야 합니다!");
-		return;
-	}*/
-	
-/*	var email = document.getElementById("email").value;
-	//alert("이메일=" + email);
-	
-	// 정상적인 이메일이 아니면(checkEmail = false)
-	if (!checkEmail(email)) {
-		alert("이메일을 확인하세요!");
-		document.getElementById("email").focus();
-		return;
-	}*/
-	
 
 	// 아이디 중복 여부 확인
 	var id = document.getElementById("id").value;
@@ -267,8 +255,6 @@ function checkRegister() {
 	}
 	
 	// 비밀번호 확인
-	//alert(document.getElementById("passwd").value);
-	//alert(document.getElementById("passwd_").value);
 	if (document.getElementById("passwd").value != document.getElementById("passwd_").value) {
 		alert("비밀번호를 확인하세요!");
 		isSubmit = false;
@@ -295,33 +281,56 @@ function checkRegister() {
 		isSubmit = false;
 	}
 	
-	// 이메일 확인
+	// 이메일확인
 	function validateEmail(email) {
-		var emailPattern = /^[a-zA-Z0-9]+@[a-zA-Z0-9]+\.[a-zA-Z]{2,}$/;
+		var emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 		return emailPattern.test(email);
 	}
 
-	var email = document.getElementById("email").value
+	function combEmail() {
+		// 이메일 입력 필드 값
+		var frontEmail = document.getElementById("frontEmail").value;
+		// 선택된 이메일 도메인 값
+		var emailDomain = document.getElementById("emailDomain").value;
+		// '기타 (직접 입력)'을 선택했을 경우 직접 입력한 도메인 값 사용
+		if(emailDomain === "custom") {
+			emailDomain = document.getElementById("customEmailDomain").value;
+		}
+		// 전체 이메일 주소 조합
+		var fullEmail = frontEmail + "@" + emailDomain;
+		return fullEmail;
+	}
+
+	// 이메일 값 조합 및 검증 실행
+	var email = combEmail(); // combEmail() 함수를 호출해서 이메일을 가져옴
 	if (validateEmail(email)) {
 		alert("올바른 이메일 형식입니다.");
 	} else {
 		alert("잘못된 이메일 형식입니다.");
+		document.getElementById("email").focus();
+		return
 	}
 	
 	//펫 유무
+	var flg_pets = document.querySelector('input[name="flg_pets"]:checked').value;
+
 	var pets = "";
-	
+
 	if (document.getElementById("pet1").checked) pets += "Y";
 	else pets += "N";
+
 	if (document.getElementById("pet2").checked) pets += "Y";
 	else pets += "N";
+
 	if (document.getElementById("pet3").checked) pets += "Y";
 	else pets += "N";
+
 	if (document.getElementById("pet4").checked) pets += "Y";
 	else pets += "N";
+
 	if (document.getElementById("pet5").checked) pets += "Y";
 	else pets += "N";
-	
+
 	document.getElementById("pets").value = pets;
 	
 	if (document.getElementById("mbr_nm").value == ""
@@ -340,14 +349,6 @@ function checkRegister() {
 					document.getElementById("phone1").value
 					+ "-" + document.getElementById("phone2").value
 					+ "-" + document.getElementById("phone3").value;
-		if(customEmailDomain){
-		document.getElementById("email").value = 
-					document.getElementById("frontEmail").value
-					+ "@" + document.getElementById("customEmailDomain").value;}
-		else{
-		document.getElementById("email").value = 
-							document.getElementById("frontEmail").value
-							+ "@" + document.getElementById("emailDomain").value
 		}
 		alert("가입완료");
 /*		alert("정상적으로 "

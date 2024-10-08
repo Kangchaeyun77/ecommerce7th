@@ -30,38 +30,44 @@ import com.happySteps.front.member.dao.MemberDao;
 import com.happySteps.front.member.dao.StatisticMemberDao;
 import com.happySteps.front.member.dao.TermAgreeDao;
 import com.happySteps.front.member.dto.MemberDto;
-//import com.happySteps.front.member.dto.StatisticMemberDto;
-//import com.happySteps.front.member.dto.TermAgreeDto;
+import com.happySteps.front.member.dto.StatisticMemberDto;
+import com.happySteps.front.member.dto.TermAgreeDto;
 
 /**
  * @version 1.0.0
- * @author one4027one#himedia.co.kr
+ * @author kbs@HappySteps.com
  * 
- * @since 2024-08-01
- * <p>DESCRIPTION:</p>
- * <p>IMPORTANT:</p>
+ * @since 2024-10-08
+ *        <p>
+ *        DESCRIPTION:
+ *        </p>
+ *        <p>
+ *        IMPORTANT:
+ *        </p>
  */
 @Service("com.happySteps.front.member.service.MemberSrvc")
 public class MemberSrvc {
-	
+
 	@Inject
 	MemberDao memberDao;
-	
+
 	@Inject
 	TermAgreeDao termAgreeDao;
-	
+
 	@Inject
 	StatisticMemberDao statisticMemberDao;
-	
+
 	public int selectIdDuplicate(MemberDto memberDto) {
 		return memberDao.selectIdDuplicate(memberDto);
 	}
+
 	public int selectNickDuplicate(MemberDto memberDto) {
 		return memberDao.selectNickDuplicate(memberDto);
 	}
+
 	
 	@Transactional("txFront")
-	public boolean insert(MemberDto memberDto) {
+	public boolean insert(MemberDto memberDto, String[] arrTermAgreement, String post) {
 		
 		int result = 0;
 		
@@ -73,74 +79,63 @@ public class MemberSrvc {
 		result += memberDao.insertMaster(memberDto);
 		result += memberDao.insertDetail(memberDto);
 		
-		// 회원(2개) 
-		if (result == 2) return true;
+		// 약관 정보
+		TermAgreeDto termAgreeDto = new TermAgreeDto();
+			
+		for (int loop = 0; loop < 3; loop++) {
+			
+			termAgreeDto.setSeq_trm_agr(termAgreeDao.sequence());
+			termAgreeDto.setSeq_mbr(memberDto.getSeq_mbr());
+			termAgreeDto.setSeq_trm(loop + 1);
+			termAgreeDto.setFlg_agr(arrTermAgreement[loop]);
+			termAgreeDto.setRegister(memberDto.getSeq_mbr());
+			
+			result += termAgreeDao.insert(termAgreeDto);
+		}
+		
+		// 통계 정보
+		// [2024-08-13][kbs@>_<.co.kr][TODO: 추후 통계 정보가 확장될 경우 로직 개선필요]
+		StatisticMemberDto statisticMemberDto = new StatisticMemberDto();
+		statisticMemberDto.setSeq_mbr(memberDto.getSeq_mbr());
+		statisticMemberDto.setPost(post);
+		result += statisticMemberDao.insert(statisticMemberDto);
+		
+		// 회원(2개) + 약관(3개) + 통계(1개)
+		if (result == 2 + 3 + 1) return true;
 		else {
 			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
 			return false;
 		}
 	}
-	
-	/*
-	 * @Transactional("txFront") public boolean insert(MemberDto memberDto, String[]
-	 * arrTermAgreement, String post) {
-	 * 
-	 * int result = 0;
-	 * 
-	 * // 신규 회원 번호(seq_mbr) memberDto.setSeq_mbr(memberDao.sequence());
-	 * memberDto.setRegister(memberDto.getSeq_mbr());
-	 * 
-	 * // 회원 정보 result += memberDao.insertMaster(memberDto); result +=
-	 * memberDao.insertDetail(memberDto);
-	 * 
-	 * // 약관 정보 TermAgreeDto termAgreeDto = new TermAgreeDto();
-	 * 
-	 * for (int loop = 0; loop < 3; loop++) {
-	 * 
-	 * termAgreeDto.setSeq_trm_agr(termAgreeDao.sequence());
-	 * termAgreeDto.setSeq_mbr(memberDto.getSeq_mbr()); termAgreeDto.setSeq_trm(loop
-	 * + 1); termAgreeDto.setFlg_agr(arrTermAgreement[loop]);
-	 * termAgreeDto.setRegister(memberDto.getSeq_mbr());
-	 * 
-	 * result += termAgreeDao.insert(termAgreeDto); }
-	 * 
-	 * // 통계 정보 // [2024-08-13][pluto@himedia.co.kir][TODO: 추후 통계 정보가 확장될 경우 로직
-	 * 개선필요] StatisticMemberDto statisticMemberDto = new StatisticMemberDto();
-	 * statisticMemberDto.setSeq_mbr(memberDto.getSeq_mbr());
-	 * statisticMemberDto.setPost(post); result +=
-	 * statisticMemberDao.insert(statisticMemberDto);
-	 * 
-	 * // 회원(2개) + 약관(3개) + 통계(1개) if (result == 2 + 3 + 1) return true; else {
-	 * TransactionAspectSupport.currentTransactionStatus().setRollbackOnly(); return
-	 * false; } }
-	 */
-	
+
 	public MemberDto selectPasswd(MemberDto memberDto) {
 		return memberDao.selectPasswd(memberDto);
 	}
-	
+
 	@Transactional("txFront")
 	public boolean updatePasswd(MemberDto memberDto) {
-		
+
 		int result = memberDao.updatePasswd(memberDto);
-		
-		if (result == 1) return true;
+
+		if (result == 1)
+			return true;
 		else {
 			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
 			return false;
 		}
 	}
-	
+
 	@Transactional("txFront")
 	public boolean update(MemberDto memberDto) {
-				
-		if (memberDao.updateMaster(memberDto) == 1 && memberDao.updateDetail(memberDto) == 1) return true;
+
+		if (memberDao.updateMaster(memberDto) == 1 && memberDao.updateDetail(memberDto) == 1)
+			return true;
 		else {
 			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
 			return false;
 		}
 	}
-	
+
 	public MemberDto select(MemberDto memberDto) {
 		return memberDao.select(memberDto);
 	}

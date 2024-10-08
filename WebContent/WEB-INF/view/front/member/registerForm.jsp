@@ -11,17 +11,18 @@
  * Copyright (C) 2024 HAPPYSTEPS.COM All Rights Reserved.
  *
  *
- * Program		: kr.co.himedia.ecommerce
+ * Program		: com.github.ecommerce7th
  * Description	:
  * Environment	: JRE 1.7 or more
  * File			:
  * Notes		:
  * History		: [NO][Programmer][Description]
- *				: [20240626130000][pluto@HAPPYSTEPS.COM][CREATE: Initial Release]
+ *				: [20241004134100][kbs@>_<.com][CREATE: Initial Release]
  */
 %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" trimDirectiveWhitespaces="true" %>
 <%@ page info="/WEB-INF/view/front/member/registerForm.jsp" %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -58,9 +59,6 @@
 					contentType: "application/json; charset=UTF-8",
 					data: JSON.stringify(myData),
 					success:function(res) {
-						// alert(JSON.stringify(res));
-						// var jsonData = JSON.parse(res);
-						// 중복이 안 될 경우
 						if (res != true) {
 							idDuplicate = false;
 							$("#id").attr("readonly",true);
@@ -87,8 +85,6 @@
 			var $frm = $("#frmMain");
 			
 			$("#btnNick").on("click", function(e) {
-				
-				// 이메일이 7자리 이하 또는 @가 없으면
 				if ($("#nickname").val().length <=1) {
 					alert("닉네임을 2자리 이상으로 입력하세요!");
 					return false;
@@ -112,7 +108,7 @@
 							alert($("#nickname").val() + "는 사용 가능하며 변경할 수 없습니다.");
 						}
 						else {
-							alert($("#nickname").val() + "는 사용 불가능! 다른 아이디 입력하세요!");
+							alert($("#nickname").val() + "는 사용 불가능! 다른 닉네임을 입력하세요!");
 							$("#nickname").val("");
 							$("#nickname").focus();
 						}
@@ -127,15 +123,16 @@
 	<script>
 	//펫 유/무 클릭시 종류선택이 가능하게하는 코드
 	function togglePetOptions() {
-		var isPetSelected = document.getElementById("btnPetYes").checked;
-
-	// 체크박스를 활성화 또는 비활성화
-		document.getElementById("pet1").disabled = !isPetSelected; //강아지
-		document.getElementById("pet2").disabled = !isPetSelected; //고양이
-		document.getElementById("pet3").disabled = !isPetSelected; //햄스터
-		document.getElementById("pet4").disabled = !isPetSelected; //파충류
-		document.getElementById("pet5").disabled = !isPetSelected; //기타
-	}
+			var petOptions = document.getElementById("petOptions");
+			var isPetYes = document.getElementById("btnPetYes").checked;
+			
+			// 반려동물 있음일 경우 체크박스를 활성화
+			var checkboxes = petOptions.getElementsByTagName("input");
+			for (var i = 0; i < checkboxes.length; i++) {
+				checkboxes[i].disabled = !isPetYes;
+				checkboxes[i].checked = false; // 초기화
+			}
+	}		
 	</script>
 	
 	
@@ -146,43 +143,46 @@
 			var customEmailDomain = document.getElementById("customEmailDomain");
 
 		if (emailDomainSelect.value === "custom") {
-	      customEmailDomain.style.display = "inline";  // 기타 선택 시 직접 입력란 표시
-	      customEmailDomain.required = true;           // 필수 입력 설정
-	    } else {
-	      customEmailDomain.style.display = "none";    // 선택 해제 시 입력란 숨기기
-	      customEmailDomain.required = false;          // 필수 입력 해제
-	    }
-	  }
+		customEmailDomain.style.display = "inline";	// 기타 선택 시 직접 입력란 표시
+		customEmailDomain.required = true;		// 필수 입력 설정
+		} else {
+		customEmailDomain.style.display = "none";	// 선택 해제 시 입력란 숨기기
+		customEmailDomain.required = false;		// 필수 입력 해제
+		}
+		}
 	//이메일 합치기
-	  function combineEmail() {
-	    var frontEmail = document.getElementById("frontEmail").value;
-	    var emailDomain = document.getElementById("emailDomain").value;
-	    var customEmailDomain = document.getElementById("customEmailDomain").value;
+		function combineEmail() {
+		var frontEmail = document.getElementById("frontEmail").value;
+		var emailDomain = document.getElementById("emailDomain").value;
+		var customEmailDomain = document.getElementById("customEmailDomain").value;
 
-	    var email = '';
+		var email = '';
 
-	    // 이메일 도메인이 'custom'일 경우, customEmailDomain 값 사용
-	    if (emailDomain === "custom" && customEmailDomain) {
-	      email = frontEmail + "@" + customEmailDomain;
-	    } else {
-	      email = frontEmail + "@" + emailDomain;
-	    }
+		// 이메일 도메인이 'custom'일 경우, customEmailDomain 값 사용
+		if (emailDomain === "custom" && customEmailDomain) {
+		email = frontEmail + "@" + customEmailDomain;
+		} else {
+		email = frontEmail + "@" + emailDomain;
+		}
 
-	    // 최종 이메일을 hidden input에 저장
-	    document.getElementById("email").value = email;
+		// 최종 이메일을 hidden input에 저장
+		document.getElementById("email").value = email;
 
-	    // 디버그 용 콘솔 로그 (필요시 제거)
-	    console.log("최종 이메일:", email);
+		// 디버그 용 콘솔 로그 (필요시 제거)
+		console.log("최종 이메일:", email);
 
-	    return true; // 폼이 정상적으로 제출되도록 반환
-	  }
+		return true; // 폼이 정상적으로 제출되도록 반환
+		}
 	</script>
 </head>
 <body>
 <form id="frmMain" method="POST">
 <input type="hidden" name="phone" id="phone" />
-<input type="hidden" name="pets" id="pets" />
 <input type="hidden" name="email" id="email" />
+<input type="hidden" name="pets" id="pets" />
+<input type="hidden" name="term1" value="${term1}"/>
+<input type="hidden" name="term2" value="${term2}"/>
+<input type="hidden" name="term3" value="${term3}"/>
 <div class="container">
 	<section class="content">
 		<nav></nav>
@@ -194,7 +194,7 @@
 					<th style="width: 150px;">아이디(*)</th>
 					<td>
 						<input value="plutomsw" type="text" id="id" name="id" required />
-						 <input type="button" value="중복 찾기" style="width:100px" id="btnId" />
+						<input type="button" value="중복 찾기" style="width:100px" id="btnId" />
 					</td>
 				</tr>
 				<tr>
@@ -223,7 +223,7 @@
 				<tr>
 					<th>연락처(*)</th>
 					<td>
-						<input value="010" type="text" id="phone1" name="phone1" maxlength="3"	   style="text-align:center;width:50px" required oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" />
+						<input value="010" type="text" id="phone1" name="phone1" maxlength="3"		style="text-align:center;width:50px" required oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" />
 						 - <input value="9947" type="text" id="phone2" name="phone2" maxlength="4" style="text-align:center;width:60px" required oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" />
 						 - <input value="1973" type="text" id="phone3" name="phone3" maxlength="4" style="text-align:center;width:60px" required oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" />
 					</td>
@@ -244,8 +244,7 @@
 				<tr>
 					<th>이메일</th>
 					<td>
-					<input type="text" id="frontEmail" name="frontEmail" placeholder="이메일주소" required>
-					@
+					<input type="text" id="frontEmail" name="frontEmail" placeholder="이메일주소" required>	@
 					<input type="text" id="customEmailDomain" name="customEmailDomain" placeholder="직접 입력" style="display:none;">
 					<select id="emailDomain" name="emailDomain" onchange="checkCustomDomain()">
 						<option value="gmail.com">gmail.com</option>
@@ -253,7 +252,6 @@
 						<option value="daum.net">daum.net</option>
 						<option value="custom">기타 (직접 입력)</option>
 					</select>
-				
 					</td>
 				</tr>
 				
@@ -268,11 +266,11 @@
 				<tr id="petOptions">
 					<th>반려동물 종류</th>
 					<td>
-						<input type="checkbox" name="pets" id="pet1" disabled /> 강아지 &nbsp;&nbsp;
-						<input type="checkbox" name="pets" id="pet2" disabled /> 고양이 &nbsp;&nbsp;
-						<input type="checkbox" name="pets" id="pet3" disabled /> 햄스터 &nbsp;&nbsp;
-						<input type="checkbox" name="pets" id="pet4" disabled /> 파충류 &nbsp;&nbsp;
-						<input type="checkbox" name="pets" id="pet5" disabled /> 기타
+						<input type="checkbox" name="pet" id="pet1" disabled /> 강아지 &nbsp;&nbsp;
+						<input type="checkbox" name="pet" id="pet2" disabled /> 고양이 &nbsp;&nbsp;
+						<input type="checkbox" name="pet" id="pet3" disabled /> 햄스터 &nbsp;&nbsp;
+						<input type="checkbox" name="pet" id="pet4" disabled /> 파충류 &nbsp;&nbsp;
+						<input type="checkbox" name="pet" id="pet5" disabled /> 기타
 					</td>
 				</tr>
 				
@@ -285,7 +283,7 @@
 				<tr>
 					<td colspan="2" style="text-align:center;padding-top: 10px;padding-bottom: 10px">
 						<input type="reset" value="다시 쓰기" style="width:100px"/>
-						 <input type="button" value="가입 하기" style="width:100px" onClick="checkRegister();"/>
+						<input type="button" value="가입 하기" style="width:100px" onClick="checkRegister();"/>
 					</td>
 				</tr>
 			</table>
