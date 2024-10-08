@@ -71,8 +71,7 @@
 			<li style="margin: 0 8px;">
 				<c:if test="${empty sessionScope.SEQ_MBR}"><%--로그인--%>
 					<a href="/front/login/loginForm.web">
-						<iconify-icon icon="uis:lock-alt" style="width: 24px; height: 50px; color: #000; vertical-align: middle; margin-top: 4px;"></iconify-icon>
-					</a>
+						<img src="/images/login.png" style="width: 30px; height: 28px; object-fit: contain; vertical-align: middle;"></a>
 				</c:if>
 				<c:if test="${not empty sessionScope.SEQ_MBR}"><%--로그아웃--%>
 					<a href="/front/login/loginForm.web">
