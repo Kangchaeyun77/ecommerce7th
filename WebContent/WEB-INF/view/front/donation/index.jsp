@@ -181,7 +181,7 @@
 						<li><a href="/front/">홈페이지</a></li>
 						<li><a href="/about">소개</a></li>
 						<li><a href="/services">서비스</a></li>
-						<li><a href="/donation">후원하기</a></li>
+						<li><a href="/front/donation/donationForm.web">후원하기</a></li>
 						<li><a href="/contact">문의하기</a></li>
 					</ul>
 				</nav>

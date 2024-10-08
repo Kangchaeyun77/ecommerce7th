@@ -25,11 +25,29 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<%@ include file="/include/front/top.jsp" %>
 	<link rel="stylesheet" type="text/css" title="common stylesheet" href="/css/layoutSubmain.css" />
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>후원하기</title>
 	<style>
+		@import url('https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@400;700&display=swap');
+
+	body {
+		font-family: 'Nanum Gothic', sans-serif;
+	}
+
+	.donation-form h2 {
+		text-align: center;
+		font-size: 24px;
+		font-weight: 700;
+	}
+
+	label, legend, input {
+		font-size: 16px;
+	}
+
 		.donation-form {
-			max-width: 600px;
+			max-width: 40%;
 			margin: 20px auto;
 			padding: 20px;
 			border: 1px solid #ddd;
@@ -62,7 +80,7 @@
 		input[type="email"],
 		input[type="tel"],
 		input[type="number"] {
-			width: 100%;
+			width: 90%;
 			padding: 8px;
 			margin-bottom: 10px;
 			border: 1px solid #ccc;
@@ -76,20 +94,21 @@
 		input[name="payment_method"][value="cms"]:checked ~ .cms-info {
 			display: block;
 		}
-
 		button {
-			width: 100%;
-			padding: 10px;
-			background-color: #4CAF50;
-			color: white;
-			border: none;
-			border-radius: 4px;
-			cursor: pointer;
-			font-size: 16px;
-		}
-
+				width: 100%;
+				padding: 10px;
+				background-color: #F9F3EC;
+				color: black;
+				border: none;
+				border-radius: 4px;
+				cursor: pointer;
+				font-size: 16px;
+				font-family: 'Nanum Gothic', sans-serif;
+				font-weight: 700;
+			}
+	
 		button[type="reset"] {
-			background-color: #f44336;
+			background-color: #D3D3D3
 		}
 	</style>
 	<script></script>
@@ -97,8 +116,16 @@
 <body>
 	<form>
 		<div class="donation-form">
-			<h2>후원 신청</h2>
-			
+		<div style="position: relative; height: 250px; overflow: hidden; margin-top: 10px;">
+				<a href="/front/">
+				<img src="/images/logo/logo3.png" alt="로고" style="width: 380px; height: 250px; object-fit: cover; display: block; margin: 0 auto;" />
+				</a>
+				</div>
+				<div style="text-align: left; margin: 30px 0; font-size: 18px;">
+				※휴대전화번호 형식의 평생계좌는 CMS자동이체신청이 불가합니다.<br>
+				※CMS자동이체 신청 시 전자금융거래법 제15조 및 동법 시행령 제10조에 따라 출금동의 인증이 필요합니다.<br>
+				</div>
+			<div style="text-align: center; margin: 30px 0; font-size: 20px;"><strong>후원신청</strong></div>
 			<!-- 기본 정보 -->
 			<fieldset>
 				<legend>기본 정보</legend>
@@ -117,9 +144,9 @@
 				
 				<!-- 주민등록번호(사업자등록번호) -->
 				<label>주민등록번호(사업자등록번호):</label>
-				<input type="text" name="id_number" placeholder="주민(사업자)등록번호"><br>
-				<small>*개인정보보호법 개정에 따라 기부금영수증 발행 시, 주민(사업자)등록번호를 기입해야 합니다. 발급을 원하지 않으실 경우 생년월일을 기입해주세요.</small><br>
-				
+				<input type="text" name="id_number" placeholder="주민(사업자)등록번호"><br><br>
+				<small>*개인정보보호법 개정에 따라 기부금영수증 발행 시, 주민(사업자)등록번호를 기입해야 합니다.<br> &nbsp;&nbsp;발급을 원하지 않으실 경우 생년월일을 기입해주세요.</small><br>
+				<br>
 				<!-- 주소 검색 -->
 				<label>주소:</label>
 				<input type="text" name="address" placeholder="주소 검색"><br>
@@ -183,9 +210,9 @@
 			<button type="submit">신청 완료</button>
 			<button type="reset">취소</button>
 		</div>
-		<footer>
-			<%@ include file="/include/front/footer.jsp" %>
-		</footer>
+	<footer>
+		<%@ include file="/include/front/login_footer.jsp" %>
+	</footer>
 	</form>
 </body>
 </html>
