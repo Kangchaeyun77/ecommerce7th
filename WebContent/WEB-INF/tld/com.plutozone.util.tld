@@ -12,7 +12,7 @@
 	<!-- ex2: <sample:page styleID="blue" pageURL="detail.spring?param1=xxx&param2=yyy" currentPage="2" linePerPage="15" totalLine="200" pageString="page" /> -->
 	<tag>
 		<name>page</name>
-		<tag-class>kr.co.himedia.ecommerce.util.paging.PagingTag</tag-class>
+		<tag-class>com.happySteps.util.paging.PagingTag</tag-class>
 		<body-content>JSP</body-content>
 		<description>Page Navigator</description>
 		<attribute>
@@ -53,7 +53,7 @@
 	</tag>
 	<tag>
 		<name>substring</name>
-		<tag-class>kr.co.himedia.ecommerce.util.tags.SubstringTag</tag-class>
+		<tag-class>com.happySteps.util.tags.SubstringTag</tag-class>
 		<body-content>JSP</body-content>
 		<description>String substring</description>
 		<attribute>
@@ -69,7 +69,7 @@
 	</tag>
 	<tag>
 		<name>masking</name>
-		<tag-class>kr.co.himedia.ecommerce.util.tags.MaskingTag</tag-class>
+		<tag-class>com.happySteps.util.tags.MaskingTag</tag-class>
 		<body-content>JSP</body-content>
 		<description>String masking</description>
 		<attribute>
