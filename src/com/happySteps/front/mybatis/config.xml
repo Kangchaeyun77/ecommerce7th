@@ -12,7 +12,7 @@
 	<typeAlias type="com.happySteps.front.buy.dto.BuyDetailDto"				alias="buydetaildto" />
 	<typeAlias type="com.happySteps.front.buy.dto.BuyDetailListDto"			alias="buydetaillistdto" />
 	<typeAlias type="com.happySteps.front.center.dto.BoardDto"				alias="boardDto" />
-	<typeAlias type="com.happySteps.front.center.dto.PagingDto"				alias="pagingDto" />
+	<typeAlias type="com.happySteps.front.common.dto.PagingDto"				alias="pagingDto" />
 	<typeAlias type="com.happySteps.front.sale.dto.SaleDto"					alias="saleDto" />
 	
 	</typeAliases>
