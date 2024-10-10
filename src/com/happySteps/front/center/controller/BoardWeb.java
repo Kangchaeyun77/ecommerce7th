@@ -475,7 +475,7 @@ public class BoardWeb extends Common {
 			
 			// 고객 문의(3)이면서 세션이 없을 경우는 로그인 페이지로 보냄
 			if (pagingDto.getCd_bbs_type() == 3 && !sessionCmpn.isSession(request)) {
-				request.setAttribute("script"	, "alert('로그인이 필요합니다!');");
+				//request.setAttribute("script"	, "alert('로그인이 필요합니다!');");
 				request.setAttribute("redirect"	, "/front/login/loginForm.web?url=/front/center/board/list.web");
 				mav.setViewName("forward:/servlet/result.web");
 			}
