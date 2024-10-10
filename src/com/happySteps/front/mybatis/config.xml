@@ -13,11 +13,15 @@
 	<typeAlias type="com.happySteps.front.buy.dto.BuyDetailListDto"			alias="buydetaillistdto" />
 	<typeAlias type="com.happySteps.front.center.dto.BoardDto"				alias="boardDto" />
 	<typeAlias type="com.happySteps.front.center.dto.PagingDto"				alias="pagingDto" />
+	<typeAlias type="com.happySteps.front.sale.dto.SaleDto"					alias="saleDto" />
+	
 	</typeAliases>
 	<mappers>
 		<mapper resource="com/happySteps/front/mybatis/login/Login.xml" />
 		<mapper resource="com/happySteps/front/mybatis/member/Member.xml" />
 		<mapper resource="com/happySteps/front/mybatis/buy/Buy.xml" />
 		<mapper resource="com/happySteps/front/mybatis/center/Board.xml" />
+		<mapper resource="com/happySteps/front/mybatis/sale/Sale.xml" />
+		
 	</mappers>
 </configuration>
