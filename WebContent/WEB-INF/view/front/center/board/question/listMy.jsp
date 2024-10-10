@@ -26,7 +26,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<%@ include file="/include/front/header.jsp" %>
+	<%@ include file="/include/front/top.jsp" %>
 	<link rel="stylesheet" type="text/css" title="common stylesheet" href="/css/layoutSubmain.css" />
 	<link rel="stylesheet" type="text/css" title="common stylesheet" href="/css/table.css" />
 	<style></style>
@@ -56,11 +56,8 @@
 <input type="hidden" id="cd_bbs_type" name="cd_bbs_type" />
 <div class="container">
 	<header>
-		<%@ include file="/include/front/top.jsp" %>
+		<%@ include file="/include/front/header.jsp" %>
 	</header>
-	<nav>
-		<%@ include file="/include/front/gnb.jsp" %>
-	</nav>
 	<section class="content">
 		<nav>
 			<%@ include file="/include/front/lnbCenter.jsp" %>
