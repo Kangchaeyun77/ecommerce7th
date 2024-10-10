@@ -40,25 +40,25 @@
 			    margin: 0 auto; /* 중앙 정렬 */
 			    padding: 0 20px; /* 좌우 여백 */
 			}
-			.snb {
+			.gnb {
 				background-color: #F9F3EC; /* 연한 노란색 배경 */
 				padding: 20px;
 				border-radius: 8px; /* 모서리 둥글게 */
 				box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* 그림자 효과 */
 			}
 
-			.snb ul {
+			.gnb ul {
 				list-style-type: none; /* 기본 리스트 스타일 제거 */
 				padding: 0; /* 패딩 제거 */
 				margin: 0; /* 마진 제거 */
 			}
 
-			.snb li {
+			.gnb li {
 				display: inline; /* 수평 배치 */
 				margin-right: 15px; /* 메뉴 간격 */
 			}
 
-			.snb a {
+			.gnb a {
 				text-decoration: none; /* 링크 밑줄 제거 */
 				color: #000; /* 검정 글자 */
 				padding: 15px 20px; /* 패딩 추가 */
@@ -66,7 +66,7 @@
 				transition: background-color 0.3s; /* 배경색 변화 효과 */
 			}
 
-			.snb a:hover {
+			.gnb a:hover {
 				background-color: #E0E0E0; /* 호버 시 배경색 변화 */
 			}
 
@@ -176,11 +176,11 @@
 				<a href="/front/">
 					<img src="/images/logo/logo3.png" alt="로고" style="width: 380px; height: 250px; object-fit: cover; "/> <!-- 로고 크기를 더 크게 조정 -->
 				</a>
-				<nav class="snb">
+				<nav class="gnb">
 					<ul>
-						<li><a href="/front/">홈페이지</a></li>
-						<li><a href="/about">소개</a></li>
-						<li><a href="/services">서비스</a></li>
+						<li><a href="/front/index.web">홈페이지</a></li>
+						<li><a href="/front/about/indx.web">소개</a></li>
+						<li><a href="/front/about/service.web">서비스</a></li>
 						<li><a href="/front/donation/donationForm.web">후원하기</a></li>
 						<li><a href="/contact">문의하기</a></li>
 					</ul>
