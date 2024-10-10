@@ -108,7 +108,7 @@
 						</a>
 					</li>
 					<li style="margin: 0 8px;">
-						<a href="/front/basket"><%--장바구니--%>
+						<a href="/front/basket/index.web"><%--장바구니--%>
 							<iconify-icon icon="mdi:cart" class="fs-4 position-relative" style="width: 24px; height: 24px; color: #000; vertical-align: middle; margin-top: 4px;"></iconify-icon>
 						</a>
 					</li>

@@ -240,19 +240,19 @@
 						<a href="/front/about/index.web" class="nav-link">소개</a>
 					</li>
 					<li class="nav-item">
-						<a href="index.html" class="nav-link">쇼핑</a>
+						<a href="#" class="nav-link">쇼핑</a>
 					</li>
 					<li class="nav-item">
 						<a href="/front/community/index.web" class="nav-link">커뮤니티</a>
 					</li>
 					<li class="nav-item">
-						<a href="index.html" class="nav-link">입양</a>
+						<a href="#" class="nav-link">입양</a>
 					</li>
 					<li class="nav-item">
 						<a href="/front/donation/index.web" class="nav-link">후원</a>
 					</li>
 					<li class="nav-item">
-						<a href="index.html" class="nav-link">고객센터</a>
+						<a href="/front/center/index.web" class="nav-link">고객센터</a>
 					</li>
 				</ul>
 			</div>
