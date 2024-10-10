@@ -16,35 +16,35 @@
 		<buttons>
 			<!-- 가장 처음 페이지로 가는 버튼(링크가 걸린 경우) -->
 			<button name="buttonFirstLink" replaceLink="#link#">
-				<![CDATA[<a href="#link#"><img src="/image/btn/btn_pageFirst.gif" border="0" alt="처음으로" align="absmiddle" /></a>&nbsp;]]>
+				<![CDATA[<a href="#link#"><img src="/images/btn/btn_pageFirst.gif" border="0" alt="처음으로" align="absmiddle" /></a>&nbsp;]]>
 			</button>
 			<!-- 가장 처음 페이지로 가는 버튼(링크 없이 디스플레이만 할 경우) -->
 			<button name="buttonFirst">
-				<![CDATA[<img src="/image/btn/btn_pageFirst.gif" border="0" alt="처음으로" align="absmiddle" />&nbsp;]]>
+				<![CDATA[<img src="/images/btn/btn_pageFirst.gif" border="0" alt="처음으로" align="absmiddle" />&nbsp;]]>
 			</button>
 			<!-- 앞 페이지로 가는 버튼(링크가 걸린 경우) -->
 			<button name="buttonPrevLink" replaceLink="#link#">
-				<![CDATA[<a href="#link#"><img src="/image/btn/btn_pagePrev.gif" border="0" alt="이전페이지" align="absmiddle" /></a>&nbsp;]]>
+				<![CDATA[<a href="#link#"><img src="/images/btn/btn_pagePrev.gif" border="0" alt="이전페이지" align="absmiddle" /></a>&nbsp;]]>
 			</button>
 			<!-- 앞 페이지로 가는 버튼(링크 없이 디스플레이만 할 경우) -->
 			<button name="buttonPrev">
-				<![CDATA[<img src="/image/btn/btn_pagePrev.gif" border="0" alt="이전페이지" align="absmiddle" />&nbsp;]]>
+				<![CDATA[<img src="/images/btn/btn_pagePrev.gif" border="0" alt="이전페이지" align="absmiddle" />&nbsp;]]>
 			</button>
 			<!-- 다음 페이지로 가는 버튼(링크가 걸린 경우) -->
 			<button name="buttonNextLink" replaceLink="#link#">
-				<![CDATA[<a href="#link#"><img src="/image/btn/btn_pageNext.gif" border="0" alt="다음페이지" align="absmiddle" /></a>&nbsp;]]>
+				<![CDATA[<a href="#link#"><img src="/images/btn/btn_pageNext.gif" border="0" alt="다음페이지" align="absmiddle" /></a>&nbsp;]]>
 			</button>
 			<!-- 다음 페이지로 가는 버튼(링크 없이 디스플레이만 할 경우) -->
 			<button name="buttonNext">
-				<![CDATA[<img src="/image/btn/btn_pageNext.gif" border="0" alt="다음페이지" align="absmiddle" />&nbsp;]]>
+				<![CDATA[<img src="/images/btn/btn_pageNext.gif" border="0" alt="다음페이지" align="absmiddle" />&nbsp;]]>
 			</button>
 			<!-- 가장 마지막 페이지로 가는 버튼(링크가 걸린 경우) -->
 			<button name="buttonLastLink" replaceLink="#link#">
-				<![CDATA[<a href="#link#"><img src="/image/btn/btn_pageLast.gif" border="0" alt="마지막으로" align="absmiddle" /></a>&nbsp;]]>
+				<![CDATA[<a href="#link#"><img src="/images/btn/btn_pageLast.gif" border="0" alt="마지막으로" align="absmiddle" /></a>&nbsp;]]>
 			</button>
 			<!-- 가장 마지막 페이지로 가는 버튼(링크 없이 디스플레이만 할 경우) -->
 			<button name="buttonLast">
-				<![CDATA[<img src="/image/btn/btn_pageLast.gif" border="0" alt="마지막으로" align="absmiddle" />&nbsp;]]>
+				<![CDATA[<img src="/images/btn/btn_pageLast.gif" border="0" alt="마지막으로" align="absmiddle" />&nbsp;]]>
 			</button>
 		</buttons>
 		<!-- 페이지 정의 -->
@@ -142,35 +142,35 @@
 		<buttons>
 			<!-- 가장 처음 페이지로 가는 버튼(링크가 걸린 경우) -->
 			<button name="buttonFirstLink" replaceLink="#link#">
-				<![CDATA[<a href="#link#"><img src="/image/btn/btn_pageFirst.gif" border="0" alt="처음으로" align="absmiddle" /></a>&nbsp;]]>
+				<![CDATA[<a href="#link#"><img src="/images/btn/btn_pageFirst.gif" border="0" alt="처음으로" align="absmiddle" /></a>&nbsp;]]>
 			</button>
 			<!-- 가장 처음 페이지로 가는 버튼(링크 없이 디스플레이만 할 경우) -->
 			<button name="buttonFirst">
-				<![CDATA[<img src="/image/btn/btn_pageFirst.gif" border="0" alt="처음으로" align="absmiddle" />&nbsp;]]>
+				<![CDATA[<img src="/images/btn/btn_pageFirst.gif" border="0" alt="처음으로" align="absmiddle" />&nbsp;]]>
 			</button>
 			<!-- 앞 페이지로 가는 버튼(링크가 걸린 경우) -->
 			<button name="buttonPrevLink" replaceLink="#link#">
-				<![CDATA[<a href="#link#"><img src="/image/btn/btn_pagePrev.gif" border="0" alt="이전페이지" align="absmiddle" /></a>&nbsp;]]>
+				<![CDATA[<a href="#link#"><img src="/images/btn/btn_pagePrev.gif" border="0" alt="이전페이지" align="absmiddle" /></a>&nbsp;]]>
 			</button>
 			<!-- 앞 페이지로 가는 버튼(링크 없이 디스플레이만 할 경우) -->
 			<button name="buttonPrev">
-				<![CDATA[<img src="/image/btn/btn_pagePrev.gif" border="0" alt="이전페이지" align="absmiddle" />&nbsp;]]>
+				<![CDATA[<img src="/images/btn/btn_pagePrev.gif" border="0" alt="이전페이지" align="absmiddle" />&nbsp;]]>
 			</button>
 			<!-- 다음 페이지로 가는 버튼(링크가 걸린 경우) -->
 			<button name="buttonNextLink" replaceLink="#link#">
-				<![CDATA[<a href="#link#"><img src="/image/btn/btn_pageNext.gif" border="0" alt="다음페이지" align="absmiddle" /></a>&nbsp;]]>
+				<![CDATA[<a href="#link#"><img src="/images/btn/btn_pageNext.gif" border="0" alt="다음페이지" align="absmiddle" /></a>&nbsp;]]>
 			</button>
 			<!-- 다음 페이지로 가는 버튼(링크 없이 디스플레이만 할 경우) -->
 			<button name="buttonNext">
-				<![CDATA[<img src="/image/btn/btn_pageNext.gif" border="0" alt="다음페이지" align="absmiddle" />&nbsp;]]>
+				<![CDATA[<img src="/images/btn/btn_pageNext.gif" border="0" alt="다음페이지" align="absmiddle" />&nbsp;]]>
 			</button>
 			<!-- 가장 마지막 페이지로 가는 버튼(링크가 걸린 경우) -->
 			<button name="buttonLastLink" replaceLink="#link#">
-				<![CDATA[<a href="#link#"><img src="/image/btn/btn_pageLast.gif" border="0" alt="마지막으로" align="absmiddle" /></a>&nbsp;]]>
+				<![CDATA[<a href="#link#"><img src="/images/btn/btn_pageLast.gif" border="0" alt="마지막으로" align="absmiddle" /></a>&nbsp;]]>
 			</button>
 			<!-- 가장 마지막 페이지로 가는 버튼(링크 없이 디스플레이만 할 경우) -->
 			<button name="buttonLast">
-				<![CDATA[<img src="/image/btn/btn_pageLast.gif" border="0" alt="마지막으로" align="absmiddle" />&nbsp;]]>
+				<![CDATA[<img src="/images/btn/btn_pageLast.gif" border="0" alt="마지막으로" align="absmiddle" />&nbsp;]]>
 			</button>
 		</buttons>
 		<!-- 페이지 정의 -->
@@ -205,35 +205,35 @@
 		<buttons>
 			<!-- 가장 처음 페이지로 가는 버튼(링크가 걸린 경우) -->
 			<button name="buttonFirstLink" replaceLink="#link#">
-				<![CDATA[<a href="#link#"><img src="/image/btn/btn_pageFirst.gif" border="0" alt="처음으로" align="absmiddle" /></a>]]>
+				<![CDATA[<a href="#link#"><img src="/images/btn/btn_pageFirst.gif" border="0" alt="처음으로" align="absmiddle" /></a>]]>
 			</button>
 			<!-- 가장 처음 페이지로 가는 버튼(링크 없이 디스플레이만 할 경우) -->
 			<button name="buttonFirst">
-				<![CDATA[<img src="/image/btn/btn_pageFirst.gif" border="0" alt="처음으로" align="absmiddle" />]]>
+				<![CDATA[<img src="/images/btn/btn_pageFirst.gif" border="0" alt="처음으로" align="absmiddle" />]]>
 			</button>
 			<!-- 앞 페이지로 가는 버튼(링크가 걸린 경우) -->
 			<button name="buttonPrevLink" replaceLink="#link#">
-				<![CDATA[<a href="#link#"><img src="/image/btn/btn_pagePrev.gif" border="0" alt="이전페이지" align="absmiddle" /></a>]]>
+				<![CDATA[<a href="#link#"><img src="/images/btn/btn_pagePrev.gif" border="0" alt="이전페이지" align="absmiddle" /></a>]]>
 			</button>
 			<!-- 앞 페이지로 가는 버튼(링크 없이 디스플레이만 할 경우) -->
 			<button name="buttonPrev">
-				<![CDATA[<img src="/image/btn/btn_pagePrev.gif" border="0" alt="이전페이지" align="absmiddle" />]]>
+				<![CDATA[<img src="/images/btn/btn_pagePrev.gif" border="0" alt="이전페이지" align="absmiddle" />]]>
 			</button>
 			<!-- 다음 페이지로 가는 버튼(링크가 걸린 경우) -->
 			<button name="buttonNextLink" replaceLink="#link#">
-				<![CDATA[<a href="#link#"><img src="/image/btn/btn_pageNext.gif" border="0" alt="다음페이지" align="absmiddle" /></a>]]>
+				<![CDATA[<a href="#link#"><img src="/images/btn/btn_pageNext.gif" border="0" alt="다음페이지" align="absmiddle" /></a>]]>
 			</button>
 			<!-- 다음 페이지로 가는 버튼(링크 없이 디스플레이만 할 경우) -->
 			<button name="buttonNext">
-				<![CDATA[<img src="/image/btn/btn_pageNext.gif" border="0" alt="다음페이지" align="absmiddle" />]]>
+				<![CDATA[<img src="/images/btn/btn_pageNext.gif" border="0" alt="다음페이지" align="absmiddle" />]]>
 			</button>
 			<!-- 가장 마지막 페이지로 가는 버튼(링크가 걸린 경우) -->
 			<button name="buttonLastLink" replaceLink="#link#">
-				<![CDATA[<a href="#link#"><img src="/image/btn/btn_pageLast.gif" border="0" alt="마지막으로" align="absmiddle" /></a>]]>
+				<![CDATA[<a href="#link#"><img src="/images/btn/btn_pageLast.gif" border="0" alt="마지막으로" align="absmiddle" /></a>]]>
 			</button>
 			<!-- 가장 마지막 페이지로 가는 버튼(링크 없이 디스플레이만 할 경우) -->
 			<button name="buttonLast">
-				<![CDATA[<img src="/image/btn/btn_pageLast.gif" border="0" alt="마지막으로" align="absmiddle" />]]>
+				<![CDATA[<img src="/images/btn/btn_pageLast.gif" border="0" alt="마지막으로" align="absmiddle" />]]>
 			</button>
 		</buttons>
 		<!-- 페이지 정의 -->
