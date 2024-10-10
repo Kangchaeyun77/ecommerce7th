@@ -40,9 +40,16 @@ public class PagingDto {
 	
 	private int cd_bbs_type		= 0;	// [게시판] 공지사항(1), 자주 찾는 질문(2), 질의 응답(3)
 	private int cd_ctg			= 0;	// [게시판] 자주 찾는 질문의 카테고리
+	private int cd_ctg_pet		= 0;	// [상품 카테고리] 강아지(1), 고양이(2), 햄스터(3), 파충류(4)
 	private int register		= 0;	// [등록자]
 	
 	
+	public int getCd_ctg_pet() {
+		return cd_ctg_pet;
+	}
+	public void setCd_ctg_pet(int cd_ctg_pet) {
+		this.cd_ctg_pet = cd_ctg_pet;
+	}
 	public int getCd_ctg() {
 		return cd_ctg;
 	}

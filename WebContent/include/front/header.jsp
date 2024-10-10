@@ -22,6 +22,43 @@
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link href="https://fonts.googleapis.com/css2?family=Chilanka&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+	<style>
+		/* 기본적으로 서브메뉴는 숨김 */
+		.submenu {
+		    display: none;
+		    position: absolute;
+		    padding: 0;
+		    list-style: none;
+		    z-index: 1000;
+		    white-space: nowrap; /* 항목이 세로로 쌓이지 않고 한 줄로 나열되도록 */
+		}
+		
+		/* 마우스를 올렸을 때 서브메뉴가 나타남 */
+		.nav-item:hover .submenu {
+		    display: block;
+		}
+		
+		/* 부모 요소에 position: relative 설정 */
+		.nav-item {
+		    position: relative;
+		}
+		
+		/* 서브메뉴 아이템 스타일 */
+		.submenu li {
+		    display: inline-block; /* 항목을 가로로 나열 */
+		    padding: 5px 10px;
+		}
+		
+		.submenu li a {
+		    text-decoration: none;
+		    color: black;
+		}
+		
+		.submenu li a:hover {
+			color: var(--accent-color);
+		}
+	</style>
+	
 	<script>
 	<%--// link 태그의 href 값을 강제로 고정시키는 스크립트
 	
@@ -240,7 +277,14 @@
 						<a href="/front/about/index.web" class="nav-link">소개</a>
 					</li>
 					<li class="nav-item">
-						<a href="#" class="nav-link">쇼핑</a>
+						<a href="/front/sale/index.web" class="nav-link">쇼핑</a>
+						<ul class="submenu">
+							<li><a href="/front/sale/index.web">전체</a></li>
+		                    <li><a href="/front/sale/list.web?cd_ctg_pet=1">강아지</a></li>
+		                    <li><a href="/front/sale/catshop/list.web">고양이</a></li>
+		                    <li><a href="/front/sale/hamstershop/list.web">햄스터</a></li>
+		                    <li><a href="/front/sale/reptileshop/list.web">파충류</a></li>
+                		</ul>
 					</li>
 					<li class="nav-item">
 						<a href="/front/community/index.web" class="nav-link">커뮤니티</a>
