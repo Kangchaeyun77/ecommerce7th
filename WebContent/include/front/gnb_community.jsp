@@ -64,14 +64,15 @@
 			background-color:#f5f5dc;
 		}</style>
 		
-		<nav class="gnb">
-			<span>
-				<a href="/front/community/board/index.web" class="menugnb">전체글 보기</a>
-				<a href="/front/community/board/popular.web" class="menugnb">인기글 보기</a>
-				<a href="/front/community/board/storyboard.web" class="menugnb">자유게시판</a>
-				<a href="/front/community/board/qna.web" class="menugnb">QnA</a>
-				<a href="/front/community/board/adap.web" class="menugnb">입양후기</a>
-				<a href="/front/community/board/info.web" class="menugnb">정보글</a>
+		<nav class="gnb" >
+			<span >
+				<a href="/front/community/index.web" class="menugnb">커뮤니티 메인</a>
+				<a href="/front/community/board/list.web?cd_bbs_type=5" class="menugnb">전체글 보기</a>
+				<a href="/front/community/board/list.web?cd_bbs_type=6" class="menugnb">인기글 보기</a>
+				<a href="/front/community/board/list.web?cd_bbs_type=7" class="menugnb">자유게시판</a>
+				<a href="/front/community/board/list.web?cd_bbs_type=8" class="menugnb">QnA</a>
+				<a href="/front/community/board/list.web?cd_bbs_type=9" class="menugnb">입양후기</a>
+				<a href="/front/community/board/list.web?cd_bbs_type=11" class="menugnb">정보글</a>
 				 <a href="your-link-here.html" class="write-button">글쓰기</a> <!-- 버튼 -->
 			</span>
 		</nav>
