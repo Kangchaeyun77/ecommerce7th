@@ -66,10 +66,10 @@
  					<h3>Quick Links</h3>
  					<ul class="menu-list list-unstyled">
  						<li class="menu-item">
- 							<a href="#" class="nav-link">홈페이지</a>
+ 							<a href="/front/index.web" class="nav-link">홈페이지</a>
  						</li>
  						<li class="menu-item">
- 							<a href="#" class="nav-link">회사소개</a>
+ 							<a href="/front/about/index.web" class="nav-link">회사소개</a>
  						</li>
  						<li class="menu-item">
  							<a href="#" class="nav-link">상품 </a>
@@ -108,7 +108,7 @@
  			<div class="col-md-3">
  				<div>
  					<h3>Our Newsletter</h3>
- 					<p class="blog-paragraph fs-6">구독할꺼임?.</p>
+ 					<p class="blog-paragraph fs-6">HappySteps 블로그 구독!</p>
  					<div class="search-bar border rounded-pill border-dark-subtle px-2">
  						<form class="text-center d-flex align-items-center" action="" method="">
  							<input type="text" class="form-control border-0 bg-transparent" placeholder="Enter your email here" />

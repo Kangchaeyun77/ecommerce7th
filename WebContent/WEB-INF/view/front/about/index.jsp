@@ -29,120 +29,29 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<style>
-		p {
-			margin-top: 5px;
-			line-height: 1.6;
-			margin-bottom: 10px;
-		}
-		.container {
-			max-width: 3000px;
-			margin: 0 auto;
-			padding: 0 20px;
-		}
-		.snb {
-			background-color: #F9F3EC;
-			padding: 20px;
-			border-radius: 8px;
-			box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-		}
-		.snb ul {
-			list-style-type: none;
-			padding: 0;
-			margin: 0;
-		}
-		.snb li {
-			display: inline;
-			margin-right: 15px;
-		}
-		.snb a {
-			text-decoration: none;
-			color: #000;
-			padding: 15px 20px;
-			border-radius: 4px;
-			transition: background-color 0.3s;
-		}
-		.snb a:hover {
-			background-color: #E0E0E0;
-		}
-		body {
-			font-family: 'RixXladywatermelonR', Arial, sans-serif;
-			background-color: #ffffff;
-			color: #000;
-			margin: 0 auto;
-			padding: 20px;
-			max-width: 2000px;
-		}
-		.txtCenter {
-			text-align: center;
-			margin-bottom: 20px;
-			background-color: #ffffff;
-			padding: 20px;
-			border-radius: 8px;
-			box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-		}
-		button.accordion {
-			background-color: #FFFFF0;
-			color: #000;
-			cursor: pointer;
-			padding: 10px;
-			width: 100%;
-			border: none;
-			text-align: left;
-			outline: none;
-			font-size: 16px;
-			transition: background-color 0.3s;
-			border-radius: 5px;
-			margin: 5px 0;
-		}
-		button.accordion:hover {
-			background-color: #FFC107;
-		}
-		button.accordion.active {
-			background-color: #FAEBD7;
-		}
-		.accordion2 {
-			background-color: #FFF;
-			color: #000;
-			cursor: text;
-			padding: 10px;
-			width: 950px;
-			border: 1px solid #ddd;
-			border-radius: 5px;
-			margin: 5px 0;
-			resize: none;
-			overflow: auto;
-			height: auto;
-		}
-		.panel {
-			padding: 1px 1px;
-			background-color: white;
-			overflow: hidden;
-			display: none;
-			height: auto;
-		}
 	</style>
 </head>
 <body>
 	<form id="frmMain">
 		<div class="container">
 			<article class="txtCenter">
-				<div style="position: relative; height: 350px; overflow: hidden; margin-top: 10px;">
+				<div style="position: relative; height: 400px; overflow: hidden; margin-top: 10px;">
 					<a href="/front/">
+					<div style="text-align: center;">
 						<img src="/images/logo/logo3.png" alt="로고" style="width: 380px; height: 250px; object-fit: cover;"/>
+					</div>
 					</a>
-					<nav class="snb">
-						<ul>
-							<li><a href="/front/about/index.web" class="menuSnb">소개</a></li>
-							<li><a href="/front/intro/service.web" class="menuSnb">서비스 안내</a></li>
-							<li><a href="/#" class="menuSnb">윤리경영</a></li>
-							<li><a href="/#" class="menuSnb">미션/비전</a></li>
-							<li><a href="/#" class="menuSnb">조직도</a></li>
-							<li><a href="/front/intro/map.web" class="menuSnb">오시는 길</a></li>
-						</ul>
-					</nav>
+					<header>
+					<div style="text-align: center;">
+					<%@ include file="/include/front/header.jsp" %>
+					<%@ include file="/include/front/gnb_about.jsp" %>
+					</div>
+					</header>
 				</div>
-				<img src="/images/about.png" style="width: 50%; height: auto;">
-				<br><br><br>
+				<div style="text-align: center;">
+					<img src="/images/about.png" style="width: 50%; height: auto;">
+				</div>
+				<br>
 				<div style="text-align: left; width: 50%; height: auto; margin: 0 auto;">
 					<p>안녕하세요, 따뜻한 마음으로 <strong>반려동물과 유기동물을 사랑하는 여러분!</strong></p>
 					<p>저희 이커머스 플랫폼에 <strong>오신 것을 진심으로 환영합니다.</strong> 저희 플랫폼은 단순히 상품을 구매하는 곳을 넘어, 반려동물과 유기동물의 행복한 삶을 함께 만들어가는 특별한 공간입니다.</p>
@@ -159,9 +68,9 @@
 					<br><br>
 					</div>
 			</article>
-		</div>			
+		</div>		
 		<footer>
-			<%@ include file="/include/front/login_footer.jsp" %>
+			<%@ include file="/include/front/footer.jsp" %>
 		</footer>
 	</form>
 </body>

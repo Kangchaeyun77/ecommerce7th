@@ -23,17 +23,17 @@
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link href="https://fonts.googleapis.com/css2?family=Chilanka&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
 	<script>
-	<!--// link 태그의 href 값을 강제로 고정시키는 스크립트
-		
-		window.onload = function() {
-			const linkElement = document.getElementById('stylesheet');
-			linkElement.href = 'js/css/vendor.css';
-		};
-		window.onload = function() {
-			const linkElement = document.getElementById('stylesheet');
-			linkElement.href = 'js/css/style.css';
-		};
-		-->
+	<%--// link 태그의 href 값을 강제로 고정시키는 스크립트
+	
+	window.onload = function() {
+		const linkElement = document.getElementById('stylesheet');
+		linkElement.href = 'js/css/vendor.css';
+	};
+	window.onload = function() {
+		const linkElement = document.getElementById('stylesheet');
+		linkElement.href = 'js/css/style.css';
+	};
+	--%>
 		<%--
 		document.addEventListener("DOMContentLoaded", function() {
 			let lastScrollTop = 0;
@@ -232,7 +232,7 @@
 					</select>
 				</div>
 
-				<ul class="navbar-nav menu-list list-unstyled d-flex gap-md-3 mb-0">
+				<ul class="navbar-nav menu-list list-unstyled d-flex gap-md-3 mb-0"style="justify-content: center">
 					<li class="nav-item">
 						<a href="/front/index.web" class="nav-link active">홈페이지</a>
 					</li>
@@ -243,7 +243,7 @@
 						<a href="index.html" class="nav-link">쇼핑</a>
 					</li>
 					<li class="nav-item">
-						<a href="index.html" class="nav-link">커뮤니티</a>
+						<a href="/front/community/index.web" class="nav-link">커뮤니티</a>
 					</li>
 					<li class="nav-item">
 						<a href="index.html" class="nav-link">입양</a>
@@ -258,7 +258,4 @@
 			</div>
 		</nav>
 	</div>
-</header>
-
-
 </header>
