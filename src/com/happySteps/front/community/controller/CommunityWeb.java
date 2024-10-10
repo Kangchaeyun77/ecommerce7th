@@ -117,19 +117,6 @@ public class CommunityWeb extends Common {
 	}
 	
 	/**
-	 * @return String(=View)
-	 * 
-	 * @since 2024-07-11
-	 * <p>DESCRIPTION: 뷰 예제</p>
-	 * <p>IMPORTANT:</p>
-	 * <p>EXAMPLE:</p>
-	 */
-	@RequestMapping(value = "/greetings.web")
-	public String greetings() {
-		return "front/greetings";
-	}
-	
-	/**
 	 * @param request [요청 서블릿]
 	 * @param response [응답 서블릿]
 	 * @param boardDto [게시판 빈]
