@@ -44,7 +44,7 @@
 					<header>
 					<div style="text-align: center;">
 					<%@ include file="/include/front/header.jsp" %>
-					<%@ include file="/include/front/gnb_community.jsp" %>
+					<%@ include file="/include/front/gnb_community_index.jsp" %>
 					</div>
 					</header>
 				</div>

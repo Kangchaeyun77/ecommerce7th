@@ -24,6 +24,43 @@
 		WHERE
 			<include refid="where" />
 	</select>
+		<select id="writeForm" parameterType="pagingDto" resultType="communityDto">
+		SELECT
+			*
+		FROM
+			(
+			SELECT
+				/*+ first_rows(10) */ ROW_NUMBER() OVER (ORDER BY FLG_TOP, FLG_REPLY DESC, DT_REG DESC) rnum
+				, SEQ_BBS
+				, (SELECT tb_reply.SEQ_BBS FROM TB_BBS tb_reply WHERE tb_reply.SEQ_BBS_PARENT = TB_BBS.SEQ_BBS) seq_reply
+				, DECODE(CD_CTG_PET, 1, '강아지', 2, '고양이', 3, '햄스터', 4, '파충류 및 양서류', 5, '기타', '미정') CTG_NM
+				, TITLE
+				, FILE_ORIG
+				, DECODE(LOWER(SUBSTR(FILE_ORIG, INSTR(FILE_ORIG, '.', -1, 1) + 1))
+					, 'xlsx', 'xls'
+					, 'xls'	, 'xls'
+					, 'docx', 'doc'
+					, 'doc'	, 'doc'
+					, 'pptx', 'ppt'
+					, 'ppt'	, 'ppt'
+					, 'hwp'	, 'hwp'
+					, 'pdf'	, 'pdf'
+					, NULL	, ''
+					, 'etc') extension
+				, FLG_TOP
+				, TO_CHAR(DT_REG, 'YYYY-MM-DD') dt_reg
+			FROM
+				TB_BBS
+			WHERE
+				<include refid="where" />
+			)
+		<![CDATA[
+		WHERE
+			rnum >= (${currentPage} - 1) * ${linePerPage} + 1 AND rnum <= ${currentPage} * ${linePerPage}
+		]]> 
+		ORDER BY
+			FLG_TOP, rnum
+	</select>
 	
 	<select id="list" parameterType="pagingDto" resultType="communityDto">
 		SELECT
@@ -81,7 +118,7 @@
 			<if test="cd_ctg != 0">
 				AND CD_CTG = #{cd_ctg}
 			</if>
-			<if test="cd_bbs_type == 3">
+			<if test="cd_bbs_type == 7">
 				AND SEQ_BBS_PARENT IS NULL
 				AND REGISTER = #{register}
 			</if>

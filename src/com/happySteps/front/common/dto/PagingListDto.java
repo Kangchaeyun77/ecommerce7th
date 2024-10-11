@@ -32,7 +32,7 @@ public class PagingListDto {
 	
 	private PagingDto paging	= null;
 	private Object list			= null;
-	
+	private Object writeForm	= null;
 	
 	public PagingDto getPaging() {
 		return paging;
@@ -45,5 +45,11 @@ public class PagingListDto {
 	}
 	public void setList(Object list) {
 		this.list = list;
+	}
+	public Object getWriteForm() {
+		return writeForm;
+	}
+	public void setWriteForm(Object writeForm) {
+		this.writeForm = writeForm;
 	}
 }

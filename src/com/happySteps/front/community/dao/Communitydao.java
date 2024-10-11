@@ -118,4 +118,18 @@ public class Communitydao extends BaseDao {
 	public int sequence() {
 		return sqlSessionFront.selectOne("com.happySteps.front.mybatis.community.Community.sequence");
 	}
+	/**
+	 * @param pagingDto [페이징 빈]
+	 * @return List<CommunityDto>
+	 * 
+	 * @since 2024-10-09
+	 * <p>DESCRIPTION: 목록</p>
+	 * <p>IMPORTANT:</p>
+	 * <p>EXAMPLE:</p>
+	 */
+	public List<CommunityDto> writeForm(PagingDto pagingDto) {
+		
+		return sqlSessionFront.selectList("com.happySteps.front.mybatis.community.Community.writeForm", pagingDto);
+		
+	}
 }
