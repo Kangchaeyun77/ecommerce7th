@@ -280,11 +280,11 @@
 						<a href="/front/sale/index.web" class="nav-link">쇼핑</a>
 						<ul class="submenu">
 							<li><a href="/front/sale/index.web">전체</a></li>
-		                    <li><a href="/front/sale/list.web?cd_ctg_pet=1">강아지</a></li>
-		                    <li><a href="/front/sale/catshop/list.web">고양이</a></li>
-		                    <li><a href="/front/sale/hamstershop/list.web">햄스터</a></li>
-		                    <li><a href="/front/sale/reptileshop/list.web">파충류</a></li>
-                		</ul>
+							<li><a href="/front/sale/list.web?cd_ctg_pet=1">강아지</a></li>
+							<li><a href="/front/sale/catshop/list.web">고양이</a></li>
+							<li><a href="/front/sale/hamstershop/list.web">햄스터</a></li>
+							<li><a href="/front/sale/reptileshop/list.web">파충류</a></li>
+						</ul>
 					</li>
 					<li class="nav-item">
 						<a href="/front/community/index.web" class="nav-link">커뮤니티</a>

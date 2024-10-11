@@ -34,8 +34,9 @@ import com.happySteps.front.common.dto.PagingListDto;
 /**
  * @version 1.0.0
  * @author 
- * 
- * @since :
+ * @param model
+ * @return ModelAndView 
+ * @since : 2024-10-10
  * <p>DESCRIPTION: 커뮤니티(전체글/인기글/자유게시판/Q&A/입양후기/정보글) 컨트롤러</p>
  * <p>IMPORTANT:</p>
  */
@@ -60,7 +61,7 @@ public class CommunityWeb extends Common {
 	 * @param model
 	 * @return ModelAndView
 	 * 
-	 * @since 
+	 * @since 2024-10-10
 	 * <p>DESCRIPTION: 파일 다운로드</p>
 	 * <p>IMPORTANT:</p>
 	 * <p>EXAMPLE:</p>
@@ -119,10 +120,10 @@ public class CommunityWeb extends Common {
 	/**
 	 * @param request [요청 서블릿]
 	 * @param response [응답 서블릿]
-	 * @param boardDto [게시판 빈]
+	 * @param communityDto [게시판 빈]
 	 * @return ModelAndView
 	 * 
-	 * @since 2024-07-04
+	 * @since 2024-10-10
 	 * <p>DESCRIPTION: 고객센터 삭제</p>
 	 * <p>IMPORTANT:</p>
 	 * <p>EXAMPLE:</p>
@@ -160,7 +161,7 @@ public class CommunityWeb extends Common {
 	 * @param boardDto [게시판 빈]
 	 * @return ModelAndView
 	 * 
-	 * @since 2024-07-04
+	 * @since 2024-10-10
 	 * <p>DESCRIPTION: 고객센터 수정 처리</p>
 	 * <p>IMPORTANT:</p>
 	 * <p>EXAMPLE:</p>
@@ -194,10 +195,10 @@ public class CommunityWeb extends Common {
 	/**
 	 * @param request [요청 서블릿]
 	 * @param response [응답 서블릿]
-	 * @param boardDto [게시판 빈]
+	 * @param communityDto [게시판 빈]
 	 * @return ModelAndView
 	 * 
-	 * @since 2024-07-04
+	 * @since 2024-10-10
 	 * <p>DESCRIPTION: 고객센터 수정 폼</p>
 	 * <p>IMPORTANT:</p>
 	 * <p>EXAMPLE:</p>
@@ -232,10 +233,10 @@ public class CommunityWeb extends Common {
 	/**
 	 * @param request [요청 서블릿]
 	 * @param response [응답 서블릿]
-	 * @param boardDto [게시판 빈]
+	 * @param communityDto [게시판 빈]
 	 * @return ModelAndView
 	 * 
-	 * @since 2024-07-04
+	 * @since 2024-10-10
 	 * <p>DESCRIPTION: 고객센터 보기</p>
 	 * <p>IMPORTANT:</p>
 	 * <p>EXAMPLE:</p>
@@ -286,7 +287,7 @@ public class CommunityWeb extends Common {
 	 * @param response [응답 서블릿]
 	 * @return ModelAndView
 	 * 
-	 * @since 2024-07-04
+	 * @since 2024-10-10
 	 * <p>DESCRIPTION: 고객센터 쓰기 처리</p>
 	 * <p>IMPORTANT:</p>
 	 * <p>EXAMPLE:</p>
@@ -395,10 +396,10 @@ public class CommunityWeb extends Common {
 	/**
 	 * @param request [요청 서블릿]
 	 * @param response [응답 서블릿]
-	 * @param boardDto [게시판 빈]
+	 * @param communityDto [게시판 빈]
 	 * @return ModelAndView
 	 * 
-	 * @since 2024-07-01
+	 * @since 2024-10-10
 	 * <p>DESCRIPTION: 고객센터 쓰기 폼</p>
 	 * <p>IMPORTANT:</p>
 	 * <p>EXAMPLE:</p>
@@ -428,10 +429,10 @@ public class CommunityWeb extends Common {
 	/**
 	 * @param request [요청 서블릿]
 	 * @param response [응답 서블릿]
-	 * @param boardDto [게시판 빈]
+	 * @param communityDto [게시판 빈]
 	 * @return ModelAndView
 	 * 
-	 * @since 2024-06-26
+	 * @since 2024-10-10
 	 * <p>DESCRIPTION: 고객센터 목록</p>
 	 * <p>IMPORTANT:</p>
 	 * <p>EXAMPLE:</p>
@@ -495,7 +496,7 @@ public class CommunityWeb extends Common {
 	 * @param response [응답 서블릿]
 	 * @return ModelAndView
 	 * 
-	 * @since 2024-10-08
+	 * @since 2024-10-10
 	 * <p>DESCRIPTION:</p>
 	 * <p>IMPORTANT:</p>
 	 * <p>EXAMPLE:</p>
