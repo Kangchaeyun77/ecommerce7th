@@ -4,9 +4,9 @@
 	
 	<insert id="insert" parameterType="statisticMemberDto">
 		INSERT INTO TB_STAT_MBR
-			(SEQ_MBR, POST)
+			(SEQ_MBR, POST, DT_REG)
 		VALUES
-			(#{seq_mbr}, #{post})
+			(#{seq_mbr}, #{post}, SYSDATE)
 	</insert>
 	
 </mapper>
