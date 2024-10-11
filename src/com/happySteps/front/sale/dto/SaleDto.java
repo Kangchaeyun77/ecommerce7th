@@ -46,11 +46,18 @@ public class SaleDto {
 	private int updater			= 0;
 	private String cd_where			= "";
 	private String cd_where_ctg 	= "";
+	private int cd_ctg_pet			= 0;	// [상품 카테고리] 강아지(1), 고양이(2), 햄스터(3), 파충류(4)
 	
 	private String searchKey		= "";
 	private String searchWord		= "";
 	
 	
+	public int getCd_ctg_pet() {
+		return cd_ctg_pet;
+	}
+	public void setCd_ctg_pet(int cd_ctg_pet) {
+		this.cd_ctg_pet = cd_ctg_pet;
+	}
 	public int getRnum() {
 		return rnum;
 	}

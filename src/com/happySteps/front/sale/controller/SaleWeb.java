@@ -65,8 +65,6 @@ public class SaleWeb extends Common {
 	@Autowired
 	SessionCmpn sessionCmpn;
 	
-	
-	
 	/**
 	 * @param request [요청 서블릿]
 	 * @param response [응답 서블릿]
