@@ -34,7 +34,11 @@
 	<meta http-equiv="pragma" content="no-cache" />
 	<%@ include file="/include/front/top.jsp" %>
 	<%@ include file="/include/front/header.jsp" %>
-
+	<header>
+	<div style="text-align: center;">
+	<%@ include file="/include/front/gnb_shopping.jsp" %>
+	</div>
+	</header>
 	<style>
 		 /* select 요소와 input 요소의 높이를 같게 하려면 */
 	    select, input[type="text"] [type="submit"]{
