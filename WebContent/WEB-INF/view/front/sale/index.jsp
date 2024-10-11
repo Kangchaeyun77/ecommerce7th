@@ -34,21 +34,31 @@
 	<meta http-equiv="pragma" content="no-cache" />
 	<%@ include file="/include/front/top.jsp" %>
 	<%@ include file="/include/front/header.jsp" %>
-	<header>
+	
 	<div style="text-align: center;">
-	<%@ include file="/include/front/gnb_shopping.jsp" %>
+		<%@ include file="/include/front/gnb_shopping.jsp" %>
 	</div>
-	</header>
 	<style>
-		 /* select 요소와 input 요소의 높이를 같게 하려면 */
-	    select, input[type="text"] [type="submit"]{
-	        height: 38px; /* 원하는 높이로 설정 */
-	        line-height: 38px; /* 텍스트 중앙 정렬을 위해 같은 값을 설정 */
-	        padding: 0 10px; /* 좌우 패딩 추가 */
-	        font-size: 14px; /* 폰트 크기 조정 */
-	        border: 1px solid #ccc; /* 테두리 스타일 */
-	        border-radius: 4px; /* 테두리 둥글게 */
-	        box-sizing: border-box; /* 패딩과 테두리를 포함한 크기 계산 */
+	    .brdSearchArea {
+	        display: flex;
+	        justify-content: flex-start;
+	        gap: 5px; /* 요소 간의 간격 조정 */
+	    }
+	    .brdSearchArea select,
+	    .brdSearchArea input[type="text"],
+	    .brdSearchArea input[type="submit"] {
+	        font-size: 14px; /* 글씨 크기 조정 */
+	        border: 0;
+			border-radius: 15px;
+			outline: none;
+			background-color: #F5F5F5
+	    }
+	    /* 필요에 따라 최대 너비 설정 */
+	    .brdSearchArea select {
+	        width: 100px; /* 예: select 박스 너비 설정 */
+	    }
+	    .brdSearchArea input[type="text"] {
+	        width: 150px; /* 예: 텍스트 입력 박스 너비 설정 */
 	    }
 	</style>
 	<script>
@@ -111,7 +121,6 @@
 														<!-- h3대신 span로 대체 
 															<h3 class="card-title pt-4 m-0">Grey hoodie</h3>
 														-->
-												</a>
 												<div class="card-text">
 																	<!-- 
 														<span class="rating secondary-font">
