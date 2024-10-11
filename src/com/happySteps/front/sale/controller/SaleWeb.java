@@ -85,15 +85,6 @@ public class SaleWeb extends Common {
 		ModelAndView mav = new ModelAndView("redirect:/error.web");
 		
 		try {
-			
-			// cd_ctg(1)를 클릭했을때 세션이 없을 경우는 로그인 페이지로 보냄
-			if (pagingDto.getCd_ctg() == 1 && !sessionCmpn.isSession(request)) {
-				request.setAttribute("script"	, "alert('로그인이 필요합니다!');");
-				request.setAttribute("redirect"	, "/front/login/loginForm.web?url=/front/sale/dogshop/list.web");
-				mav.setViewName("forward:/servlet/result.web");
-			}
-			else {
-				
 				if (pagingDto.getCd_ctg_pet() == 1)
 					pagingDto.setRegister(Integer.parseInt(getSession(request, "SEQ_MBR")));
 				
@@ -106,20 +97,19 @@ public class SaleWeb extends Common {
 					mav.setViewName("front/sale/dogshop/list");
 				}
 				else if (pagingDto.getCd_ctg_pet() == 2) {
-					mav.setViewName("front/sale/catshop/list.web");
+					mav.setViewName("front/sale/catshop/list");
 				}
 				else if (pagingDto.getCd_ctg_pet() == 3) {
-					mav.setViewName("front/sale/hamstershop/list.web");
+					mav.setViewName("front/sale/hamstershop/list");
 				}
 				else if (pagingDto.getCd_ctg_pet() == 4) {
-					mav.setViewName("front/sale/reptileshop/list.web");
+					mav.setViewName("front/sale/reptileshop/list");
 				}
 				else {
 					request.setAttribute("redirect"	, "/");
 					mav.setViewName("forward:/servlet/result.web");
 				}
 			}
-		}
 		catch (Exception e) {
 			logger.error("[" + this.getClass().getName() + ".list()] " + e.getMessage(), e);
 		}

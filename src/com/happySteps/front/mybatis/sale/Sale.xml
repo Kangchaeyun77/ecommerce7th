@@ -71,7 +71,7 @@
 		FROM
 			TB_SLE
 		WHERE
-			CD_CTG		= #{cd_ctg}
+			CD_CTG_PET		= #{cd_ctg_pet}
 			AND SEQ_SLE	= #{seq_sle}
 			
 	</select>
