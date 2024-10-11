@@ -359,4 +359,3 @@ function checkRegister() {
 		frmMain.action = "/front/member/registerProc.web";
 		frmMain.submit();
 	}
-}
