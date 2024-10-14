@@ -108,7 +108,6 @@
 			, dtl.POST
 			, dtl.ADDR1
 			, dtl.ADDR2
-			, dtl.PETS
 			, dtl.FLG_EMAIL
 			, dtl.FLG_SMS
 		FROM
