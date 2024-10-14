@@ -27,6 +27,7 @@
 <head>
 	<%@ include file="/include/front/top.jsp" %>
 	<link rel="stylesheet" type="text/css" title="common stylesheet" href="/css/layoutSubmain.css" />
+	<%@ include file="/include/front/lnbMyPage.jsp" %>
 	<style></style>
 	<script>
 		function goList(value) {
