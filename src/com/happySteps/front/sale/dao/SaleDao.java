@@ -46,17 +46,7 @@ public class SaleDao extends BaseDao {
 		return sqlSessionFront.selectOne("com.happySteps.front.mybatis.sale.Sale.count", pagingDto);
 	}
 	
-	/**
-	 * @param pagingDto [페이징 빈]
-	 * @return List<BoardDto>
-	 * 
-	 * @since 2024-07-04
-	 * <p>DESCRIPTION: 카테고리 shop 목록</p>
-	 * <p>IMPORTANT:</p>
-	 * <p>EXAMPLE:</p>
-	 */
 	public List<SaleDto> list(PagingDto pagingDto) {
-		
 		return sqlSessionFront.selectList("com.happySteps.front.mybatis.sale.Sale.list", pagingDto);
 	}
 
@@ -64,7 +54,9 @@ public class SaleDao extends BaseDao {
 		return sqlSessionFront.selectOne("com.happySteps.front.mybatis.sale.Sale.select", saleDto);
 	}
 	
-	public List<SaleDto> search(SaleDto saleDto) {
-		return sqlSessionFront.selectList("com.happySteps.front.mybatis.sale.Sale.search", saleDto);
+	public List<SaleDto> index(PagingDto pagingDto) {
+		return sqlSessionFront.selectList("com.happySteps.front.mybatis.sale.Sale.index", pagingDto);
 	}
+
 }
+

@@ -74,11 +74,9 @@ public class SaleSrvc {
 		return pagingListDto;
 	}
 	
+
+	
 	public SaleDto select(SaleDto saleDto) {
 		return saleDao.select(saleDto);
-	}
-	
-	public List<SaleDto> search(SaleDto saleDto) {
-		return saleDao.search(saleDto);
 	}
 }

@@ -77,12 +77,23 @@ public class SaleWeb extends Common {
 	 * <p>EXAMPLE:</p>
 	 */
 	
-	@RequestMapping(value = "/front/sale/list.web")
+	@RequestMapping(value = "/front/sale/shop/list.web")
 	public ModelAndView list(HttpServletRequest request, HttpServletResponse response, PagingDto pagingDto) {
 		
 		ModelAndView mav = new ModelAndView("redirect:/error.web");
 		
+		
+		logger.debug("내가 확인");
+		
 		try {
+			
+			// 세션이 없을 경우는 로그인 페이지로 보냄
+			if (!sessionCmpn.isSession(request)) {
+				request.setAttribute("script"	, "alert('로그인이 필요합니다!');");
+				request.setAttribute("redirect"	, "/");
+				mav.setViewName("forward:/servlet/result.web");
+			}
+			else {
 				if (pagingDto.getCd_ctg_pet() == 1)
 					pagingDto.setRegister(Integer.parseInt(getSession(request, "SEQ_MBR")));
 				
@@ -92,54 +103,25 @@ public class SaleWeb extends Common {
 				mav.addObject("list"	, pagingListDto.getList());
 				
 				if (pagingDto.getCd_ctg_pet() == 1) {
-					mav.setViewName("front/sale/dogshop/list");
+					mav.setViewName("front/sale/shop/dog/list");
 				}
 				else if (pagingDto.getCd_ctg_pet() == 2) {
-					mav.setViewName("front/sale/catshop/list");
+					mav.setViewName("front/sale/shop/cat/list");
 				}
 				else if (pagingDto.getCd_ctg_pet() == 3) {
-					mav.setViewName("front/sale/hamstershop/list");
+					mav.setViewName("front/sale/shop/hamster/list");
 				}
 				else if (pagingDto.getCd_ctg_pet() == 4) {
-					mav.setViewName("front/sale/reptileshop/list");
+					mav.setViewName("front/sale/shop/reptile/list");
 				}
 				else {
 					request.setAttribute("redirect"	, "/");
 					mav.setViewName("forward:/servlet/result.web");
 				}
 			}
+		}
 		catch (Exception e) {
 			logger.error("[" + this.getClass().getName() + ".list()] " + e.getMessage(), e);
-		}
-		finally {}
-		
-		return mav;
-	}
-	
-	/**
-	 * @param request [요청 서블릿]
-	 * @param response [응답 서블릿]
-	 * @return ModelAndView
-	 * 
-	 * @since 2024-08-09
-	 * <p>DESCRIPTION:</p>
-	 * <p>IMPORTANT:</p>
-	 * <p>EXAMPLE:</p>
-	 */
-	@RequestMapping(value = "/front/sale/search.web")
-	public ModelAndView search(HttpServletRequest request, HttpServletResponse response, SaleDto saleDto) {
-		
-		ModelAndView mav = new ModelAndView("redirect:/error.web");
-		
-		try {
-			List<SaleDto> list = saleSrvc.search(saleDto);
-			
-			mav.addObject("list", list);
-			
-			mav.setViewName("front/sale/search");
-		}
-		catch (Exception e) {
-			logger.error("[" + this.getClass().getName() + ".search()] " + e.getMessage(), e);
 		}
 		finally {}
 		
@@ -156,46 +138,24 @@ public class SaleWeb extends Common {
 	 * <p>IMPORTANT:</p>
 	 * <p>EXAMPLE:</p>
 	 */
-	/* 강아지shop list
-	@RequestMapping(value = "/front/sale/dogshop/list.web")
-	public ModelAndView list(HttpServletRequest request, HttpServletResponse response) {
+	@RequestMapping(value = "/front/sale/shop/index.web")
+	public ModelAndView index(HttpServletRequest request, HttpServletResponse response,
+			PagingDto pagingDto) {
 		
-		ModelAndView mav = new ModelAndView("redirect:/error.web");
-		
-		try {
-			mav.setViewName("/front/sale/dogshop/list");
-		}
-		catch (Exception e) {
-			logger.error("[" + this.getClass().getName() + ".list()] " + e.getMessage(), e);
-		}
-		finally {}
-		
-		return mav;
-	}
-	*/
-	/**
-	 * @param request [요청 서블릿]
-	 * @param response [응답 서블릿]
-	 * @return ModelAndView
-	 * 
-	 * @since 2024-07-12
-	 * <p>DESCRIPTION:</p>
-	 * <p>IMPORTANT:</p>
-	 * <p>EXAMPLE:</p>
-	 */
-	@RequestMapping(value = "/front/sale/index.web")
-	public ModelAndView index(HttpServletRequest request, HttpServletResponse response) {
-		
-		ModelAndView mav = new ModelAndView("redirect:/error.web");
-		
-		try {
-			mav.setViewName("front/sale/index");
-		}
-		catch (Exception e) {
-			logger.error("[" + this.getClass().getName() + ".index()] " + e.getMessage(), e);
-		}
-		finally {}
-		
-		return mav;
+	    ModelAndView mav = new ModelAndView("redirect:/error.web");
+
+	    try {
+	    	PagingListDto pagingListDto = saleSrvc.list(pagingDto);
+	    	
+	    	mav.addObject("paging", pagingListDto.getPaging());
+            mav.addObject("list", pagingListDto.getList());
+            
+            mav.setViewName("/front/sale/shop/index");
+            
+	    } catch (Exception e) {
+	        logger.error("[" + this.getClass().getName() + ".index()] " + e.getMessage(), e);
+	    } finally {}
+
+	    return mav;
 	}
 }

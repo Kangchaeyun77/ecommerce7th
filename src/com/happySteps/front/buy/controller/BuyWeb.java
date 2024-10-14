@@ -33,6 +33,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.happySteps.front.common.Common;
+import com.happySteps.front.sale.dto.SaleDto;
+import com.happySteps.front.sale.service.SaleSrvc;
 import com.happySteps.front.buy.controller.BuyWeb;
 import com.happySteps.front.buy.dto.BuyDto;
 import com.happySteps.front.buy.service.BuySrvc;
@@ -57,6 +59,33 @@ public class BuyWeb extends Common{
 	
 	@Inject
 	BuySrvc buySrvc;
+	
+	@Inject
+	SaleSrvc saleSrvc;
+	
+	@RequestMapping(value = "/front/buy/view.web")
+	public ModelAndView view(HttpServletRequest request, HttpServletResponse response, SaleDto saleDto) {
+		
+		ModelAndView mav = new ModelAndView("redirect:/error.web");
+		
+		//logger.debug("내가 확인");
+		
+		try {
+			
+			SaleDto _saleDto	= saleSrvc.select(saleDto);
+			
+			mav.addObject("saleDto"		, _saleDto);
+			
+			mav.setViewName("/front/buy/view");
+			
+		}
+		catch (Exception e) {
+			logger.error("[" + this.getClass().getName() + ".view()] " + e.getMessage(), e);
+		}
+		finally {}
+		
+		return mav;
+	}
 	
 	/**
 	 * @param request [요청 서블릿]

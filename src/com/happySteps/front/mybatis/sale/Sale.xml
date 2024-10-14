@@ -8,9 +8,31 @@
 		FROM
 			TB_SLE
 		WHERE
-			<include refid="where" />
+			CD_STATE_SALE = 1
 	</select>
 	
+	<select id="list" parameterType="pagingDto" resultType="saleDto">
+		SELECT
+			*
+		FROM
+			(
+			SELECT
+				/*+ first_rows(10) */ ROW_NUMBER() OVER (ORDER BY DT_REG DESC) rnum
+				, SEQ_SLE
+				, SLE_NM
+				, DESCES
+				, CD_STATE_SALE
+				, PRICE_SALE
+				, TO_CHAR(DT_REG, 'YYYY-MM-DD') dt_reg
+			FROM
+				TB_SLE
+			WHERE
+				CD_STATE_SALE = 1
+			)
+		ORDER BY
+			rnum
+	</select>
+	<!-- 
 	<select id="list" parameterType="pagingDto" resultType="saleDto">
 		SELECT
 			*
@@ -60,20 +82,23 @@
 				AND CD_CTG_PET = #{cd_ctg_pet}
 			</if>
 	</sql>
-	
+	 -->
 	<select id="select" parameterType="saleDto" resultType="saleDto">
 		SELECT
 			SEQ_SLE
+			, SEQ_PRD
 			, SLE_NM
-			, CD_CTG_PET
-			, DESECES
-			, TO_CHAR(DT_REG, 'YYYY-MM-DD') dt_reg
+			, PRICE_SALE
+			, IMG
+			, DESCES
 		FROM
 			TB_SLE
 		WHERE
-			CD_CTG_PET		= #{cd_ctg_pet}
-			AND SEQ_SLE	= #{seq_sle}
-			
+			SEQ_SLE				= #{seq_sle}
+			AND CD_STATE_SALE	= 1
+			<![CDATA[
+			AND SYSDATE >= DT_SALE_START AND SYSDATE <= DT_SALE_END
+			]]>
 	</select>
 	
 	<select id="sequence" resultType="java.lang.Integer">

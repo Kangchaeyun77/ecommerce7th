@@ -277,7 +277,7 @@
 						<a href="/front/about/index.web" class="nav-link">소개</a>
 					</li>
 					<li class="nav-item">
-						<a href="/front/sale/index.web" class="nav-link">쇼핑</a>
+						<a href="/front/sale/shop/index.web" class="nav-link">쇼핑</a>
 					</li>
 					<li class="nav-item">
 						<a href="/front/community/index.web" class="nav-link">커뮤니티</a>
