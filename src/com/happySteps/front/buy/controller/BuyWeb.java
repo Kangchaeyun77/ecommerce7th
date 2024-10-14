@@ -63,8 +63,8 @@ public class BuyWeb extends Common{
 	@Inject
 	SaleSrvc saleSrvc;
 	
-	@RequestMapping(value = "/front/buy/view.web")
-	public ModelAndView view(HttpServletRequest request, HttpServletResponse response, SaleDto saleDto) {
+	@RequestMapping(value = "/front/buy/writeForm.web")
+	public ModelAndView writeForm(HttpServletRequest request, HttpServletResponse response, SaleDto saleDto) {
 		
 		ModelAndView mav = new ModelAndView("redirect:/error.web");
 		
@@ -76,11 +76,11 @@ public class BuyWeb extends Common{
 			
 			mav.addObject("saleDto"		, _saleDto);
 			
-			mav.setViewName("/front/buy/view");
+			mav.setViewName("/front/buy/writeForm");
 			
 		}
 		catch (Exception e) {
-			logger.error("[" + this.getClass().getName() + ".view()] " + e.getMessage(), e);
+			logger.error("[" + this.getClass().getName() + ".writeForm()] " + e.getMessage(), e);
 		}
 		finally {}
 		
