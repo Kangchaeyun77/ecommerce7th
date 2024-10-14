@@ -4,9 +4,9 @@
 	
 	<insert id="insert" parameterType="basketDto">
 		INSERT INTO TB_BSK
-			(SEQ_BSK, SEQ_MBR, SEQ_SLE, SEQ_PRD, SEQ_SLL, SLE_NM, PRICE, COUNT, IMG, FLG_DELETE, DT_REG)
+			(SEQ_BSK, SEQ_MBR, SEQ_SLE, SEQ_PRD, SLE_NM, PRICE, COUNT, IMG, FLG_DELETE, DT_REG)
 		VALUES
-			(SQ_SEQ_BSK.NEXTVAL, #{seq_mbr}, #{seq_sle}, #{seq_prd}, #{seq_sll}, #{sle_nm}, #{price}, #{count}, #{img}, 'N', SYSDATE)
+			(SQ_SEQ_BSK.NEXTVAL, #{seq_mbr}, #{seq_sle}, #{seq_prd}, #{sle_nm}, #{price}, #{count}, #{img}, 'N', SYSDATE)
 	</insert>
 	
 	<select id="listing" parameterType="java.lang.Integer" resultType="basketDto">
