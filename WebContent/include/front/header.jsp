@@ -92,6 +92,8 @@
 		--%>
 	</script>
 	
+</head>
+<body id=site-header>
 	<!-- Google tag (gtag.js) -->
 	<script async src="https://www.googletagmanager.com/gtag/js?id=G-7P274EVRQV"></script>
 	<script>
@@ -102,9 +104,7 @@
 	  gtag('config', 'G-7P274EVRQV');
 	</script>
 	
-</head>
-<body id=site-header>
-
+<%-- 
   <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
     <defs>
 		<symbol xmlns="http://www.w3.org/2000/svg" id="uis:lock-alt" viewBox="0 0 24 24">
@@ -173,7 +173,8 @@
 
     </defs>
   </svg>
-
+--%>
+<%-- 
   <div class="preloader-wrapper">
     <div class="preloader">
     </div>
@@ -240,7 +241,7 @@
 		</div>
 	</div>
 </div>
-
+--%>
 <header id=site-header>
 	
 	<div class="container-fluid">
@@ -249,26 +250,25 @@
 	<div class="container">
 		<nav class="main-menu d-flex navbar navbar-expand-lg ">
 			
-
 			<button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
 				<span class="navbar-toggler-icon"></span>
 			</button>
-
-			<div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
-				<div class="offcanvas-header justify-content-center">
-					<button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-				</div>
-
-				<div class="offcanvas-body justify-content-between">
-					<select class="filter-categories border-0 mb-0 me-5" hidden>
-						<option>동물 카테고리</option>
-						<option>강아지</option>
-						<option>고양이</option>
-						<option>햄스터</option>
-						<option>파충류 및 양서류</option>
-					</select>
-				</div>
-
+				<%-- 
+				<div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+					<div class="offcanvas-header justify-content-center">
+						<button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+					</div>
+	
+					<div class="offcanvas-body justify-content-between">
+						<select class="filter-categories border-0 mb-0 me-5" hidden>
+							<option>동물 카테고리</option>
+							<option>강아지</option>
+							<option>고양이</option>
+							<option>햄스터</option>
+							<option>파충류 및 양서류</option>
+						</select>
+					</div>
+				--%>
 				<ul class="navbar-nav menu-list list-unstyled d-flex gap-md-3 mb-0"style="justify-content: center">
 					<li class="nav-item">
 						<a href="/front/index.web" class="nav-link active">홈페이지</a>

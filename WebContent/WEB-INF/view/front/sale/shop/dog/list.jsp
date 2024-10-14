@@ -29,9 +29,6 @@
 <head>
 	<%@ include file="/include/front/top.jsp" %>
 	<%@ include file="/include/front/header.jsp" %>
-	<div style="text-align: center;">
-		<%@ include file="/include/front/gnb_shopping.jsp" %>
-	</div>
 	<style>
 		    .brdSearchArea {
 	        display: flex;
@@ -69,19 +66,25 @@
 		    text-align: center;
 		}
 	</style>
-	<script>
-	
-		function goView(value) {
-			
-			// document.getElementById("currentPage").remove();
-			// document.getElementById("searchKey").remove();
-			// document.getElementById("searchWord").remove();
+</head>
+<body>
+<form id="frmMain" method="POST">
+<input type="hidden" id="cd_ctg_pet" name="cd_ctg_pet" value="${paging.cd_ctg_pet}"/>
+<input type="hidden" name="seq_sle"		id="seq_sle" value="${paging.seq_sle}"/>
+<input type="hidden" name="seq_mbr"		id="seq_mbr" />
+<input type="hidden" id="sequence"		name="sequence" />
+<input type="hidden" name="currentPage" id="currentPage" value="${paging.currentPage}" />
+<div style="text-align: center;">
+	<%@ include file="/include/front/gnb_shopping.jsp" %>
+</div>
+<script>
+		function goWriteForm(value) {
 			
 			var frmMain = document.getElementById("frmMain");
 			
 			document.getElementById("seq_sle").value = value;
 			
-			frmMain.action="/front/buy/view.web";
+			frmMain.action="/front/buy/writeForm.web";
 			frmMain.submit();
 		}
 		<%-- 
@@ -121,14 +124,6 @@
 		}
 		--%>
 	</script>
-</head>
-<body>
-<form id="frmMain" method="POST">
-<input type="hidden" id="cd_ctg_pet" name="cd_ctg_pet" />
-<input type="hidden" name="seq_sle"		id="seq_sle" />
-<input type="hidden" name="seq_mbr"		id="seq_mbr" />
-<input type="hidden" id="sequence"		name="sequence" />
-<input type="hidden" name="currentPage" id="currentPage" value="${paging.currentPage}" />
 <div class="container" id="content">
 	<section class="content">
 		<article class="txtCenter">
@@ -154,10 +149,10 @@
 						</c:when>
 						<c:otherwise>
 							<c:forEach items="${list}" var="list">
-								<div class="product"><a href="javascript:goView(${list.seq_sle});">
+								<div class="product"><a href="javascript:goWriteForm(${list.seq_sle});">
 									<img src="#" class="img-fluid rounded-4" alt="image"></a>
 									<div>
-										<a href="javascript:goView(${list.seq_sle});"><span>${list.sle_nm}</span>
+										<a href="javascript:goWriteForm(${list.seq_sle});"><span>${list.sle_nm}</span>
 										</a>
 										<div class="card-text">
 											<span class="rating secondary-font">

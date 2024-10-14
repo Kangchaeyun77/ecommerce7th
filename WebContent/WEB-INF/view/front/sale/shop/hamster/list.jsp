@@ -1,3 +1,4 @@
+
 <%
 /**
  * YOU ARE STRICTLY PROHIBITED TO COPY, DISCLOSE, DISTRIBUTE, MODIFY OR USE THIS PROGRAM
@@ -71,7 +72,7 @@
 	</style>
 	<script>
 	
-		function goView(value) {
+		function goWriteForm(value) {
 			
 			// document.getElementById("currentPage").remove();
 			// document.getElementById("searchKey").remove();
@@ -81,7 +82,7 @@
 			
 			document.getElementById("seq_sle").value = value;
 			
-			frmMain.action="/front/buy/view.web";
+			frmMain.action="/front/buy/writeForm.web";
 			frmMain.submit();
 		}
 		<%-- 
@@ -124,8 +125,8 @@
 </head>
 <body>
 <form id="frmMain" method="POST">
-<input type="hidden" id="cd_ctg_pet" name="cd_ctg_pet" />
-<input type="hidden" name="seq_sle"		id="seq_sle" />
+<input type="hidden" id="cd_ctg_pet" name="cd_ctg_pet" value="${paging.cd_ctg_pet}"/>
+<input type="hidden" name="seq_sle"		id="seq_sle" value="${paging.seq_sle}"/>
 <input type="hidden" name="seq_mbr"		id="seq_mbr" />
 <input type="hidden" id="sequence"		name="sequence" />
 <input type="hidden" name="currentPage" id="currentPage" value="${paging.currentPage}" />
@@ -154,10 +155,10 @@
 						</c:when>
 						<c:otherwise>
 							<c:forEach items="${list}" var="list">
-								<div class="product"><a href="javascript:goView(${list.seq_sle});">
+								<div class="product"><a href="javascript:goWriteForm(${list.seq_sle});">
 									<img src="#" class="img-fluid rounded-4" alt="image"></a>
 									<div>
-										<a href="javascript:goView(${list.seq_sle});"><span>${list.sle_nm}</span>
+										<a href="javascript:goWriteForm(${list.seq_sle});"><span>${list.sle_nm}</span>
 										</a>
 										<div class="card-text">
 											<span class="rating secondary-font">

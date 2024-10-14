@@ -20,7 +20,9 @@
  *				: [202410091832][rkdcodbs77#naver.com][CREATE: Initial Release]
  */
  %>
- <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" trimDirectiveWhitespaces="true" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" trimDirectiveWhitespaces="true" %>
+<html>
+<head>
 	<style>
 		.gnb ul {
 			list-style-type: none;
@@ -42,7 +44,8 @@
 			background-color: #f5f5dc;
 		}
 		</style>
-		
+</head>
+	<body>	
 		<nav class="gnb" >
 			<span >
 				<a href="/front/sale/shop/index.web">전체</a>
@@ -52,3 +55,5 @@
 				<a href="javascript:goList(4)">파충류</a>
 			</span>
 		</nav>
+	</body>
+</html>

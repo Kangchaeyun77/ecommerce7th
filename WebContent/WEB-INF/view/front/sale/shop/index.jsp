@@ -34,10 +34,6 @@
 	<meta http-equiv="pragma" content="no-cache" />
 	<%@ include file="/include/front/top.jsp" %>
 	<%@ include file="/include/front/header.jsp" %>
-	
-	<div style="text-align: center;">
-		<%@ include file="/include/front/gnb_shopping.jsp" %>
-	</div>
 	<style>
 	    .brdSearchArea {
 	        display: flex;
@@ -75,7 +71,18 @@
 		    text-align: center;
 		}
 	</style>
-	<script>
+</head>
+<body>
+<form id="frmMain" method="POST">
+<input type="hidden" id="cd_ctg_pet" 	name="cd_ctg_pet"	value="${paging.cd_ctg_pet}"/>
+<input type="hidden" id="seq_sle"		name="seq_sle"		value="${paging.seq_sle}">
+<input type="hidden" id="seq_mbr"		name="seq_mbr"/>
+<input type="hidden" id="sequence"		name="sequence" />
+<input type="hidden" id="currentPage"	name="currentPage"	value="${paging.currentPage}" />
+<div style="text-align: center;">
+	<%@ include file="/include/front/gnb_shopping.jsp" %>
+</div>
+<script>
 		
 		function goList(value) {
 			var frmMain = document.getElementById("frmMain");
@@ -85,37 +92,29 @@
 			frmMain.submit();
 		}
 	
-		function goView(value) {
+		function goWriteForm(value) {
 		    var frmMain = document.getElementById("frmMain");
+		    
+		    document.getElementById("cd_ctg_pet").value = value;
 		    document.getElementById("seq_sle").value = value;
-	
-		    // 선택된 cd_ctg_pet 값 설정
-		    var selectedCdCtgPet = document.getElementById("cd_ctg_pet").value; 
-		    document.getElementById("cd_ctg_pet").value = selectedCdCtgPet; 
-	
-		    frmMain.action = "/front/buy/view.web";
+		    frmMain.action = "/front/buy/writeForm.web";
 		    frmMain.submit();
 		}
 		
-	</script>
-</head>
-<body>
-<form id="frmMain" method="POST">
-<input type="hidden" id="cd_ctg_pet" 	name="cd_ctg_pet" value="${paging.cd_ctg_pet}"/>
-<input type="hidden" id="seq_sle"		name="seq_sle"		value="${paging.seq_sle}">
-<input type="hidden" id="seq_mbr"		name="seq_mbr"/>
-<input type="hidden" id="sequence"		name="sequence" />
-<input type="hidden" id="currentPage"	name="currentPage"	value="${paging.currentPage}" />
+</script>
 <div class="container" id="content">
 	<section class="content">
 		<article class="txtCenter">
+		 
 			<div class="brdSearchArea">
-				<select name="cd_ctg_pet" id="cd_ctg_pet">
+			<%--
+				<select name="cd_ctg_pet_items" id="cd_ctg_pet_items">
 					<option value="1"<c:if test="${paging.cd_ctg_pet == 1}">selected</c:if>>강아지</option>
 					<option value="2"<c:if test="${paging.cd_ctg_pet == 2}">selected</c:if>>고양이</option>
 					<option value="3"<c:if test="${paging.cd_ctg_pet == 3}">selected</c:if>>햄스터</option>
 					<option value="4"<c:if test="${paging.cd_ctg_pet == 4}">selected</c:if>>파충류</option>
 				</select>
+				--%>
 			<%-- 
 				<c:choose>
 					<c:when test="${cd_ctg_pet == 1}">
@@ -165,9 +164,9 @@
 						<c:otherwise>
 							<c:forEach items="${list}" var="list">
 								<div class="product">
-									<a href="javascript:goView(${list.seq_sle});"><img src=# class="img-fluid rounded-4" alt="image"></a>
+									<a href="javascript:goWriteForm(${list.seq_sle});"><img src=# class="img-fluid rounded-4" alt="image"></a>
 									<div>
-										<a href="javascript:goView(${list.seq_sle});"><span>${list.sle_nm}</span>
+										<a href="javascript:goWriteForm(${list.seq_sle});"><span>${list.sle_nm}</span>
 										</a>
 										<div class="card-text">
 											<span class="rating secondary-font">

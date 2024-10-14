@@ -22,7 +22,9 @@
 %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" trimDirectiveWhitespaces="true" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
+<!DOCTYPE html>
+<html>
+<head>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -40,79 +42,64 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Chilanka&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+</head>
 	
-<!--<script>
-	document.addEventListener("DOMContentLoaded", function() {
-		let lastScrollTop = 0;
-		const fixedElement = document.getElementById('fixedElement');
-
-		window.addEventListener('scroll', function() {
-			let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-
-			if (scrollTop > lastScrollTop) {
-				// 스크롤 다운 시 사라지기
-				fixedElement.style.opacity = '0'; // 요소를 투명하게
-			} else {
-				// 스크롤 업 시 나타나기
-				fixedElement.style.opacity = '1'; // 요소를 다시 보이게
-			}
-			lastScrollTop = scrollTop;
-		});
-	});
-</script>-->
-
-<div class="container py-2" style="height: 270px;">
-	<div class="row py-4 pb-0 pb-sm-4 align-items-center ">
-		<div class="col-sm-4 col-lg-3 text-center text-sm-start">
-		<span style="position: absolute; top: 0; right: 0; line-height: 43px; vertical-align: middle;"></span>
-
-		<div class="main-logo">
-			<a href="/front/index.web">
-				<img src="/images/logo/logo3.png" alt="logo" class="img-fluid">
-			</a>
-		</div>
-		</div>
-		<div class="col-sm-6 offset-sm-2 offset-md-0 col-lg-5 d-none d-lg-block">
-			<div class="search-bar border rounded-2 px-3 border-dark-subtle">
-				<form id="search-form" class="text-center d-flex align-items-center" action="" method="">
-					<input type="text" class="form-control border-0 bg-transparent" placeholder="다양한 상품을 검색하세요" />
-					<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-						<path fill="currentColor" d="M21.71 20.29L18 16.61A9 9 0 1 0 16.61 18l3.68 3.68a1 1 0 0 0 1.42 0a1 1 0 0 0 0-1.39ZM11 18a7 7 0 1 1 7-7a7 7 0 0 1-7 7Z" />
-					</svg>
-				</form>
+<script>
+</script>
+<body>
+	<div class="container py-2" style="height: 270px;">
+		<div class="row py-4 pb-0 pb-sm-4 align-items-center ">
+			<div class="col-sm-4 col-lg-3 text-center text-sm-start">
+			<span style="position: absolute; top: 0; right: 0; line-height: 43px; vertical-align: middle;"></span>
+	
+			<div class="main-logo">
+				<a href="/front/index.web">
+					<img src="/images/logo/logo3.png" alt="logo" class="img-fluid">
+				</a>
+			</div>
+			</div>
+			<div class="col-sm-6 offset-sm-2 offset-md-0 col-lg-5 d-none d-lg-block">
+				<div class="search-bar border rounded-2 px-3 border-dark-subtle">
+					<form id="search-form" class="text-center d-flex align-items-center" action="" method="">
+						<input type="text" class="form-control border-0 bg-transparent" placeholder="다양한 상품을 검색하세요" />
+						<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+							<path fill="currentColor" d="M21.71 20.29L18 16.61A9 9 0 1 0 16.61 18l3.68 3.68a1 1 0 0 0 1.42 0a1 1 0 0 0 0-1.39ZM11 18a7 7 0 1 1 7-7a7 7 0 0 1-7 7Z" />
+						</svg>
+					</form>
+				</div>
+			</div>
+			<div class="col-sm-8 col-lg-4 d-flex justify-content-end gap-5 align-items-center mt-4 mt-sm-0 justify-content-center justify-content-sm-end">
+				<ul class="list-unstyled d-flex m-0">
+				<li style="margin: 0 8px;">
+					<c:if test="${empty sessionScope.SEQ_MBR}"><%--로그인--%>
+						<a href="/front/login/loginForm.web">
+							<img src="/images/login.png" style="width: 30px; height: 28px; object-fit: contain; vertical-align: middle;">
+						</a>
+					</c:if>
+					<c:if test="${not empty sessionScope.SEQ_MBR}"><%--로그아웃--%>
+						<a href="/front/login/loginForm.web">
+							<img src="/images/logoutlogo.png" style="width: 32px; height: 34px; object-fit: contain; vertical-align: middle;">
+						</a>
+					</c:if>
+				</li>
+				<li style="margin: 0 8px;">
+					<a href="/front/myPage/index.web"><%--마이페이지--%>
+						<iconify-icon icon="healthicons:person" class="fs-4" style="width: 32px; height: 32px; color: #000; vertical-align: middle; margin-top: 4px;"></iconify-icon>
+					</a>
+				</li>
+				<li style="margin: 0 8px;">
+					<a href="#"><%--찜--%>
+						<iconify-icon icon="mdi:heart" class="fs-4" style="width: 32px; height: 32px; color: #000; vertical-align: middle; margin-top: 4px;"></iconify-icon>
+					</a>
+				</li>
+				<li style="margin: 0 8px;">
+					<a href="#"><%--장바구니--%>
+						<iconify-icon icon="mdi:cart" class="fs-4 position-relative" style="width: 32px; height: 32px; color: #000; vertical-align: middle; margin-top: 4px;"></iconify-icon>
+					</a>
+				</li>
+			</ul>
 			</div>
 		</div>
-		<div class="col-sm-8 col-lg-4 d-flex justify-content-end gap-5 align-items-center mt-4 mt-sm-0 justify-content-center justify-content-sm-end">
-			<ul class="list-unstyled d-flex m-0">
-			<li style="margin: 0 8px;">
-				<c:if test="${empty sessionScope.SEQ_MBR}"><%--로그인--%>
-					<a href="/front/login/loginForm.web">
-						<img src="/images/login.png" style="width: 30px; height: 28px; object-fit: contain; vertical-align: middle;">
-					</a>
-				</c:if>
-				<c:if test="${not empty sessionScope.SEQ_MBR}"><%--로그아웃--%>
-					<a href="/front/login/loginForm.web">
-						<img src="/images/logoutlogo.png" style="width: 32px; height: 34px; object-fit: contain; vertical-align: middle;">
-					</a>
-				</c:if>
-			</li>
-			<li style="margin: 0 8px;">
-				<a href="/front/myPage/index.web"><%--마이페이지--%>
-					<iconify-icon icon="healthicons:person" class="fs-4" style="width: 32px; height: 32px; color: #000; vertical-align: middle; margin-top: 4px;"></iconify-icon>
-				</a>
-			</li>
-			<li style="margin: 0 8px;">
-				<a href="#"><%--찜--%>
-					<iconify-icon icon="mdi:heart" class="fs-4" style="width: 32px; height: 32px; color: #000; vertical-align: middle; margin-top: 4px;"></iconify-icon>
-				</a>
-			</li>
-			<li style="margin: 0 8px;">
-				<a href="#"><%--장바구니--%>
-					<iconify-icon icon="mdi:cart" class="fs-4 position-relative" style="width: 32px; height: 32px; color: #000; vertical-align: middle; margin-top: 4px;"></iconify-icon>
-				</a>
-			</li>
-		</ul>
-		</div>
 	</div>
-</div>
-
+</body>
+</html>
