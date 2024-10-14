@@ -78,21 +78,21 @@
 					newCell3 = newRow.insertCell(2);			// [1] 상품 일련번호(seq_prd)
 					newCell4 = newRow.insertCell(3);			// [2] 판매 상품명(sle_nm)
 					newCell5 = newRow.insertCell(4);			// [3] 판매 상품 가격(price)
-																// [4] 판매 상품 이미지(img)
-																// [5] 구매 수량(count)
+																// [4] 구매 수량(count)
+																// [5] 판매 상품 이미지(img)
 					
 					newCell1.innerText = loop + 1;
 					newCell2.innerText = item[2]
 					// newCell3.innerText = item[4].replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");	// 가격
 					newCell3.innerText = item[3];
-					newCell4.innerHTML = "<img src='" + item[4] + "' height='100px' />"
+					newCell4.innerHTML = "<img src='" + item[5] + "' height='100px' />"
 									+ "<input type='hidden' name='buyList[" + loop + "].seq_sle' id='buyList[" + loop + "].seq_sle' value='" + item[0] + "'/>"
 									+ "<input type='hidden' name='buyList[" + loop + "].seq_prd' id='buyList[" + loop + "].seq_prd' value='" + item[1] + "'/>"
 									+ "<input type='hidden' name='buyList[" + loop + "].sle_nm'  id='buyList[" + loop + "].sle_nm'  value='" + item[2] + "'/>"
 									+ "<input type='hidden' name='buyList[" + loop + "].price'   id='buyList[" + loop + "].price'   value='" + item[3] + "'/>";
 									
 					// newCell5.innerText = item[5].replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");	// 수량
-					newCell5.innerHTML = "<input type='text' name='buyList[" + loop + "].count' id='buyList[" + loop + "].count' value='" + item[5] + "'/>";
+					newCell5.innerHTML = "<input type='text' name='buyList[" + loop + "].count' id='buyList[" + loop + "].count' value='" + item[4] + "'/>";
 				}
 			}
 			 
