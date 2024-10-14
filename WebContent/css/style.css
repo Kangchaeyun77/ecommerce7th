@@ -127,13 +127,6 @@ CSS STRUCTURE:
   --light-primary-color: #eef1f3;
 }
 
-/* Fonts */
-:root {
-  --body-font: 'RixXladywatermelonR', sans-serif;
-  --heading-font: 'Chilanka', cursive;
-  --secondary-font: 'Montserrat', sans-serif;
-}
-
 
 body {
   --bs-link-color: #333;
