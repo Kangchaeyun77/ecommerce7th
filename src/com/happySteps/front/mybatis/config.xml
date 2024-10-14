@@ -9,11 +9,12 @@
 	<typeAlias type="com.happySteps.front.member.dto.MemberDto"				alias="memberDto" />
 	<typeAlias type="com.happySteps.front.member.dto.TermAgreeDto"			alias="termagreeDto" />
 	<typeAlias type="com.happySteps.front.member.dto.StatisticMemberDto"	alias="statisticmemberDto" />
-	<typeAlias type="com.happySteps.front.buy.dto.BuyMasterDto"				alias="buymasterdto" />
-	<typeAlias type="com.happySteps.front.buy.dto.BuyDto"					alias="buydto" />
-	<typeAlias type="com.happySteps.front.buy.dto.BuyDetailDto"				alias="buydetaildto" />
-	<typeAlias type="com.happySteps.front.buy.dto.BuyDetailListDto"			alias="buydetaillistdto" />
+	<typeAlias type="com.happySteps.front.buy.dto.BuyMasterDto"				alias="buymasterDto" />
+	<typeAlias type="com.happySteps.front.buy.dto.BuyDto"					alias="buyDto" />
+	<typeAlias type="com.happySteps.front.buy.dto.BuyDetailDto"				alias="buydetailDto" />
+	<typeAlias type="com.happySteps.front.buy.dto.BuyDetailListDto"			alias="buydetaillistDto" />
 	<typeAlias type="com.happySteps.front.center.dto.BoardDto"				alias="boardDto" />
+	<typeAlias type="com.happySteps.front.basket.dto.BasketDto"				alias="basketDto" />
 	<typeAlias type="com.happySteps.front.community.dto.CommunityDto"		alias="communityDto" />
 	<typeAlias type="com.happySteps.front.common.dto.PagingDto"				alias="pagingDto" />
 	<typeAlias type="com.happySteps.front.sale.dto.SaleDto"					alias="saleDto" />
@@ -26,6 +27,7 @@
 		<mapper resource="com/happySteps/front/mybatis/member/StatisticMember.xml" />
 		<mapper resource="com/happySteps/front/mybatis/buy/Buy.xml" />
 		<mapper resource="com/happySteps/front/mybatis/center/Board.xml" />
+		<mapper resource="com/happySteps/front/mybatis/basket/Basket.xml" />
 		<mapper resource="com/happySteps/front/mybatis/sale/Sale.xml" />
 		<mapper resource="com/happySteps/front/mybatis/community/Community.xml" />
 	</mappers>

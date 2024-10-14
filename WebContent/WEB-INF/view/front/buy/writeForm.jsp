@@ -95,38 +95,128 @@
 		.item_goods_tab li.on a {
 		    font-weight: bold; /* 선택된 항목 강조 (필요에 따라 조정) */
 		}
+		.product-detail {
+		    display: flex;
+		    justify-content: space-between; /* 두 요소를 좌우에 배치 */
+		    align-items: flex-start; /* 세로 정렬을 상단에 맞춤 */
+		    gap: 20px; /* 좌우 요소 사이의 간격 설정 */
+		}
+		
+		.product-image {
+		    flex: 1; /* 이미지 영역의 크기를 조정 (필요에 따라 변경 가능) */
+		}
+		
+		.product-biginfo {
+		    flex: 2; /* 정보 영역의 크기를 조정 (필요에 따라 변경 가능) */
+		}
+		.product-count input[type="number"],
+		.product-count input[type="submit"] {
+		    font-size: 20px; /* 글씨 크기 조정 */
+		    border: 0;
+		    border-radius: 15px;
+		    outline: none;
+		    background-color: #F5F5F5;
+		    text-align: center; /* 텍스트를 중앙으로 정렬 */
+		}
 	</style>
 	
 </head>
 <body>
 <form id="frmMain" method="POST">
-<input type="hidden" name="seq_prd" value="${saleDto.seq_prd}" />
-<input type="hidden" id="seq_sle" name="seq_sle" value="${saleDto.seq_sle}" />
-<input type="hidden" name="sle_nm" value="${saleDto.sle_nm}" />
-<input type="hidden" name="price" value="${saleDto.price_sale}" />
-<input type="hidden" id="cd_ctg_pet" 	name="cd_ctg_pet" value="${saleDto.cd_ctg_pet}"/>
-<input type="hidden" name="cd_state_prd" value="${saleDto.cd_state_sle}" />
+<input type="hidden" name="seq_prd" 	id="seq_prd"	value="${saleDto.seq_prd}" />
+<input type="hidden" name="seq_sle" 	id="seq_sle"	value="${saleDto.seq_sle}" />
+<input type="hidden" name="sle_nm" 		id="sle_nm"		value="${saleDto.sle_nm}" />
+<input type="hidden" name="price_sale" 	id="price_sale"	value="${saleDto.price_sale}" />
+<input type="hidden" name="cd_ctg_pet"  id="cd_ctg_pet"	value="${saleDto.cd_ctg_pet}"/>
+
+<input type="hidden" name="buyList[0].seq_sle" 			value="${saleDto.seq_sle}" />
+<input type="hidden" name="buyList[0].seq_prd" 			value="${saleDto.seq_prd}" />
 <div class="container">
 	<div style="text-align: center;">
 	<%@ include file="/include/front/gnb_shopping.jsp" %>
 	</div>
 	<script>
+	
+		<c:if test="${empty sessionScope.SEQ_MBR}">
+		var isLogin = false;
+		</c:if>
+		
+		<c:if test="${not empty sessionScope.SEQ_MBR}">
+		var isLogin = true;
+		</c:if>
+		
+		function writeProc() {
+			
+			if (!isLogin) {
+				alert("로그인이 필요합니다!");
+				return;
+			}
+			
+			var frmMain = document.getElementById("frmMain");
+			frmMain.action = "/front/buy/writeProc.web";
+			frmMain.submit();
+		}
+		function setBasketIframe() {
+			
+			if (!isLogin) {
+				alert("로그인이 필요합니다!");
+				return;
+			}
+			
+			// 화면의 구매할 상품 정보(수량 포함)를 서버로 전송
+			var seq_sle		= document.getElementById("seq_sle").value;		// 판매 상품 일련번호
+			var seq_prd		= document.getElementById("seq_prd").value;		// 상품 일련번호
+			var seq_mng		= document.getElementById("seq_mng").value;		// 판매자 일련번호
+			var sle_nm		= document.getElementById("sle_nm").value;		// 판매 상품명
+			var price_sale	= document.getElementById("price_sale").value;		// 판매 상품 가격
+			var count		= document.getElementById("count").value;		// 구매 수량
+			var img			= document.getElementById("img").src;			// 판매 상품 이미지
+			
+			var item = seq_sle + "|" + seq_prd + "|" + seq_mng + "|" + sle_nm + "|" + price_sale + "|" + count + "|"	+ img;
+			document.getElementById("item").value = item;
+			
+			var frmMain = document.getElementById("frmMain");
+			frmMain.action = "/front/basket/setBasketIframe.web";
+			frmMain.target = "frmBlank";
+			frmMain.submit();
+		}
+		
+		function setBasketCookie() {
+			
+			if (!isLogin) {
+				alert("로그인이 필요합니다!");
+				return;
+			}
+			
+			var seq_sle		= document.getElementById("seq_sle").value;		// 판매 상품 일련번호
+			var seq_prd		= document.getElementById("seq_prd").value;		// 상품 일련번호
+			var seq_sll		= document.getElementById("seq_mng").value;		// 판매자 일련번호
+			var seq_mng		= document.getElementById("sle_nm").value;		// 판매 상품명
+			var price_sale	= document.getElementById("price_sale").value;		// 판매 상품 가격
+			var count		= document.getElementById("count").value;		// 구매 수량
+			var img			= document.getElementById("img").src;			// 판매 상품 이미지
+			
+			var item = seq_sle + "|" + seq_prd + "|" + seq_sll + "|" + sle_nm + "|" + price + "|" + count + "|"	+ img;
+			//alert(item);
+			
+			// 쿠키에 구매 정보를 저장
+			insertBasket(item);
+			
+			if (confirm("장바구니로 이동하시겠습니까?")) {
+				location.href = "/front/basket/main.web";
+			}
+			else {
+				location.href = "/front/sale/";
+			}
+			
+		}
+		
 		function goList(value) {
 			var frmMain = document.getElementById("frmMain");
 			
 			document.getElementById("cd_ctg_pet").value = value;
 			
 			frmMain.action="/front/sale/shop/list.web";
-			frmMain.submit();
-		}
-	
-		function goView(value) {
-			
-			var frmMain = document.getElementById("frmMain");
-			
-			document.getElementById("seq_sle").value = value;
-			
-			frmMain.action="/front/buy/writeForm.web";
 			frmMain.submit();
 		}
 		
@@ -155,17 +245,22 @@
 		        <div class="product-image">
 		            ${saleDto.img}
 		        </div>
-		        <div class="product-info">
-		            <h1 class="product-name">${saleDto.sle_nm}</h1>
-		            <p class="product-description">${saleDto.desces}</p>
-		            <p class="product-price">판매가: ${saleDto.price_sale}</p>
-		        </div>
-		        
-		    </div>
+				<div class="product-biginfo">
+			        <div class="product-info">
+			            <h1 class="product-name">${saleDto.sle_nm}</h1>
+			            <p class="product-description">${saleDto.desces}</p>
+			            <p class="product-price">판매가: ${saleDto.price_sale}</p>
+			        </div>
+			        <div class="product-count">
+					    <label for="quantity">구매 수량</label>
+					    <input type="number" id="count" name="buyList[0].count" min="1" value ="1">
+					</div>
+			    </div>
+			</div>
 			<div class="button-container" style="text-align:center;padding-top:10px;padding-bottom:10px">
-                <button class="button list-button" onclick="#" >목록</button>
+                <button class="button list-button" onclick="javascript:goList" >목록</button>
                 <button class="button buy-button" onclick="#">구매</button>
-                <button class="button cart-button" onclick="javascript:writeProc()">장바구니</button>
+                <button class="button cart-button" onclick="javascript:setBasketCookie()">장바구니</button>
             </div>
 			<div class="item_goods_tab">
                 <ul style="list-style: none; padding: 0; margin: 0; display: flex; justify-content: center;">

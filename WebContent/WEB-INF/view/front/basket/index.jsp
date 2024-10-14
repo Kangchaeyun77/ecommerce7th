@@ -11,13 +11,13 @@
  * Copyright (C) 2024 himedia.co.kr All Rights Reserved.
  *
  *
- * Program		: kr.co.himedia.ecommerce
+ * Program		: com.happySteps
  * Description	:
  * Environment	: JRE 1.7 or more
  * File			:
  * Notes		:
  * History		: [NO][Programmer][Description]
- *				: [20240626130000][pluto@himedia.co.kr][CREATE: Initial Release]
+ *				: [20241014174700][kbs@happySteps.com][CREATE: Initial Release]
  */
 %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" trimDirectiveWhitespaces="true" %>
@@ -32,15 +32,15 @@
 	<script>
 		function writeProc() {
 			/* JavaScript + Cookie */
-			// [2024-08-26][pluto@himedia.co.kr][TODO: 쿠키 정보(장바구니) 삭제(정상적으로 구매 및 결제된 경우만)]
+			// [2024-08-26][kbs@happySteps.com][TODO: 쿠키 정보(장바구니) 삭제(정상적으로 구매 및 결제된 경우만)]
 			document.cookie = "productBasket=; path=/; expires=Sat, 01 Jan 1972 00:00:00 GMT";
 			
 			/* Session + iFrame
-			[2024-08-27][pluto@himedia.co.kr][TODO: 세션 정보(장바구니) 삭제 필요(정상적으로 구매 및 결제된 경우)]
+			[2024-08-27][kbs@happySteps.com][TODO: 세션 정보(장바구니) 삭제 필요(정상적으로 구매 및 결제된 경우)]
 			*/
 			
 			/* Database + iFrame
-			[2024-08-27][pluto@himedia.co.kr][TODO: 데이터베이스 정보(장바구니) 삭제 처리 필요(정상적으로 구매 및 결제된 경우)]
+			[2024-08-27][kbs@happySteps.com][TODO: 데이터베이스 정보(장바구니) 삭제 처리 필요(정상적으로 구매 및 결제된 경우)]
 			*/
 			
 			var frmMain = document.getElementById("frmMain");
@@ -49,14 +49,14 @@
 		}
 		
 		/*
-		[2024-08-26][pluto@himedia.co.kr][TODO: 장바구니 by JavaScript + Cookies]
+		[2024-10-14][kbs@happySteps.com][TODO: 장바구니 by JavaScript + Cookies]
 		@ 합계(수량과 금액) 표시
 		@ 삭제 버튼(합계 포함)
 		@ 수량 변경(합계 포함)
 		*/
 		window.onload = function () {
 			
-			/* Session/Database + iFrame
+			/* Session/Database + iFrame */
 			var items = "${item}";
 			
 			if (items != "") {
@@ -76,29 +76,27 @@
 					newCell1 = newRow.insertCell(0);			
 					newCell2 = newRow.insertCell(1);			// [0] 판매 상품 일련번호(seq_sle)
 					newCell3 = newRow.insertCell(2);			// [1] 상품 일련번호(seq_prd)
-					newCell4 = newRow.insertCell(3);			// [2] 판매자 일련번호(seq_sll)
-					newCell5 = newRow.insertCell(4);			// [3] 판매 상품명(sle_nm)
-					// [4] 판매 상품 가격(price)
-					// [5] 구매 수량(count)
-					// [6] 판매 상품 이미지(img)
+					newCell4 = newRow.insertCell(3);			// [2] 판매 상품명(sle_nm)
+					newCell5 = newRow.insertCell(4);			// [3] 판매 상품 가격(price)
+																// [4] 구매 수량(count)
+																// [5] 판매 상품 이미지(img)
 					
 					newCell1.innerText = loop + 1;
-					newCell2.innerText = item[3]
+					newCell2.innerText = item[2]
 					// newCell3.innerText = item[4].replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");	// 가격
-					newCell3.innerText = item[4];
-					newCell4.innerHTML = "<img src='" + item[6] + "' height='100px' />"
+					newCell3.innerText = item[3];
+					newCell4.innerHTML = "<img src='" + item[5] + "' height='100px' />"
 									+ "<input type='hidden' name='buyList[" + loop + "].seq_sle' id='buyList[" + loop + "].seq_sle' value='" + item[0] + "'/>"
 									+ "<input type='hidden' name='buyList[" + loop + "].seq_prd' id='buyList[" + loop + "].seq_prd' value='" + item[1] + "'/>"
-									+ "<input type='hidden' name='buyList[" + loop + "].sle_nm'  id='buyList[" + loop + "].sle_nm'  value='" + item[3] + "'/>"
-									+ "<input type='hidden' name='buyList[" + loop + "].price'   id='buyList[" + loop + "].price'   value='" + item[4] + "'/>";
+									+ "<input type='hidden' name='buyList[" + loop + "].sle_nm'  id='buyList[" + loop + "].sle_nm'  value='" + item[2] + "'/>"
+									+ "<input type='hidden' name='buyList[" + loop + "].price'   id='buyList[" + loop + "].price'   value='" + item[3] + "'/>";
 									
 					// newCell5.innerText = item[5].replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");	// 수량
-					newCell5.innerHTML = "<input type='text' name='buyList[" + loop + "].count' id='buyList[" + loop + "].count' value='" + item[5] + "'/>";
+					newCell5.innerHTML = "<input type='text' name='buyList[" + loop + "].count' id='buyList[" + loop + "].count' value='" + item[4] + "'/>";
 				}
 			}
-			 */
 			 
-			/* JavaScript + Cookie */
+			/* JavaScript + Cookie 
 			var items		= getCookie("productBasket");
 			var itemArray	= items.split(",");
 			
@@ -134,7 +132,7 @@
 								
 				// newCell5.innerText = item[5].replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");	// 수량
 				newCell5.innerHTML = "<input type='text' name='buyList[" + loop + "].count' id='buyList[" + loop + "].count' value='" + item[5] + "'/>";
-			}
+			}*/
 		}
 	</script>
 </head>
@@ -159,7 +157,7 @@
 			</thead>
 			<tbody>
 				<tr>
-					<td colspan="5">
+					<td colspan="6">
 						장바구니에 저장된 정보가 없습니다!
 					</td>
 				</tr>

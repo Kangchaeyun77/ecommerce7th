@@ -10,15 +10,17 @@
  * Copyright (C) 2024 himedia.co.kr All Rights Reserved.
  *
  *
- * Program		: kr.co.himedia.ecommerce
+ * Program		: com.happySteps
  * Description	:
  * Environment	: JRE 1.7 or more
  * File			: BasketWeb.java
  * Notes		:
  * History		: [NO][Programmer][Description]
- *				: [20240826123632][pluto@himedia.co.kr][CREATE: Initial Release]
+ *				: [20241014174000][kbs@happySteps.com][CREATE: Initial Release]
  */
 package com.happySteps.front.basket.controller;
+
+import java.util.List;
 
 //import java.util.List;
 
@@ -39,7 +41,7 @@ import com.happySteps.front.common.Common;
 
 /**
  * @version 1.0.0
- * @author pluto@himedia.co.kr
+ * @author kbs@happySteps.com
  * 
  * @since 2024-08-26
  * <p>DESCRIPTION:</p>
@@ -82,11 +84,10 @@ public class BasketWeb extends Common {
 			basketDto.setSeq_mbr(Integer.parseInt(getSession(request, "SEQ_MBR")));
 			basketDto.setSeq_sle(Integer.parseInt(arrBasket[0]));
 			basketDto.setSeq_prd(Integer.parseInt(arrBasket[1]));
-			basketDto.setSeq_sll(Integer.parseInt(arrBasket[2]));
-			basketDto.setSle_nm(arrBasket[3]);
-			basketDto.setPrice(Integer.parseInt(arrBasket[4]));
-			basketDto.setCount(Integer.parseInt(arrBasket[5]));
-			basketDto.setImg(arrBasket[6]);
+			basketDto.setSle_nm(arrBasket[2]);
+			basketDto.setPrice(Integer.parseInt(arrBasket[3]));
+			basketDto.setCount(Integer.parseInt(arrBasket[4]));
+			basketDto.setImg(arrBasket[5]);
 			
 			if (basketSrvc.insert(basketDto)) {
 				request.setAttribute("script", "alert('장바구니에 저장되었습니다.');");
@@ -162,7 +163,7 @@ public class BasketWeb extends Common {
 		ModelAndView mav = new ModelAndView("redirect:/error.web");
 		
 		try {
-			/* Database + iFrame
+			/* Database + iFrame*/
 			List<BasketDto> list = basketSrvc.listing(Integer.parseInt(getSession(request, "SEQ_MBR")));
 			
 			String item = "";
@@ -170,7 +171,6 @@ public class BasketWeb extends Common {
 			for (int loop = 0; loop < list.size(); loop++) {
 				item += list.get(loop).getSeq_sle()
 						+ "|" + list.get(loop).getSeq_prd()
-						+ "|" + list.get(loop).getSeq_sll()
 						+ "|" + list.get(loop).getSle_nm()
 						+ "|" + list.get(loop).getPrice()
 						+ "|" + list.get(loop).getCount()
@@ -181,11 +181,11 @@ public class BasketWeb extends Common {
 			}
 			logger.debug(item);
 			mav.addObject("item", item);
-			*/
 			
-			/* Session + iFrame */
+			
+			/* Session + iFrame 
 			HttpSession session = request.getSession(false);
-			mav.addObject("item", session.getAttribute("ITEM"));
+			mav.addObject("item", session.getAttribute("ITEM"));*/
 			
 			mav.setViewName("front/basket/index");
 		}
@@ -213,7 +213,7 @@ public class BasketWeb extends Common {
 		ModelAndView mav = new ModelAndView("redirect:/error.web");
 		
 		try {
-			/* Database + iFrame
+			/* Database + iFrame*/
 			List<BasketDto> list = basketSrvc.listing(Integer.parseInt(getSession(request, "SEQ_MBR")));
 			
 			String item = "";
@@ -221,7 +221,6 @@ public class BasketWeb extends Common {
 			for (int loop = 0; loop < list.size(); loop++) {
 				item += list.get(loop).getSeq_sle()
 						+ "|" + list.get(loop).getSeq_prd()
-						+ "|" + list.get(loop).getSeq_sll()
 						+ "|" + list.get(loop).getSle_nm()
 						+ "|" + list.get(loop).getPrice()
 						+ "|" + list.get(loop).getCount()
@@ -232,11 +231,11 @@ public class BasketWeb extends Common {
 			}
 			logger.debug(item);
 			mav.addObject("item", item);
-			*/
 			
-			/* Session + iFrame */
+			
+			/* Session + iFrame 
 			HttpSession session = request.getSession(false);
-			mav.addObject("item", session.getAttribute("ITEM"));
+			mav.addObject("item", session.getAttribute("ITEM"));*/
 			
 			mav.setViewName("front/basket/index");
 		}
