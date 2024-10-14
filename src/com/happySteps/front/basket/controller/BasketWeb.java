@@ -171,7 +171,6 @@ public class BasketWeb extends Common {
 			for (int loop = 0; loop < list.size(); loop++) {
 				item += list.get(loop).getSeq_sle()
 						+ "|" + list.get(loop).getSeq_prd()
-						+ "|" + list.get(loop).getSeq_sll()
 						+ "|" + list.get(loop).getSle_nm()
 						+ "|" + list.get(loop).getPrice()
 						+ "|" + list.get(loop).getCount()
@@ -222,7 +221,6 @@ public class BasketWeb extends Common {
 			for (int loop = 0; loop < list.size(); loop++) {
 				item += list.get(loop).getSeq_sle()
 						+ "|" + list.get(loop).getSeq_prd()
-						+ "|" + list.get(loop).getSeq_sll()
 						+ "|" + list.get(loop).getSle_nm()
 						+ "|" + list.get(loop).getPrice()
 						+ "|" + list.get(loop).getCount()

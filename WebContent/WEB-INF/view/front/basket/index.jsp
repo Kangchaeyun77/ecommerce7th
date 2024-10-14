@@ -78,8 +78,8 @@
 					newCell3 = newRow.insertCell(2);			// [1] 상품 일련번호(seq_prd)
 					newCell4 = newRow.insertCell(3);			// [2] 판매 상품명(sle_nm)
 					newCell5 = newRow.insertCell(4);			// [3] 판매 상품 가격(price)
-																// [4] 구매 수량(count)
-																// [5] 판매 상품 이미지(img)
+																// [4] 판매 상품 이미지(img)
+																// [5] 구매 수량(count)
 					
 					newCell1.innerText = loop + 1;
 					newCell2.innerText = item[2]
