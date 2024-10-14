@@ -10,13 +10,13 @@
  * Copyright (C) 2024 himedia.co.kr All Rights Reserved.
  *
  *
- * Program		: kr.co.himedia.ecommerce
+ * Program		: com.happySteps
  * Description	:
  * Environment	: JRE 1.7 or more
  * File			: BasketDao.java
  * Notes		:
  * History		: [NO][Programmer][Description]
- *				: [20240827165109][pluto@himedia.co.kr][CREATE: Initial Release]
+ *				: [20241014173800][kbs@happySteps.com][CREATE: Initial Release]
  */
 package com.happySteps.front.basket.dao;
 
@@ -29,9 +29,9 @@ import com.happySteps.front.common.dao.BaseDao;
 
 /**
  * @version 1.0.0
- * @author pluto@himedia.co.kr
+ * @author kbs@happySteps.com
  * 
- * @since 2024-08-27
+ * @since 2024-10-14
  * <p>DESCRIPTION:</p>
  * <p>IMPORTANT:</p>
  */
@@ -39,10 +39,10 @@ import com.happySteps.front.common.dao.BaseDao;
 public class BasketDao extends BaseDao {
 	
 	public List<BasketDto> listing(int seq_mbr) {
-		return sqlSessionFront.selectList("kr.co.himedia.ecommerce.front.mybatis.basket.Basket.listing", seq_mbr);
+		return sqlSessionFront.selectList("com.happySteps.front.mybatis.basket.Basket.listing", seq_mbr);
 	}
 	
 	public int insert(BasketDto basketDto) {
-		return sqlSessionFront.insert("kr.co.himedia.ecommerce.front.mybatis.basket.Basket.insert", basketDto);
+		return sqlSessionFront.insert("com.happySteps.front.mybatis.basket.Basket.insert", basketDto);
 	}
 }
