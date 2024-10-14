@@ -286,8 +286,8 @@ public class CommunityWeb extends Common {
 	 * @param response [응답 서블릿]
 	 * @return ModelAndView
 	 * 
-	 * @since 2024-07-04
-	 * <p>DESCRIPTION: 고객센터 쓰기 처리</p>
+	 * @since 2024-10-13
+	 * <p>DESCRIPTION: 커뮤니티 쓰기 처리</p>
 	 * <p>IMPORTANT:</p>
 	 * <p>EXAMPLE:</p>
 	 */
@@ -295,6 +295,9 @@ public class CommunityWeb extends Common {
 	@RequestMapping(value = "/front/community/board/writeProc.web", method = RequestMethod.POST)
 	public ModelAndView writeProc(HttpServletRequest request, HttpServletResponse response, CommunityDto communityDto, FileUploadDto fileUploadDto) {
 		
+		logger.error("request");
+		logger.error("response");
+		logger.error("communityDto");
 		ModelAndView mav = new ModelAndView("redirect:/error.web");
 		
 		String message	= "";
@@ -363,15 +366,15 @@ public class CommunityWeb extends Common {
 					String[] arrValue = new String[1];
 					
 					arrName[0] = "cd_bbs_type";
-					arrValue[0] = "3";
+					arrValue[0] = "7";
 					
 					request.setAttribute("script"	, "alert('등록되었습니다.');");
-					request.setAttribute("post"		, "/front/community/board/list.web");
+					//request.setAttribute("post"		, "/front/community/board/list.web");
 					request.setAttribute("name"		, arrName);
 					request.setAttribute("value"	, arrValue);
 					
-					// request.setAttribute("script"	, "alert('등록되었습니다.');");
-					// request.setAttribute("redirect"	, "/front/center/board/list.web?cd_bbs_type=" + boardDto.getCd_bbs_type());
+					 request.setAttribute("script"	, "alert('등록되었습니다.');");
+					 request.setAttribute("redirect"	, "/front/community/board/list.web?cd_bbs_type=" + communityDto.getCd_bbs_type());
 				}
 				else {
 					request.setAttribute("script"	, "alert('시스템 관리자에게 문의하세요!');");
@@ -440,7 +443,7 @@ public class CommunityWeb extends Common {
 	 * @return ModelAndView
 	 * 
 	 * @since 2024-06-26
-	 * <p>DESCRIPTION: 고객센터 목록</p>
+	 * <p>DESCRIPTION: 커뮤 목록</p>
 	 * <p>IMPORTANT:</p>
 	 * <p>EXAMPLE:</p>
 	 */

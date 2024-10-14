@@ -28,6 +28,7 @@
 <html>
 <head>
 	<link rel="stylesheet" type="text/css" title="common stylesheet" href="/css/table.css" />
+	<link rel="stylesheet" href="/css/brdSearchArea.css">
 	<%@ include file="/include/front/top.jsp" %>
 	<style></style>
 	<script>

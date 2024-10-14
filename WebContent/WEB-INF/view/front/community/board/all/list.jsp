@@ -29,7 +29,9 @@
 <head>
 	<%@ include file="/include/front/top.jsp" %>
 	<link rel="stylesheet" type="text/css" title="common stylesheet" href="/css/table.css" />
-	<style></style>
+	<link rel="stylesheet" href="/css/brdSearchArea.css">
+	<style>
+	</style>
 	<script>
 		function download(type, sequence) {
 			

@@ -118,10 +118,6 @@
 			<if test="cd_ctg != 0">
 				AND CD_CTG = #{cd_ctg}
 			</if>
-			<if test="cd_bbs_type == 7">
-				AND SEQ_BBS_PARENT IS NULL
-				AND REGISTER = #{register}
-			</if>
 	</sql>
 	
 	<update id="deleteFlag" parameterType="CommunityDto">

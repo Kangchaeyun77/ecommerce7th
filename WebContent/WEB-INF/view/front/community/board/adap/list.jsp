@@ -29,6 +29,7 @@
 <head>
 	<%@ include file="/include/front/top.jsp" %>
 	<link rel="stylesheet" type="text/css" title="common stylesheet" href="/css/table.css" />
+	<link rel="stylesheet" href="/css/brdSearchArea.css">
 	<style></style>
 	<script>
 		function download(type, sequence) {
@@ -57,8 +58,7 @@
 			frmMain.submit();
 		}
 		
-		function goList(value) {
-			
+		function getList(value) {
 			var frmMain = document.getElementById("frmMain");
 			
 			document.getElementById("searchWord").value = "";

@@ -42,7 +42,7 @@
 			SEQ_MBR = #{seq_mbr}
 	</select>
 	
-<!--	<update id="updatePasswd" parameterType="memberDto">
+<update id="updatePasswd" parameterType="memberDto">
 		UPDATE
 			TB_MBR_MST
 		SET
@@ -95,11 +95,13 @@
 		WHERE
 			SEQ_MBR		= #{seq_mbr}
 	</update>
-	
+
 	<select id="select" parameterType="memberDto" resultType="memberDto">
 		SELECT
 			mst.SEQ_MBR
 			, mst.EMAIL
+			, mst.ID
+			, mst.Nickname
 			, mst.MBR_NM
 			, mst.GENDER
 			, mst.PHONE
@@ -107,7 +109,6 @@
 			, dtl.ADDR1
 			, dtl.ADDR2
 			, dtl.PETS
-			, dtl.INTRO
 			, dtl.FLG_EMAIL
 			, dtl.FLG_SMS
 		FROM
@@ -118,7 +119,7 @@
 			mst.SEQ_MBR = dtl.SEQ_MBR
 		WHERE
 			mst.SEQ_MBR = #{seq_mbr}
-	</select>-->
+	</select>
 	
 	<insert id="insertMaster" parameterType="memberDto">
 		INSERT INTO TB_MBR_MST

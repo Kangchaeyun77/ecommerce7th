@@ -29,6 +29,7 @@
 <head>
 	<%@ include file="/include/front/top.jsp" %>
 	<link rel="stylesheet" type="text/css" title="common stylesheet" href="/css/table.css" />
+	<link rel="stylesheet" href="/css/brdSearchArea.css">
 	<style></style>
 	<script>
 		function download(type, sequence) {
@@ -57,7 +58,7 @@
 			frmMain.submit();
 		}
 		
-		function goList(value) {
+		function goList2(value) {
 			
 			var frmMain = document.getElementById("frmMain");
 			
@@ -65,6 +66,7 @@
 			document.getElementById("currentPage").value = "1";
 			document.getElementById("cd_bbs_type").value = value;
 			
+			alert(value);
 			frmMain.action="/front/community/board/list.web";
 			frmMain.target = "";
 			frmMain.submit();
