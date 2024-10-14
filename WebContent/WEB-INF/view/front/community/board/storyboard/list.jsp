@@ -29,6 +29,7 @@
 <head>
 	<%@ include file="/include/front/top.jsp" %>
 	<link rel="stylesheet" type="text/css" title="common stylesheet" href="/css/table.css" />
+	<link rel="stylesheet" href="/css/brdSearchArea.css">
 	<style></style>
 	<script>
 		function download(type, sequence) {
@@ -41,30 +42,22 @@
 			frmMain.target = "frmBlank";
 			frmMain.submit();
 		}
-		
 		function goView(value) {
-			
-			// document.getElementById("currentPage").remove();
-			// document.getElementById("searchKey").remove();
-			// document.getElementById("searchWord").remove();
-			
-			var frmMain = document.getElementById("frmMain");
-			
-			document.getElementById("seq_bbs").value = value;
-			
-			frmMain.action="/front/community/board/view.web";
-			frmMain.target = "";
-			frmMain.submit();
+		    var frmMain = document.getElementById("frmMain");
+		    document.getElementById("seq_bbs").value = value;
+		    frmMain.action="/front/community/board/view.web";
+		    frmMain.target = "";
+		    frmMain.submit();
 		}
 		
-		function goList(value) {
-			
+		function getList(value) {
 			var frmMain = document.getElementById("frmMain");
 			
 			document.getElementById("searchWord").value = "";
 			document.getElementById("currentPage").value = "1";
 			document.getElementById("cd_bbs_type").value = value;
 			
+			alert(value);
 			frmMain.action="/front/community/board/list.web";
 			frmMain.target = "";
 			frmMain.submit();
@@ -137,7 +130,7 @@
 							</td>
 							<td>
 								<c:if test="${list.extension != null && list.extension != ''}">
-									<a href="javascript:download('BbsNotice', ${list.seq_bbs});" title="${list.file_orig}"><img src="/images/icon/doc/${list.extension}.png" alt="${list.file_orig}" /></a> 
+									<a href="javascript:download('BbsNotice', ${list.seq_bbs});" title="${list.file_orig}"><img src="/image/icon/doc/${list.extension}.png" alt="${list.file_orig}" /></a> 
 								</c:if>
 							</td>
 							<td>

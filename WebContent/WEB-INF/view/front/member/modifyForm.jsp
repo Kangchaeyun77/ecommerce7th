@@ -38,8 +38,8 @@
 <body>
 <form id="frmMain" method="POST">
 <input type="hidden" name="phone" id="phone" />
-<input type="hidden" name="hobbys" id="hobbys" />
-<input type="hidden" name="_hobbys" id="_hobbys"			value ="${memberDto.hobbys}" />			<!-- 기존 취미 값 -->
+<input type="hidden" name="pets" id="pets" />
+<input type="hidden" name="_pets" id="_pets"			value ="${memberDto.pets}" />			<!-- 기존 취미 값 -->
 <input type="hidden" name="_flg_sms" id="_flg_sms"			value ="${memberDto.flg_sms}" />			<!-- 기존 문자 수신동의 값 -->
 <input type="hidden" name="_flg_email" id="_flg_email"		value ="${memberDto.flg_email}" />	<!-- 기존 이메일 수신동의 값 -->
 <div class="container">
@@ -60,9 +60,23 @@
 					</td>
 				</tr>
 				<tr>
-					<th>이메일(아이디*)</th>
+					<th>닉네임</th>
 					<td colspan="3">
-						${memberDto.email}
+						${memberDto.nickname}
+					</td>
+				</tr>
+				<tr>
+					<th>아이디</th>
+					<td colspan="3">
+						${memberDto.id}
+					</td>
+				</tr>
+				<tr>
+					<th>이메일</th>
+					<td colspan="3">
+						<c:if test="${not empty memberDto}">
+							 Email: ${memberDto.email}
+						</c:if>
 					</td>
 				</tr>
 				<tr>
@@ -85,6 +99,7 @@
 						<input type="button" value="우편번호 찾기" style="width:100px" onClick="execDaumPostcode();" />
 					</td>
 				</tr>
+				<%-- 
 				<tr>
 					<th>취미</th>
 					<td colspan="3">
@@ -94,6 +109,7 @@
 					</td>
 				</tr>
 				<tr>
+				--%>
 					<th>마케팅 수신 동의</th>
 					<td colspan="3">
 						SMS <input type="checkbox" name="flg_sms" id="flg_sms" value="Y"<c:if test="${memberDto.flg_sms == 'Y'}"> checked</c:if>/>

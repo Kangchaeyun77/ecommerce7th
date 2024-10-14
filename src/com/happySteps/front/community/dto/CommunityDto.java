@@ -8,6 +8,7 @@ public class CommunityDto {
 	private int seq_reply		= 0;	// 답변 일련번호
 	private int cd_bbs_type	= 0;	// 게시판 종류: 공지사항(1),FAQ(2),문의(3),입양(4),커뮤니티(전체글)(5)인기글(6),자유게시판(7),Q&A(8),입양후기(9),정보글(11),기타(12)
 	private String title		= "";	// 제목
+	private int cd_ctg			= 0;	// 카테고리 코드 자유게시판(7),Q&A(8),입양후기(9),정보글(11)
 	private int cd_ctg_pet		= 0;	// 카테고리 코드:강아지(1),고양이(2),햄스터(3),파충류(4),기타(5)
 	private String ctg_nm		= "";	// 카테고리 명칭
 	private String content		= "";	// 내용
@@ -142,5 +143,11 @@ public class CommunityDto {
 	}
 	public void setUpdater(int updater) {
 		this.updater = updater;
+	}
+	public int getCd_ctg() {
+		return cd_ctg;
+	}
+	public void setCd_ctg(int cd_ctg) {
+		this.cd_ctg = cd_ctg;
 	}
 }

@@ -10,21 +10,21 @@
  * Copyright (C) 2024 himedia.co.kr All Rights Reserved.
  *
  *
- * Program		: kr.co.himedia.ecommerce
+ * Program		: com.happySteps
  * Description	:
  * Environment	: JRE 1.7 or more
  * File			: BasketDto.java
  * Notes		:
  * History		: [NO][Programmer][Description]
- *				: [20240827164243][pluto@himedia.co.kr][CREATE: Initial Release]
+ *				: [20241014173900][kbs@happySteps.com][CREATE: Initial Release]
  */
 package com.happySteps.front.basket.dto;
 
 /**
  * @version 1.0.0
- * @author pluto@himedia.co.kr
+ * @author kbs@happySteps.com
  * 
- * @since 2024-08-27
+ * @since 2024-10-14
  * <p>DESCRIPTION:</p>
  * <p>IMPORTANT:</p>
  */

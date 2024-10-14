@@ -118,10 +118,6 @@
 			<if test="cd_ctg != 0">
 				AND CD_CTG = #{cd_ctg}
 			</if>
-			<if test="cd_bbs_type == 7">
-				AND SEQ_BBS_PARENT IS NULL
-				AND REGISTER = #{register}
-			</if>
 	</sql>
 	
 	<update id="deleteFlag" parameterType="CommunityDto">
@@ -146,9 +142,9 @@
 	
 	<insert id="insert" parameterType="CommunityDto">
 		INSERT INTO TB_BBS
-			(SEQ_BBS, CD_BBS_TYPE, TITLE, CD_CTG, CONTENT, FILE_SAVE, FILE_ORIG, READED, DT_REG, REGISTER)
+			(SEQ_BBS, CD_BBS_TYPE, TITLE, CD_CTG,CD_CTG_PET, CONTENT, FILE_SAVE, FILE_ORIG, READED, DT_REG, REGISTER)
 		VALUES
-			(#{seq_bbs}, #{cd_bbs_type}, #{title}, #{cd_ctg}, #{content}, #{file_save}, #{file_orig}, 0, SYSDATE, #{register})
+			(#{seq_bbs}, #{cd_bbs_type}, #{title}, #{cd_ctg},#{cd_ctg_pet}, #{content}, #{file_save}, #{file_orig}, 0, SYSDATE, #{register})
 	</insert>
 	
 	<update id="update" parameterType="CommunityDto">
@@ -170,6 +166,7 @@
 			, TITLE
 			, (SELECT tb_reply.SEQ_BBS FROM TB_BBS tb_reply WHERE tb_reply.SEQ_BBS_PARENT = TB_BBS.SEQ_BBS) seq_reply
 			, CD_CTG
+			, CD_CTG_PET
 			, CONTENT
 			, FILE_SAVE
 			, FILE_ORIG
