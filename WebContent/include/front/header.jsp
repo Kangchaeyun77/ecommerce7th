@@ -1,60 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" trimDirectiveWhitespaces="true" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<!DOCTYPE html>
-<head>
-	<meta charset="utf-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<meta name="format-detection" content="telephone=no">
-	<meta name="apple-mobile-web-app-capable" content="yes">
-	<meta name="author" content="">
-	<meta name="keywords" content="">
-	<meta name="description" content="">
-	<title>HappySteps - 행복한발걸음</title>
-	<link rel="stylesheet" href="/css/site_header.css">
-	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css" />
-	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet"
-		integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
-	<link rel="stylesheet" type="text/css" href="/css/vendor.css">
-	<link rel="stylesheet" type="text/css" href="/css/style.css">
-	<link rel="preconnect" href="https://fonts.googleapis.com">
-	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-	<link href="https://fonts.googleapis.com/css2?family=Chilanka&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
-	<style></style>
-	
-	<script>
-	<%--// link 태그의 href 값을 강제로 고정시키는 스크립트
-	
-	window.onload = function() {
-		const linkElement = document.getElementById('stylesheet');
-		linkElement.href = 'js/css/vendor.css';
-	};
-	window.onload = function() {
-		const linkElement = document.getElementById('stylesheet');
-		linkElement.href = 'js/css/style.css';
-	};
-	--%>
-		<%--
-		document.addEventListener("DOMContentLoaded", function() {
-			let lastScrollTop = 0;
-			const fixedElement = document.getElementById('fixedElement');
 
-			window.addEventListener('scroll', function() {
-				let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-
-				if (scrollTop > lastScrollTop) {
-					// 스크롤 다운 시 사라지기
-					fixedElement.style.opacity = '0'; // 요소를 투명하게
-				} else {
-					// 스크롤 업 시 나타나기
-					fixedElement.style.opacity = '1'; // 요소를 다시 보이게
-				}
-				lastScrollTop = scrollTop;
-			});
-		});
-		--%>
-	</script>
-</head>
 <body id=site-header>
 	<!-- Google tag (gtag.js) -->
 	<script async src="https://www.googletagmanager.com/gtag/js?id=G-7P274EVRQV"></script>
@@ -65,8 +11,8 @@
 
 	  gtag('config', 'G-7P274EVRQV');
 	</script>
-	
-<%-- 
+
+
   <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
     <defs>
 		<symbol xmlns="http://www.w3.org/2000/svg" id="uis:lock-alt" viewBox="0 0 24 24">
@@ -135,55 +81,11 @@
 
     </defs>
   </svg>
---%>
-<%-- 
+
   <div class="preloader-wrapper">
     <div class="preloader">
     </div>
   </div>
-<!-- 상단 장바구니관련 코드 -->
-<div class="offcanvas offcanvas-end" data-bs-scroll="true" tabindex="-1" id="offcanvasCart" aria-labelledby="My Cart">
-	<div class="offcanvas-header justify-content-center">
-		<button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-	</div>
-	<div class="offcanvas-body">
-		<div class="order-md-last">
-			<h4 class="d-flex justify-content-between align-items-center mb-3">
-				<span class="text-primary">쇼핑카트</span>
-				<span class="badge bg-primary rounded-circle pt-2">3</span>
-			</h4>
-			<ul class="list-group mb-3">
-				<li class="list-group-item d-flex justify-content-between lh-sm">
-					<div>
-						<h6 class="my-0">강아지 간식</h6>
-						<small class="text-body-secondary">최고급 간식</small>
-					</div>
-					<span class="text-body-secondary">12,000￦</span>
-				</li>
-				<li class="list-group-item d-flex justify-content-between lh-sm">
-					<div>
-						<h6 class="my-0">강아지 사료</h6>
-						<small class="text-body-secondary">최고급 사료</small>
-					</div>
-					<span class="text-body-secondary">8,000￦</span>
-				</li>
-				<li class="list-group-item d-flex justify-content-between lh-sm">
-					<div>
-						<h6 class="my-0">장난감</h6>
-						<small class="text-body-secondary">탱탱볼</small>
-					</div>
-					<span class="text-body-secondary">2,000￦</span>
-				</li>
-				<li class="list-group-item d-flex justify-content-between">
-					<span class="fw-bold">총합 (원)</span>
-					<strong>22,000원</strong>
-				</li>
-			</ul>
-
-			<button class="w-100 btn btn-primary btn-lg" type="submit">주문하기</button>
-		</div>
-	</div>
-</div>
 <!-- 검색창영역 -->
 <div class="offcanvas offcanvas-end" data-bs-scroll="true" tabindex="-1" id="offcanvasSearch" aria-labelledby="Search">
 	<div class="offcanvas-header justify-content-center"> 
@@ -203,8 +105,7 @@
 		</div>
 	</div>
 </div>
---%>
-<header id=site-header>
+
 	<div class="container-fluid">
 		<hr class="m-0">
 	</div>
@@ -213,22 +114,10 @@
 			<button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
 				<span class="navbar-toggler-icon"></span>
 			</button>
-				<%-- 
 				<div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
 					<div class="offcanvas-header justify-content-center">
 						<button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
 					</div>
-	
-					<div class="offcanvas-body justify-content-between">
-						<select class="filter-categories border-0 mb-0 me-5" hidden>
-							<option>동물 카테고리</option>
-							<option>강아지</option>
-							<option>고양이</option>
-							<option>햄스터</option>
-							<option>파충류 및 양서류</option>
-						</select>
-					</div>
-				--%>
 				<ul class="navbar-nav menu-list list-unstyled d-flex gap-md-3 mb-0"style="justify-content: center">
 					<li class="nav-item">
 						<a href="/front/index.web" class="nav-link active">홈페이지</a>
@@ -254,4 +143,4 @@
 				</ul>
 				</nav>
 			</div>
-</header>
+</body>

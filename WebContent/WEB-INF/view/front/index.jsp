@@ -25,13 +25,22 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<meta charset="UTF-8">
-	<meta http-equiv="cache-control" content="no-cache" />
-	<meta http-equiv="pragma" content="no-cache" />
-	<%@ include file="/include/front/top.jsp" %>
-	<%@ include file="/include/front/header.jsp" %>
-	
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="format-detection" content="telephone=no">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="author" content="">
+	<meta name="keywords" content="">
+	<meta name="description" content="">
+	<title>HappySteps - 행복한발걸음</title>
 </head>
+<top>
+	<%@ include file="/include/front/top.jsp" %>
+</top>
+<header>
+	<%@ include file="/include/front/header.jsp" %>
+</header>
 <body>
 <!-- 슬라이드 배너 영역(첫페이지) -->
 <section id="banner" style="background: #F9F3EC;">

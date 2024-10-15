@@ -22,7 +22,6 @@
  %>
  <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" trimDirectiveWhitespaces="true" %>
  <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
- <footer id="footer" class="my-5">
  	<div class="container py-5 my-5">
  		<div class="row">
 
@@ -120,7 +119,6 @@
 
  		</div>
  	</div>
- </footer>
 
  <div id="footer-bottom">
  	<div class="container">
