@@ -25,9 +25,9 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<%@ include file="/include/front/top.jsp" %>
 	<link rel="stylesheet" type="text/css" title="common stylesheet" href="/css/layoutSubmain.css" />
-	<link rel="stylesheet" type="text/css" title="common stylesheet" href="/css/table.css" />
+	<link rel="stylesheet" type="text/css" title="common stylesheet" href="/css/lnb.css" />
+	<link rel="stylesheet" href="/css/table.css">
 	<style></style>
 	<script type="text/javascript" src="/js/package/tinymce/tinymce.min.js"></script>
 	<script type="text/javascript" src="/js/package/tinymce.js"></script>
@@ -65,6 +65,7 @@
 <div class="container">
 	<header>
 		<%@ include file="/include/front/header.jsp" %>
+		<%@ include file="/include/front/top.jsp" %>
 	</header>
 	<section class="content">
 		<nav>

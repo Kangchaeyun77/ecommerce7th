@@ -26,9 +26,9 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<%@ include file="/include/front/top.jsp" %>
 	<link rel="stylesheet" type="text/css" title="common stylesheet" href="/css/layoutSubmain.css" />
-	<link rel="stylesheet" type="text/css" title="common stylesheet" href="/css/table.css" />
+	<link rel="stylesheet" type="text/css" title="common stylesheet" href="/css/lnb.css" />
+	<link rel="stylesheet" href="/css/table.css">
 	<style></style>
 	<script>
 		function download(type, sequence) {
@@ -76,6 +76,7 @@
 <div class="container">
 	<header>
 		<%@ include file="/include/front/header.jsp" %>
+		<%@ include file="/include/front/top.jsp" %>
 	</header>
 	<section class="content">
 		<nav>

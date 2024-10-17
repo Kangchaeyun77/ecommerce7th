@@ -20,159 +20,62 @@
  *				: [20241014174700][kbs@happySteps.com][CREATE: Initial Release]
  */
 %>
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" trimDirectiveWhitespaces="true" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page import="java.util.List" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page info="/WEB-INF/view/front/basket/index.jsp" %>
+<%@ page import="com.happySteps.front.basket.dto.BasketDto" %>
 <!DOCTYPE html>
 <html>
 <head>
-	<%@ include file="/include/front/top.jsp" %>
-	<link rel="stylesheet" type="text/css" title="common stylesheet" href="/css/layoutMain.css" />
-	<link rel="stylesheet" type="text/css" title="common stylesheet" href="/css/table.css" />
-	<style></style>
-	<script>
-		function writeProc() {
-			/* JavaScript + Cookie */
-			// [2024-08-26][kbs@happySteps.com][TODO: 쿠키 정보(장바구니) 삭제(정상적으로 구매 및 결제된 경우만)]
-			document.cookie = "productBasket=; path=/; expires=Sat, 01 Jan 1972 00:00:00 GMT";
-			
-			/* Session + iFrame
-			[2024-08-27][kbs@happySteps.com][TODO: 세션 정보(장바구니) 삭제 필요(정상적으로 구매 및 결제된 경우)]
-			*/
-			
-			/* Database + iFrame
-			[2024-08-27][kbs@happySteps.com][TODO: 데이터베이스 정보(장바구니) 삭제 처리 필요(정상적으로 구매 및 결제된 경우)]
-			*/
-			
-			var frmMain = document.getElementById("frmMain");
-			frmMain.action = "/front/buy/writeProc.web";
-			frmMain.submit();
-		}
-		
-		/*
-		[2024-10-14][kbs@happySteps.com][TODO: 장바구니 by JavaScript + Cookies]
-		@ 합계(수량과 금액) 표시
-		@ 삭제 버튼(합계 포함)
-		@ 수량 변경(합계 포함)
-		*/
-		window.onload = function () {
-			
-			/* Session/Database + iFrame */
-			var items = "${item}";
-			
-			if (items != "") {
-				var itemArray	= items.split(",");
-				
-				var table = document.getElementById("productBasket");
-				
-				if (itemArray.length > 0) table.deleteRow(-1);
-				
-				for (loop = 0; loop < itemArray.length; loop++) {
-					
-					//alert(itemArray[loop]);
-					
-					var item = itemArray[loop].split("|");
-					newRow = table.insertRow();
-					
-					newCell1 = newRow.insertCell(0);			
-					newCell2 = newRow.insertCell(1);			// [0] 판매 상품 일련번호(seq_sle)
-					newCell3 = newRow.insertCell(2);			// [1] 상품 일련번호(seq_prd)
-					newCell4 = newRow.insertCell(3);			// [2] 판매 상품명(sle_nm)
-					newCell5 = newRow.insertCell(4);			// [3] 판매 상품 가격(price)
-																// [4] 구매 수량(count)
-																// [5] 판매 상품 이미지(img)
-					
-					newCell1.innerText = loop + 1;
-					newCell2.innerText = item[2]
-					// newCell3.innerText = item[4].replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");	// 가격
-					newCell3.innerText = item[3];
-					newCell4.innerHTML = "<img src='" + item[5] + "' height='100px' />"
-									+ "<input type='hidden' name='buyList[" + loop + "].seq_sle' id='buyList[" + loop + "].seq_sle' value='" + item[0] + "'/>"
-									+ "<input type='hidden' name='buyList[" + loop + "].seq_prd' id='buyList[" + loop + "].seq_prd' value='" + item[1] + "'/>"
-									+ "<input type='hidden' name='buyList[" + loop + "].sle_nm'  id='buyList[" + loop + "].sle_nm'  value='" + item[2] + "'/>"
-									+ "<input type='hidden' name='buyList[" + loop + "].price'   id='buyList[" + loop + "].price'   value='" + item[3] + "'/>";
-									
-					// newCell5.innerText = item[5].replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");	// 수량
-					newCell5.innerHTML = "<input type='text' name='buyList[" + loop + "].count' id='buyList[" + loop + "].count' value='" + item[4] + "'/>";
-				}
-			}
-			 
-			/* JavaScript + Cookie 
-			var items		= getCookie("productBasket");
-			var itemArray	= items.split(",");
-			
-			var table = document.getElementById("productBasket");
-			
-			if (itemArray.length > 0) table.deleteRow(-1);
-			
-			for (loop = 0; loop < itemArray.length; loop++) {
-				
-				//alert(itemArray[loop]);
-				
-				var item = itemArray[loop].split("|");
-				newRow = table.insertRow();
-				
-				newCell1 = newRow.insertCell(0);			
-				newCell2 = newRow.insertCell(1);			// [0] 판매 상품 일련번호(seq_sle)
-				newCell3 = newRow.insertCell(2);			// [1] 상품 일련번호(seq_prd)
-				newCell4 = newRow.insertCell(3);			// [2] 판매자 일련번호(seq_sll)
-				newCell5 = newRow.insertCell(4);			// [3] 판매 상품명(sle_nm)
-				// [4] 판매 상품 가격(price)
-				// [5] 구매 수량(count)
-				// [6] 판매 상품 이미지(img)
-				
-				newCell1.innerText = loop + 1;
-				newCell2.innerText = item[3]
-				// newCell3.innerText = item[4].replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");	// 가격
-				newCell3.innerText = item[4];
-				newCell4.innerHTML = "<img src='" + item[6] + "' height='100px' />"
-								+ "<input type='hidden' name='buyList[" + loop + "].seq_sle' id='buyList[" + loop + "].seq_sle' value='" + item[0] + "'/>"
-								+ "<input type='hidden' name='buyList[" + loop + "].seq_prd' id='buyList[" + loop + "].seq_prd' value='" + item[1] + "'/>"
-								+ "<input type='hidden' name='buyList[" + loop + "].sle_nm'  id='buyList[" + loop + "].sle_nm'  value='" + item[3] + "'/>"
-								+ "<input type='hidden' name='buyList[" + loop + "].price'   id='buyList[" + loop + "].price'   value='" + item[4] + "'/>";
-								
-				// newCell5.innerText = item[5].replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");	// 수량
-				newCell5.innerHTML = "<input type='text' name='buyList[" + loop + "].count' id='buyList[" + loop + "].count' value='" + item[5] + "'/>";
-			}*/
-		}
-	</script>
+    <title>장바구니</title>
+    <link rel="stylesheet" type="text/css" href="/css/layoutMain.css" />
+    <link rel="stylesheet" type="text/css" href="/css/table.css" />
 </head>
 <body>
-<form id="frmMain" method="POST">
 <div class="container">
-	<header>
-		<%@ include file="/include/front/header.jsp" %>
-	</header>
-	<section class="content">
-		<nav></nav>
-		<article class="txtCenter">
-			<table id="productBasket" class="headTop_01" style="width: 900px; margin-left: auto; margin-right: auto;">
-			<thead>
-				<tr>
-					<th style="width: 5%">NO</th>
-					<th>판매명</th>
-					<th>가격</th>
-					<th>이미지</th>
-					<th>수량</th>
-				</tr>
-			</thead>
-			<tbody>
-				<tr>
-					<td colspan="6">
-						장바구니에 저장된 정보가 없습니다!
-					</td>
-				</tr>
-			</tbody>
-			</table>
-			<br/>
-			<input type="button" value="구매" style="width:100px" onclick="javascript:writeProc();"/>
-			<br/>
-		</article>
-		<aside></aside>
-	</section>
-	<footer>
-		<%@ include file="/include/front/footer.jsp" %>
-	</footer>
+    <header>
+        <%@ include file="/include/front/header.jsp" %>
+        <%@ include file="/include/front/top.jsp" %>
+    </header>
+    <section class="content">
+        <nav></nav>
+        <form id="frmMain" method="POST" action="/front/pay/payment.web">
+            <c:if test="${not empty basketList}">
+                <table id="productBasket" class="headTop_01" style="width: 900px; margin-left: auto; margin-right: auto;">
+                    <tr>
+                        <th>상품명</th>
+                        <th>수량</th>
+                        <th>가격</th>
+                        <th>이미지</th>
+                        <th>삭제</th>
+                    </tr>
+                    <c:forEach var="item" items="${basketList}">
+                        <tr>
+                            <td>${item.sle_nm}</td>
+                            <td>${item.count}</td>
+                            <td>${item.price} 원</td>
+                            <td><img src="${item.img}" alt="상품 이미지" height="100px"/></td>
+                            <td><a href="/front/basket/removeItem.web?seq_bsk=${item.seq_bsk}">삭제</a></td>
+                        </tr>
+                    </c:forEach>
+                </table>
+
+                <div class="total">
+                    <p>총 결제금액: ${totalPrice} 원</p>
+                    <input type="hidden" name="totalPrice" value="${totalPrice}">
+                    <button type="submit">결제 페이지로 이동</button>
+                </div>
+            </c:if>
+            <c:if test="${empty basketList}">
+                <p>장바구니가 비어 있습니다.</p>
+            </c:if>
+        </form>
+        <aside></aside>
+    </section>
+    <footer>
+        <%@ include file="/include/front/footer.jsp" %>
+    </footer>
 </div>
-</form>
 </body>
 </html>

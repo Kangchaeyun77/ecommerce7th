@@ -164,7 +164,7 @@
 						<c:otherwise>
 							<c:forEach items="${list}" var="list">
 								<div class="product">
-									<a href="javascript:goWriteForm(${list.seq_sle});"><img src=# class="img-fluid rounded-4" alt="image"></a>
+									<a href="javascript:goWriteForm(${list.seq_sle});"><img src="${list.img}" class="img-fluid rounded-4" alt="image"></a>
 									<div>
 										<a href="javascript:goWriteForm(${list.seq_sle});"><span>${list.sle_nm}</span>
 										</a>
