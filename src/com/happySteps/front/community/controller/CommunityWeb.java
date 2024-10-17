@@ -25,7 +25,6 @@ import com.happySteps.common.file.FileUpload;
 import com.happySteps.front.community.controller.CommunityWeb;
 import com.happySteps.front.community.dto.CommunityDto;
 import com.happySteps.front.community.service.CommunitySrvc;
-
 import com.happySteps.front.common.Common;
 import com.happySteps.front.common.component.SessionCmpn;
 import com.happySteps.front.common.dto.PagingDto;
@@ -235,11 +234,54 @@ public class CommunityWeb extends Common {
 	 * @param communityDto [게시판 빈]
 	 * @return ModelAndView
 	 * 
-	 * @since 2024-10-10
-	 * <p>DESCRIPTION: 커뮤니티 보기</p>
+	 * @since 2024-10-17
+	 * <p>DESCRIPTION: 커뮤니티 글 보기</p>
 	 * <p>IMPORTANT:</p>
 	 * <p>EXAMPLE:</p>
 	 */
+	@RequestMapping(value = "/front/community/board/view.web", method = RequestMethod.POST)
+	public ModelAndView view(HttpServletRequest request, HttpServletResponse response, CommunityDto communityDto) {
+		
+		ModelAndView mav = new ModelAndView("redirect:/error.web");
+		
+		try {
+			CommunityDto _communityDto = communitySrvc.select(communityDto);
+			
+			mav.addObject("communityDto", _communityDto);
+			
+			if (communityDto.getCd_bbs_type() == 6) {
+				mav.setViewName("front/community/board/popular/view");
+			} else if (communityDto.getCd_bbs_type() == 7) {
+				mav.setViewName("front/community/board/storyboard/view");
+			} else if (communityDto.getCd_bbs_type() == 8) {
+				mav.setViewName("front/community/board/qna/view");
+			} else if (communityDto.getCd_bbs_type() == 9) {
+				mav.setViewName("front/community/board/adap/view");
+			} else if (communityDto.getCd_bbs_type() == 11) {
+				mav.setViewName("front/community/board/information/view");
+			
+				
+				// DB 부하 감소를 위해 답변이 있을 때만
+				if (_communityDto.getSeq_reply() > 0) {
+					CommunityDto boardReplyDto = communitySrvc.selectReply(communityDto);
+					mav.addObject("boardReplyDto", boardReplyDto);
+				}
+				
+				mav.setViewName("front/community/board/qna/view");
+			}
+			else {
+				request.setAttribute("redirect"	, "/");
+				mav.setViewName("forward:/servlet/result.web");
+			}
+		}
+		catch (Exception e) {
+			logger.error("[" + this.getClass().getName() + ".view()] " + e.getMessage(), e);
+		}
+		finally {}
+		
+		return mav;
+	}
+	
 	/**
 	 * @param request [요청 서블릿]
 	 * @param response [응답 서블릿]
@@ -251,8 +293,6 @@ public class CommunityWeb extends Common {
 	 * <p>IMPORTANT:</p>
 	 * <p>EXAMPLE:</p>
 	 */
-	
-	
 	@RequestMapping(value = "/front/community/board/list.web")
 	public ModelAndView list(HttpServletRequest request, HttpServletResponse response, PagingDto pagingDto) {
 		ModelAndView mav = new ModelAndView("redirect:/error.web");

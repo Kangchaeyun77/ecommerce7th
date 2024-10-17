@@ -30,7 +30,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<link rel="stylesheet" type="text/css" href="/css/table.css" />
+	<link rel="stylesheet" type="text/css" href="/css/communityTable.css" />
 	<link rel="stylesheet" href="/css/brdSearchArea.css">
 	<script>
 		function download(type, sequence) {

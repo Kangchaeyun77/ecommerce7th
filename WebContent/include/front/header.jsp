@@ -28,7 +28,9 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css" />
 <link rel="stylesheet" type="text/css" href="/css/style.css">
 <link rel="stylesheet" type="text/css" href="/css/vendor.css">
+
 <%--
+
 integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -37,7 +39,7 @@ integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJ
 </head>
 <body>
 <div class="container py-2" style="height: 270px;">
-	<div class="row py-4 pb-0 pb-sm-4 align-items-center">
+	<div class="row py-4 pb-0 pb-sm-4 align-items-center" style="align-items:center;">
 		<!-- 로고 영역 -->
 		<div class="col-sm-4 col-lg-3 text-center text-sm-start">
 			<div class="main-logo">
@@ -49,10 +51,10 @@ integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJ
 
 		<!-- 검색창 영역 (로고 오른쪽) -->
 		<div class="col-sm-4 col-lg-4 offset-lg-1"> <!-- 오른쪽으로 이동 -->
-			<div class="search-bar border rounded-2 px-3 border-dark-subtle">
-				<form id="search-form" class="text-center d-flex align-items-center" action="" method="">
-					<input type="text" style="width: auto; height: 100px; border: none; background-color: transparent;" placeholder="다양한 상품을 검색하세요" />
-					<img src="/images/search.png" class="fs-4 me-3" alt="Search Icon" style="width: 24px; height: 24px;" />
+			<div class="search-bar border rounded-2 px-3 border-dark-subtle" style="display:flex;justify-content:space-between;align-items:center;margin:0;">
+				<form id="search-form" class="text-center align-items-center" action="" method="">
+					<input type="text" style="width: calc(100% - 24px); height: 100px; border: none; background-color: transparent;" placeholder="다양한 상품을 검색하세요" />
+					<img src="/images/search.png" class="fs-4 me-3" alt="Search Icon" style="width: 24px; height: 24px;margin-right:0 !important;" />
 				</form>
 			</div>
 		</div>
@@ -74,7 +76,7 @@ integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJ
 			</div>
 		</div>
 	</div>
-	<!-- 두 번째 고정 검색창 (데스크탑에서 사용) -->
+	<%-- 두 번째 고정 검색창 (데스크탑에서 사용) -->
 	<div class="col-sm-6 offset-sm-2 offset-md-0 col-lg-5 d-none d-lg-block">
 		<div class="search-bar border rounded-2 px-3 border-dark-subtle">
 			<form id="search-form" class="text-center d-flex align-items-center" action="" method="">

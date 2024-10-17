@@ -21,26 +21,7 @@
  */
  %>
  <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" trimDirectiveWhitespaces="true" %>
-		<style>
-		.gnb ul {
-			list-style-type: none;
-			padding: 0;
-			margin: 0;
-		}
-		.gnb li {
-			display: inline;
-			margin-right: 15px;
-		}
-		.gnb a {
-			text-decoration: none;
-			color: #000;
-			padding: 15px 20px;
-			border-radius: 4px;
-			transition: background-color 0.3s;
-		}
-		.gnb a:hover {
-			background-color: #f5f5dc;
-		}</style>
+<link rel="stylesheet" type="text/css" href="/css/gnb.css">
 		<nav class="gnb">
 			<span>
 				<a href="/front/about/service.web" class="menugnb">서비스 안내</a>
