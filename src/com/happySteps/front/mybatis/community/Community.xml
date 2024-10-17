@@ -24,6 +24,15 @@
 		WHERE
 			<include refid="where" />
 	</select>
+	
+	<select id="count_all" parameterType="pagingDto" resultType="java.lang.Integer">
+		SELECT
+			COUNT(ROWNUM)
+		FROM
+			TB_BBS
+		WHERE
+			<include refid="all_where" />
+	</select>
 		<select id="writeForm" parameterType="pagingDto" resultType="communityDto">
 		SELECT
 			*
@@ -60,6 +69,46 @@
 		]]> 
 		ORDER BY
 			FLG_TOP, rnum
+	</select>
+	
+	
+	<select id="allList" parameterType="pagingDto" resultType="communityDto">
+	   	SELECT
+				*
+			FROM
+				(
+				SELECT
+					/*+ first_rows(10) */ ROW_NUMBER() OVER (ORDER BY FLG_TOP, FLG_REPLY DESC, DT_REG DESC) rnum
+					, SEQ_BBS
+					, (SELECT tb_reply.SEQ_BBS FROM TB_BBS tb_reply WHERE tb_reply.SEQ_BBS_PARENT = TB_BBS.SEQ_BBS) seq_reply
+					, DECODE(CD_CTG_PET, 1, '강아지', 2, '고양이', 3, '햄스터', 4, '파충류 및 양서류', 5, '기타', '미정') CTG_NM
+					, TITLE
+					, FILE_ORIG
+					, DECODE(LOWER(SUBSTR(FILE_ORIG, INSTR(FILE_ORIG, '.', -1, 1) + 1))
+						, 'xlsx', 'xls'
+						, 'xls'	, 'xls'
+						, 'docx', 'doc'
+						, 'doc'	, 'doc'
+						, 'pptx', 'ppt'
+						, 'ppt'	, 'ppt'
+						, 'hwp'	, 'hwp'
+						, 'pdf'	, 'pdf'
+						, NULL	, ''
+						, 'etc') extension
+					, FLG_TOP
+					, TO_CHAR(DT_REG, 'YYYY-MM-DD') dt_reg
+					, READED
+				FROM
+					TB_BBS
+				WHERE
+					<include refid="all_where" />
+				)
+			<![CDATA[
+			WHERE
+				rnum >= (${currentPage} - 1) * ${linePerPage} + 1 AND rnum <= ${currentPage} * ${linePerPage}
+			]]> 
+			ORDER BY
+				FLG_TOP, rnum
 	</select>
 	
 	<select id="list" parameterType="pagingDto" resultType="communityDto">
@@ -120,6 +169,25 @@
 			</if>
 	</sql>
 	
+	<sql id="all_where">
+		CD_BBS_TYPE IN (7, 9, 11)
+		AND FLG_DELETE IS NULL
+		<if test="searchWord != null and searchWord != ''">
+			<if test="searchKey == 'title'">
+				AND TITLE LIKE '%' || #{searchWord} || '%'
+			</if>
+			<if test="searchKey == 'contents'">
+				AND CONTENT LIKE '%' || #{searchWord} || '%'
+			</if>
+			<if test="searchKey == 'title+contents'">
+				AND (TITLE LIKE '%' || #{searchWord} || '%' OR CONTENT LIKE '%' || #{searchWord} || '%')
+			</if>
+		</if>
+		<if test="cd_ctg != 0">
+			AND CD_CTG = #{cd_ctg}
+		</if>
+	</sql>
+	
 	<update id="deleteFlag" parameterType="CommunityDto">
 		UPDATE
 			TB_BBS
@@ -151,11 +219,12 @@
 		UPDATE
 			TB_BBS
 		SET
-			TITLE		= #{title}
-			, CD_CTG	= #{cd_ctg}
-			, CONTENT	= #{content}
-			, DT_UPT	= SYSDATE
-			, UPDATER	= #{updater}
+			TITLE			= #{title}
+			, CD_CTG		= #{cd_ctg}
+			, CD_CTG_PET	= #{cd_ctg_pet}
+			, CONTENT		= #{content}
+			, DT_UPT		= SYSDATE
+			, UPDATER		= #{updater}
 		WHERE
 			SEQ_BBS = #{seq_bbs}
 	</update>

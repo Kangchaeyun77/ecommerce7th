@@ -8,12 +8,16 @@ package com.happySteps.front.community.service;
  * <p>IMPORTANT: @Transactional가 적용된 메소드에 절대 try/catch 로직 적용 불가</p>
  */
 
+
 import javax.inject.Inject;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.interceptor.TransactionAspectSupport;
 
+import com.happySteps.front.community.controller.CommunityWeb;
 import com.happySteps.front.community.dao.Communitydao;
 import com.happySteps.front.community.dto.CommunityDto;
 
@@ -22,6 +26,8 @@ import com.happySteps.front.common.dto.PagingListDto;
 
 @Service("com.happySteps.front.community.service.CommunitySrvc")
 public class CommunitySrvc {
+	/** Logger */
+	private static Logger logger = LoggerFactory.getLogger(CommunitySrvc.class);
 	
 	@Inject
 	Communitydao communitydao;
@@ -139,13 +145,43 @@ public class CommunitySrvc {
 	public CommunityDto select(CommunityDto communityDto) {
 		return communitydao.select(communityDto);
 	}
+	/**
+	 * @param pagingDto [게시판 빈]
+	 * @return PagingListDto
+	 * 
+	 * @since 2024-10-14
+	 * <p>DESCRIPTION: 커뮤니티 전체 글 목록</p>
+	 * <p>IMPORTANT:</p>
+	 * <p>EXAMPLE:</p>
+	 */
+	public PagingListDto allList(PagingDto pagingDto) {
+		PagingListDto pagingListDto = new PagingListDto();
+		
+		// 전체 라인(행) 수
+		int totalLine = communitydao.count_all(pagingDto);
+		// 전체 페이지 수 = 전체 라인(행) 수 / 페이징할 라인수
+		int totalPage = (int) Math.ceil((double)totalLine / (double)pagingDto.getLinePerPage());
+		pagingDto.setTotalLine(totalLine);
+		pagingDto.setTotalPage(totalPage);
+		
+		if (totalPage == 0) {
+			pagingDto.setCurrentPage(1);
+		}
+		
+		// 페이징 정보와 게시글 리스트 설정
+		pagingListDto.setPaging(pagingDto);
+		// DAO 메소드 호출 시 bbsTypeList와 pagingDto를 전달
+		pagingListDto.setList(communitydao.allList(pagingDto));
+
+	    return pagingListDto;
+	}
 	
 	/**
 	 * @param pagingDto [게시판 빈]
 	 * @return PagingListDto
 	 * 
 	 * @since 2024-10-09
-	 * <p>DESCRIPTION: 커뮤니티</p>
+	 * <p>DESCRIPTION: 커뮤니티 목록</p>
 	 * <p>IMPORTANT:</p>
 	 * <p>EXAMPLE:</p>
 	 */
@@ -172,7 +208,7 @@ public class CommunitySrvc {
 	 * @return PagingListDto
 	 * 
 	 * @since 2024-10-09
-	 * <p>DESCRIPTION: 커뮤니티</p>
+	 * <p>DESCRIPTION: 커뮤니티 쓰기 폼</p>
 	 * <p>IMPORTANT:</p>
 	 * <p>EXAMPLE:</p>
 	 */
