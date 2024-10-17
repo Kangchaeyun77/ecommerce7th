@@ -31,7 +31,6 @@
 	<style>
 		body {
 			margin: 0;
-			font-family: Arial, sans-serif;
 		}
 		.container {
 			max-width: 1200px; /* 최대 너비 설정 */
@@ -68,13 +67,11 @@
 			<article class="txtCenter">
 				<div style="position: relative; height: 400px; overflow: hidden; margin-top: 10px;">
 					<a href="/front/">
-						<div style="text-align: center;">
-							<img src="/images/logo/logo3.png" alt="로고" style="width: 380px; height: 250px; object-fit: cover;"/>
-						</div>
 					</a>
 					<header>
 						<div style="text-align: center;">
 							<%@ include file="/include/front/header.jsp" %>
+							<%@ include file="/include/front/top.jsp" %>
 							<%@ include file="/include/front/gnb_about.jsp" %>
 						</div>
 					</header>
