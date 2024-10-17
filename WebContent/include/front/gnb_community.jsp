@@ -1,12 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" trimDirectiveWhitespaces="true" %>
 <style>
-	{
-		display: flex;
-		justify-content: center; /* 가운데 정렬 */
-		align-items: center; /* 세로 가운데 정렬 */
-		height: 100vh; /* 화면 전체 높이 사용 */
-		margin: 0;
-	}
+nav.gnb {
+	display: flex;
+	justify-content: space-around; /* 가로 정렬 */
+	align-items: center; /* 세로 정렬 */
+	width: 100%;
+	padding: 10px 0;
+    background-color: #fff; /* 배경 색상 설정 */
+}
 
 	button, .write-button {
 		display: inline-block;
@@ -40,7 +41,7 @@
 		transition: background-color 0.3s;
 	}
 
-	.gnb a:hover !important{
+	.gnb a:hover {
 		background-color: #f5f5dc; /* 호버 시 색상 변경 */
 	}
 	

@@ -36,6 +36,10 @@ public class Communitydao extends BaseDao {
 	public int count(PagingDto pagingDto) {
 		return sqlSessionFront.selectOne("com.happySteps.front.mybatis.community.Community.count", pagingDto);
 	}
+
+	public int count_all(PagingDto pagingDto) {
+		return sqlSessionFront.selectOne("com.happySteps.front.mybatis.community.Community.count_all", pagingDto);
+	}
 	
 	/**
 	 * @param communityDto [게시판 빈]
@@ -101,6 +105,20 @@ public class Communitydao extends BaseDao {
 		
 		return sqlSessionFront.selectOne("com.happySteps.front.mybatis.community.Community.select", communityDto);
 	}
+	/**
+	 * @param pagingDto [페이징 빈]
+	 * @return allList<CommunityDto>
+	 * 
+	 * @since 2024-10-14
+	 * <p>DESCRIPTION: 전체 목록</p>
+	 * <p>IMPORTANT:</p>
+	 * <p>EXAMPLE:</p>
+	 */
+	
+	public List<CommunityDto> allList(PagingDto pagingDto) {
+	    return sqlSessionFront.selectList("com.happySteps.front.mybatis.community.Community.allList", pagingDto);
+	}
+	
 	/**
 	 * @param pagingDto [페이징 빈]
 	 * @return List<CommunityDto>

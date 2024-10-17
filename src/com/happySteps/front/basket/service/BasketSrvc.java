@@ -25,8 +25,6 @@ import java.util.List;
 import javax.inject.Inject;
 
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-import org.springframework.transaction.interceptor.TransactionAspectSupport;
 
 import com.happySteps.front.basket.dao.BasketDao;
 import com.happySteps.front.basket.dto.BasketDto;
@@ -39,25 +37,36 @@ import com.happySteps.front.basket.dto.BasketDto;
  * <p>DESCRIPTION:</p>
  * <p>IMPORTANT:</p>
  */
-@Service("com.happySteps.front.service.BasketSrvc")
+@Service("com.happySteps.front.basket.srvc.BasketSrvc")
 public class BasketSrvc {
-	
-	@Inject
-	BasketDao basketDao;
-	
-	public List<BasketDto> listing(int seq_mbr) {
-		return basketDao.listing(seq_mbr);
-	}
-	
-	@Transactional("txFront")
-	public boolean insert(BasketDto basketDto) {
-		
-		int result = basketDao.insert(basketDto);
-		
-		if (result == 1) return true;
-		else {
-			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
-			return false;
-		}
-	}
+
+    @Inject
+    BasketDao basketDao;
+
+    public boolean insertOrUpdate(BasketDto basketDto) {
+        List<BasketDto> existingItems = basketDao.listing(basketDto.getSeq_mbr());
+        
+        for (BasketDto item : existingItems) {
+            if (item.getSeq_sle() == basketDto.getSeq_sle()) {
+                // 동일한 상품이 있을 경우 수량 업데이트
+                item.setCount(item.getCount() + basketDto.getCount());
+                return basketDao.update(item) > 0;
+            }
+        }
+
+        // 동일한 상품이 없으면 새로운 항목으로 추가
+        return basketDao.insert(basketDto) > 0;
+    }
+
+    public List<BasketDto> getBasketByUser(int seq_mbr) {
+        return basketDao.listing(seq_mbr);
+    }
+
+    public boolean deleteItem(int seq_bsk) {
+        return basketDao.delete(seq_bsk) > 0;
+    }
+
+    public boolean clearBasket(int seq_mbr) {
+        return basketDao.deleteAllByUser(seq_mbr) > 0;
+    }
 }

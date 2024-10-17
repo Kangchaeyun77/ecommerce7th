@@ -71,10 +71,10 @@
  							<a href="/front/about/index.web" class="nav-link">회사소개</a>
  						</li>
  						<li class="menu-item">
- 							<a href="#" class="nav-link">상품 </a>
+ 							<a href="/front/sale/index.web" class="nav-link">상품 </a>
  						</li>
  						<li class="menu-item">
- 							<a href="#" class="nav-link">고객센터</a>
+ 							<a href="/front/center/index.web" class="nav-link">고객센터</a>
  						</li>
  						<li class="menu-item">
  							<a href="#" class="nav-link">Contact Us</a>
@@ -87,7 +87,7 @@
  					<h3>Help Center</h3>
  					<ul class="container">
  						<li class="menu-item">
- 							<a href="#" class="nav-link">FAQs</a>
+ 							<a href="/front/center/board/list.web" class="nav-link">FAQs</a>
  						</li>
  						<li class="menu-item">
  							<a href="#" class="nav-link">결제</a>
