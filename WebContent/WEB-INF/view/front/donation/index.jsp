@@ -182,7 +182,7 @@
 						<li><a href="/front/about/index.web">소개</a></li>
 						<li><a href="/front/about/service.web">서비스</a></li>
 						<li><a href="/front/donation/donationForm.web">후원하기</a></li>
-						<li><a href="/contact">문의하기</a></li>
+						<li><a href="/front/center/board/index.web">문의하기</a></li>
 					</ul>
 				</nav>
 			</div>
