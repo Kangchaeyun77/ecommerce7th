@@ -27,9 +27,9 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<%@ include file="/include/front/top.jsp" %>
 	<link rel="stylesheet" type="text/css" title="common stylesheet" href="/css/layoutSubmain.css" />
-	<link rel="stylesheet" type="text/css" title="common stylesheet" href="/css/table.css" />
+	<link rel="stylesheet" type="text/css" title="common stylesheet" href="/css/lnb.css" />
+	<link rel="stylesheet" href="/css/table.css">
 	<style></style>
 	<script>
 		function goWriteForm() {
@@ -84,6 +84,7 @@
 <div class="container">
 	<header>
 		<%@ include file="/include/front/header.jsp" %>
+		<%@ include file="/include/front/top.jsp" %>
 	</header>
 	<section class="content">
 		<nav>
@@ -135,8 +136,8 @@
 			<br/>
 			<plutozoneUtilTag:page styleID="front_image" currentPage="${paging.currentPage}" linePerPage="${paging.linePerPage}" totalLine="${paging.totalLine}" scriptFunction="goPage" />
 			<br/>
-			<div style="width: 900px; margin-left: auto; margin-right: auto">
-				<a href="javascript:goWriteForm();" class="btnBasic">문의 등록</a>
+			<div style="width: 900px; margin-left: auto; margin-right: auto; margin-top: 10px;" >
+				<a href="javascript:goWriteForm();" class="btn btn-outline-dark btn-lg text-uppercase fs-6 rounded-1">문의 등록</a>
 			</div>
 		</article>
 		<aside></aside>

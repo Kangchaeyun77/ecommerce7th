@@ -16,7 +16,7 @@ li {
 
 .menuLnb {
 	display: block;
-	width: 500px; /* 메뉴바의 넓이 지정 */
+	width: 200px; /* 메뉴바의 넓이 지정 */
 	padding: 15px 20px;
 	background-color: #F9F3EC;
 	color: #333333;
