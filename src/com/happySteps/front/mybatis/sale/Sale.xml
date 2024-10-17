@@ -20,6 +20,7 @@
 				/*+ first_rows(10) */ ROW_NUMBER() OVER (ORDER BY DT_REG DESC) rnum
 				, SEQ_SLE
 				, SLE_NM
+				, IMGs
 				, DESCES
 				, CD_STATE_SALE
 				, PRICE_SALE
