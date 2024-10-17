@@ -30,11 +30,6 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>후원하기</title>
 	<style>
-		@import url('https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@400;700&display=swap');
-
-	body {
-		font-family: 'Nanum Gothic', sans-serif;
-	}
 
 	.donation-form h2 {
 		text-align: center;

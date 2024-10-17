@@ -24,12 +24,14 @@
 <%@ page info="/WEB-INF/view/front/community/board/qna/list" %>
 <%@ taglib prefix="c"					uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="plutozoneUtilTag"	uri="/WEB-INF/tld/com.plutozone.util.tld" %>
+<%@ include file="/include/front/header.jsp" %>
+<%@ include file="/include/front/top.jsp" %>
+<%@ include file="/include/front/gnb_community.jsp" %>
 <!DOCTYPE html>
 <html>
 <head>
-	<link rel="stylesheet" type="text/css" title="common stylesheet" href="/css/table.css" />
+	<link rel="stylesheet" type="text/css" href="/css/table.css" />
 	<link rel="stylesheet" href="/css/brdSearchArea.css">
-	<%@ include file="/include/front/top.jsp" %>
 	<style></style>
 	<script>
 	function goView(value) {
@@ -72,17 +74,12 @@
 </head>
 <body>
 <form id="frmMain" method="POST">
+<input type="hidden" id="type"			name="type" />
+<input type="hidden" id="sequence"		name="sequence" />
+<input type="hidden" name="seq_bbs"		id="seq_bbs" />
 <input type="hidden" name="cd_bbs_type" id="cd_bbs_type" value="${paging.cd_bbs_type}" />
 <input type="hidden" name="currentPage" id="currentPage" value="${paging.currentPage}" />
 <div class="container">
-	<header>
-		<div style="text-align: center;">
-		<%@ include file="/include/front/header.jsp" %>
-		<div style="display: flex; justify-content: center;">
-			<%@ include file="/include/front/gnb_community.jsp" %>
-		</div>
-		</div>	
-	</header>
 	<nav>
 	</nav>
 	<section class="content">
@@ -92,6 +89,7 @@
 					<option value="title"<c:if test="${paging.searchKey == 'title'}"> selected</c:if>>제목</option>
 					<option value="contents"<c:if test="${paging.searchKey == 'contents'}"> selected</c:if>>내용</option>
 					<option value="title+contents"<c:if test="${paging.searchKey == 'title+contents'}"> selected</c:if>>제목 또는 내용</option>
+					
 				</select>
 				<input type="text" name="searchWord" id="searchWord" value="${paging.searchWord}" />
 				<input type="submit" value="검색"/>

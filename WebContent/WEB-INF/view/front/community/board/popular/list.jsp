@@ -24,11 +24,13 @@
 <%@ page info="/WEB-INF/view/front/community/board/popular/list.jsp" %>
 <%@ taglib prefix="c"					uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="plutozoneUtilTag"	uri="/WEB-INF/tld/com.plutozone.util.tld" %>
+<%@ include file="/include/front/header.jsp" %>
+<%@ include file="/include/front/top.jsp" %>
+<%@ include file="/include/front/gnb_community.jsp" %>
 <!DOCTYPE html>
 <html>
 <head>
-	<%@ include file="/include/front/top.jsp" %>
-	<link rel="stylesheet" type="text/css" title="common stylesheet" href="/css/table.css" />
+	<link rel="stylesheet" type="text/css" href="/css/table.css" />
 	<link rel="stylesheet" href="/css/brdSearchArea.css">
 	<style></style>
 	<script>
@@ -91,12 +93,6 @@
 <input type="hidden" name="cd_bbs_type"	id="cd_bbs_type" value="${paging.cd_bbs_type}" />
 <input type="hidden" name="currentPage"	id="currentPage" value="${paging.currentPage}" />
 <div class="container">
-	<header>
-		<%@ include file="/include/front/header.jsp" %>
-		<div style="display: flex; justify-content: center;">
-			<%@ include file="/include/front/gnb_community.jsp" %>
-		</div>
-	</header>
 	<section class="content">
 		<nav>
 		</nav>

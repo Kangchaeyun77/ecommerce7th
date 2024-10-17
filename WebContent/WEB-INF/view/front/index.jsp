@@ -35,13 +35,13 @@
 	<meta name="description" content="">
 	<title>HappySteps - 행복한발걸음</title>
 </head>
+<body>
 <header>
 	<%@ include file="/include/front/header.jsp" %>
 </header>
 <top>
 	<%@ include file="/include/front/top.jsp" %>
 </top>
-<body>
 <!-- 슬라이드 배너 영역(첫페이지) -->
 <section id="banner" style="background: #F9F3EC;">
 	<div class="container">

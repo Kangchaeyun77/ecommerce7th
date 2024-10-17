@@ -21,140 +21,48 @@
  */
 %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" trimDirectiveWhitespaces="true" %>
-<%@ page info="/WEB-INF/view/front/community/board/qna/view.jsp" %>
+<%@ page info="/WEB-INF/view/front/community/board/qna/writeForm.jsp" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-	<style>
-		.category-container {
-		display: flex;
-		align-items: center;
-		margin-top: 10px;
-	}
-	.category-select {
-		flex: 1; /* 균등하게 분배하되 */
-		max-width: 150px; /* 최대 너비 설정 */
-		margin-right: 5px; /* 간격 줄임 */
-		border: 1px solid #ccc;
-		border-radius: 5px;
-		padding: 8px;
-		background-color: #FFFFFF;
-		font-size: 0.9rem;
-		transition: border-color 0.3s ease;
-	}
-
-	.category-select:last-child {
-		margin-right: 0; /* 마지막 요소는 오른쪽 여백 없앰 */
-	}
-
-	.category-select:focus {
-		border-color: #888;
-		outline: none;
-	}
-
-	.label-pet {
-	margin-right: 20px; /* 레이블과 선택박스 간격 줄임 */
-	font-weight: bold;
-	color: #000000;
-	font-size: 1rem; /* 글자 크기 증가 */
-	margin-top: 0.1px; /* 위쪽 여백을 줄임 */
-	}
-	}
-		h1 {
-			text-align: center;
-			color: #333;
-		}
-
-		label {
-			font-weight: bold;
-			color: #555;
-			margin-top: 10px;
-			display: block;
-		}
-
-		input[type="text"], textarea {
-			width: 90%;
-			padding: 12px;
-			margin-top: 5px;
-			margin-bottom: 20px;
-			border: 1px solid #ccc;
-			border-radius: 10px;
-			background-color: #FFFFFF;
-		}
-
-		textarea {
-			height: 200px;
-			resize: none;
-		}
-
-		input[type="file"] {
-			display: block;
-			margin-bottom: 20px;
-		}
-
-		.submit-btn {
-			display: block;
-			width: 100%;
-			padding: 15px;
-			background-color: #F9F3EC;
-			border: none;
-			border-radius: 25px;
-			font-size: 1.1rem;
-			font-weight: bold;
-			cursor: pointer;
-			transition: background-color 0.3s ease;
-		}
-
-		.submit-btn:hover {
-			background-color: #f5f5dc;
-		}
-
-		.required {
-			color: red;
-			font-weight: normal;
-		}
-	</style>
+<link rel="stylesheet" href="/css/form.css">
+	<style></style>
 	<script>
-		function setActiveCategory(button) {
-			var buttons = document.querySelectorAll('.category-buttons button');
-			buttons.forEach(function(btn) {
-				btn.classList.remove('active');
-			});
-			button.classList.add('active');
-		}
-		
 		function goList(value) {
-			var frmMain = document.getElementById("frmMain");
-			document.getElementById("cd_bbs_type").value = value;
-			frmMain.action="/front/community/board/list.web";
-			frmMain.submit();
+			var cd_ctg = document.getElementById("cd_ctg").value;
+			redirectUrl = "/front/community/board/list.web?cd_bbs_type=" + cd_ctg;
+			window.location.href = redirectUrl;
 		}
-		
-		function writeProc(value) {
+		function writeProc() {
 			var frmMain = document.getElementById("frmMain");
-			document.getElementById("cd_bbs_type").value = value;
-			
-			if (document.getElementById("title").value == ""
-					|| document.getElementById("cd_ctg_pet").value == "0"
-					|| document.getElementById("content").value == "") {
+			var selectedCtg = document.getElementById("cd_ctg").value; // 선택된 카테고리 값 가져오기
+			alert("선택된 카테고리: " + selectedCtg); // 선택된 값 출력
+
+			// 필수 항목 체크
+			if (document.getElementById("title").value === "" ||
+				selectedCtg === "0" ||
+				document.getElementById("cd_ctg_pet").value === "0" ||
+				document.getElementById("cd_ctg").value === "0" ||
+				document.getElementById("content").value === "") {
 				alert("필수 항목을 입력하세요!");
 				return;
 			}
-			frmMain.action="/front/community/board/writeProc.web";
+
+			// 게시판 유형에 따른 처리
+			frmMain.action = "/front/community/board/writeProc.web?cd_bbs_type=" + selectedCtg; // 수정된 부분
 			frmMain.submit();
 		}
 	</script>
 </head>
 <body>
-		<div style="position: relative; height: 250px; overflow: hidden; margin-top: 10px;">
-				<a href="/front/">
-				<img src="/images/logo/logo3.png" alt="로고" style="width: 380px; height: 250px; object-fit: cover; display: block; margin: 0 auto;" />
-				</a>
-				</div>
-				<br>
-	<form class="form-container" id="frmMain" method="POST" enctype="multipart/form-data">
-		<input type="hidden" id="cd_bbs_type" name="cd_bbs_type" />
+	<div style="position: relative; height: 250px; overflow: hidden; margin-top: 10px;">
+		<a href="/front/">
+			<img src="/images/logo/logo3.png" alt="로고" style="width: 380px; height: 250px; object-fit: cover; display: block; margin: 0 auto;" />
+		</a>
+	</div>
+	<br>
+	<form class="frmMain" id="frmMain" method="POST" enctype="multipart/form-data">
 		<div class="container">
 			<%@ include file="/include/front/gnb_community.jsp" %>
 			<br>
@@ -168,20 +76,25 @@
 							</td>
 						</tr>
 						<tr>
-					<th>반려동물</th>
-						<td>
-							<div class="category-container">
-								<select id="cd_ctg_pet" name="cd_ctg_pet" required class="category-select">
-									<option value="0">선택</option>
-									<option value="1">강아지</option>
-									<option value="2">고양이</option>
-									<option value="3">햄스터</option>
-									<option value="4">파충류</option>
-									<option value="5">기타</option>
-								</select>
-							</div>
-						</td>
-					</tr>
+							<th>카테고리(*)</th>
+							<td>
+								<div class="category-container">
+									<select id="cd_ctg" name="cd_ctg" required class="category-select">
+										<option value="8">Q&A</option>
+									</select>
+									&nbsp;&nbsp;&nbsp;
+									<label class="label-pet">반려동물(*)</label>
+									<select id="cd_ctg_pet" name="cd_ctg_pet" required class="category-select">
+										<option value="0">선택</option>
+										<option value="1">강아지</option>
+										<option value="2">고양이</option>
+										<option value="3">햄스터</option>
+										<option value="4">파충류</option>
+										<option value="5">기타</option>
+									</select>
+								</div>
+							</td>
+						</tr>
 						<tr>
 							<th>내용(*)</th>
 							<td>
@@ -192,16 +105,12 @@
 							<th>첨부 파일</th>
 							<td>
 								<input type="file" id="files[0]" name="files[0]" />
-								<!--
-								<input type="file" id="files[1]" name="files[1]" />
-								<input type="file" id="files[2]" name="files[2]" />
-								-->
 							</td>
 						</tr>
 					</table>
 					<div style="display: flex; justify-content: center; width: 70%; margin-left: auto; margin-right: auto;">
-						<button type="button" class="submit-btn"style="margin-right: 10px; font-size: 0.9rem;" onclick="javascript:goList(3);">목록</button>
-						<button type="button" class="submit-btn" style=" font-size: 0.9rem;" onclick="javascript:writeProc(3);">등록</button>
+						<button type="button" class="submit-btn" style="margin-right: 10px; font-size: 0.9rem;" onclick="goList();">목록</button>
+						<button type="button" class="submit-btn" onclick="writeProc();">게시글 작성</button>
 					</div>
 				</article>
 			</section>

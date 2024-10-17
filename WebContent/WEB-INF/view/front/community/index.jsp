@@ -35,18 +35,15 @@
 	<form id="frmMain">
 		<div class="container">
 			<article class="txtCenter">
-				<div style="position: relative; height: 400px; overflow: hidden; margin-top: 10px;">
-					<a href="/front/">
-					<div style="text-align: center;">
-						<img src="/images/logo/logo3.png" alt="로고" style="width: 380px; height: 250px; object-fit: cover;"/>
-					</div>
-					</a>
-					<header>
-					<div style="text-align: center;">
+			<div style="position: relative; height: 400px; overflow: hidden; margin-top: 10px;">
+					<a href="/front/"></a>
+			<header>
+					<div style="text-align: center;">	
 					<%@ include file="/include/front/header.jsp" %>
+					<%@ include file="/include/front/top.jsp" %>
 					<%@ include file="/include/front/gnb_community_index.jsp" %>
 					</div>
-					</header>
+			</header>
 				</div>
 				<div style="text-align: center;">
 					<img src="/images/community.png" style="width: 50%; height: auto;">
