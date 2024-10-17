@@ -28,22 +28,18 @@
 	<title>소개</title>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<style>
-	</style>
+	<link rel="stylesheet" href="css/gnb.css">
 </head>
 <body>
 	<form id="frmMain">
 		<div class="container">
 			<article class="txtCenter">
 				<div style="position: relative; height: 400px; overflow: hidden; margin-top: 10px;">
-					<a href="/front/">
-					<div style="text-align: center;">
-						<img src="/images/logo/logo3.png" alt="로고" style="width: 380px; height: 250px; object-fit: cover;"/>
-					</div>
-					</a>
+					<a href="/front/"></a>
 					<header>
-					<div style="text-align: center;">
+					<div style="text-align: center;">	
 					<%@ include file="/include/front/header.jsp" %>
+					<%@ include file="/include/front/top.jsp" %>
 					<%@ include file="/include/front/gnb_about.jsp" %>
 					</div>
 					</header>

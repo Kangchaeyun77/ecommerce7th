@@ -63,7 +63,7 @@
  			<div class="col-md-3">
  				<div class="footer-menu">
  					<h3>Quick Links</h3>
- 					<ul class="menu-list list-unstyled">
+ 					<ul class="container">
  						<li class="menu-item">
  							<a href="/front/index.web" class="nav-link">홈페이지</a>
  						</li>
@@ -85,7 +85,7 @@
  			<div class="col-md-3">
  				<div class="footer-menu">
  					<h3>Help Center</h3>
- 					<ul class="menu-list list-unstyled">
+ 					<ul class="container">
  						<li class="menu-item">
  							<a href="#" class="nav-link">FAQs</a>
  						</li>

@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" trimDirectiveWhitespaces="true" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
-
 <body id=site-header>
 	<!-- Google tag (gtag.js) -->
 	<script async src="https://www.googletagmanager.com/gtag/js?id=G-7P274EVRQV"></script>
@@ -105,7 +104,6 @@
 	</div>
 </div>
 
-
 	<div class="container-fluid">
 		<hr class="m-0">
 	</div>
@@ -141,6 +139,84 @@
 						<a href="/front/center/index.web" class="nav-link">고객센터</a>
 					</li>
 				</ul>
+					</div>
 				</nav>
 			</div>
+		
 </body>
+<style>
+	.container-fluid {
+		width: 100%;
+		padding: 0;
+	}
+
+	/* 네비게이션 메뉴에 대한 설정 */
+	.main-menu {
+		background-color: #fff; /* 배경색 설정 */
+		padding: 10px;
+	}
+
+	/* 네비게이션바 확장 설정 */
+	.navbar-expand-lg {
+		justify-content: space-between;
+	}
+
+	/* 토글 버튼 스타일 */
+	.navbar-toggler {
+		border: none;
+		background-color: transparent;
+		outline: none;
+	}
+
+	/* 네비게이션 항목에 대한 설정 */
+	.nav-link {
+		color: #333; /* 글자 색상 */
+		padding: 10px 15px;
+		text-decoration: none;
+		border-radius: 5px;
+		transition: background-color 0.3s;
+	}
+
+	/* 네비게이션 항목 호버 시 효과 */
+	.nav-link:hover {
+		background-color: #f5f5dc;
+		color: #000; /* 호버 시 글자 색상 */
+	}
+
+	/* 네비게이션 항목 활성화 시 효과 */
+	.nav-link.active {
+		font-weight: bold;
+		color: #000;
+	}
+
+	/* 메뉴 리스트 항목 스타일 */
+	.menu-list {
+		display: flex;
+		justify-content: center;
+		gap: 20px; /* 항목 간의 간격 */
+	}
+
+	/* 오프캔버스 설정 */
+	.offcanvas {
+		background-color: #fff; /* 오프캔버스 배경색 */
+	}
+
+	.offcanvas-header {
+		border-bottom: 1px solid #ddd;
+	}
+
+	/* 오프캔버스 닫기 버튼 설정 */
+	.btn-close {
+		outline: none;
+		border: none;
+		background-color: transparent;
+	}
+
+	/* 반응형 설정 */
+	@media (max-width: 768px) {
+		.navbar-nav {
+			flex-direction: column;
+			gap: 10px;
+		}
+	}
+</style>
