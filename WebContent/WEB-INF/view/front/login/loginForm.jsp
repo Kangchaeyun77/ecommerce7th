@@ -41,6 +41,23 @@
 			if ("${url}") {
 				alert("로그인이 필요합니다.");
 			}
+			
+			const cookies = document.cookie.split(';');
+		    let rememberedId = '';
+
+		    for (let i = 0; i < cookies.length; i++) {
+		        const cookie = cookies[i].trim();
+		        if (cookie.startsWith("rememberedId=")) {
+		            rememberedId = decodeURIComponent(cookie.substring("rememberedId=".length)); // 디코딩 추가
+		            break;
+		        }
+		    }
+
+		    // 저장된 아이디가 있을 경우 입력란에 표시
+		    if (rememberedId) {
+		        document.getElementById("id").value = rememberedId; // 아이디 입력란에 값 설정
+		        document.getElementById("rememberMe").checked = true; // 체크박스도 체크
+		    }
 		}
 		
 		function checkForm() {
@@ -72,54 +89,20 @@
 			frmMain.action = "/front/login/loginProc.web";
 			frmMain.submit();
 		}
-		/*
-		$(function() {
-			var $frm = $("#frmMain");
 			
-			$frm.on("submit", function(e) {
-				
-				// 이메일과 비밀번호가 7자리 이하 또는 @가 없으면
-				if ($("#email").val().length <=7
-						|| $("#passwd").val().length <=7
-						|| $("#email").val().indexOf("@") <= 0) {
-					alert("이메일/아이디(@ 포함)와 비밀번호는 8자리 이상을 입력하세요!");
-					return false;
-				}
-				
-				e.preventDefault();
-				var myData = $frm.serialize();
-				//alert(myData);
-				
-				$.ajax({
-					type: "POST",
-					url: $frm.attr("action"),
-					data: myData,
-					success:function(res) {
-						
-						if (res) {
-							var jsonData = JSON.parse(res);
-							//alert(jsonData);
-							
-							var message = "";
-							//alert("[" + jsonData.name + "]");
-							
-							if (jsonData.name != "") {
-								message = jsonData.name
-										+ "(" + jsonData.email
-										+ ")" + "님 반갑습니다.";
-							}
-							else {
-								message = jsonData.email
-										+ ", 너 누구냐?";
-							}
-							
-							$(".container").html(message);
-						}
-					}
-				});
-			});
-		});
-		*/
+		function rememberId() {
+		    const checkbox = document.getElementById("rememberMe");
+		    const userIdInput = document.getElementById("id"); // 아이디 입력란의 ID가 "id"인지 확인하세요
+
+		    if (checkbox.checked) {
+		        // 체크박스가 체크된 경우
+		        document.cookie = "rememberedId=" + encodeURIComponent(userIdInput.value) + "; path=/; max-age=" + (60 * 60 * 24 * 30); // 30일 동안 유효
+		    } else {
+		        // 체크박스가 체크 해제된 경우 쿠키 삭제
+		        document.cookie = "rememberedId=; path=/; max-age=0";
+		    }
+		}
+
 	</script>
 </head>
 <body>
