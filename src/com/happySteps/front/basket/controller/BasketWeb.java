@@ -32,7 +32,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.happySteps.front.basket.dto.BasketDto;
@@ -114,28 +116,19 @@ public class BasketWeb extends Common {
 		return mav;
 	}
 
-	@RequestMapping(value = "/front/basket/addItem.web")
-	public ModelAndView addItem(HttpServletRequest request, HttpServletResponse response, String item) {
-		ModelAndView mav = new ModelAndView("forward:/servlet/result.web");
+	@RequestMapping(value = "/front/basket/addItem.web", method = RequestMethod.POST)
+	public ModelAndView addItem(@RequestBody BasketDto basketDto, HttpServletRequest request) {
+		ModelAndView mav = new ModelAndView("/front/basket/index");
 
 		try {
-			String[] arrBasket = item.split("\\|");
-			BasketDto basketDto = new BasketDto();
-
-			basketDto.setSeq_mbr(Integer.parseInt(getSession(request, "SEQ_MBR")));
-			basketDto.setSeq_sle(Integer.parseInt(arrBasket[0]));
-			basketDto.setSeq_prd(Integer.parseInt(arrBasket[1]));
-			basketDto.setSle_nm(arrBasket[2]);
-			basketDto.setPrice(Integer.parseInt(arrBasket[3]));
-			basketDto.setCount(Integer.parseInt(arrBasket[4]));
-			basketDto.setImg(arrBasket[5]);
-
-			if (basketSrvc.insertOrUpdate(basketDto)) {
-				request.setAttribute("script", "alert('장바구니에 저장되었습니다.');");
-			} else {
-				request.setAttribute("script", "alert('시스템 관리자에게 문의하세요!');");
-			}
-		} catch (Exception e) {
+			// 사용자 세션에서 SEQ_MBR 가져오기
+			int seqMbr = Integer.parseInt(getSession(request, "SEQ_MBR"));
+			basketDto.setSeq_mbr(seqMbr);
+			
+			// DB에 장바구니 추가
+			basketSrvc.insertOrUpdate(basketDto); 
+			
+		}catch (Exception e) {
 			logger.error("[" + this.getClass().getName() + ".addItem()] " + e.getMessage(), e);
 		}
 
