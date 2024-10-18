@@ -33,100 +33,100 @@
 	<%@ include file="/include/front/top.jsp" %>
 	<style>
 		ul {
-		    list-style-type: none;
-		    padding: 0;
-		    margin: 0;
+			list-style-type: none;
+			padding: 0;
+			margin: 0;
 		}
 		body {
-		    font-family: Arial, sans-serif;
-		    margin: 0;
-		    padding: 0;
+			font-family: Arial, sans-serif;
+			margin: 0;
+			padding: 0;
 		}
 		
 		.product-detail {
-		    display: flex;
-		    padding: 80px;
+			display: flex;
+			padding: 80px;
 		}
 		
 		.product-image {
-		    flex: 1;
-		    padding-right: 20px;
+			flex: 1;
+			padding-right: 20px;
 		}
 		
 		.product-image img {
-		    max-width: 100%;
-		    height: auto;
+			max-width: 100%;
+			height: auto;
 		}
 		
 		.product-info {
-		    flex: 1;
+			flex: 1;
 		}
 		
 		.product-name {
-		    font-size: 24px;
-		    font-weight: bold;
-		    margin-bottom: 10px;
+			font-size: 24px;
+			font-weight: bold;
+			margin-bottom: 10px;
 		}
 		
 		.product-description {
-		    font-size: 16px;
-		    margin-bottom: 20px;
+			font-size: 16px;
+			margin-bottom: 20px;
 		}
 		
 		.sale-price {
-		    font-size: 20px;
-		    color: #E74C3C; /* 원하는 가격 색상 */
+			font-size: 20px;
+			color: #E74C3C; /* 원하는 가격 색상 */
 		}
 		
 		.button-container {
-		    margin-top: 20px;
-		    margin: 0 10px;
+			margin-top: 20px;
+			margin: 0 10px;
 		}
 		.item_goods_tab ul {
-		    list-style: none; /* 기본 리스트 스타일 제거 */
-		    padding: 0; /* 패딩 제거 */
-		    margin: 0; /* 마진 제거 */
-		    display: flex; /* 가로로 배치 */
+			list-style: none; /* 기본 리스트 스타일 제거 */
+			padding: 0; /* 패딩 제거 */
+			margin: 0; /* 마진 제거 */
+			display: flex; /* 가로로 배치 */
 		}
 		
 		.item_goods_tab li {
-		    margin-right: 20px; /* 항목 간 간격 조정 (필요에 따라 조정) */
+			margin-right: 20px; /* 항목 간 간격 조정 (필요에 따라 조정) */
 		}
 		
 		.item_goods_tab li.on a {
-		    font-weight: bold; /* 선택된 항목 강조 (필요에 따라 조정) */
+			font-weight: bold; /* 선택된 항목 강조 (필요에 따라 조정) */
 		}
 		.product-detail {
-		    display: flex;
-		    justify-content: space-between; /* 두 요소를 좌우에 배치 */
-		    align-items: flex-start; /* 세로 정렬을 상단에 맞춤 */
+			display: flex;
+			justify-content: space-between; /* 두 요소를 좌우에 배치 */
+			align-items: flex-start; /* 세로 정렬을 상단에 맞춤 */
 		}
 		
 		.product-image {
-		    flex: 1; /* 이미지 영역의 크기를 조정 (필요에 따라 변경 가능) */
+			flex: 1; /* 이미지 영역의 크기를 조정 (필요에 따라 변경 가능) */
 		}
 		
 		.product-biginfo {
-		    flex: 2; /* 정보 영역의 크기를 조정 (필요에 따라 변경 가능) */
+			flex: 2; /* 정보 영역의 크기를 조정 (필요에 따라 변경 가능) */
 		}
 		.product-count input[type="number"],
 		.product-count input[type="submit"] {
-		    font-size: 20px; /* 글씨 크기 조정 */
-		    border: 0;
-		    border-radius: 15px;
-		    outline: none;
-		    background-color: #F5F5F5;
-		    text-align: center; /* 텍스트를 중앙으로 정렬 */
+			font-size: 20px; /* 글씨 크기 조정 */
+			border: 0;
+			border-radius: 15px;
+			outline: none;
+			background-color: #F5F5F5;
+			text-align: center; /* 텍스트를 중앙으로 정렬 */
 		}
 		.circular-button {
-		    width: 30px; /* 너비 설정 */
-		    height: 30px; /* 높이 설정 */
-		    border: 0;
-		    border-radius: 60%; /* 원형 만들기 */
-		    outline: none;
-		    background-color: #F5F5F5;
-		    line-height: 10px;
-		    cursor: pointer; /* 포인터 커서 추가 (선택 사항) */
+			width: 30px; /* 너비 설정 */
+			height: 30px; /* 높이 설정 */
+			border: 0;
+			border-radius: 60%; /* 원형 만들기 */
+			outline: none;
+			background-color: #F5F5F5;
+			line-height: 10px;
+			cursor: pointer; /* 포인터 커서 추가 (선택 사항) */
 		  }
 		  .button list-button {
 		  	width:100%; 
@@ -139,37 +139,22 @@
 		  	font-size:16px;
 		  }
 		  .tabcontent {
-		    display: none; /* 기본적으로 숨김 */
-		    border: 1px solid #ccc;
-		    padding: 10px;
-		    margin-top: 10px;
+			display: none; /* 기본적으로 숨김 */
+			border: 1px solid #ccc;
+			padding: 10px;
+			margin-top: 10px;
 		}
 		
 		.tablinks {
-		    cursor: pointer;
+			cursor: pointer;
 		}
 		
 		.tablinks:hover {
-		    text-decoration: underline;
+			text-decoration: underline;
 		}
 	</style>
 	
-</head>
-<body>
-<form id="frmMain" method="POST">
-<input type="hidden" name="seq_prd" 	id="seq_prd"	value="${saleDto.seq_prd}" />
-<input type="hidden" name="seq_sle" 	id="seq_sle"	value="${saleDto.seq_sle}" />
-<input type="hidden" name="sle_nm" 		id="sle_nm"		value="${saleDto.sle_nm}" />
-<input type="hidden" name="price_sale" 	id="price_sale"	value="${saleDto.price_sale}" />
-<input type="hidden" name="cd_ctg_pet"  id="cd_ctg_pet"	value="${saleDto.cd_ctg_pet}"/>
-
-<input type="hidden" name="buyList[0].seq_sle" 			value="${saleDto.seq_sle}" />
-<input type="hidden" name="buyList[0].seq_prd" 			value="${saleDto.seq_prd}" />
-<div class="container">
-	<div style="text-align: center;">
-	<%@ include file="/include/front/gnb_shopping.jsp" %>
-	</div>
-	<script>
+		<script>
 	
 		<c:if test="${empty sessionScope.SEQ_MBR}">
 		var isLogin = false;
@@ -190,190 +175,171 @@
 			frmMain.action = "/front/buy/writeProc.web";
 			frmMain.submit();
 		}
-		function setBasketIframe() {
-			
-			if (!isLogin) {
-				alert("로그인이 필요합니다!");
-				return;
-			}
-			
-			// 화면의 구매할 상품 정보(수량 포함)를 서버로 전송
-			var seq_sle		= document.getElementById("seq_sle").value;		// 판매 상품 일련번호
-			var seq_prd		= document.getElementById("seq_prd").value;		// 상품 일련번호
-			var seq_mng		= document.getElementById("seq_mng").value;		// 판매자 일련번호
-			var sle_nm		= document.getElementById("sle_nm").value;		// 판매 상품명
-			var price_sale	= document.getElementById("price_sale").value;		// 판매 상품 가격
-			var count		= document.getElementById("count").value;		// 구매 수량
-			var img			= document.getElementById("img").src;			// 판매 상품 이미지
-			
-			var item = seq_sle + "|" + seq_prd + "|" + seq_mng + "|" + sle_nm + "|" + price_sale + "|" + count + "|"	+ img;
-			document.getElementById("item").value = item;
-			
-			var frmMain = document.getElementById("frmMain");
-			frmMain.action = "/front/basket/setBasketIframe.web";
-			frmMain.target = "frmBlank";
-			frmMain.submit();
-		}
-		
-		function setBasketCookie() {
-			
-			if (!isLogin) {
-				alert("로그인이 필요합니다!");
-				return;
-			}
-			
-			var seq_sle		= document.getElementById("seq_sle").value;		// 판매 상품 일련번호
-			var seq_prd		= document.getElementById("seq_prd").value;		// 상품 일련번호
-			var seq_sll		= document.getElementById("seq_mng").value;		// 판매자 일련번호
-			var seq_mng		= document.getElementById("sle_nm").value;		// 판매 상품명
-			var price_sale	= document.getElementById("price_sale").value;		// 판매 상품 가격
-			var count		= document.getElementById("count").value;		// 구매 수량
-			var img			= document.getElementById("img").src;			// 판매 상품 이미지
-			
-			var item = seq_sle + "|" + seq_prd + "|" + seq_sll + "|" + sle_nm + "|" + price + "|" + count + "|"	+ img;
-			//alert(item);
-			
-			// 쿠키에 구매 정보를 저장
-			insertBasket(item);
-			
-			if (confirm("장바구니로 이동하시겠습니까?")) {
-				location.href = "/front/basket/main.web";
-			}
-			else {
-				location.href = "/front/sale/";
-			}
-			
-		}
 		
 		function goList(value) {
 			var frmMain = document.getElementById("frmMain");
 			
-			document.getElementById("cd_ctg_pet").value = value;
+			// value가 숫자인지 확인하고 정수로 변환
+			var intValue = parseInt(value, 10);
 			
-			frmMain.action="/front/sale/shop/list.web";
+			// intValue가 NaN일 경우 0으로 설정
+			if (isNaN(intValue)) {
+				intValue = 1; // 기본값으로 1을 설정
+			}
+			
+			document.getElementById("cd_ctg_pet").value = intValue;
+			
+			frmMain.action = "/front/sale/shop/list.web";
 			frmMain.submit();
 		}
 		
-		function writeProc() {
-			/* JavaScript + Cookie */
-			// [2024-08-26][pluto@himedia.co.kr][TODO: 쿠키 정보(장바구니) 삭제(정상적으로 구매 및 결제된 경우만)]
-			document.cookie = "productBasket=; path=/; expires=Sat, 01 Jan 1972 00:00:00 GMT";
+		
+		function addToCart(seqSle, seqPrd, sleNm, price, img) {
 			
-			/* Session + iFrame
-			[2024-08-27][pluto@himedia.co.kr][TODO: 세션 정보(장바구니) 삭제 필요(정상적으로 구매 및 결제된 경우)]
-			*/
+			const count = parseInt(document.getElementById("count").value);
 			
-			/* Database + iFrame
-			[2024-08-27][pluto@himedia.co.kr][TODO: 데이터베이스 정보(장바구니) 삭제 처리 필요(정상적으로 구매 및 결제된 경우)]
-			*/
-			
-			var frmMain = document.getElementById("frmMain");
-			frmMain.action = "/front/buy/writeProc.web";
-			frmMain.submit();
+			const data = {
+				seq_sle: seqSle,
+				seq_prd: seqPrd, 
+				sle_nm: sleNm,
+				price: price,
+				count: count, 
+				img: img
+			};
+
+			$.ajax({
+				url: '/front/basket/addItem.web', // 장바구니 추가 요청을 처리할 URL
+				type: 'POST',
+				contentType: 'application/json',
+				data: JSON.stringify(data),
+				success: function(response) {
+					if (confirm('상품이 장바구니에 추가되었습니다. 장바구니 페이지로 이동할까요?')) {
+						window.location.href ='/front/basket/index.web'; // 장바구니 페이지로 이동
+					}
+				},
+				error: function(xhr, status, error) {
+					alert('장바구니 추가 중 오류가 발생했습니다.');
+				}
+			});
 		}
+		
 		function changeQuantity(delta) {
-		    var countInput = document.getElementById("count");
-		    var currentValue = parseInt(countInput.value) || 0; // 현재 수량 가져오기
-		    var newValue = currentValue + delta; // 새로운 수량 계산하기
-		    if (newValue >= 1) { // 최소 수량 제한
-		        countInput.value = newValue; // 새로운 수량 설정
-		    }
+			var countInput = document.getElementById("count");
+			var currentValue = parseInt(countInput.value) || 0; // 현재 수량 가져오기
+			var newValue = currentValue + delta; // 새로운 수량 계산하기
+			if (newValue >= 1) { // 최소 수량 제한
+				countInput.value = newValue; // 새로운 수량 설정
+			}
 		}
 		function validateInput(input) {
-		    // 숫자가 아닌 문자 제거
-		    input.value = input.value.replace(/[^0-9]/g, '');
+			// 숫자가 아닌 문자 제거
+			input.value = input.value.replace(/[^0-9]/g, '');
 
-		    // 입력값이 1보다 작으면 1로 설정
-		    if (input.value === '' || parseInt(input.value) < 1) {
-		        input.value = '1';
-		    }
+			// 입력값이 1보다 작으면 1로 설정
+			if (input.value === '' || parseInt(input.value) < 1) {
+				input.value = '1';
+			}
 		}
 		function openTab(evt, tabName) {
-		    // 모든 탭 내용을 숨김
-		    const tabcontents = document.querySelectorAll('.tabcontent');
-		    tabcontents.forEach(tab => {
-		        tab.style.display = "none";
-		    });
+			// 모든 탭 내용을 숨김
+			const tabcontents = document.querySelectorAll('.tabcontent');
+			tabcontents.forEach(tab => {
+				tab.style.display = "none";
+			});
 
-		    // 클릭한 탭 버튼 활성화
-		    const tablinks = document.querySelectorAll('.tablinks');
-		    tablinks.forEach(tab => {
-		        tab.classList.remove('active');
-		    });
+			// 클릭한 탭 버튼 활성화
+			const tablinks = document.querySelectorAll('.tablinks');
+			tablinks.forEach(tab => {
+				tab.classList.remove('active');
+			});
 
-		    // 클릭한 탭 내용 표시 및 버튼 활성화
-		    document.getElementById(tabName).style.display = "block";
-		    evt.currentTarget.classList.add('active');
+			// 클릭한 탭 내용 표시 및 버튼 활성화
+			document.getElementById(tabName).style.display = "block";
+			evt.currentTarget.classList.add('active');
 		}
 
 		// 기본적으로 첫 번째 탭 열기
 		document.addEventListener('DOMContentLoaded', () => {
-		    document.querySelector('.tablinks').click(); // 첫 번째 탭 클릭
+			document.querySelector('.tablinks').click(); // 첫 번째 탭 클릭
 		});
 	</script>
+</head>
+<body>
+<form id="frmMain" method="POST">
+<input type="hidden" name="seq_prd" 	id="seq_prd"	value="${saleDto.seq_prd}" />
+<input type="hidden" name="seq_sle" 	id="seq_sle"	value="${saleDto.seq_sle}" />
+<input type="hidden" name="sle_nm" 		id="sle_nm"		value="${saleDto.sle_nm}" />
+<input type="hidden" name="price_sale" 	id="price_sale"	value="${saleDto.price_sale}" />
+<input type="hidden" name="cd_ctg_pet"  id="cd_ctg_pet"	value="${saleDto.cd_ctg_pet}"/>
+<input type="hidden" name="buyList[0].seq_sle" 			value="${saleDto.seq_sle}" />
+<input type="hidden" name="buyList[0].seq_prd" 			value="${saleDto.seq_prd}" />
+<div class="container">
+	<div style="text-align: center;">
+	<%@ include file="/include/front/gnb_shopping.jsp" %>
+	</div>
 	<section class="content">
 		<article class="txtCenter">
 			<div class="product-detail" style="display: flex; justify-content: center; align-items: top; margin: 10px;">
-		        <div class="product-image">
-		            <img src="${saleDto.img}" class="img-fluid rounded-4" />
-		        </div>
+				<div class="product-image">
+					<img src="${saleDto.img}" class="img-fluid rounded-4" />
+				</div>
 				<div class="product-biginfo" style="flex: 1; text-align: left;"">
-			        <div class="product-info">
-			        	<h1 class="product-name">${saleDto.sle_nm}</h1>
-			            <p class="product-description">${saleDto.desces}</p>
-			            <p class="product-price"><fmt:formatNumber value="${productDto.price_cost}" pattern="#,###" />원가</p>
-			            <p class="sale-price">할인가: <fmt:formatNumber value="${saleDto.price_sale}" pattern="#,###" />원</p>
-			        </div>
-			        <div class="box__score-awards" onclick="javascript:clickReviewSummary('200011603', '30', '3', 'B');">
+					<div class="product-info">
+						<h1 class="product-name">${saleDto.sle_nm}</h1>
+						<p class="product-description">${saleDto.desces}</p>
+						<p class="product-price"><fmt:formatNumber value="${productDto.price_cost}" pattern="#,###" />원가</p>
+						<p class="sale-price">할인가: <fmt:formatNumber value="${saleDto.price_sale}" pattern="#,###" />원</p>
+					</div>
+					<div class="box__score-awards" onclick="javascript:clickReviewSummary('200011603', '30', '3', 'B');">
 						<a href="#" class="sprite__vip2x--before link__score">
 							<span class="text__score"><span class="for-a11y">평점</span>4.8</span>
 							<span class="text__num">리뷰 5개</span>
 						</a>
 					</div>
-			        <div class="quantity-container" style="margin: 90px; margin-left: 0px ">
-					    <button type="button" onclick="changeQuantity(-1)" class="circular-button">-</button>
-					    <input type="text" id="count" name="buyList[0].count" value="1" style="text-align: center;" oninput="validateInput(this)">
-					    <button type="button" onclick="changeQuantity(1)" class="circular-button">+</button>
+					<div class="quantity-container" style="margin: 90px; margin-left: 0px ">
+						<button type="button" onclick="changeQuantity(-1)" class="circular-button">-</button>
+						<input type="text" id="count" name="buyList[0].count" value="1" style="text-align: center;" oninput="validateInput(this)">
+						<button type="button" onclick="changeQuantity(1)" class="circular-button">+</button>
 					</div>
-			    </div>
+				</div>
 			</div>
 			<div class="button-container" style="text-align:center; padding-top:30px; padding-bottom:60px">
-                <button class="button list-button" onclick="javascript:goList()" >목록</button>
-                <button class="button buy-button" onclick="#">구매</button>
-                <button class="button cart-button" onclick="javascript:setBasketCookie()">장바구니</button>
-            </div>
+				<button class="button list-button" onclick="javascript:goList();" >목록</button>
+				<button class="button buy-button" onclick="#">구매</button>
+				<button class="button cart-button" onclick="javascript:addToCart(${saleDto.seq_sle}, ${saleDto.seq_prd}, '${saleDto.sle_nm}', ${saleDto.price_sale}, '${saleDto.img}');">장바구니</button>
+			</div>
 			<div class="item_goods_tab">
-		        <ul style="list-style: none; padding: 0; margin: 0; display: flex; justify-content: center;">
-		            <li style="margin-right: 20px;" class="tablinks" onclick="openTab(event, 'details')">
-		                상품상세정보
-		            </li>
-		            <li style="margin-right: 20px;" class="tablinks" onclick="openTab(event, 'delivery')">
-		                배송안내
-		            </li>
-		            <li style="margin-right: 20px;" class="tablinks" onclick="openTab(event, 'returns')">
-		                교환 및 반품안내
-		            </li>
-		            <li style="margin-right: 20px;" class="tablinks" onclick="openTab(event, 'reviews')">
-		                상품후기 <strong>(0)</strong>
-		            </li>
-		            <li style="margin-right: 20px;" class="tablinks" onclick="openTab(event, 'inquiries')">
-		                상품문의 <strong>(0)</strong>
-		            </li>
-		        </ul>
-		    </div>
-		    <div id="details" class="tabcontent">
-		        <h3>상품상세정보</h3>
-		        <p>여기에 상품 상세 정보가 표시됩니다. ${saleDto.desces}</p>
-		    </div>
+				<ul style="list-style: none; padding: 0; margin: 0; display: flex; justify-content: center;">
+					<li style="margin-right: 20px;" class="tablinks" onclick="openTab(event, 'details')">
+						상품상세정보
+					</li>
+					<li style="margin-right: 20px;" class="tablinks" onclick="openTab(event, 'delivery')">
+						배송안내
+					</li>
+					<li style="margin-right: 20px;" class="tablinks" onclick="openTab(event, 'returns')">
+						교환 및 반품안내
+					</li>
+					<li style="margin-right: 20px;" class="tablinks" onclick="openTab(event, 'reviews')">
+						상품후기 <strong>(0)</strong>
+					</li>
+					<li style="margin-right: 20px;" class="tablinks" onclick="openTab(event, 'inquiries')">
+						상품문의 <strong>(0)</strong>
+					</li>
+				</ul>
+			</div>
+			<div id="details" class="tabcontent">
+				<h3>상품상세정보</h3>
+				<p>여기에 상품 상세 정보가 표시됩니다. ${saleDto.desces}</p>
+			</div>
 		
-		    <div id="delivery" class="tabcontent">
-		        <h3>배송안내</h3>
-		        <p>배송안내
+			<div id="delivery" class="tabcontent">
+				<h3>배송안내</h3>
+				<p>배송안내
 					- 배송비 : 기본배송료는 3,000원 입니다. (도서,산간,오지 일부지역은 배송비가 추가될 수 있습니다)  
 					<br>
-		            40,000원 이상 구매시 무료배송입니다.
+					40,000원 이상 구매시 무료배송입니다.
 					<br>
-		            일부 부피가 큰 제품의 경우 제품당 5,000원의 추가 배송비가 부과됩니다.
+					일부 부피가 큰 제품의 경우 제품당 5,000원의 추가 배송비가 부과됩니다.
 					<br>
 					- 본 상품의 평균 배송일은 2~3일입니다.
 					<br>
@@ -387,11 +353,11 @@
 					  배송 가능일이란 본 상품을 주문 하신 고객님들께 상품 배송이 가능한 기간을 의미합니다. 
 					<br>
 					  (단, 연휴 및 공휴일은 기간 계산시 제외하며 현금 주문일 경우 입금일 기준 입니다.)</p>
-		    </div>
+			</div>
 		
-		    <div id="returns" class="tabcontent">
-		        <h3>교환 및 반품안내</h3>
-		        <p>교환 및 반품안내
+			<div id="returns" class="tabcontent">
+				<h3>교환 및 반품안내</h3>
+				<p>교환 및 반품안내
 					- 상품 택(tag)제거 또는 개봉으로 상품 가치 훼손 시에는 상품수령후 7일 이내라도 교환 및 반품이 불가능합니다.
 					<br>
 					- 저단가 상품, 일부 특가 상품은 고객 변심에 의한 교환, 반품은 고객께서 배송비를 부담하셔야 합니다(제품의 하자,배송오류는 제외)
@@ -408,18 +374,18 @@
 					<br>
 					환불안내
 					- 상품 청약철회 가능기간은 상품 수령일로 부터 7일 이내 입니다.</p>
-		    </div>
+			</div>
 		
-		    <div id="reviews" class="tabcontent">
-		        <h3>상품후기</h3>
-		        <p>여기에 상품 후기가 표시됩니다.</p>
-		    </div>
+			<div id="reviews" class="tabcontent">
+				<h3>상품후기</h3>
+				<p>여기에 상품 후기가 표시됩니다.</p>
+			</div>
 		
-		    <div id="inquiries" class="tabcontent">
-		        <h3>상품문의</h3>
-		        <p>여기에 상품 문의 내용이 표시됩니다.</p>
-		    </div>
-		    
+			<div id="inquiries" class="tabcontent">
+				<h3>상품문의</h3>
+				<p>여기에 상품 문의 내용이 표시됩니다.</p>
+			</div>
+			
 		</article>
 		<aside></aside>
 	</section>
