@@ -29,8 +29,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<%@ include file="/include/front/top.jsp" %>
 	<%@ include file="/include/front/header.jsp" %>
+	<%@ include file="/include/front/top.jsp" %>
 	<style>
 		ul {
 		    list-style-type: none;
@@ -45,7 +45,7 @@
 		
 		.product-detail {
 		    display: flex;
-		    padding: 20px;
+		    padding: 80px;
 		}
 		
 		.product-image {
@@ -64,6 +64,7 @@
 		
 		.product-name {
 		    font-size: 24px;
+		    font-weight: bold;
 		    margin-bottom: 10px;
 		}
 		
@@ -72,7 +73,7 @@
 		    margin-bottom: 20px;
 		}
 		
-		.product-price {
+		.sale-price {
 		    font-size: 20px;
 		    color: #E74C3C; /* 원하는 가격 색상 */
 		}
@@ -99,7 +100,6 @@
 		    display: flex;
 		    justify-content: space-between; /* 두 요소를 좌우에 배치 */
 		    align-items: flex-start; /* 세로 정렬을 상단에 맞춤 */
-		    gap: 20px; /* 좌우 요소 사이의 간격 설정 */
 		}
 		
 		.product-image {
@@ -117,6 +117,40 @@
 		    outline: none;
 		    background-color: #F5F5F5;
 		    text-align: center; /* 텍스트를 중앙으로 정렬 */
+		}
+		.circular-button {
+		    width: 30px; /* 너비 설정 */
+		    height: 30px; /* 높이 설정 */
+		    border: 0;
+		    border-radius: 60%; /* 원형 만들기 */
+		    outline: none;
+		    background-color: #F5F5F5;
+		    line-height: 10px;
+		    cursor: pointer; /* 포인터 커서 추가 (선택 사항) */
+		  }
+		  .button list-button {
+		  	width:100%; 
+		  	padding:10px; 
+		  	background-color:#dead6f; 
+		  	color:white; 
+		  	border:none; 
+		  	border-radius:5px; 
+		  	cursor:pointer; 
+		  	font-size:16px;
+		  }
+		  .tabcontent {
+		    display: none; /* 기본적으로 숨김 */
+		    border: 1px solid #ccc;
+		    padding: 10px;
+		    margin-top: 10px;
+		}
+		
+		.tablinks {
+		    cursor: pointer;
+		}
+		
+		.tablinks:hover {
+		    text-decoration: underline;
 		}
 	</style>
 	
@@ -237,109 +271,160 @@
 			frmMain.action = "/front/buy/writeProc.web";
 			frmMain.submit();
 		}
-		
+		function changeQuantity(delta) {
+		    var countInput = document.getElementById("count");
+		    var currentValue = parseInt(countInput.value) || 0; // 현재 수량 가져오기
+		    var newValue = currentValue + delta; // 새로운 수량 계산하기
+		    if (newValue >= 1) { // 최소 수량 제한
+		        countInput.value = newValue; // 새로운 수량 설정
+		    }
+		}
+		function validateInput(input) {
+		    // 숫자가 아닌 문자 제거
+		    input.value = input.value.replace(/[^0-9]/g, '');
+
+		    // 입력값이 1보다 작으면 1로 설정
+		    if (input.value === '' || parseInt(input.value) < 1) {
+		        input.value = '1';
+		    }
+		}
+		function openTab(evt, tabName) {
+		    // 모든 탭 내용을 숨김
+		    const tabcontents = document.querySelectorAll('.tabcontent');
+		    tabcontents.forEach(tab => {
+		        tab.style.display = "none";
+		    });
+
+		    // 클릭한 탭 버튼 활성화
+		    const tablinks = document.querySelectorAll('.tablinks');
+		    tablinks.forEach(tab => {
+		        tab.classList.remove('active');
+		    });
+
+		    // 클릭한 탭 내용 표시 및 버튼 활성화
+		    document.getElementById(tabName).style.display = "block";
+		    evt.currentTarget.classList.add('active');
+		}
+
+		// 기본적으로 첫 번째 탭 열기
+		document.addEventListener('DOMContentLoaded', () => {
+		    document.querySelector('.tablinks').click(); // 첫 번째 탭 클릭
+		});
 	</script>
 	<section class="content">
 		<article class="txtCenter">
-			<div class="product-detail">
+			<div class="product-detail" style="display: flex; justify-content: center; align-items: top; margin: 10px;">
 		        <div class="product-image">
-		            ${saleDto.img}
+		            <img src="${saleDto.img}" class="img-fluid rounded-4" />
 		        </div>
-				<div class="product-biginfo">
+				<div class="product-biginfo" style="flex: 1; text-align: left;"">
 			        <div class="product-info">
-			            <h1 class="product-name">${saleDto.sle_nm}</h1>
+			        	<h1 class="product-name">${saleDto.sle_nm}</h1>
 			            <p class="product-description">${saleDto.desces}</p>
-			            <p class="product-price">판매가: ${saleDto.price_sale}</p>
+			            <p class="product-price"><fmt:formatNumber value="${productDto.price_cost}" pattern="#,###" />원가</p>
+			            <p class="sale-price">할인가: <fmt:formatNumber value="${saleDto.price_sale}" pattern="#,###" />원</p>
 			        </div>
-			        <div class="product-count">
-					    <label for="quantity">구매 수량</label>
-					    <input type="number" id="count" name="buyList[0].count" min="1" value ="1">
+			        <div class="box__score-awards" onclick="javascript:clickReviewSummary('200011603', '30', '3', 'B');">
+						<a href="#" class="sprite__vip2x--before link__score">
+							<span class="text__score"><span class="for-a11y">평점</span>4.8</span>
+							<span class="text__num">리뷰 5개</span>
+						</a>
+					</div>
+			        <div class="quantity-container" style="margin: 90px; margin-left: 0px ">
+					    <button type="button" onclick="changeQuantity(-1)" class="circular-button">-</button>
+					    <input type="text" id="count" name="buyList[0].count" value="1" style="text-align: center;" oninput="validateInput(this)">
+					    <button type="button" onclick="changeQuantity(1)" class="circular-button">+</button>
 					</div>
 			    </div>
 			</div>
-			<div class="button-container" style="text-align:center;padding-top:10px;padding-bottom:10px">
-                <button class="button list-button" onclick="javascript:goList" >목록</button>
+			<div class="button-container" style="text-align:center; padding-top:30px; padding-bottom:60px">
+                <button class="button list-button" onclick="javascript:goList()" >목록</button>
                 <button class="button buy-button" onclick="#">구매</button>
                 <button class="button cart-button" onclick="javascript:setBasketCookie()">장바구니</button>
             </div>
 			<div class="item_goods_tab">
-                <ul style="list-style: none; padding: 0; margin: 0; display: flex; justify-content: center;">
-			        <li style="margin-right: 20px;">
-			            상품상세정보
-			        </li>
-			        <li style="margin-right: 20px;">
-			            배송안내
-			        </li>
-			        <li style="margin-right: 20px;">
-			           교환 및 반품안내
-			        </li>
-			        <li style="margin-right: 20px;">
-			            상품후기 <strong>(0)</strong>
-			        </li>
-			        <li style="margin-right: 20px;">
-			            상품문의 <strong>(0)</strong>
-			        </li>
-			    </ul>
-            </div>
-            <div id="detail" class="tab-content">
-			    <h3>상품상세정보</h3>
-			    <p>${saleDto.desces}</p>
-			</div>
-			<div id="delivery" class="tab-content" ">
-			    <h3>배송안내</h3>
-			    <p>배송안내
-					- 배송비 : 기본배송료는 3,000원 입니다. (도서,산간,오지 일부지역은 배송비가 추가될 수 있습니다)  
-					
-		            40,000원 이상 구매시 무료배송입니다.
+		        <ul style="list-style: none; padding: 0; margin: 0; display: flex; justify-content: center;">
+		            <li style="margin-right: 20px;" class="tablinks" onclick="openTab(event, 'details')">
+		                상품상세정보
+		            </li>
+		            <li style="margin-right: 20px;" class="tablinks" onclick="openTab(event, 'delivery')">
+		                배송안내
+		            </li>
+		            <li style="margin-right: 20px;" class="tablinks" onclick="openTab(event, 'returns')">
+		                교환 및 반품안내
+		            </li>
+		            <li style="margin-right: 20px;" class="tablinks" onclick="openTab(event, 'reviews')">
+		                상품후기 <strong>(0)</strong>
+		            </li>
+		            <li style="margin-right: 20px;" class="tablinks" onclick="openTab(event, 'inquiries')">
+		                상품문의 <strong>(0)</strong>
+		            </li>
+		        </ul>
+		    </div>
+		    <div id="details" class="tabcontent">
+		        <h3>상품상세정보</h3>
+		        <p>여기에 상품 상세 정보가 표시됩니다. ${saleDto.desces}</p>
+		    </div>
 		
+		    <div id="delivery" class="tabcontent">
+		        <h3>배송안내</h3>
+		        <p>배송안내
+					- 배송비 : 기본배송료는 3,000원 입니다. (도서,산간,오지 일부지역은 배송비가 추가될 수 있습니다)  
+					<br>
+		            40,000원 이상 구매시 무료배송입니다.
+					<br>
 		            일부 부피가 큰 제품의 경우 제품당 5,000원의 추가 배송비가 부과됩니다.
-					
+					<br>
 					- 본 상품의 평균 배송일은 2~3일입니다.
-					
+					<br>
 					  (입금 확인 후) 설치 상품의 경우 다소 늦어질수 있습니다.
-					
+					<br>
 					  [배송예정일은 주문시점(주문순서)에 따른 유동성이 발생하므로 평균 배송일과는 차이가 발생할 수 있습니다.]
-					
+					<br>
 					
 					- 본 상품의 배송 가능일은 2~3일 입니다. 
-					
+					<br>
 					  배송 가능일이란 본 상품을 주문 하신 고객님들께 상품 배송이 가능한 기간을 의미합니다. 
-					
+					<br>
 					  (단, 연휴 및 공휴일은 기간 계산시 제외하며 현금 주문일 경우 입금일 기준 입니다.)</p>
-			</div>
-			<div id="exchange" class="tab-content" ">
-			    <h3>교환 및 반품안내</h3>
-			    <p>교환 및 반품안내
+		    </div>
+		
+		    <div id="returns" class="tabcontent">
+		        <h3>교환 및 반품안내</h3>
+		        <p>교환 및 반품안내
 					- 상품 택(tag)제거 또는 개봉으로 상품 가치 훼손 시에는 상품수령후 7일 이내라도 교환 및 반품이 불가능합니다.
-					
+					<br>
 					- 저단가 상품, 일부 특가 상품은 고객 변심에 의한 교환, 반품은 고객께서 배송비를 부담하셔야 합니다(제품의 하자,배송오류는 제외)
-					
+					<br>
 					- 일부 상품은 신모델 출시, 부품가격 변동 등 제조사 사정으로 가격이 변동될 수 있습니다.
-					
+					<br>
 					- 신발의 경우, 실외에서 착화하였거나 사용흔적이 있는 경우에는 교환/반품 기간내라도 교환 및 반품이 불가능 합니다.
-					
+					<br>
 					- 수제화 중 개별 주문제작상품(굽높이,발볼,사이즈 변경)의 경우에는 제작완료, 인수 후에는 교환/반품기간내라도 교환 및 반품이 불가능 합니다. 
-					
+					<br>
 					- 수입,명품 제품의 경우, 제품 및 본 상품의 박스 훼손, 분실 등으로 인한 상품 가치 훼손 시 교환 및 반품이 불가능 하오니, 양해 바랍니다.
-					
+					<br>
 					- 일부 특가 상품의 경우, 인수 후에는 제품 하자나 오배송의 경우를 제외한 고객님의 단순변심에 의한 교환, 반품이 불가능할 수 있사오니, 각 상품의 상품상세정보를 꼭 참조하십시오. 
-					
+					<br>
 					환불안내
 					- 상품 청약철회 가능기간은 상품 수령일로 부터 7일 이내 입니다.</p>
-			</div>
-			<div id="reviews" class="tab-content" ">
-			    <h3>상품후기</h3>
-			    <p>여기에 상품후기를 입력하세요.</p>
-			</div>
-			<div id="qna" class="tab-content" ">
-			    <h3>상품문의</h3>
-			    <p>여기에 상품문의 내용을 입력하세요.</p>
-			</div>
+		    </div>
+		
+		    <div id="reviews" class="tabcontent">
+		        <h3>상품후기</h3>
+		        <p>여기에 상품 후기가 표시됩니다.</p>
+		    </div>
+		
+		    <div id="inquiries" class="tabcontent">
+		        <h3>상품문의</h3>
+		        <p>여기에 상품 문의 내용이 표시됩니다.</p>
+		    </div>
+		    
 		</article>
 		<aside></aside>
 	</section>
 	<footer>
-		<%@ include file="/include/seller/footer.jsp" %>
+		<%@ include file="/include/front/footer.jsp" %>
 	</footer>
 </div>
 </form>
