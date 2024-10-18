@@ -408,8 +408,9 @@ public class MemberWeb extends Common {
 			String staticKey	= staticProperties.getProperty("front.enc.user.aes256.key", "[UNDEFINED]");
 			SKwithAES aes		= new SKwithAES(staticKey);
 			
+			memberDto.setNickname(memberDto.getNickname());
+			
 			memberDto.setId(aes.encode(memberDto.getId()));
-			memberDto.setNickname(aes.encode(memberDto.getNickname()));
 			memberDto.setMbr_nm(aes.encode(memberDto.getMbr_nm()));
 			memberDto.setPhone(aes.encode(memberDto.getPhone()));
 			memberDto.setEmail(aes.encode(memberDto.getEmail()));
