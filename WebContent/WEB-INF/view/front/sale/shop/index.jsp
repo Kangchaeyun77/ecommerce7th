@@ -89,26 +89,48 @@
 	<%@ include file="/include/front/gnb_shopping.jsp" %>
 </div>
 <script>
-		
-	function goList(value) {
-		var frmMain = document.getElementById("frmMain");
-		
-		document.getElementById("cd_ctg_pet").value = value;
-		frmMain.action="/front/sale/shop/list.web";
-		frmMain.submit();
-	}
+		function goList(value) {
+			var frmMain = document.getElementById("frmMain");
+			document.getElementById("cd_ctg_pet").value = value;
+			frmMain.action = "/front/sale/shop/list.web";
+			frmMain.submit();
+		}
 
-	function goWriteForm(value) {
-	    var frmMain = document.getElementById("frmMain");
-	    
-	    document.getElementById("cd_ctg_pet").value = value;
-	    document.getElementById("seq_sle").value = value;
-	    frmMain.action = "/front/buy/writeForm.web";
-	    
-	    frmMain.submit();
-	}
-		
-</script>
+		function goWriteForm(value) {
+			var frmMain = document.getElementById("frmMain");
+			document.getElementById("cd_ctg_pet").value = value;
+			document.getElementById("seq_sle").value = value;
+			frmMain.action = "/front/buy/writeForm.web";
+			frmMain.submit();
+		}
+
+		function addToCart(seqSle, seqPrd, sleNm, price, img) {
+
+			const data = {
+				seq_sle: seqSle,
+				seq_prd: seqPrd, // 여기에 seq_prd 값을 그대로 사용 (숫자여야 함)
+				sle_nm: sleNm,
+				price: price,
+				count: 1, // 기본 수량 1로 설정
+				img: img
+			};
+
+			$.ajax({
+				url: '/front/basket/addItem.web', // 장바구니 추가 요청을 처리할 URL
+				type: 'POST',
+				contentType: 'application/json',
+				data: JSON.stringify(data),
+				success: function(response) {
+					if (confirm('상품이 장바구니에 추가되었습니다. 장바구니 페이지로 이동할까요?')) {
+						window.location.href ='/front/basket/index.web'; // 장바구니 페이지로 이동
+					}
+				},
+				error: function(xhr, status, error) {
+					alert('장바구니 추가 중 오류가 발생했습니다.');
+				}
+			});
+		}
+	</script>
 <div class="container" id="content">
 	<section class="content">
 		<article class="txtCenter">
@@ -184,14 +206,15 @@
 											    5.0
 											</span>
 											<h3 class="secondary-font text-primary"><fmt:formatNumber value="${list.price_sale}" pattern="#,###" />원</h3>
-												<div class="d-flex flex-wrap mt-3">
-													<a href="#" class="btn-cart me-3 px-3 pt-2 pb-2" style="display: flex; align-items: center; justify-content: center; font-size: 18px;">
-													    <span class="text-uppercase m-0">장바구니</span>
-													</a>
-													    <a href="#" class="btn-wishlist px-4 pt-3" style="display: inline-block; border: 1px solid #ccc; border-radius: 5px; text-decoration: none; text-align: center; padding: 10px;">
-													        <span  class="fs-5" style="color: black; font-size: 20px; line-height: 1;">❤︎</span>
-														</a>
-												 </div>
+											<div class="d-flex flex-wrap mt-3">
+												<a href="javascript:addToCart(${list.seq_sle}, ${list.seq_prd}, '${list.sle_nm}', ${list.price_sale}, '${list.img}');" 
+													class="btn-cart me-3 px-3 pt-2 pb-2" style="display: flex; align-items: center; justify-content: center; font-size: 18px;">
+												<span class="text-uppercase m-0">장바구니</span>
+												</a>
+												<a href="#" class="btn-wishlist px-4 pt-3" style="display: inline-block; border: 1px solid #ccc; border-radius: 5px; text-decoration: none; text-align: center; padding: 10px;">
+													<span  class="fs-5" style="color: black; font-size: 20px; line-height: 1;">❤︎</span>
+												</a>
+											</div>
 										</div>
 									</div>
 								</div>
