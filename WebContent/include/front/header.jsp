@@ -51,9 +51,9 @@ integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJ
 
 		<!-- 검색창 영역 (로고 오른쪽) -->
 		<div class="col-sm-4 col-lg-4 offset-lg-1"> <!-- 오른쪽으로 이동 -->
-			<div class="search-bar border rounded-2 px-3 border-dark-subtle" style="display:flex;justify-content:space-between;align-items:center;margin:0;">
+			<div class="search-bar border rounded-2 px-3 border-dark-subtle" style="width: calc(100%); height: 100px; border: none; background-color: transparent;"">
 				<form id="search-form" class="text-center align-items-center" action="" method="">
-					<input type="text" style="width: calc(100% - 24px); height: 100px; border: none; background-color: transparent;" placeholder="다양한 상품을 검색하세요" />
+					<input type="text" style="width: calc(100% - 40px); height: 100px; border: none; background-color: transparent;" placeholder="다양한 상품을 검색하세요" />
 					<img src="/images/search.png" class="fs-4 me-3" alt="Search Icon" style="width: 24px; height: 24px;margin-right:0 !important;" />
 				</form>
 			</div>
@@ -127,7 +127,6 @@ integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJ
 							</a>
 						</li>
 						<li style="margin: 0 8px;">
-							<a href="/front/basket/index.web">
 								 <img src="/images/cart.png" class="fs-4 position-relative" style="width: 50px; vertical-align: middle; margin-top: 7px;" />
 							</a>
 						</li>
