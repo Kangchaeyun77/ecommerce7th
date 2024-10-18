@@ -26,14 +26,15 @@
 <%@ taglib prefix="fmt"					uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="fn"					uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="plutozoneUtilTag"	uri="/WEB-INF/tld/com.plutozone.util.tld" %>
+
 <!DOCTYPE html>
 <html>
 <head>
 	<meta charset="UTF-8">
 	<meta http-equiv="cache-control" content="no-cache" />
 	<meta http-equiv="pragma" content="no-cache" />
-	<%@ include file="/include/front/top.jsp" %>
 	<%@ include file="/include/front/header.jsp" %>
+	<%@ include file="/include/front/top.jsp" %>
 	<style>
 	    .brdSearchArea {
 	        display: flex;
@@ -69,7 +70,12 @@
 		    padding: 20px;
 		    width: 250px;
 		    text-align: center;
+		    transition: transform 0.3s ease-in-out;
 		}
+		.product:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    }
 	</style>
 </head>
 <body>
@@ -84,29 +90,29 @@
 </div>
 <script>
 		
-		function goList(value) {
-			var frmMain = document.getElementById("frmMain");
-			
-			document.getElementById("cd_ctg_pet").value = value;
-			frmMain.action="/front/sale/shop/list.web";
-			frmMain.submit();
-		}
-	
-		function goWriteForm(value) {
-		    var frmMain = document.getElementById("frmMain");
-		    
-		    document.getElementById("cd_ctg_pet").value = value;
-		    document.getElementById("seq_sle").value = value;
-		    frmMain.action = "/front/buy/writeForm.web";
-		    frmMain.submit();
-		}
+	function goList(value) {
+		var frmMain = document.getElementById("frmMain");
+		
+		document.getElementById("cd_ctg_pet").value = value;
+		frmMain.action="/front/sale/shop/list.web";
+		frmMain.submit();
+	}
+
+	function goWriteForm(value) {
+	    var frmMain = document.getElementById("frmMain");
+	    
+	    document.getElementById("cd_ctg_pet").value = value;
+	    document.getElementById("seq_sle").value = value;
+	    frmMain.action = "/front/buy/writeForm.web";
+	    
+	    frmMain.submit();
+	}
 		
 </script>
 <div class="container" id="content">
 	<section class="content">
 		<article class="txtCenter">
-		 
-			<div class="brdSearchArea">
+			<div class="brdSearchArea" style="margin: 30px; margin-left: 0px; margin-bottom: 15px">
 			<%--
 				<select name="cd_ctg_pet_items" id="cd_ctg_pet_items">
 					<option value="1"<c:if test="${paging.cd_ctg_pet == 1}">selected</c:if>>강아지</option>
@@ -156,7 +162,7 @@
 				<input type="text" name="searchWord" id="searchWord" value="${paging.searchWord}"/><input type="submit" value="검색"/>
 			</div>
 			<div class="brdInfo">전체 ${paging.totalLine}개[${paging.currentPage}/${paging.totalPage} 페이지]</div>
-				<div class="product-container" style="display: flex; flex-wrap: wrap;">
+				<div class="product-container" style="display: flex; flex-wrap: wrap; margin: 30px; margin-left: 0px">
 					<c:choose>
 						<c:when test="${empty list}">
 							등록된 상품이 없습니다.
@@ -194,7 +200,9 @@
 					</c:choose>
 				</div>
 			<br/>
+			<div class="center-container"  style= "display: flex; justify-content: center;">
 			<plutozoneUtilTag:page styleID="admin_text" currentPage="${paging.currentPage}" linePerPage="${paging.linePerPage}" totalLine="${paging.totalLine}" scriptFunction="goPages"/>
+			</div>
 			<br/>
 		</article>
 		<aside></aside>
@@ -205,7 +213,4 @@
 </div>
 </form>
 </body>
-<footer>
-	<%@ include file="/include/front/footer.jsp" %>
-</footer>
 </html>

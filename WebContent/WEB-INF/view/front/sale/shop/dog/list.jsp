@@ -28,8 +28,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<%@ include file="/include/front/top.jsp" %>
 	<%@ include file="/include/front/header.jsp" %>
+	<%@ include file="/include/front/top.jsp" %>
 	<style>
 		    .brdSearchArea {
 	        display: flex;
@@ -57,6 +57,9 @@
 		    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
 		    gap: 20px;
 		    justify-items: center;
+		    flex-wrap: wrap;
+		    margin: 30px;
+		    margin-left: 0px"
 		}
 		.product {
 		    background-color: white;
@@ -65,7 +68,16 @@
 		    padding: 20px;
 		    width: 250px;
 		    text-align: center;
+		    transition: transform 0.3s ease-in-out;
 		}
+		.product:hover {
+	        transform: translateY(-10px);
+	        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+        }
+        .product_name {
+        	font-size: 1.1em;
+        
+        }
 	</style>
 </head>
 <body>
@@ -128,33 +140,36 @@
 <div class="container" id="content">
 	<section class="content">
 		<article class="txtCenter">
-			<div class="brdSearchArea">
+			<div class="brdSearchArea" style="margin: 30px; margin-left: 0px">
 				<select name="searchKey">
 					<option value="sle_nm">상품명</option>
 					<option value="sle_desces">상품설명</option>
 					<option value="sle_desces_and_nm">상품명 및 설명</option>
 				</select>
-				<select name="cd_ctg_pet" id="cd_ctg_pet">
-					<option value="11"<c:if test="${paging.cd_ctg_pet == 11}">selected</c:if>>사료</option>
-					<option value="12"<c:if test="${paging.cd_ctg_pet == 12}">selected</c:if>>간식</option>
-					<option value="13"<c:if test="${paging.cd_ctg_pet == 13}">selected</c:if>>하우스</option>
-					<option value="14"<c:if test="${paging.cd_ctg_pet == 14}">selected</c:if>>기타</option>
-				</select>
+				<select id="pet_items" name="pet_items" required>
+					<option value="11">사료</option>
+					<option value="12">간식</option>
+					<option value="13">하우스</option>
+					<option value="14">기타</option>
+			</select>
 				<input type="text" name="searchWord" id="searchWord" value="${paging.searchWord}"/ ><input type="submit" value="검색"/>
 			</div>
 			<div class="brdInfo">전체 ${paging.totalLine}개[${paging.currentPage}/${paging.totalPage} 페이지]</div>
-				<div class="product-container" style="display: flex; flex-wrap: wrap;">
+				<div class="product-container" style="display: flex; flex-wrap: wrap; margin: 30px; margin-left: 0px">
 					<c:choose>
 						<c:when test="${empty list}">
 							등록된 상품이 없습니다.
 						</c:when>
 						<c:otherwise>
-							<c:forEach items="${list}" var="list">
-								<div class="product"><a href="javascript:goWriteForm(${list.seq_sle});">
-									<img src="#" class="img-fluid rounded-4" alt="image"></a>
+							<c:forEach items="${list}" var="list" >
+								<div class="product"><a href="javascript:goWriteForm(${list.seq_sle});" >
+									<img src="${list.img}" class="img-fluid rounded-4" alt="image"></a>
 									<div>
-										<a href="javascript:goWriteForm(${list.seq_sle});"><span>${list.sle_nm}</span>
-										</a>
+										<div class="product_name">
+											<a href="javascript:goWriteForm(${list.seq_sle});">
+											<span><strong>${list.sle_nm}</strong></span>
+											</a>
+										</div>
 										<div class="card-text">
 											<span class="rating secondary-font">
 											    ⭐️
@@ -181,8 +196,9 @@
 					</c:choose>
 				</div>
 <br/>
+<div class="center-container"  style= "display: flex; justify-content: center;">
 <plutozoneUtilTag:page styleID="admin_text" currentPage="${paging.currentPage}" linePerPage="${paging.linePerPage}" totalLine="${paging.totalLine}" scriptFunction="goPages"/>
-<br/>
+</div><br/>
 </article>
 <aside></aside>
 </section>
