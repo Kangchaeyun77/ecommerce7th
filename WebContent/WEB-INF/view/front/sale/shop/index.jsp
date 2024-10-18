@@ -36,46 +36,46 @@
 	<%@ include file="/include/front/header.jsp" %>
 	<%@ include file="/include/front/top.jsp" %>
 	<style>
-	    .brdSearchArea {
-	        display: flex;
-	        justify-content: flex-start;
-	        gap: 5px; /* 요소 간의 간격 조정 */
-	    }
-	    .brdSearchArea select,
-	    .brdSearchArea input[type="text"],
-	    .brdSearchArea input[type="submit"] {
-	        font-size: 14px; /* 글씨 크기 조정 */
-	        border: 0;
+		.brdSearchArea {
+			display: flex;
+			justify-content: flex-start;
+			gap: 5px; /* 요소 간의 간격 조정 */
+		}
+		.brdSearchArea select,
+		.brdSearchArea input[type="text"],
+		.brdSearchArea input[type="submit"] {
+			font-size: 14px; /* 글씨 크기 조정 */
+			border: 0;
 			border-radius: 15px;
 			outline: none;
 			background-color: #F5F5F5
-	    }
-	    /* 필요에 따라 최대 너비 설정 */
-	    .brdSearchArea select {
-	        width: 100px; /* 예: select 박스 너비 설정 */
-	    }
-	    .brdSearchArea input[type="text"] {
-	        width: 150px; /* 예: 텍스트 입력 박스 너비 설정 */
-	    }
-	    .product-container {
-		    display: grid;
-		    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-		    gap: 20px;
-		    justify-items: center;
+		}
+		/* 필요에 따라 최대 너비 설정 */
+		.brdSearchArea select {
+			width: 100px; /* 예: select 박스 너비 설정 */
+		}
+		.brdSearchArea input[type="text"] {
+			width: 150px; /* 예: 텍스트 입력 박스 너비 설정 */
+		}
+		.product-container {
+			display: grid;
+			grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+			gap: 20px;
+			justify-items: center;
 		}
 		.product {
-		    background-color: white;
-		    border: 1px solid #ddd;
-		    border-radius: 8px;
-		    padding: 20px;
-		    width: 250px;
-		    text-align: center;
-		    transition: transform 0.3s ease-in-out;
+			background-color: white;
+			border: 1px solid #ddd;
+			border-radius: 8px;
+			padding: 20px;
+			width: 250px;
+			text-align: center;
+			transition: transform 0.3s ease-in-out;
 		}
 		.product:hover {
-        transform: translateY(-10px);
-        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
-    }
+		transform: translateY(-10px);
+		box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+	}
 	</style>
 </head>
 <body>
@@ -108,7 +108,7 @@
 
 			const data = {
 				seq_sle: seqSle,
-				seq_prd: seqPrd, // 여기에 seq_prd 값을 그대로 사용 (숫자여야 함)
+				seq_prd: seqPrd, 
 				sle_nm: sleNm,
 				price: price,
 				count: 1, // 기본 수량 1로 설정
@@ -116,13 +116,13 @@
 			};
 
 			$.ajax({
-				url: '/front/basket/addItem.web', // 장바구니 추가 요청을 처리할 URL
+				url: '/front/basket/addItem.web', 
 				type: 'POST',
 				contentType: 'application/json',
 				data: JSON.stringify(data),
 				success: function(response) {
 					if (confirm('상품이 장바구니에 추가되었습니다. 장바구니 페이지로 이동할까요?')) {
-						window.location.href ='/front/basket/index.web'; // 장바구니 페이지로 이동
+						window.location.href ='/front/basket/index.web';
 					}
 				},
 				error: function(xhr, status, error) {
