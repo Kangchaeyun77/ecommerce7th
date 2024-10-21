@@ -81,6 +81,7 @@
 <body>
 <form id="frmMain" method="POST">
 <input type="hidden" id="cd_ctg_pet" 	name="cd_ctg_pet"	value="${paging.cd_ctg_pet}"/>
+<input type="hidden" id="pet_items" 	name="pet_items" 	value="${paging.pet_items}"/>
 <input type="hidden" id="seq_sle"		name="seq_sle"		value="${paging.seq_sle}">
 <input type="hidden" id="seq_mbr"		name="seq_mbr"/>
 <input type="hidden" id="sequence"		name="sequence" />
@@ -89,98 +90,68 @@
 	<%@ include file="/include/front/gnb_shopping.jsp" %>
 </div>
 <script>
-		function goList(value) {
-			var frmMain = document.getElementById("frmMain");
-			document.getElementById("cd_ctg_pet").value = value;
-			frmMain.action = "/front/sale/shop/list.web";
-			frmMain.submit();
-		}
 
-		function goWriteForm(value) {
-			var frmMain = document.getElementById("frmMain");
-			document.getElementById("cd_ctg_pet").value = value;
-			document.getElementById("seq_sle").value = value;
-			frmMain.action = "/front/buy/writeForm.web";
-			frmMain.submit();
-		}
+	function goPage(value) {
+		
+		var frmMain = document.getElementById("frmMain");
+		
+		frmMain.currentPage.setAttribute("value", value);
+		frmMain.action="/front/sale/shop/index.web";
+		frmMain.submit();
+	}
+	function goList(value) {
+		var frmMain = document.getElementById("frmMain");
+		document.getElementById("cd_ctg_pet").value = value;
+		frmMain.action = "/front/sale/shop/list.web";
+		frmMain.submit();
+	}
 
-		function addToCart(seqSle, seqPrd, sleNm, price, img) {
+	function goWriteForm(value) {
+		var frmMain = document.getElementById("frmMain");
+		document.getElementById("cd_ctg_pet").value = value;
+		document.getElementById("seq_sle").value = value;
+		frmMain.action = "/front/buy/writeForm.web";
+		frmMain.submit();
+	}
 
-			const data = {
-				seq_sle: seqSle,
-				seq_prd: seqPrd, 
-				sle_nm: sleNm,
-				price: price,
-				count: 1, // 기본 수량 1로 설정
-				img: img
-			};
+	function addToCart(seqSle, seqPrd, sleNm, price, img) {
 
-			$.ajax({
-				url: '/front/basket/addItem.web', 
-				type: 'POST',
-				contentType: 'application/json',
-				data: JSON.stringify(data),
-				success: function(response) {
-					if (confirm('상품이 장바구니에 추가되었습니다. 장바구니 페이지로 이동할까요?')) {
-						window.location.href ='/front/basket/index.web';
-					}
-				},
-				error: function(xhr, status, error) {
-					alert('장바구니 추가 중 오류가 발생했습니다.');
+		const data = {
+			seq_sle: seqSle,
+			seq_prd: seqPrd, 
+			sle_nm: sleNm,
+			price: price,
+			count: 1, // 기본 수량 1로 설정
+			img: img
+		};
+
+		$.ajax({
+			url: '/front/basket/addItem.web', 
+			type: 'POST',
+			contentType: 'application/json',
+			data: JSON.stringify(data),
+			success: function(response) {
+				if (confirm('상품이 장바구니에 추가되었습니다. 장바구니 페이지로 이동할까요?')) {
+					window.location.href ='/front/basket/index.web';
 				}
-			});
-		}
+			},
+			error: function(xhr, status, error) {
+				alert('장바구니 추가 중 오류가 발생했습니다.');
+			}
+		});
+	}
 	</script>
 <div class="container" id="content">
 	<section class="content">
 		<article class="txtCenter">
 			<div class="brdSearchArea" style="margin: 30px; margin-left: 0px; margin-bottom: 15px">
-			<%--
-				<select name="cd_ctg_pet_items" id="cd_ctg_pet_items">
-					<option value="1"<c:if test="${paging.cd_ctg_pet == 1}">selected</c:if>>강아지</option>
-					<option value="2"<c:if test="${paging.cd_ctg_pet == 2}">selected</c:if>>고양이</option>
-					<option value="3"<c:if test="${paging.cd_ctg_pet == 3}">selected</c:if>>햄스터</option>
-					<option value="4"<c:if test="${paging.cd_ctg_pet == 4}">selected</c:if>>파충류</option>
+				<select id="cd_ctg_pet" name="cd_ctg_pet" required>
+					<option value="0"<c:if test="${paging.cd_ctg_pet == 0}"> selected</c:if>>전체</option>
+					<option value="1"<c:if test="${paging.cd_ctg_pet == 1}"> selected</c:if>>강아지</option>
+					<option value="2"<c:if test="${paging.cd_ctg_pet == 2}"> selected</c:if>>고양이</option>
+					<option value="3"<c:if test="${paging.cd_ctg_pet == 3}"> selected</c:if>>햄스터</option>
+					<option value="4"<c:if test="${paging.cd_ctg_pet == 4}"> selected</c:if>>파충류</option>
 				</select>
-				--%>
-			<%-- 
-				<c:choose>
-					<c:when test="${cd_ctg_pet == 1}">
-						<select name="cd_ctg_pet" id="cd_ctg_pet_dog">
-							<option value="11"<c:if test="${paging.cd_ctg_pet == 11}">selected</c:if>>사료</option>
-							<option value="12"<c:if test="${paging.cd_ctg_pet == 12}">selected</c:if>>간식</option>
-							<option value="13"<c:if test="${paging.cd_ctg_pet == 13}">selected</c:if>>하우스</option>
-							<option value="14"<c:if test="${paging.cd_ctg_pet == 14}">selected</c:if>>기타</option>
-						</select>
-					</c:when>
-				<c:otherwise>
-					<c:if test="${cd_ctg_pet == 2}">
-						<select name="cd_ctg_pet" id="cd_ctg_pet_cat">
-							<option value="21"<c:if test="${paging.cd_ctg_pet == 21}">selected</c:if>>사료</option>
-							<option value="22"<c:if test="${paging.cd_ctg_pet == 22}">selected</c:if>>간식</option>
-							<option value="23"<c:if test="${paging.cd_ctg_pet == 23}">selected</c:if>>하우스</option>
-							<option value="24"<c:if test="${paging.cd_ctg_pet == 24}">selected</c:if>>기타</option>
-						</select>
-					</c:if>
-					<c:if test="${cd_ctg_pet == 3}">
-						<select name="cd_ctg_pet" id="cd_ctg_pet_hamster">
-							<option value="31"<c:if test="${paging.cd_ctg_pet == 31}">selected</c:if>>사료</option>
-							<option value="32"<c:if test="${paging.cd_ctg_pet == 32}">selected</c:if>>간식</option>
-							<option value="33"<c:if test="${paging.cd_ctg_pet == 33}">selected</c:if>>하우스</option>
-							<option value="34"<c:if test="${paging.cd_ctg_pet == 34}">selected</c:if>>기타</option>
-						</select>
-					</c:if>
-					<c:if test="${cd_ctg_pet == 4}">
-						<select name="cd_ctg_pet" id="cd_ctg_pet_reptile">
-							<option value="41"<c:if test="${paging.cd_ctg_pet == 41}">selected</c:if>>사료</option>
-							<option value="42"<c:if test="${paging.cd_ctg_pet == 42}">selected</c:if>>간식</option>
-							<option value="43"<c:if test="${paging.cd_ctg_pet == 43}">selected</c:if>>하우스</option>
-							<option value="44"<c:if test="${paging.cd_ctg_pet == 44}">selected</c:if>>기타</option>
-						</select>
-					</c:if>
-				</c:otherwise>
-				</c:choose>
-				--%>
 				<input type="text" name="searchWord" id="searchWord" value="${paging.searchWord}"/><input type="submit" value="검색"/>
 			</div>
 			<div class="brdInfo">전체 ${paging.totalLine}개[${paging.currentPage}/${paging.totalPage} 페이지]</div>
@@ -224,7 +195,7 @@
 				</div>
 			<br/>
 			<div class="center-container"  style= "display: flex; justify-content: center;">
-			<plutozoneUtilTag:page styleID="admin_text" currentPage="${paging.currentPage}" linePerPage="${paging.linePerPage}" totalLine="${paging.totalLine}" scriptFunction="goPages"/>
+			<plutozoneUtilTag:page styleID="front_image" currentPage="${paging.currentPage}" linePerPage="${paging.linePerPage}" totalLine="${paging.totalLine}" scriptFunction="goPage"/>
 			</div>
 			<br/>
 		</article>

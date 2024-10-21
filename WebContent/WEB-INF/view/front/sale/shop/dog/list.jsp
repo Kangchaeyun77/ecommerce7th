@@ -82,11 +82,12 @@
 </head>
 <body>
 <form id="frmMain" method="POST">
-<input type="hidden" id="cd_ctg_pet" name="cd_ctg_pet" value="${paging.cd_ctg_pet}"/>
-<input type="hidden" name="seq_sle"		id="seq_sle" value="${paging.seq_sle}"/>
-<input type="hidden" name="seq_mbr"		id="seq_mbr" />
+<input type="hidden" id="cd_ctg_pet" 	name="cd_ctg_pet"	value="${paging.cd_ctg_pet}"/>
+<input type="hidden" id="pet_items" 	name="pet_items" 	value="${paging.pet_items}"/>
+<input type="hidden" id="seq_sle"		name="seq_sle"		value="${paging.seq_sle}">
+<input type="hidden" id="seq_mbr"		name="seq_mbr"/>
 <input type="hidden" id="sequence"		name="sequence" />
-<input type="hidden" name="currentPage" id="currentPage" value="${paging.currentPage}" />
+<input type="hidden" id="currentPage"	name="currentPage"	value="${paging.currentPage}" />
 <div style="text-align: center;">
 	<%@ include file="/include/front/gnb_shopping.jsp" %>
 </div>
@@ -100,17 +101,14 @@
 			frmMain.action="/front/buy/writeForm.web";
 			frmMain.submit();
 		}
-		<%-- 
 		function goPage(value) {
-			
+		
 			var frmMain = document.getElementById("frmMain");
 			
-			document.getElementById("currentPage").value = value;
-			
-			frmMain.action="/front/center/board/list.web";
+			frmMain.currentPage.setAttribute("value", value);
+			frmMain.action="/front/sale/shop/list.web";
 			frmMain.submit();
 		}
-		--%>
 		function goList(value) {
 			
 			var frmMain = document.getElementById("frmMain");
@@ -181,7 +179,8 @@
 											</span>
 											<h3 class="secondary-font text-primary"><fmt:formatNumber value="${list.price_sale}" pattern="#,###" />원</h3>
 												<div class="d-flex flex-wrap mt-3">
-													<a href="#" class="btn-cart me-3 px-3 pt-2 pb-2" style="display: flex; align-items: center; justify-content: center; font-size: 18px;">
+													<a href="javascript:addToCart(${list.seq_sle}, ${list.seq_prd}, '${list.sle_nm}', ${list.price_sale}, '${list.img}');" 
+														class="btn-cart me-3 px-3 pt-2 pb-2" style="display: flex; align-items: center; justify-content: center; font-size: 18px;">
 													    <span class="text-uppercase m-0">장바구니</span>
 													</a>
 													    <a href="#" class="btn-wishlist px-4 pt-3" style="display: inline-block; border: 1px solid #ccc; border-radius: 5px; text-decoration: none; text-align: center; padding: 10px;">

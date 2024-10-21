@@ -29,61 +29,36 @@
 				TB_SLE
 			WHERE
 				CD_STATE_SALE = 1
-			)
-		ORDER BY
-			rnum
-	</select>
-	<!-- 
-	<select id="list" parameterType="pagingDto" resultType="saleDto">
-		SELECT
-			*
-		FROM
-			(
-			SELECT
-				/*+ first_rows(10) */ ROW_NUMBER() OVER (ORDER BY DT_REG DESC) rnum
-				, SEQ_SLE
-				, SLE_NM
-				, PRICE_SALE
-				, IMG
-				, CASE CD_CTG_PET
-				, WHEN 1 THEN '강아지'
-					WHEN 2 THEN '고양이'
-					WHEN 3 THEN '햄스터'
-					WHEN 4 THEN '파충류'
-					WHEN 5 THEN '기타'
-				  END AS CD_CTG_PET
-				, TO_CHAR(DT_REG, 'YYYY-MM-DD') dt_reg
-			FROM
-				TB_SLE
-			WHERE
 				<include refid="where" />
 			)
 		<![CDATA[
 		WHERE
 			rnum >= (${currentPage} - 1) * ${linePerPage} + 1 AND rnum <= ${currentPage} * ${linePerPage}
-		]]> 
+		]]>
 		ORDER BY
 			rnum
 	</select>
-	
+
 	<sql id="where">
-			CD_CTG_PET = #{cd_ctg_pet}
-			<if test="searchWord != null and searchWord != ''">
-				<if test="searchKey == 'sle_nm'">
-					AND SLE_NM LIKE '%' || #{searchWord} || '%'
-				</if>
-				<if test="searchKey == 'desces'">
-					AND DESCES LIKE '%' || #{searchWord} || '%'
-				</if>
-				<if test="searchKey == 'sle_nm+desces'">
-					AND (SLE_NM LIKE '%' || #{searchWord} || '%' OR DESCES LIKE '%' || #{searchWord} || '%')
-				</if>
+		<if test="cd_ctg_pet != null and cd_ctg_pet != 0">
+			AND CD_CTG_PET = #{cd_ctg_pet}
+		</if>
+		<if test="pet_items != null and pet_items != 0">
+			AND PET_ITEMS = #{pet_items}
+		</if>
+		<if test="searchWord != null and searchWord != ''">
+			<if test="searchKey == 'sle_nm'">
+				AND SLE_NM LIKE '%' || #{searchWord} || '%'
 			</if>
-			<if test="cd_ctg_pet != 0">
-				AND CD_CTG_PET = #{cd_ctg_pet}
+			<if test="searchKey == 'desces'">
+				AND DESCES LIKE '%' || #{searchWord} || '%'
 			</if>
+			<if test="searchKey == 'sle_nm+desces'">
+				AND (SLE_NM LIKE '%' || #{searchWord} || '%' OR DESCES LIKE '%' || #{searchWord} || '%')
+			</if>
+		</if>
 	</sql>
-	 -->
+	
 	<select id="select" parameterType="saleDto" resultType="saleDto">
 		SELECT
 			SEQ_SLE
