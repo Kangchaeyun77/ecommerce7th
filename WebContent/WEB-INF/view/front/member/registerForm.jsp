@@ -283,7 +283,7 @@
 				<tr>
 					<td colspan="2" style="text-align:center;padding-top: 10px;padding-bottom: 10px">
 						<input type="reset" value="다시 쓰기" style="width:100px"/>
-						<input type="button" value="가입 하기" style="width:100px" onClick="checkRegister();"/>
+						<input type="button" value="가입 하기" style="width:100px" onClick="combineEmail(); checkRegister();"/>
 					</td>
 				</tr>
 			</table>
