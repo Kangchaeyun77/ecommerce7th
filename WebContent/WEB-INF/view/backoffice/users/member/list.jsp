@@ -99,7 +99,7 @@
 					<th>닉네임</th>
 					<th style="width: 10%">상태</th>
 					<th style="width: 15%">성명</th>
-					<th style="width: 10%">구분</th>
+					<th style="width: 10%">성별</th>
 					<th style="width: 10%">등록일</th>
 				</tr>
 				<c:choose>
