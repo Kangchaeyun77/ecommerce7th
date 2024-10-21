@@ -2,32 +2,68 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.happySteps.backoffice.mybatis.users.Member">
 	
-	<update id="update" parameterType ="memberDto">
+	<update id="updateMst" parameterType ="memberDto">
 		UPDATE
 			TB_MBR_MST
 		SET
 			CD_STATE	= #{cd_state}
+			<if test="phone != null and phone != ''">
+			, PHONE	= #{phone}
+			</if>
+			<if test="flg_pets != null and flg_pets != ''">
+			, FLG_PETS	= #{flg_pets}
+			</if>
+			, PETS		= #{pets}
 			, DT_UPT	= SYSDATE
 			, UPDATER	= #{updater}
 		WHERE
 			SEQ_MBR = #{seq_mbr}
 	</update>
 	
+	<update id="updateDtl" parameterType="memberDto">
+		UPDATE
+			TB_MBR_DTL
+		SET
+			DT_UPT		= SYSDATE
+			, UPDATER	= #{updater}
+			<if test="post != null and post != ''">
+			, POST		= #{post}
+			</if>
+			<if test="addr1 != null and addr1 != ''">
+			, ADDR1		= #{addr1}
+			</if>
+			<if test="addr2 != null and addr2 != ''">
+			, ADDR2		= #{addr2}
+			</if>
+			<if test="flg_sms != null and flg_sms != ''">
+			, FLG_SMS	= #{flg_sms}
+			, DT_SMS	= SYSDATE
+			</if>
+			<if test="flg_email != null and flg_email != ''">
+			, FLG_EMAIL	= #{flg_email}
+			, DT_EMAIL	= SYSDATE
+			</if>
+		WHERE
+			SEQ_MBR		= #{seq_mbr}
+	</update>
+	
 	<select id="select" parameterType="memberDto" resultType="memberDto">
 		SELECT
 			tb_mbr_mst.SEQ_MBR
+			, tb_mbr_mst.ID
+			, tb_mbr_mst.NICKNAME
 			, tb_mbr_mst.EMAIL
 			, tb_mbr_mst.CD_STATE
 			, tb_mbr_mst.MBR_NM
 			, tb_mbr_mst.GENDER
 			, tb_mbr_mst.PHONE
 			, tb_mbr_mst.LAST_IP
+			, tb_mbr_mst.FLG_PETS
+			, tb_mbr_mst.PETS
 			, TO_CHAR(tb_mbr_mst.LAST_DT, 'YYYY-MM-DD HH24:MI:SS') last_dt
 			, tb_mbr_dtl.POST
 			, tb_mbr_dtl.ADDR1
 			, tb_mbr_dtl.ADDR2
-			, tb_mbr_dtl.HOBBYS
-			, tb_mbr_dtl.INTRO
 			, tb_mbr_dtl.FLG_SMS
 			, tb_mbr_dtl.FLG_EMAIL
 			, TO_CHAR(tb_mbr_mst.DT_REG, 'YYYY-MM-DD HH24:MI:SS') dt_reg
@@ -55,7 +91,8 @@
 			SELECT
 				/*+ first_rows(10) */ ROW_NUMBER() OVER (ORDER BY DT_REG DESC) rnum
 				, SEQ_MBR
-				, EMAIL
+				, ID
+				, NICKNAME
 				, CD_STATE
 				, MBR_NM
 				, GENDER
@@ -78,8 +115,8 @@
 				<if test="searchKey == 'mbr_nm'">
 					AND MBR_NM = #{searchWord}
 				</if>
-				<if test="searchKey == 'email'">
-					AND EMAIL = #{searchWord}
+				<if test="searchKey == 'id'">
+					AND ID = #{searchWord}
 				</if>
 			</if>
 		</where>

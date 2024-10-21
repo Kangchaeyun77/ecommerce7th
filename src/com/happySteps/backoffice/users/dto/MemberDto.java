@@ -30,28 +30,55 @@ package com.happySteps.backoffice.users.dto;
  */
 public class MemberDto {
 	
-	private int rnum			= 0;
+	private int rnum				= 0;
 	private int seq_mbr			= 0;
-	private String email		= "";
-	private String passwd		= "";
-	private int cd_state		= 0;
-	private String mbr_nm		= "";
-	private String gender		= "";
-	private String phone		= "";
-	private String post			= "";
-	private String addr1		= "";
-	private String addr2		= "";
-	private String hobbys		= null;
-	private String intro		= "";
-	private String flg_sms		= "";
-	private String flg_email	= "";
-	private String last_ip		= "";
-	private String last_dt		= "";
-	private String dt_reg		= "";
-	private int register		= 0;
-	private String dt_upt		= "";
+	private String email			= "";
+	private String id				= "";
+	private String nickname			= "";
+	private String passwd			= "";
+	private int cd_state			= 0;
+	private String mbr_nm			= "";
+	private String gender			= "";
+	private String phone			= "";
+	private String post				= "";
+	private String addr1			= "";
+	private String addr2			= "";
+	private String flg_pets			= "";
+	private String pets				= null;
+	private String flg_sms			= "";
+	private String flg_email		= "";
+	private String last_ip			= "";
+	private String last_dt			= "";
+	private String dt_reg			= "";
+	private int register			= 0;
+	private String dt_upt			= "";
 	private int updater			= 0;
 	
+	
+	public String getFlg_pets() {
+		return flg_pets;
+	}
+	public void setFlg_pets(String flg_pets) {
+		this.flg_pets = flg_pets;
+	}
+	public String getId() {
+		return id;
+	}
+	public void setId(String id) {
+		this.id = id;
+	}
+	public String getNickname() {
+		return nickname;
+	}
+	public void setNickname(String nickname) {
+		this.nickname = nickname;
+	}
+	public String getPets() {
+		return pets;
+	}
+	public void setPets(String pets) {
+		this.pets = pets;
+	}
 	
 	public int getRnum() {
 		return rnum;
@@ -76,12 +103,6 @@ public class MemberDto {
 	}
 	public void setDt_upt(String dt_upt) {
 		this.dt_upt = dt_upt;
-	}
-	public String getHobbys() {
-		return hobbys;
-	}
-	public void setHobbys(String hobbys) {
-		this.hobbys = hobbys;
 	}
 	public String getLast_ip() {
 		return last_ip;
@@ -112,12 +133,6 @@ public class MemberDto {
 	}
 	public void setSeq_mbr(int seq_mbr) {
 		this.seq_mbr = seq_mbr;
-	}
-	public String getIntro() {
-		return intro;
-	}
-	public void setIntro(String intro) {
-		this.intro = intro;
 	}
 	public String getGender() {
 		return gender;

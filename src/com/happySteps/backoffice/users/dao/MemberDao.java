@@ -39,8 +39,12 @@ import com.happySteps.backoffice.users.dto.MemberDto;
 @Repository("com.happySteps.backoffice.users.dao.MemberDao")
 public class MemberDao extends BaseDao {
 	
-	public int update(MemberDto memberDto) {
-		return sqlSessionBackoffice.update("com.happySteps.backoffice.mybatis.users.Member.update", memberDto); 
+	public int updateMst(MemberDto memberDto) {
+		return sqlSessionBackoffice.update("com.happySteps.backoffice.mybatis.users.Member.updateMst", memberDto);
+	}
+	
+	public int updateDtl(MemberDto memberDto) {
+		return sqlSessionBackoffice.update("com.happySteps.backoffice.mybatis.users.Member.updateDtl", memberDto);
 	}
 	
 	public MemberDto select(MemberDto memberDto) {

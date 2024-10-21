@@ -48,9 +48,8 @@ public class MemberSrvc {
 	@Transactional("txBackoffice")
 	public boolean update(MemberDto memberDto) {
 		
-		int result = memberDao.update(memberDto);
-		
-		if (result == 1) return true;
+		if (memberDao.updateMst(memberDto) == 1 && memberDao.updateDtl(memberDto) == 1)
+			return true;
 		else {
 			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
 			return false;

@@ -81,7 +81,7 @@ public class MemberWeb extends Common {
 			List<MemberDto> list = (List<MemberDto>) pagingListDto.getList();
 			
 			for (int loop = 0; loop < list.size(); loop++) {
-				list.get(loop).setEmail(aes.decode(list.get(loop).getEmail()));
+				list.get(loop).setId(aes.decode(list.get(loop).getId()));
 				list.get(loop).setMbr_nm(aes.decode(list.get(loop).getMbr_nm()));
 			}
 			
@@ -112,7 +112,7 @@ public class MemberWeb extends Common {
 			String staticKey	= staticProperties.getProperty("backoffice.enc.user.aes256.key", "[UNDEFINED]");
 			SKwithAES aes		= new SKwithAES(staticKey);
 			
-			_memberDto.setEmail(aes.decode(_memberDto.getEmail()));
+			_memberDto.setId(aes.decode(_memberDto.getId()));
 			_memberDto.setMbr_nm(aes.decode(_memberDto.getMbr_nm()));
 			_memberDto.setPhone(aes.decode(_memberDto.getPhone()));
 			_memberDto.setPost(aes.decode(_memberDto.getPost()));
@@ -138,6 +138,39 @@ public class MemberWeb extends Common {
 		
 		try {
 			memberDto.setUpdater(Integer.parseInt(getSession(request, "SEQ_MNG")));
+			
+			String pet1 = request.getParameter("pet1") != null ? "Y" : "N";
+			String pet2 = request.getParameter("pet2") != null ? "Y" : "N";
+			String pet3 = request.getParameter("pet3") != null ? "Y" : "N";
+			String pet4 = request.getParameter("pet4") != null ? "Y" : "N";
+			String pet5 = request.getParameter("pet5") != null ? "Y" : "N";
+
+			String pets = pet1 + pet2 + pet3 + pet4 + pet5;
+			memberDto.setPets(pets);
+			
+			
+			String phone1 = request.getParameter("phone1");
+			String phone2 = request.getParameter("phone2");
+			String phone3 = request.getParameter("phone3");
+			
+			String phone = phone1 + "-" + phone2 + "-" + phone3;
+			memberDto.setPhone(phone);
+			
+			String flg_email = request.getParameter("flg_email") != null ? "Y" : "N";
+			String flg_sms = request.getParameter("flg_sms") != null ? "Y" : "N";
+			
+			memberDto.setFlg_email(flg_email);
+			logger.debug("겟이멜"+flg_email);
+			memberDto.setFlg_sms(flg_sms);
+			logger.debug("겟문자"+flg_sms);
+			
+			String staticKey	= staticProperties.getProperty("front.enc.user.aes256.key", "[UNDEFINED]");
+			SKwithAES aes		= new SKwithAES(staticKey);
+			
+			memberDto.setPhone(aes.encode(memberDto.getPhone()));
+			memberDto.setPost(aes.encode(memberDto.getPost()));
+			memberDto.setAddr1(aes.encode(memberDto.getAddr1()));
+			memberDto.setAddr2(aes.encode(memberDto.getAddr2()));
 			
 			if (memberSrvc.update(memberDto)) {
 				request.setAttribute("script"	, "alert('적용되었습니다.');");
