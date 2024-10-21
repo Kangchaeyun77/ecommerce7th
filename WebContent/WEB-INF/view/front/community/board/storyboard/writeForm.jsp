@@ -23,39 +23,100 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" trimDirectiveWhitespaces="true" %>
 <%@ page info="/WEB-INF/view/front/community/board/storyboard/writeForm.jsp" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page session="true" %>
+
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-<link rel="stylesheet" href="/css/form.css">
+	<link rel="stylesheet" href="/css/form.css">
 	<style></style>
 	<script>
-		function goList(value) {
+		function goList() {
 			var cd_ctg = document.getElementById("cd_ctg").value;
 			redirectUrl = "/front/community/board/list.web?cd_bbs_type=" + cd_ctg;
 			window.location.href = redirectUrl;
 		}
+
 		function writeProc() {
 			var frmMain = document.getElementById("frmMain");
-			var selectedCtg = document.getElementById("cd_ctg").value; // 선택된 카테고리 값 가져오기
-			alert("선택된 카테고리: " + selectedCtg); // 선택된 값 출력
+			var selectedCtg = document.getElementById("cd_ctg").value; 
+			var nickname = document.getElementById("nickname").value;// 선택된 카테고리 값 가져오기
 
 			// 필수 항목 체크
 			if (document.getElementById("title").value === "" ||
 				selectedCtg === "0" ||
 				document.getElementById("cd_ctg_pet").value === "0" ||
-				document.getElementById("cd_ctg").value === "0" ||
 				document.getElementById("content").value === "") {
 				alert("필수 항목을 입력하세요!");
 				return;
 			}
 
+			// 태그 처리
+			var tagInput = document.getElementById('tagInput');
+			var escapedValue = escapeSpecialChars(tagInput.value);
+
+			// 태그 값을 폼에 추가
+			var tagHiddenInput = document.createElement('input');
+			tagHiddenInput.type = 'hidden';
+			tagHiddenInput.name = 'tag'; // 서버에서 사용할 이름
+			tagHiddenInput.value = escapedValue;
+			frmMain.appendChild(tagHiddenInput);
+
 			// 게시판 유형에 따른 처리
-			frmMain.action = "/front/community/board/writeProc.web?cd_bbs_type=" + selectedCtg; // 수정된 부분
+			frmMain.action = "/front/community/board/writeProc.web?cd_bbs_type=" + selectedCtg;
 			frmMain.submit();
 		}
+
+		document.addEventListener('DOMContentLoaded', function () {
+			var input = document.getElementById('tagInput');
+			input.addEventListener('keyup', addHashToTag);
+		});
+
+		function addHashToTag() {
+			var input = document.getElementById('tagInput');
+			var tags = input.value.split(','); // 쉼표로 구분하여 배열로 변환
+
+			// 각 태그에 #이 없으면 붙임
+			for (var i = 0; i < tags.length; i++) {
+				tags[i] = tags[i].trim(); // 앞뒤 공백 제거
+				if (tags[i].length > 0 && tags[i].charAt(0) !== '#') {
+					tags[i] = '#' + tags[i]; // 첫 글자가 #이 아니면 추가
+				}
+			}
+
+			// 다시 쉼표로 구분된 문자열로 합침
+			input.value = tags.join(', ');
+		}
+
+		function escapeSpecialChars(str) {
+			return str.replace(/[\\"'&<>]/g, function (char) {
+				switch (char) {
+					case '"':
+						return '&quot;';
+					case "'":
+						return '&#39;';
+					case '&':
+						return '&amp;';
+					case '<':
+						return '&lt;';
+					case '>':
+						return '&gt;';
+					default:
+						return char;
+				}
+			});
+		}
+		// 게시판 유형에 따른 처리
+		frmMain.action = "/front/community/board/writeProc.web?cd_bbs_type=" + selectedCtg; // 수정된 부분
+		frmMain.submit();
+		
 	</script>
 </head>
 <body>
+	<c:set var="nickname" value="${sessionScope.nickname}" />
+	<input type="hidden" id="nickname" name="nickname" value="${nickname}" />  
+	<input type="hidden" id="nickname" name="nickname" value="<%= session.getAttribute("nickname") %>" />
+
 	<div style="position: relative; height: 250px; overflow: hidden; margin-top: 10px;">
 		<a href="/front/">
 			<img src="/images/logo/logo3.png" alt="로고" style="width: 380px; height: 250px; object-fit: cover; display: block; margin: 0 auto;" />
@@ -65,6 +126,7 @@
 	<form class="frmMain" id="frmMain" method="POST" enctype="multipart/form-data">
 		<div class="container">
 			<%@ include file="/include/front/gnb_community.jsp" %>
+
 			<br>
 			<section class="content">
 				<article class="txtCenter">
@@ -102,6 +164,14 @@
 							<th>내용(*)</th>
 							<td>
 								<textarea id="content" name="content" required></textarea>
+							</td>
+						</tr>
+						<tr>
+							<th>태그</th>
+							<td>
+								<div class="tag-container">
+									<input type="text" id="tagInput" name="tagInput" placeholder="태그를 입력하세요" style="width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 5px;">
+								</div>
 							</td>
 						</tr>
 						<tr>

@@ -32,6 +32,7 @@
 <head>
 	<link rel="stylesheet" type="text/css" href="/css/table.css" />
 	<link rel="stylesheet" href="/css/brdSearchArea.css">
+	<title>커뮤니티 입양글 목록</title>
 	<style></style>
 	<script>
 		function download(type, sequence) {

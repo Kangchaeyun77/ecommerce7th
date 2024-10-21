@@ -1,3 +1,4 @@
+<%@page import="com.happySteps.front.community.dto.CommunityDto"%>
 <%
 /**
  * YOU ARE STRICTLY PROHIBITED TO COPY, DISCLOSE, DISTRIBUTE, MODIFY OR USE THIS PROGRAM
@@ -29,73 +30,10 @@
 <!DOCTYPE html>
 <html>
 <head>
+	<meta charset="UTF-8">
 	<link rel="stylesheet" href="/css/brdSearchArea.css">
-	<style>
-/* 전체 컨테이너 스타일 */
-.content-container {
-    border: 2px solid #F9F3EC; /* 외부 박스 테두리 색상 */
-    border-radius: 15px; /* 둥근 모서리 */
-    padding: 20px; /* 내부 여백 */
-    margin-top: 20px; /* 상단 여백 */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* 미세한 그림자 효과 */
-    background-color: #fff; /* 배경색 */
-}
-
-/* 제목 스타일 */
-.headLeft_01 th {
-    background-color: #F9F3EC; /* 부드러운 연한 핑크색 배경 */
-    color: #333; /* 텍스트 색상 */
-    font-size: 20px; /* 제목 폰트 크기 */
-    padding: 12px; /* 내부 여백 */
-    border-radius: 10px; /* 둥근 모서리 */
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* 미세한 그림자 효과 */
-}
-
-/* 내용 스타일 */
-.content {
-    font-size: 16px; /* 폰트 크기 */
-    line-height: 1.8; /* 줄 간격 */
-    color: #555; /* 어두운 텍스트 색상 */
-}
-
-/* 등록일자 스타일 */
-td {
-    font-size: 14px; /* 폰트 크기 */
-    color: #777; /* 연한 텍스트 색상 */
-}
-
-/* 첨부 파일 스타일 */
-.attach-file {
-    font-size: 16px; /* 폰트 크기 */
-    color: #007BFF; /* 링크 색상 */
-    text-decoration: underline; /* 밑줄 */
-    transition: color 0.3s; /* 부드러운 색상 변화 */
-}
-
-.attach-file:hover {
-    color: #0056b3; /* 호버시 색상 변화 */
-}
-
-/* 버튼 스타일 */
-input[type="button"] {
-    background-color: #F9F3EC; /* 하늘색 */
-    color: black; /* 텍스트 색상 */
-    border: none; /* 테두리 없음 */
-    border-radius: 25px; /* 둥근 모서리 */
-    padding: 10px 25px; /* 내부 여백 */
-    cursor: pointer; /* 커서 포인터 */
-    transition: background-color 0.3s, transform 0.2s; /* 부드러운 효과 */
-    margin-top: 20px; /* 버튼 상단 여백 */
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* 미세한 그림자 효과 */
-}
-
-input[type="button"]:hover {
-    background-color: #f5f5dc; /* 호버시 색상 변화 */
-    transform: scale(1.05); /* 호버시 약간 커짐 */
-}
-
-
-	</style>
+	<link rel="stylesheet" href="/css/view.css">
+		<title>커뮤니티 자유게시판 상세보기</title>
 	<script>
 		function download(type, sequence) {
 			
@@ -115,12 +53,7 @@ input[type="button"]:hover {
 		    frmMain.submit();
 		}
 		function goList(value) {
-			var frmMain = document.getElementById("frmMain");
-			
-			document.getElementById("cd_bbs_type").value = value;
-			frmMain.action="/front/community/board/list.web";
-			frmMain.target = "";
-			frmMain.submit();
+			location.href = "/front/community/board/list.web?cd_bbs_type=7";
 		}
 	</script>
 </head>
@@ -128,22 +61,66 @@ input[type="button"]:hover {
 <form id="frmMain" method="POST">
 <input type="hidden" id="type"			name="type" />
 <input type="hidden" id="sequence"		name="sequence" />
-<input type="hidden" id="cd_bbs_type"	name="cd_ctg" />
+<input type="hidden" id="cd_ctg"		name="cd_ctg" />
+<input type="hidden" id="cd_ctg_pet"	name="cd_ctg_pet" />
 <input type="hidden" id="cd_bbs_type"	name="cd_bbs_type" />
 <input type="hidden" id="seq_bbs"		name="seq_bbs"		value="${communityDto.seq_bbs}" />
 <div class="container">
 	<section class="content">
 		<article class="txtCenter">
 		 <div class="content-container"> 
-		   <h2 class="title">제목: ${communityDto.title}</h2>
+			<h2 class="title">제목: ${communityDto.title}</h2>			
+			<div class="icon-cd_ctg_pet" style="display: flex; justify-content: center; align-items: flex-start; flex-direction: column;">
+				<c:choose>
+					<c:when test="${communityDto.cd_ctg_pet == 1}">
+						<img src="/images/icon/community/dog.png" alt="Dog" style="width: 10%; height: 10%;" />
+					</c:when>
+					<c:when test="${communityDto.cd_ctg_pet == 2}">
+						<img src="/images/icon/community/cat.png" alt="Cat" style="width: 10%; height: 10%;" />
+					</c:when>
+					<c:when test="${communityDto.cd_ctg_pet == 3}">
+						<img src="/images/icon/community/hamster.png" alt="Hamster" style="width: 10%; height: 10%;" />
+					</c:when>
+					<c:when test="${communityDto.cd_ctg_pet == 4}">
+						<img src="/images/icon/community/reptile.png" alt="Reptile" style="width: 10%; height: 10%;" />
+					</c:when>
+					<c:otherwise>
+						<img src="/images/icon/community/default.png" alt="Default Pet" style="width: 10%; height: 10%;" />
+					</c:otherwise>
+				</c:choose>
+			</div>
+					<div class="tag-container">
+						테그: ${communityDto.tag}
+					</div>
 		<hr>
-			<table class="headLeft_01"">
+			<table class="headLeft_01">
+				<tr>
+					<th>작성자</th>
+					<td>
+						${communityDto.nickname}
+					</td>
+				</tr>
+				<tr>
+				<tr>
+					<th>등록 일자</th>
+					<td>
+						${communityDto.dt_reg}
+					</td>
+				</tr>
 				<tr>
 					<th>내용</th>
 					<td class="content">
-						${communityDto.content}
+						<c:out value="${communityDto.content}" escapeXml="false" />
 					</td>
 				</tr>
+			<tr>
+				<th>이미지 업로드</th>
+				<td>
+					<div class="image-upload-container">
+					이미지영역
+					</div>
+				</td>
+			</tr>
 				<c:if test="${communityDto.file_orig != ''}">
 				<tr>
 					<th>첨부 파일</th>
@@ -152,15 +129,9 @@ input[type="button"]:hover {
 					</td>
 				</tr>
 				</c:if>
-				<tr>
-					<th>등록 일자</th>
-					<td>
-						${communityDto.dt_reg}
-					</td>
-				</tr>
 			</table>
-			<div style="text-align: center; margin-top: 20px;">
-				<input type="button" value="목록" style="width:500px" onclick="javascript:goList(7);"/>
+			<div style="display: flex; justify-content: center; margin-top: 20px;">
+				<input type="button" value="목록" style="width:50%; height:60px;" onclick="javascript:goList();" />
 			</div>
 			</div>
 		</article>

@@ -15,7 +15,23 @@
 			CD_BBS_TYPE			= #{cd_bbs_type}
 			AND SEQ_BBS_PARENT	= #{seq_bbs}
 	</select>
-	
+	<select id="allSelect" parameterType="CommunityDto" resultType="communityDto">
+		SELECT
+			SEQ_BBS,
+			TITLE,
+			CD_CTG,
+			CD_CTG_PET,
+			CONTENT,
+			TAG,
+			FILE_SAVE,
+			FILE_ORIG,
+			TO_CHAR(DT_REG, 'YYYY-MM-DD') AS dt_reg,
+			NICKNAME
+		FROM
+			TB_BBS 
+		WHERE
+			SEQ_BBS = #{seq_bbs}
+	</select>
 	<select id="count" parameterType="pagingDto" resultType="java.lang.Integer">
 		SELECT
 			COUNT(ROWNUM)
@@ -210,9 +226,9 @@
 	
 	<insert id="insert" parameterType="CommunityDto">
 		INSERT INTO TB_BBS
-			(SEQ_BBS, CD_BBS_TYPE, TITLE, CD_CTG,CD_CTG_PET, CONTENT, FILE_SAVE, FILE_ORIG, READED, DT_REG, REGISTER)
+			(SEQ_BBS, CD_BBS_TYPE, TITLE, CD_CTG,CD_CTG_PET, CONTENT, NICKNAME, TAG, FILE_SAVE, FILE_ORIG, READED, DT_REG, REGISTER)
 		VALUES
-			(#{seq_bbs}, #{cd_bbs_type}, #{title}, #{cd_ctg},#{cd_ctg_pet}, #{content}, #{file_save}, #{file_orig}, 0, SYSDATE, #{register})
+			(#{seq_bbs}, #{cd_bbs_type}, #{title}, #{cd_ctg},#{cd_ctg_pet}, #{content},#{nickname},#{tag}, #{file_save}, #{file_orig}, 0, SYSDATE, #{register})
 	</insert>
 	
 	<update id="update" parameterType="CommunityDto">
@@ -229,23 +245,23 @@
 			SEQ_BBS = #{seq_bbs}
 	</update>
 	
-	<select id="select" parameterType="CommunityDto" resultType="CommunityDto">
+	<select id="select" parameterType="CommunityDto" resultType="communityDto">
 		SELECT
-			SEQ_BBS
-			, TITLE
-			, (SELECT tb_reply.SEQ_BBS FROM TB_BBS tb_reply WHERE tb_reply.SEQ_BBS_PARENT = TB_BBS.SEQ_BBS) seq_reply
-			, CD_CTG
-			, CD_CTG_PET
-			, CONTENT
-			, FILE_SAVE
-			, FILE_ORIG
-			, TO_CHAR(DT_REG, 'YYYY-MM-DD') dt_reg
+			SEQ_BBS,
+			TITLE,
+			CD_CTG,
+			CD_CTG_PET,
+			CONTENT,
+			TAG,
+			FILE_SAVE,
+			FILE_ORIG,
+			TO_CHAR(DT_REG, 'YYYY-MM-DD') AS dt_reg,
+			NICKNAME
 		FROM
-			TB_BBS
+			TB_BBS 
 		WHERE
-			CD_BBS_TYPE		= #{cd_bbs_type}
-			AND SEQ_BBS		= #{seq_bbs}
-			
+			CD_BBS_TYPE = #{cd_bbs_type}
+			AND SEQ_BBS = #{seq_bbs}
 	</select>
 	
 	<select id="sequence" resultType="java.lang.Integer">

@@ -93,6 +93,19 @@ public class Communitydao extends BaseDao {
 		return sqlSessionFront.update("com.happySteps.front.mybatis.community.Community.update", communityDto);
 	}
 	/**
+	 * @param communityDto [페이징 빈]
+	 * @return allView<CommunityDto>
+	 * 
+	 * @since 2024-10-20
+	 * <p>DESCRIPTION: 전체 글 보기</p>
+	 * <p>IMPORTANT:</p>
+	 * <p>EXAMPLE:</p>
+	 */
+	
+	public CommunityDto allSelect(CommunityDto communityDto) {
+		return sqlSessionFront.selectOne("com.happySteps.front.mybatis.community.Community.allSelect", communityDto);
+	}
+	/**
 	 * @param communityDto [게시판 빈]
 	 * @return CommunityDto
 	 * 

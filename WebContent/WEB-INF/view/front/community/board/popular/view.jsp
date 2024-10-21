@@ -1,4 +1,4 @@
-<%
+<%@page import="com.happySteps.front.community.dto.CommunityDto"%><%
 /**
  * YOU ARE STRICTLY PROHIBITED TO COPY, DISCLOSE, DISTRIBUTE, MODIFY OR USE THIS PROGRAM
  * IN PART OR AS A WHOLE WITHOUT THE PRIOR WRITTEN CONSENT OF HAPPYSTEPS.COM.
@@ -29,35 +29,31 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<link rel="stylesheet" type="text/css" href="/css/layoutSubmain.css" />
-	<link rel="stylesheet" type="text/css" href="/css/table.css" />
+	<link rel="stylesheet" href="/css/brdSearchArea.css">
+	<link rel="stylesheet" href="/css/view.css">
+	<title>커뮤니티 인기 게시판 상세보기</title>
 	<style></style>
 	<script>
-		function download(type, sequence) {
-			
-			var frmMain = document.getElementById("frmMain");
-			
-			frmMain.type.setAttribute("value", type);
-			frmMain.sequence.setAttribute("value", sequence);
-			frmMain.action = "/front/community/board/download.web";
-			frmMain.target = "frmBlank";
-			frmMain.submit();
-		}
-		function goView(value) {
-		    var frmMain = document.getElementById("frmMain");
-		    document.getElementById("seq_bbs").value = value;
-		    frmMain.action="/front/community/board/view.web";
-		    frmMain.target = "";
-		    frmMain.submit();
-		}
-		function goList(value) {
-			var frmMain = document.getElementById("frmMain");
-			
-			document.getElementById("cd_bbs_type").value = value;
-			frmMain.action="/front/community/board/list.web";
-			frmMain.target = "";
-			frmMain.submit();
-		}
+	function download(type, sequence) {
+		
+		var frmMain = document.getElementById("frmMain");
+		
+		frmMain.type.setAttribute("value", type);
+		frmMain.sequence.setAttribute("value", sequence);
+		frmMain.action = "/front/community/board/download.web";
+		frmMain.target = "frmBlank";
+		frmMain.submit();
+	}
+	function goView(value) {
+	    var frmMain = document.getElementById("frmMain");
+	    document.getElementById("seq_bbs").value = value;
+	    frmMain.action="/front/community/board/view.web";
+	    frmMain.target = "";
+	    frmMain.submit();
+	}
+	function goList(value) {
+		location.href = "/front/community/board/list.web?cd_bbs_type=6";
+	}
 	</script>
 </head>
 <body>
@@ -99,7 +95,7 @@
 				</tr>
 			</table>
 			<div style="width: 900px; margin-left: auto; margin-right: auto">
-				<input type="button" value="목록" style="width:100px" onclick="javascript:goList(7);"/>
+				<input type="button" value="목록" style="width:100px" onclick="javascript:goList();"/>
 			</div>
 		</article>
 		<aside></aside>

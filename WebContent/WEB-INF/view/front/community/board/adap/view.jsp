@@ -1,4 +1,4 @@
-<%
+<%@page import="com.happySteps.front.community.dto.CommunityDto"%><%
 /**
  * YOU ARE STRICTLY PROHIBITED TO COPY, DISCLOSE, DISTRIBUTE, MODIFY OR USE THIS PROGRAM
  * IN PART OR AS A WHOLE WITHOUT THE PRIOR WRITTEN CONSENT OF HAPPYSTEPS.COM.
@@ -29,7 +29,9 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<link rel="stylesheet" type="text/css" href="/css/table.css" />
+	<link rel="stylesheet" href="/css/brdSearchArea.css">
+	<link rel="stylesheet" href="/css/view.css">
+	<title>커뮤니티 입양후기글 상세보기</title>
 	<style></style>
 	<script>
 		function download(type, sequence) {
@@ -43,11 +45,11 @@
 			frmMain.submit();
 		}
 		function goView(value) {
-		    var frmMain = document.getElementById("frmMain");
-		    document.getElementById("seq_bbs").value = value;
-		    frmMain.action="/front/community/board/view.web";
-		    frmMain.target = "";
-		    frmMain.submit();
+			var frmMain = document.getElementById("frmMain");
+			document.getElementById("seq_bbs").value = value;
+			frmMain.action="/front/community/board/view.web";
+			frmMain.target = "";
+			frmMain.submit();
 		}
 		function goList(value) {
 			var frmMain = document.getElementById("frmMain");

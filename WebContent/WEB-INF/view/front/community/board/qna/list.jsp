@@ -14,14 +14,14 @@
  * Program		: com.happySteps
  * Description	:
  * Environment	: JRE 1.7 or more
- * File			:
+ * File			: list.jsp
  * Notes		:
  * History		: [NO][Programmer][Description]
  *				: [2024-10-10][rkdcodbs77#naevr.com][CREATE: Initial Release]
  */
 %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" trimDirectiveWhitespaces="true" %>
-<%@ page info="/WEB-INF/view/front/community/board/qna/list" %>
+<%@ page info="/WEB-INF/view/front/community/board/Q&A/list.jsp" %>
 <%@ taglib prefix="c"					uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="plutozoneUtilTag"	uri="/WEB-INF/tld/com.plutozone.util.tld" %>
 <%@ include file="/include/front/header.jsp" %>
@@ -30,46 +30,51 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<link rel="stylesheet" type="text/css" href="/css/table.css" />
+	<link rel="stylesheet" type="text/css" href="/css/communityTable.css" />
 	<link rel="stylesheet" href="/css/brdSearchArea.css">
-	<style></style>
+	<title>커뮤니티 질문 목록</title>
 	<script>
-	function goView(value) {
+		function download(type, sequence) {
+			
+			var frmMain = document.getElementById("frmMain");
+			
+			frmMain.type.setAttribute("value", type);
+			frmMain.sequence.setAttribute("value", sequence);
+			frmMain.action = "/front/community/board/download.web";
+			frmMain.target = "frmBlank";
+			frmMain.submit();
+		}
+		function goView(value) {
+			var frmMain = document.getElementById("frmMain");
+			document.getElementById("seq_bbs").value = value;
+			frmMain.action="/front/community/board/view.web";
+			frmMain.target = "";
+			frmMain.submit();
+		}
 		
-		/*
-		document.getElementById("currentPage").remove();
-		document.getElementById("searchKey").remove();
-		document.getElementById("searchWord").remove();
-		*/
-		var frmMain = document.getElementById("frmMain");
+		function getList(value) {
+			var frmMain = document.getElementById("frmMain");
+			
+			document.getElementById("searchWord").value = "";
+			document.getElementById("currentPage").value = "1";
+			document.getElementById("cd_bbs_type").value = value;
+			
+			alert(value);
+			frmMain.action="/front/community/board/list.web";
+			frmMain.target = "";
+			frmMain.submit();
+		}
 		
-		document.getElementById("seq_bbs").value = value;
-		
-		frmMain.action="/front/center/community/view.web";
-		frmMain.submit();
-	}
-	
-	function goPage(value) {
-		
-		var frmMain = document.getElementById("frmMain");
-		
-		document.getElementById("currentPage").value = value;
-		
-		frmMain.action="/front/community/board/list.web";
-		frmMain.submit();
-	}
-	
-	function goList(value) {
-		
-		var frmMain = document.getElementById("frmMain");
-		
-		document.getElementById("searchWord").value = "";
-		document.getElementById("currentPage").value = "1";
-		document.getElementById("cd_bbs_type").value = value;
-		
-		frmMain.action="/front/community/board/list.web";
-		frmMain.submit();
-	}
+		function goPage(value) {
+			
+			var frmMain = document.getElementById("frmMain");
+			
+			document.getElementById("currentPage").value = value;
+			
+			frmMain.action="/front/community/board/list.web";
+			frmMain.target = "";
+			frmMain.submit();
+		}
 	</script>
 </head>
 <body>
@@ -77,19 +82,18 @@
 <input type="hidden" id="type"			name="type" />
 <input type="hidden" id="sequence"		name="sequence" />
 <input type="hidden" name="seq_bbs"		id="seq_bbs" />
-<input type="hidden" name="cd_bbs_type" id="cd_bbs_type" value="${paging.cd_bbs_type}" />
-<input type="hidden" name="currentPage" id="currentPage" value="${paging.currentPage}" />
+<input type="hidden" name="cd_bbs_type"	id="cd_bbs_type" value="${paging.cd_bbs_type}" />
+<input type="hidden" name="currentPage"	id="currentPage" value="${paging.currentPage}" />
 <div class="container">
-	<nav>
-	</nav>
 	<section class="content">
+		<nav>
+		</nav>
 		<article class="txtCenter">
 			<div class="brdSearchArea" style="display: flex; justify-content: center; align-items: center;">
 				<select name="searchKey" id="searchKey">
 					<option value="title"<c:if test="${paging.searchKey == 'title'}"> selected</c:if>>제목</option>
 					<option value="contents"<c:if test="${paging.searchKey == 'contents'}"> selected</c:if>>내용</option>
 					<option value="title+contents"<c:if test="${paging.searchKey == 'title+contents'}"> selected</c:if>>제목 또는 내용</option>
-					
 				</select>
 				<input type="text" name="searchWord" id="searchWord" value="${paging.searchWord}" />
 				<input type="submit" value="검색"/>
@@ -99,12 +103,13 @@
 				<tr>
 					<th style="width: 5%">NO</th>
 					<th>제목</th>
+					<th style="width: 5%">첨부</th>
 					<th style="width: 10%">등록일</th>
 				</tr>
 				<c:choose>
 					<c:when test="${empty list}">
 						<tr>
-							<td colspan="3">등록된 글이 없습니다.</td>
+							<td colspan="4">등록된 글이 없습니다.</td>
 						</tr>
 					</c:when>
 					<c:otherwise>
@@ -114,11 +119,15 @@
 								${list.rnum}
 							</td>
 							<td style="text-align: left">
-								<a href="/front/community/board/view.web?cd_bbs_type=8&seq_bbs=${list.seq_bbs}">
-									<c:if test="${list.seq_reply == 0}">[미답변] </c:if>
-									<c:if test="${list.seq_reply > 0}">[답변 완료] </c:if>
+								<c:if test="${list.flg_top == 'Y'}">[커뮤니티 공지] </c:if>
+								<a href="javascript:goView(${list.seq_bbs});">
 									${list.title}
 								</a>
+							</td>
+							<td>
+								<c:if test="${list.extension != null && list.extension != ''}">
+									<a href="javascript:download('BbsNotice', ${list.seq_bbs});" title="${list.file_orig}"><img src="/image/icon/doc/${list.extension}.png" alt="${list.file_orig}" /></a> 
+								</c:if>
 							</td>
 							<td>
 								${list.dt_reg}
@@ -133,7 +142,7 @@
 			<plutozoneUtilTag:page styleID="front_image" currentPage="${paging.currentPage}" linePerPage="${paging.linePerPage}" totalLine="${paging.totalLine}" scriptFunction="goPage" />
 			</div>
 			<br/>
-			<div style="width: auto; margin-left: auto; margin-right: auto">
+			<div style="width: 900px; margin-left: auto; margin-right: auto">
 			</div>
 		</article>
 		<aside></aside>
@@ -142,6 +151,7 @@
 		<%@ include file="/include/front/footer.jsp" %>
 	</footer>
 </div>
+<iframe name="frmBlank" id="frmBlank" width="0" height="0"></iframe>
 </form>
 </body>
 </html>

@@ -12,6 +12,8 @@ public class CommunityDto {
 	private int cd_ctg_pet		= 0;	// 카테고리 코드:강아지(1),고양이(2),햄스터(3),파충류(4),기타(5)
 	private String ctg_nm		= "";	// 카테고리 명칭
 	private String content		= "";	// 내용
+	private String tag			= "";	// 태그
+	private String nickname		= "";	// 닉네임
 	private String flg_delete	= "";	// 삭제 여부
 	private String flg_top		= "";	// 최상위 여부
 	private String flg_reply	= "";	// 답변 여부
@@ -24,6 +26,14 @@ public class CommunityDto {
 	private String dt_upt		= "";	// 수정 일시
 	private int updater		= 0;	// 수정자
 	
+	
+	
+	public String getTag() {
+		return tag;
+	}
+	public void setTag(String tag) {
+		this.tag = tag;
+	}
 	public int getRnum() {
 		return rnum;
 	}
@@ -77,6 +87,13 @@ public class CommunityDto {
 	}
 	public void setContent(String content) {
 		this.content = content;
+	}
+	
+	public String getNickname() {
+		return nickname;
+	}
+	public void setNickname(String nickname) {
+		this.nickname = nickname;
 	}
 	public String getFlg_delete() {
 		return flg_delete;

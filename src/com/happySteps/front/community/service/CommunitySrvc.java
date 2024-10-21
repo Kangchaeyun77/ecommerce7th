@@ -132,7 +132,19 @@ public class CommunitySrvc {
 			return false;
 		}
 	}
-	
+
+	/**
+	 * @param pagingDto [게시판 빈]
+	 * @return PagingListDto
+	 * 
+	 * @since 2024-10-20
+	 * <p>DESCRIPTION: 커뮤니티 전체 글 보기</p>
+	 * <p>IMPORTANT:</p>
+	 * <p>EXAMPLE:</p>
+	 */
+	public CommunityDto allSelect(CommunityDto communityDto) {
+		return communitydao.allSelect(communityDto);
+		}
 	/**
 	 * @param communityDto [게시판 빈]
 	 * @return CommunityDto

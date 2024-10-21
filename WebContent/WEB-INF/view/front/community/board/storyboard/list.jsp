@@ -32,6 +32,7 @@
 <head>
 	<link rel="stylesheet" type="text/css" href="/css/communityTable.css" />
 	<link rel="stylesheet" href="/css/brdSearchArea.css">
+	<title>커뮤니티 자유게시판</title>
 	<script>
 		function download(type, sequence) {
 			
@@ -44,11 +45,11 @@
 			frmMain.submit();
 		}
 		function goView(value) {
-		    var frmMain = document.getElementById("frmMain");
-		    document.getElementById("seq_bbs").value = value;
-		    frmMain.action="/front/community/board/view.web";
-		    frmMain.target = "";
-		    frmMain.submit();
+			var frmMain = document.getElementById("frmMain");
+			document.getElementById("seq_bbs").value = value;
+			frmMain.action="/front/community/board/view.web";
+			frmMain.target = "";
+			frmMain.submit();
 		}
 		
 		function getList(value) {
