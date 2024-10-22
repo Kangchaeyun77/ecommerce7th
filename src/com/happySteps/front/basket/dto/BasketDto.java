@@ -34,12 +34,13 @@ public class BasketDto {
 	private int seq_mbr		= 0;
 	private int seq_sle		= 0;
 	private int seq_prd		= 0;
-	private String sle_nm	= "";
-	private int price		= 0;
-	private int count		= 0;
-	private String img		= "";
-	private String dt_reg	= "";
-	private String dt_upt	= "";
+	private String sle_nm		= "";
+	private int price			= 0;
+	private int count			= 0;
+	private String img			= "";
+	private String dt_reg		= "";
+	private String dt_upt		= "";
+	
 	
 	public int getSeq_bsk() {
 		return seq_bsk;
