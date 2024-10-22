@@ -37,24 +37,24 @@ import com.happySteps.front.common.dao.BaseDao;
  */
 @Repository("com.happySteps.front.basket.dao.BasketDao")
 public class BasketDao extends BaseDao {
-    
-    public List<BasketDto> listing(int seq_mbr) {
-        return sqlSessionFront.selectList("com.happySteps.front.mybatis.basket.Basket.listing", seq_mbr);
-    }
-    
-    public int insert(BasketDto basketDto) {
-        return sqlSessionFront.insert("com.happySteps.front.mybatis.basket.Basket.insert", basketDto);
-    }
 
-    public int update(BasketDto basketDto) {
-        return sqlSessionFront.update("com.happySteps.front.mybatis.basket.Basket.update", basketDto);
-    }
+	public List<BasketDto> listing(int seq_mbr) {
+		return sqlSessionFront.selectList("com.happySteps.front.mybatis.basket.Basket.listing", seq_mbr);
+	}
 
-    public int delete(int seq_bsk) {
-        return sqlSessionFront.delete("com.happySteps.front.mybatis.basket.Basket.delete", seq_bsk);
-    }
+	public int insert(BasketDto basketDto) {
+		return sqlSessionFront.insert("com.happySteps.front.mybatis.basket.Basket.insert", basketDto);
+	}
 
-    public int deleteAllByUser(int seq_mbr) {
-        return sqlSessionFront.delete("com.happySteps.front.mybatis.basket.Basket.deleteAllByUser", seq_mbr);
-    }
+	public int update(BasketDto basketDto) {
+		return sqlSessionFront.update("com.happySteps.front.mybatis.basket.Basket.update", basketDto);
+	}
+
+	public int delete(int seq_bsk) {
+		return sqlSessionFront.delete("com.happySteps.front.mybatis.basket.Basket.delete", seq_bsk);
+	}
+
+	public int deleteAllByUser(int seq_mbr) {
+		return sqlSessionFront.delete("com.happySteps.front.mybatis.basket.Basket.deleteAllByUser", seq_mbr);
+	}
 }
