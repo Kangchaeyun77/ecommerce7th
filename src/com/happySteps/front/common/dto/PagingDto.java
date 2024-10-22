@@ -32,20 +32,34 @@ public class PagingDto {
 	
 	private int totalLine		= 0;	// 전체 라인(행) 수
 	private int totalPage		= 0;	// 전체 페이지 수 = 전체 라인(행) 수 / 페이징할 라인수
-	private int linePerPage		= 10;	// 페이징할 라인수
-	private int currentPage		= 1;	// 현재 페이지
+	private int linePerPage	= 10;	// 페이징할 라인수
+	private int currentPage	= 1;	// 현재 페이지
 	
 	private String searchKey	= "";	// 검색키(예: 타이틀, 내용, 타이틀+내용)
 	private String searchWord	= "";	// 검색어
 	
-	private int cd_bbs_type		= 0;	// [게시판] 공지사항(1), 자주 찾는 질문(2), 질의 응답(3)
+	private int cd_bbs_type	= 0;	// [게시판] 공지사항(1), 자주 찾는 질문(2), 질의 응답(3)
 	private int cd_ctg			= 0;	// [게시판] 자주 찾는 질문의 카테고리
 	private int cd_ctg_pet		= 0;	// [상품 카테고리] 강아지(1), 고양이(2), 햄스터(3), 파충류(4)
 	private int register		= 0;	// [등록자]
-	private int  seq_sle	= 0;
+	private int seq_sle		= 0;	// 상품 일련번호
+	private int pet_items		= 0;	// [상품 카테고리] 사료(x1), 간식(x2), 하우스(x3), 기타(x4)
+	private int cd_state_sale	= 0;	// [상품 카테고리] 사료(x1), 간식(x2), 하우스(x3), 기타(x4)
 
 	
 	
+	public int getPet_items() {
+		return pet_items;
+	}
+	public void setPet_items(int pet_items) {
+		this.pet_items = pet_items;
+	}
+	public int getCd_state_sale() {
+		return cd_state_sale;
+	}
+	public void setCd_state_sale(int cd_state_sale) {
+		this.cd_state_sale = cd_state_sale;
+	}
 	public int getSeq_sle() {
 		return seq_sle;
 	}
