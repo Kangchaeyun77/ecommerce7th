@@ -23,6 +23,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" trimDirectiveWhitespaces="true" %>
 			<ul>
 				<li><a href="/console/users/member/list.web" class="menuLnb">구매자</a></li>
-				<li><a href="/console/users/seller/list.web?cd_state=0" class="menuLnb">판매자</a></li>
-				<li><a href="#" class="menuLnb">관리자</a></li>
+				<li><a href="/console/users/manager/list.web" class="menuLnb">관리자</a></li>
 			</ul>
