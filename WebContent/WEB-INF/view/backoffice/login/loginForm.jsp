@@ -41,9 +41,9 @@
 			
 			var frmMain = document.getElementById("frmMain");
 			
-			if (document.getElementById("id").value.length < 6
+			if (document.getElementById("id").value.length < 5
 					|| document.getElementById("id").value.length > 32) {
-				alert("아이디를 6 ~ 16자 이내로 입력하세요!");
+				alert("아이디를 5 ~ 16자 이내로 입력하세요!");
 				document.getElementById("id").focus();
 				return;
 			}
