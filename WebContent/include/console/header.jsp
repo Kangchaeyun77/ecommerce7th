@@ -33,11 +33,13 @@
 	<link rel="apple-touch-icon" href="/image/apple-touch-icon.png" />
 	<link rel="stylesheet" type="text/css" title="common stylesheet" href="/css/common.css" />
 	<script type="text/javascript" src="/js/common.js"></script>
-	<!-- Google tag (gtag.js) [2024-07-26][pluto@HAPPYSTEPS.COM][INSERT: Google GA] -->
-	<script async=true src="https://www.googletagmanager.com/gtag/js?id=G-9KNFMF8B68"></script>
+	
+	<!-- Google tag (gtag.js) backoffice -->
+	<script async=true src="https://www.googletagmanager.com/gtag/js?id=G-84QQFR1V1E"></script>
 	<script>
-		window.dataLayer = window.dataLayer || [];
-		function gtag(){dataLayer.push(arguments);}
-		gtag('js', new Date());
-		gtag('config', 'G-9KNFMF8B68');
+	  window.dataLayer = window.dataLayer || [];
+	  function gtag(){dataLayer.push(arguments);}
+	  gtag('js', new Date());
+	
+	  gtag('config', 'G-84QQFR1V1E');
 	</script>

@@ -204,3 +204,4 @@ function checkRegister() {
 		// frmMain.action = "/registerProc.jsp";
 		frmMain.submit();
 	}
+}

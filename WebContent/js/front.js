@@ -349,7 +349,7 @@ function checkRegister() {
 					document.getElementById("phone1").value
 					+ "-" + document.getElementById("phone2").value
 					+ "-" + document.getElementById("phone3").value;
-		}
+	}
 		alert("가입완료");
 /*		alert("정상적으로 "
 				+ email
@@ -358,4 +358,4 @@ function checkRegister() {
 			
 		frmMain.action = "/front/member/registerProc.web";
 		frmMain.submit();
-	}
+}
