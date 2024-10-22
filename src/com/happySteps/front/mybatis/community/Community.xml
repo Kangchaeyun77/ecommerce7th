@@ -1,6 +1,40 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.happySteps.front.mybatis.community.Community">
+	
+	<select id="getLikeCount" parameterType="int" resultType="int">
+		SELECT
+			COUNT(*) 
+		FROM 
+			TB_LKE
+		WHERE
+			SEQ_BBS = #{seq_bbs}
+	</select>
+	
+	<delete id="removeLike" parameterType="LikeDto">
+		DELETE 
+		FROM 
+			TB_LKE
+		WHERE
+			SEQ_BBS 		= #{seq_bbs} 
+			AND REGISTER	= #{register}
+	</delete>
+	
+	<insert id="addLike" parameterType="LikeDto">
+	INSERT INTO 
+		TB_LKE (SEQ_LKE, SEQ_BBS, REGISTER, DT_REG, FLG_LKE, SEQ_MBR,CD_CTG)
+	VALUES (SEQ_LKE.NEXTVAL, #{seq_bbs}, #{register}, SYSDATE, #{flg_lke}, #{seq_mbr}, #{cd_ctg})
+	</insert>
+	
+	<select id="isLiked" parameterType="LikeDto" resultType="int">
+	SELECT
+		COUNT(*) 
+	FROM 
+		TB_LKE 
+	WHERE
+		SEQ_BBS = #{seq_bbs}
+	</select>		
+	
 	<select id="selectReply" parameterType="communityDto" resultType="communityDto">
 		SELECT
 			SEQ_BBS
@@ -15,6 +49,7 @@
 			CD_BBS_TYPE			= #{cd_bbs_type}
 			AND SEQ_BBS_PARENT	= #{seq_bbs}
 	</select>
+		
 	<select id="allSelect" parameterType="CommunityDto" resultType="communityDto">
 		SELECT
 			SEQ_BBS,
@@ -87,6 +122,49 @@
 			FLG_TOP, rnum
 	</select>
 	
+	
+	<select id="popular_allList" parameterType="pagingDto" resultType="communityDto">
+		SELECT
+		    *
+		FROM
+		    (
+		    SELECT
+		        /*+ first_rows(10) */ ROW_NUMBER() OVER (ORDER BY l.like_count ASC, b.FLG_TOP,  b.FLG_REPLY DESC, b.DT_REG DESC) rnum
+		        , b.SEQ_BBS
+		        , (SELECT tb_reply.SEQ_BBS FROM TB_BBS tb_reply WHERE tb_reply.SEQ_BBS_PARENT = b.SEQ_BBS) seq_reply
+		        , DECODE(b.CD_CTG_PET, 1, '강아지', 2, '고양이', 3, '햄스터', 4, '파충류 및 양서류', 5, '기타', '미정') CTG_NM
+		        , b.TITLE
+		        , b.FILE_ORIG
+		        , DECODE(LOWER(SUBSTR(b.FILE_ORIG, INSTR(b.FILE_ORIG, '.', -1, 1) + 1))
+		            , 'xlsx', 'xls'
+		            , 'xls' , 'xls'
+		            , 'docx', 'doc'
+		            , 'doc' , 'doc'
+		            , 'pptx', 'ppt'
+		            , 'ppt' , 'ppt'
+		            , 'hwp' , 'hwp'
+		            , 'pdf' , 'pdf'
+		            , NULL  , ''
+		            , 'etc') extension
+		        , b.FLG_TOP
+		        , TO_CHAR(b.DT_REG, 'YYYY-MM-DD') dt_reg
+		        , NVL(l.like_count, 0) AS like_count
+		        , b.READED
+		    FROM
+		        TB_BBS b
+		    LEFT JOIN 
+		        (SELECT SEQ_BBS, COUNT(*) AS like_count FROM TB_LKE GROUP BY SEQ_BBS) l
+		    ON b.SEQ_BBS = l.SEQ_BBS
+		    WHERE
+		        <include refid="all_where" />
+		    )
+		<![CDATA[
+		WHERE
+		    rnum >= (${currentPage} - 1) * ${linePerPage} + 1 AND rnum <= ${currentPage} * ${linePerPage}
+		]]> 
+		ORDER BY
+		    FLG_TOP, rnum
+	</select>
 	
 	<select id="allList" parameterType="pagingDto" resultType="communityDto">
 	   	SELECT
@@ -255,8 +333,8 @@
 			TAG,
 			FILE_SAVE,
 			FILE_ORIG,
-			TO_CHAR(DT_REG, 'YYYY-MM-DD') AS dt_reg,
-			NICKNAME
+			TO_CHAR(DT_REG, 'YYYY-MM-DD') AS dt_reg
+			,NICKNAME
 		FROM
 			TB_BBS 
 		WHERE

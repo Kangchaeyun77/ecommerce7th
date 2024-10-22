@@ -17,7 +17,7 @@
  * File			: list.jsp
  * Notes		:
  * History		: [NO][Programmer][Description]
- *				: [2024-10-10][rkdcodbs77#naevr.com][CREATE: Initial Release]
+ *				: [20241014][rkdcodbs77#naevr.com][CREATE: Initial Release]
  */
 %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" trimDirectiveWhitespaces="true" %>
@@ -32,7 +32,7 @@
 <head>
 	<link rel="stylesheet" type="text/css" href="/css/table.css" />
 	<link rel="stylesheet" href="/css/brdSearchArea.css">
-	<title>커뮤니티 인기게시판</title>
+	<title>커뮤니티 모든 글 목록</title>
 	<style></style>
 	<script>
 		function download(type, sequence) {
@@ -69,6 +69,7 @@
 			document.getElementById("currentPage").value = "1";
 			document.getElementById("cd_bbs_type").value = value;
 			
+			alert(value);
 			frmMain.action="/front/community/board/list.web";
 			frmMain.target = "";
 			frmMain.submit();

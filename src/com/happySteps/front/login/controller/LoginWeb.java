@@ -202,6 +202,7 @@ public class LoginWeb extends Common {
 				session.setAttribute("SEQ_MBR", Integer.toString(memberDto.getSeq_mbr()));
 				session.setAttribute("NAME", aes.decode(memberDto.getMbr_nm()));
 				session.setAttribute("ID", aes.decode(memberDto.getId()));
+				session.setAttribute("NICKNAME", aes.decode(memberDto.getNickname()));
 				session.setAttribute("DT_LOGIN", Datetime.getNow("yyyy-MM-dd HH:mm:ss"));
 				
 				request.setAttribute("script", "alert('" + session.getAttribute("NAME")

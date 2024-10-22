@@ -1,4 +1,5 @@
-<%@page import="com.happySteps.front.community.dto.CommunityDto"%><%
+<%@page import="com.happySteps.front.community.dto.CommunityDto"%>
+<%
 /**
  * YOU ARE STRICTLY PROHIBITED TO COPY, DISCLOSE, DISTRIBUTE, MODIFY OR USE THIS PROGRAM
  * IN PART OR AS A WHOLE WITHOUT THE PRIOR WRITTEN CONSENT OF HAPPYSTEPS.COM.
@@ -29,56 +30,97 @@
 <!DOCTYPE html>
 <html>
 <head>
+	<meta charset="UTF-8">
 	<link rel="stylesheet" href="/css/brdSearchArea.css">
 	<link rel="stylesheet" href="/css/view.css">
-	<title>커뮤니티 인기 게시판 상세보기</title>
-	<style></style>
+		<title>커뮤니티 인기글 상세보기</title>
 	<script>
-	function download(type, sequence) {
-		
-		var frmMain = document.getElementById("frmMain");
-		
-		frmMain.type.setAttribute("value", type);
-		frmMain.sequence.setAttribute("value", sequence);
-		frmMain.action = "/front/community/board/download.web";
-		frmMain.target = "frmBlank";
-		frmMain.submit();
-	}
-	function goView(value) {
-	    var frmMain = document.getElementById("frmMain");
-	    document.getElementById("seq_bbs").value = value;
-	    frmMain.action="/front/community/board/view.web";
-	    frmMain.target = "";
-	    frmMain.submit();
-	}
-	function goList(value) {
-		location.href = "/front/community/board/list.web?cd_bbs_type=6";
-	}
+		function download(type, sequence) {
+			
+			var frmMain = document.getElementById("frmMain");
+			
+			frmMain.type.setAttribute("value", type);
+			frmMain.sequence.setAttribute("value", sequence);
+			frmMain.action = "/front/community/board/download.web";
+			frmMain.target = "frmBlank";
+			frmMain.submit();
+		}
+		function goView(value) {
+			var frmMain = document.getElementById("frmMain");
+			document.getElementById("seq_bbs").value = value;
+			frmMain.action="/front/community/board/view.web";
+			frmMain.target = "";
+			frmMain.submit();
+		}
+		function goList(value) {
+			location.href = "/front/community/board/list.web?cd_bbs_type=6";
+		}
 	</script>
 </head>
 <body>
 <form id="frmMain" method="POST">
 <input type="hidden" id="type"			name="type" />
 <input type="hidden" id="sequence"		name="sequence" />
-<input type="hidden" id="cd_bbs_type"	name="cd_ctg" />
+<input type="hidden" id="cd_ctg"		name="cd_ctg" />
+<input type="hidden" id="cd_ctg_pet"	name="cd_ctg_pet" />
 <input type="hidden" id="cd_bbs_type"	name="cd_bbs_type" />
 <input type="hidden" id="seq_bbs"		name="seq_bbs"		value="${communityDto.seq_bbs}" />
 <div class="container">
 	<section class="content">
 		<article class="txtCenter">
-			<table class="headLeft_01" style="width: 900px; margin-left: auto; margin-right: auto">
+		 <div class="content-container"> 
+			<h2 class="title">제목: ${communityDto.title}</h2>			
+			<div class="icon-cd_ctg_pet" style="display: flex; justify-content: center; align-items: flex-start; flex-direction: column;">
+				<c:choose>
+					<c:when test="${communityDto.cd_ctg_pet == 1}">
+						<img src="/images/icon/community/dog.png" alt="Dog" style="width: 10%; height: 10%;" />
+					</c:when>
+					<c:when test="${communityDto.cd_ctg_pet == 2}">
+						<img src="/images/icon/community/cat.png" alt="Cat" style="width: 10%; height: 10%;" />
+					</c:when>
+					<c:when test="${communityDto.cd_ctg_pet == 3}">
+						<img src="/images/icon/community/hamster.png" alt="Hamster" style="width: 10%; height: 10%;" />
+					</c:when>
+					<c:when test="${communityDto.cd_ctg_pet == 4}">
+						<img src="/images/icon/community/reptile.png" alt="Reptile" style="width: 10%; height: 10%;" />
+					</c:when>
+					<c:otherwise>
+						<img src="/images/icon/community/default.png" alt="Default Pet" style="width: 10%; height: 10%;" />
+					</c:otherwise>
+				</c:choose>
+			</div>
+					<div class="tag-container">
+						테그: ${communityDto.tag}
+					</div>
+		<hr>
+			<table class="headLeft_01">
 				<tr>
-					<th style="width: 150px;">제목</th>
+					<th>작성자</th>
 					<td>
-						${communityDto.title}
+						${communityDto.nickname}
+					</td>
+				</tr>
+				<tr>
+				<tr>
+					<th>등록 일자</th>
+					<td>
+						${communityDto.dt_reg}
 					</td>
 				</tr>
 				<tr>
 					<th>내용</th>
 					<td class="content">
-						${communityDto.content}
+						<c:out value="${communityDto.content}" escapeXml="false" />
 					</td>
 				</tr>
+			<tr>
+				<th>이미지 업로드</th>
+				<td>
+					<div class="image-upload-container">
+					이미지영역
+					</div>
+				</td>
+			</tr>
 				<c:if test="${communityDto.file_orig != ''}">
 				<tr>
 					<th>첨부 파일</th>
@@ -87,15 +129,10 @@
 					</td>
 				</tr>
 				</c:if>
-				<tr>
-					<th>등록 일자</th>
-					<td>
-						${communityDto.dt_reg}
-					</td>
-				</tr>
 			</table>
-			<div style="width: 900px; margin-left: auto; margin-right: auto">
-				<input type="button" value="목록" style="width:100px" onclick="javascript:goList();"/>
+			<div style="display: flex; justify-content: center; margin-top: 20px;">
+				<input type="button" value="목록" style="width:50%; height:60px;" onclick="javascript:goList();" />
+			</div>
 			</div>
 		</article>
 		<aside></aside>

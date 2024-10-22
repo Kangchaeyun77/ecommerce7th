@@ -39,8 +39,7 @@
 
 		function writeProc() {
 			var frmMain = document.getElementById("frmMain");
-			var selectedCtg = document.getElementById("cd_ctg").value; 
-			var nickname = document.getElementById("nickname").value;// 선택된 카테고리 값 가져오기
+			var selectedCtg = document.getElementById("cd_ctg").value; // 선택된 카테고리 값 가져오기
 
 			// 필수 항목 체크
 			if (document.getElementById("title").value === "" ||
@@ -112,6 +111,7 @@
 		
 	</script>
 </head>
+
 <body>
 	<c:set var="nickname" value="${sessionScope.nickname}" />
 	<input type="hidden" id="nickname" name="nickname" value="${nickname}" />  

@@ -35,6 +35,52 @@
 	<link rel="stylesheet" href="/css/view.css">
 		<title>커뮤니티 자유게시판 상세보기</title>
 	<script>
+	function toggleLike(seq_bbs) {
+		const likeElement = document.getElementById('likeElement'); // 이모지를 표시할 요소
+		const seq_mbr = sessionStorage.getItem('SEQ_MBR');
+		const cd_ctg = document.getElementById("cd_ctg").value;
+
+		fetch('/front/community/board/like.web', {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json',
+			},
+			body: JSON.stringify({ seq_bbs: seq_bbs, seq_mbr: seq_mbr, cd_ctg: cd_ctg}) // seq_bbs를 포함
+		})
+		.then(response => response.json())
+		.then(data => {
+			document.getElementById('like_count').innerText = data.like_count;
+			
+			// 이모지 변경
+			if (data.liked) {
+				likeElement.innerText = '❤️'; // 눌린 하트 이모지
+			} else {
+				likeElement.innerText = '🤍'; // 기본 하트 이모지
+			}
+		})
+		.catch((error) => {
+			console.error('Error:', error);
+		});
+	}
+
+	function fetchLikeCount(seq_bbs) {
+		fetch('/front/community/board/like_count.web', {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json',
+			},
+			body: JSON.stringify({ seq_bbs: seq_bbs })
+		})
+		.then(response => response.json())
+		.then(data => {
+			// 좋아요 수 업데이트
+			updateLikeCount(data.newLikeCount);
+		})
+		.catch((error) => {
+			console.error('Error:', error);
+		});
+	}
+
 		function download(type, sequence) {
 			
 			var frmMain = document.getElementById("frmMain");
@@ -46,11 +92,11 @@
 			frmMain.submit();
 		}
 		function goView(value) {
-		    var frmMain = document.getElementById("frmMain");
-		    document.getElementById("seq_bbs").value = value;
-		    frmMain.action="/front/community/board/view.web";
-		    frmMain.target = "";
-		    frmMain.submit();
+			var frmMain = document.getElementById("frmMain");
+			document.getElementById("seq_bbs").value = value;
+			frmMain.action="/front/community/board/view.web";
+			frmMain.target = "";
+			frmMain.submit();
 		}
 		function goList(value) {
 			location.href = "/front/community/board/list.web?cd_bbs_type=7";
@@ -61,9 +107,11 @@
 <form id="frmMain" method="POST">
 <input type="hidden" id="type"			name="type" />
 <input type="hidden" id="sequence"		name="sequence" />
-<input type="hidden" id="cd_ctg"		name="cd_ctg" />
+<input type="hidden" id="cd_ctg" name="cd_ctg" value="${communityDto.cd_ctg}" />  
 <input type="hidden" id="cd_ctg_pet"	name="cd_ctg_pet" />
 <input type="hidden" id="cd_bbs_type"	name="cd_bbs_type" />
+<c:set var="seq_mbr" value="${sessionScope.seq_mbr}" />
+<input type="hidden" id="seq_mbr" name="seq_mbr" value="<%= session.getAttribute("seq_mbr") %>" />
 <input type="hidden" id="seq_bbs"		name="seq_bbs"		value="${communityDto.seq_bbs}" />
 <div class="container">
 	<section class="content">
@@ -119,6 +167,13 @@
 					<div class="image-upload-container">
 					이미지영역
 					</div>
+				</td>
+			</tr>
+			<tr>
+				<th>좋아요</th>
+				<td>
+					<span id="likeElement" style="cursor: pointer; font-size: 24px;" onclick="toggleLike(${communityDto.seq_bbs})">🤍</span>
+					<span id="like_count">${communityDto.like_count}</span>
 				</td>
 			</tr>
 				<c:if test="${communityDto.file_orig != ''}">

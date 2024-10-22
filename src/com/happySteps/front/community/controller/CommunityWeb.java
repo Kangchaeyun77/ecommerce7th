@@ -249,12 +249,16 @@ public class CommunityWeb extends Common {
 		try {
 			CommunityDto _communityDto = communitySrvc.select(communityDto);
 			mav.addObject("communityDto", _communityDto);
-			logger.error("가져와짐?="+_communityDto);
-			logger.error("가져와짐?="+communityDto);
+			//logger.error("가져와짐?="+_communityDto);
+			//logger.error("가져와짐?="+communityDto);
 			communityDto.getSeq_bbs();
-			logger.error("가져와짐?="+communityDto.getSeq_bbs());
+			//logger.error("가져와짐?="+communityDto.getSeq_bbs());
 			if (communityDto.getCd_bbs_type() == 6) {
 				mav.setViewName("front/community/board/popular/view");
+				_communityDto = communitySrvc.allSelect(communityDto);
+				mav.addObject("communityDto", _communityDto);
+				mav.setViewName("front/community/board/all/view"); 
+						
 			} else if (communityDto.getCd_bbs_type() == 7) {
 				mav.setViewName("front/community/board/storyboard/view");
 			} else if (communityDto.getCd_bbs_type() == 8) {
@@ -270,11 +274,10 @@ public class CommunityWeb extends Common {
 				}
 				mav.setViewName("front/community/board/qna/view");
 			// cd_bbs_type 5일 때 모든 게시글 조회
-			} else if (communityDto.getCd_bbs_type() == 5) {
-			//
+			} else if (communityDto.getCd_bbs_type() == 5){
 				_communityDto = communitySrvc.allSelect(communityDto);
 				mav.addObject("communityDto", _communityDto);
-						mav.setViewName("front/community/board/all/view"); // 전체 글을 보여주는 뷰
+				mav.setViewName("front/community/board/all/view"); // 전체 글을 보여주는 뷰
 			} else {
 				request.setAttribute("redirect" , "/");
 				mav.setViewName("forward:/servlet/result.web");
@@ -351,7 +354,7 @@ public class CommunityWeb extends Common {
 				mav.setViewName("forward:/servlet/result.web");
 			} else {
 				// 5번 글일 때 allList 호출
-				if (pagingDto.getCd_bbs_type() == 5) {
+				if (pagingDto.getCd_bbs_type() == 5 ) {
 					pagingDto.setRegister(Integer.parseInt(getSession(request, "SEQ_MBR")));
 					PagingListDto pagingListDto = communitySrvc.allList(pagingDto);
 					
@@ -365,6 +368,12 @@ public class CommunityWeb extends Common {
 					mav.addObject("list", pagingListDto.getList());
 
 					if (pagingDto.getCd_bbs_type() == 6) {
+						
+						pagingDto.setRegister(Integer.parseInt(getSession(request, "SEQ_MBR")));
+						PagingListDto pagingListDto1 = communitySrvc.popular_allList(pagingDto);
+						
+						mav.addObject("paging", pagingListDto1.getPaging());
+						mav.addObject("list", pagingListDto1.getList());
 						mav.setViewName("front/community/board/popular/list");
 					} else if (pagingDto.getCd_bbs_type() == 7) {
 						mav.setViewName("front/community/board/storyboard/list");
@@ -420,7 +429,7 @@ public class CommunityWeb extends Common {
 			
 			//닉네임이 없으면 에러 처리
 			if(nickname == null) {
-				logger.error("닉네임="+nickname);
+				//logger.error("닉네임="+nickname);
 				request.setAttribute("script", "alert('닉네임이 없습니다. 로그인 후 다시 시도해 주세요.');");
 				request.setAttribute("redirect", "/front/login/loginForm.web"); 
 				

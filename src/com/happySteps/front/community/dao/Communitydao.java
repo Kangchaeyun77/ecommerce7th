@@ -7,13 +7,12 @@ import org.springframework.stereotype.Repository;
 import com.happySteps.front.common.dao.BaseDao;
 
 import com.happySteps.front.community.dto.CommunityDto;
-
+import com.happySteps.front.like.dto.LikeDto;
 import com.happySteps.front.common.dto.PagingDto;
 
 /**
  * @version 1.0.0
  * @author rkdcodbs77#naver.com
- * 
  * @since 2024-10-09
  * <p>DESCRIPTION:</p>
  * <p>IMPORTANT:</p>
@@ -21,9 +20,54 @@ import com.happySteps.front.common.dto.PagingDto;
 @Repository("com.happySteps.front.community.dao.Communitydao")
 public class Communitydao extends BaseDao {
 	/**
+	 * @param likeDto
+	 * @return 좋아요 개수
+	 * @since 2024-10-21
+	 * <p>DESCRIPTION: 게시글 좋아요 개수</p>
+	 * <p>IMPORTANT:</p>
+	 * <p>EXAMPLE:</p>
+	 */
+	public int getLikeCount(LikeDto likeDto) {
+		return sqlSessionFront.selectOne("com.happySteps.front.mybatis.community.Community.getLikeCount", likeDto);
+	}
+	/**
+	 * @param likeDto
+	 * @return 좋아요 제거
+	 * @since 2024-10-21
+	 * <p>DESCRIPTION: 게시글 좋아요 제거</p>
+	 * <p>IMPORTANT:</p>
+	 * <p>EXAMPLE:</p>
+	 */
+	public int removeLike(LikeDto likeDto) {
+		return sqlSessionFront.delete("com.happySteps.front.mybatis.community.Community.removeLike", likeDto);
+	}
+	/**
+	 * @param likeDto
+	 * @return 좋아요를 추가
+	 * @since 2024-10-21
+	 * <p>DESCRIPTION: 게시글 좋아요 추가</p>
+	 * <p>IMPORTANT:</p>
+	 * <p>EXAMPLE:</p>
+	 */
+	public int addLike(LikeDto likeDto) {
+		return sqlSessionFront.insert("com.happySteps.front.mybatis.community.Community.addLike", likeDto);
+	}
+	/**
+	 * @param seq_bbs
+	 * @return 좋아요 상태 
+	 * @since 2024-10-21
+	 * <p>DESCRIPTION: 게시글 좋아요 확인</p>
+	 * <p>IMPORTANT:</p>
+	 * <p>EXAMPLE:</p>
+	 */
+	public boolean isLiked(LikeDto likeDto) {
+		Integer count = sqlSessionFront.selectOne("com.happySteps.front.mybatis.community.Community.isLiked", likeDto);
+		return count != null && count > 0;
+	}
+	
+	/**
 	 * @param communityDto [게시판 빈]
-	 * @return CommunityDto
-	 * 
+	 * @return CommunityDto 
 	 * @since 2024-10-09
 	 * <p>DESCRIPTION: 보기(답변)</p>
 	 * <p>IMPORTANT:</p>
@@ -44,7 +88,6 @@ public class Communitydao extends BaseDao {
 	/**
 	 * @param communityDto [게시판 빈]
 	 * @return int
-	 * 
 	 * @since 2024-10-09
 	 * <p>DESCRIPTION: 글 삭제</p>
 	 * <p>IMPORTANT:</p>
@@ -57,7 +100,6 @@ public class Communitydao extends BaseDao {
 	/**
 	 * @param communityDto [게시판 빈]
 	 * @return int
-	 * 
 	 * @since 2024-10-09
 	 * <p>DESCRIPTION: 등록</p>
 	 * <p>IMPORTANT:</p>
@@ -70,7 +112,6 @@ public class Communitydao extends BaseDao {
 	/**
 	 * @param communityDto [게시판 빈]
 	 * @return CommunityDto
-	 * 
 	 * @since 2024-10-10
 	 * <p>DESCRIPTION: 삭제(처리)</p>
 	 * <p>IMPORTANT:</p>
@@ -83,7 +124,6 @@ public class Communitydao extends BaseDao {
 	/**
 	 * @param communityDto [게시판 빈]
 	 * @return int
-	 * 
 	 * @since 2024-10-09
 	 * <p>DESCRIPTION: 수정</p>
 	 * <p>IMPORTANT:</p>
@@ -95,9 +135,8 @@ public class Communitydao extends BaseDao {
 	/**
 	 * @param communityDto [페이징 빈]
 	 * @return allView<CommunityDto>
-	 * 
 	 * @since 2024-10-20
-	 * <p>DESCRIPTION: 전체 글 보기</p>
+	 * <p>DESCRIPTION: 커뮤니티 전체 글 보기</p>
 	 * <p>IMPORTANT:</p>
 	 * <p>EXAMPLE:</p>
 	 */
@@ -108,9 +147,8 @@ public class Communitydao extends BaseDao {
 	/**
 	 * @param communityDto [게시판 빈]
 	 * @return CommunityDto
-	 * 
 	 * @since 2024-10-09
-	 * <p>DESCRIPTION: 보기</p>
+	 * <p>DESCRIPTION: 글 보기</p>
 	 * <p>IMPORTANT:</p>
 	 * <p>EXAMPLE:</p>
 	 */
@@ -121,9 +159,20 @@ public class Communitydao extends BaseDao {
 	/**
 	 * @param pagingDto [페이징 빈]
 	 * @return allList<CommunityDto>
-	 * 
 	 * @since 2024-10-14
-	 * <p>DESCRIPTION: 전체 목록</p>
+	 * <p>DESCRIPTION: 커뮤니티 모든 글목록</p>
+	 * <p>IMPORTANT:</p>
+	 * <p>EXAMPLE:</p>
+	 */
+	
+	public List<CommunityDto> popular_allList(PagingDto pagingDto) {
+	    return sqlSessionFront.selectList("com.happySteps.front.mybatis.community.Community.popular_allList", pagingDto);
+	}
+	/**
+	 * @param pagingDto [페이징 빈]
+	 * @return allList<CommunityDto>
+	 * @since 2024-10-14
+	 * <p>DESCRIPTION: 커뮤니티 모든 글목록</p>
 	 * <p>IMPORTANT:</p>
 	 * <p>EXAMPLE:</p>
 	 */
@@ -135,7 +184,6 @@ public class Communitydao extends BaseDao {
 	/**
 	 * @param pagingDto [페이징 빈]
 	 * @return List<CommunityDto>
-	 * 
 	 * @since 2024-10-09
 	 * <p>DESCRIPTION: 목록</p>
 	 * <p>IMPORTANT:</p>
@@ -152,9 +200,8 @@ public class Communitydao extends BaseDao {
 	/**
 	 * @param pagingDto [페이징 빈]
 	 * @return List<CommunityDto>
-	 * 
 	 * @since 2024-10-09
-	 * <p>DESCRIPTION: 목록</p>
+	 * <p>DESCRIPTION: 글쓰기폼</p>
 	 * <p>IMPORTANT:</p>
 	 * <p>EXAMPLE:</p>
 	 */

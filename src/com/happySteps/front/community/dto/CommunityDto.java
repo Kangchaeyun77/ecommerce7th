@@ -26,13 +26,14 @@ public class CommunityDto {
 	private String dt_upt		= "";	// 수정 일시
 	private int updater		= 0;	// 수정자
 	
+	private int like_count		= 0;
 	
 	
-	public String getTag() {
-		return tag;
+	public int getLike_count() {
+		return like_count;
 	}
-	public void setTag(String tag) {
-		this.tag = tag;
+	public void setLike_count(int like_count) {
+		this.like_count = like_count;
 	}
 	public int getRnum() {
 		return rnum;
@@ -88,7 +89,12 @@ public class CommunityDto {
 	public void setContent(String content) {
 		this.content = content;
 	}
-	
+	public String getTag() {
+		return tag;
+	}
+	public void setTag(String tag) {
+		this.tag = tag;
+	}
 	public String getNickname() {
 		return nickname;
 	}
