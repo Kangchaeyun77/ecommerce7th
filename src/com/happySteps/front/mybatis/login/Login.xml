@@ -8,6 +8,7 @@
 			, PASSWD
 			, MBR_NM
 			, ID
+			, NICKNAME
 		FROM
 			TB_MBR_MST
 		WHERE

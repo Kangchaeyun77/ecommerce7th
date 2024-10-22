@@ -30,7 +30,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<link rel="stylesheet" type="text/css" href="/css/table.css" />
+	<link rel="stylesheet" type="text/css" href="/css/communityTable.css" />
 	<link rel="stylesheet" href="/css/brdSearchArea.css">
 	<title>커뮤니티 정보 게시판</title>
 	<style></style>
