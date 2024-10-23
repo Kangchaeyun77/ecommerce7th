@@ -75,7 +75,8 @@
 		
 		.sale-price {
 			font-size: 20px;
-			color: #E74C3C; /* 원하는 가격 색상 */
+			color: #000000; /* 원하는 가격 색상 */
+			font-weight: bold;
 		}
 		
 		.button-container {
@@ -151,6 +152,9 @@
 		
 		.tablinks:hover {
 			text-decoration: underline;
+		}
+		.reviews {
+			font-size:16px;
 		}
 	</style>
 	
@@ -290,12 +294,17 @@
 						<p class="product-price"><fmt:formatNumber value="${productDto.price_cost}" pattern="#,###" />원가</p>
 						<p class="sale-price">할인가: <fmt:formatNumber value="${saleDto.price_sale}" pattern="#,###" />원</p>
 					</div>
-					<div class="box__score-awards" onclick="javascript:clickReviewSummary('200011603', '30', '3', 'B');">
-						<a href="#" class="sprite__vip2x--before link__score">
-							<span class="text__score"><span class="for-a11y">평점</span>4.8</span>
-							<span class="text__num">리뷰 5개</span>
-						</a>
-					</div>
+					<div class="rating_star">
+						<span class="rating secondary-font">
+						    ⭐️
+						    ⭐️
+						    ⭐️
+						    ⭐️
+						    ⭐️
+						    5.0
+						</span><a href="#"></a>
+						<span class="reviews">상품후기</span>
+		        	</div>
 					<div class="quantity-container" style="margin: 90px; margin-left: 0px ">
 						<button type="button" onclick="changeQuantity(-1)" class="circular-button">-</button>
 						<input type="text" id="count" name="buyList[0].count" value="1" style="text-align: center;" oninput="validateInput(this)">
