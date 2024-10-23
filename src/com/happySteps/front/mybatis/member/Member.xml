@@ -15,6 +15,16 @@
 			]]> 
 	</update>-->
 	
+	<select id="findId" parameterType="memberDto" resultType="memberDto">
+		SELECT 
+		 	ID 
+        FROM 
+        	TB_MBR_MST
+        WHERE 
+        	EMAIL = #{email}
+        	AND MBR_NM = #{mbr_nm}
+	</select>
+	
 	<select id="selectIdDuplicate" parameterType="memberDto" resultType="java.lang.Integer">
 		SELECT
 			COUNT(ID)
