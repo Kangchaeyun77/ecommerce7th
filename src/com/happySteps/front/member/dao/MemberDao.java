@@ -36,6 +36,14 @@ import com.happySteps.front.member.dto.MemberDto;
 @Repository("com.happySteps.front.member.dao.MemberDao")
 public class MemberDao extends BaseDao {
 	
+	public int newPasswd(MemberDto memberDto) {
+		return sqlSessionFront.update("kr.co.himedia.ecommerce.front.mybatis.member.Member.newPasswd", memberDto);
+	}
+	
+	public MemberDto findPasswd(MemberDto memberDto) {
+		return sqlSessionFront.selectOne("com.happySteps.front.mybatis.member.Member.findPasswd", memberDto);
+	}
+	
 	public MemberDto findId(MemberDto memberDto) {
 		return sqlSessionFront.selectOne("com.happySteps.front.mybatis.member.Member.findId", memberDto);
 	}
