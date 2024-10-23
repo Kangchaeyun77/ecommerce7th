@@ -302,8 +302,10 @@
 						    ⭐️
 						    ⭐️
 						    5.0
-						</span><a href="#"></a>
+						</span>
+						<a href="#">
 						<span class="reviews">상품후기</span>
+						</a>
 		        	</div>
 					<div class="quantity-container" style="margin: 90px; margin-left: 0px ">
 						<button type="button" onclick="changeQuantity(-1)" class="circular-button">-</button>
