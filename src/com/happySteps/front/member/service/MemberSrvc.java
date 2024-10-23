@@ -57,6 +57,10 @@ public class MemberSrvc {
 	@Inject
 	StatisticMemberDao statisticMemberDao;
 
+	public MemberDto findId(MemberDto memberDto) {
+		return memberDao.findId(memberDto);
+	}
+	
 	public int selectIdDuplicate(MemberDto memberDto) {
 		return memberDao.selectIdDuplicate(memberDto);
 	}

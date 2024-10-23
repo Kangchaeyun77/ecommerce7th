@@ -36,6 +36,10 @@ import com.happySteps.front.member.dto.MemberDto;
 @Repository("com.happySteps.front.member.dao.MemberDao")
 public class MemberDao extends BaseDao {
 	
+	public MemberDto findId(MemberDto memberDto) {
+		return sqlSessionFront.selectOne("com.happySteps.front.mybatis.member.Member.findId", memberDto);
+	}
+	
 	public int selectIdDuplicate(MemberDto memberDto) {
 		return sqlSessionFront.selectOne("com.happySteps.front.mybatis.member.Member.selectIdDuplicate", memberDto);
 	}

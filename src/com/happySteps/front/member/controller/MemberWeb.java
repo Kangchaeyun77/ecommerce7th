@@ -96,6 +96,79 @@ public class MemberWeb extends Common {
 	/**
 	 * @param request [요청 서블릿]
 	 * @param response [응답 서블릿]
+	 * @param boardDto [게시판 빈]
+	 * @return ModelAndView
+	 * 
+	 * @since 2024-08-02
+	 * <p>DESCRIPTION: 아이디 찾기 처리</p>
+	 * <p>IMPORTANT:</p>
+	 * <p>EXAMPLE:</p>
+	 */
+	@RequestMapping(value = "/front/member/findIdProc.web", method = RequestMethod.POST)
+	public ModelAndView findIdProc(HttpServletRequest request, HttpServletResponse response,
+	                                 MemberDto memberDto) {
+
+	    ModelAndView mav = new ModelAndView("redirect:/error.web");
+
+	    try {
+	        // HttpSession session = request.getSession();
+
+	        // 아이디 찾기 폼에서 입력한 사용자의 이름과 이메일을 가져옴
+	        String findNm		= request.getParameter("findNm");
+	        String findEmail	= request.getParameter("findEmail");
+
+	        // session.setAttribute("findNm", findNm);
+	        // session.setAttribute("findEmail", findEmail);
+	        
+	        //memberDto.setMbr_nm(findNm);
+	        //memberDto.setEmail(findEmail);
+	        
+	        logger.debug("인풋이름=" + findNm);
+	        logger.debug("인풋이메일=" + findEmail);
+	        /*
+	        if (findNm != null && findEmail != null) { // AND 연산으로 수정
+	            logger.debug("설정된 memberDto 이메일(findEmail): " + memberDto.getEmail());
+	            logger.debug("설정된 memberDto 이름(findNm): " + memberDto.getMbr_nm());
+	        }
+	        */
+	        // DB값을 불러오기
+	        String staticKey = staticProperties.getProperty("front.enc.user.aes256.key", "[UNDEFINED]");
+	        SKwithAES aes = new SKwithAES(staticKey);
+	        
+	        // 브라우저에서 입력한 값들을 암호화함
+	        memberDto.setMbr_nm(aes.encode(findNm));
+	        memberDto.setEmail(aes.encode(findEmail));
+
+	        MemberDto _memberDto = memberSrvc.findId(memberDto);
+	        
+	     // 암호화된 이름과 이메일 비교
+	        if (_memberDto != null) {
+	            
+	            logger.debug("복호화된 ID: " + aes.decode(_memberDto.getId()));
+
+	            // 브라우저에 ID 출력
+	            // request.setAttribute("foundId", aes.decode(memberDto.getId()));
+	            
+	            mav.addObject("foundId", aes.decode(_memberDto.getId()));
+	            mav.setViewName("front/member/findIdForm"); // ID를 보여줄 JSP 페이지로 리디렉션
+	            
+	        }
+	        else {
+	            logger.debug("이름 또는 이메일이 일치하지 않습니다.");
+	            mav.setViewName("front/member/termAgreeForm");
+	        }
+	        
+	        
+	    } 
+	    catch (Exception e) {
+	        logger.error("[" + this.getClass().getName() + ".findIdProc()] " + e.getMessage(), e);
+	    } 
+	    return mav;
+	}
+	
+	/**
+	 * @param request [요청 서블릿]
+	 * @param response [응답 서블릿]
 	 * @return ModelAndView
 	 * 
 	 * @since 2024-10-04
