@@ -134,7 +134,7 @@ public class SaleWeb extends Common {
 	 * @return ModelAndView
 	 * 
 	 * @since 2024-07-12
-	 * <p>DESCRIPTION:</p>
+	 * <p>DESCRIPTION: 상품 전체 페이지</p>
 	 * <p>IMPORTANT:</p>
 	 * <p>EXAMPLE:</p>
 	 */

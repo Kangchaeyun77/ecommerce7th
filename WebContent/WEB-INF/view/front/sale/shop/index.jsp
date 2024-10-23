@@ -75,7 +75,12 @@
 		.product:hover {
 		transform: translateY(-10px);
 		box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
-	}
+		}
+		.product_name {
+        	font-size: 21px;
+        	font-weight: bold;
+        	margin : 20px;
+        }
 	</style>
 </head>
 <body>
@@ -162,11 +167,14 @@
 						</c:when>
 						<c:otherwise>
 							<c:forEach items="${list}" var="list">
-								<div class="product">
+								<div class="product" style="text-decoration: none;">
 									<a href="javascript:goWriteForm(${list.seq_sle});"><img src="${list.img}" class="img-fluid rounded-4" alt="image"></a>
 									<div>
-										<a href="javascript:goWriteForm(${list.seq_sle});"><span>${list.sle_nm}</span>
-										</a>
+										<div class="product_name">
+											<a href="javascript:goWriteForm(${list.seq_sle});">
+											<span>${list.sle_nm}</span>
+											</a>
+										</div>
 										<div class="card-text">
 											<span class="rating secondary-font">
 											    ⭐️
