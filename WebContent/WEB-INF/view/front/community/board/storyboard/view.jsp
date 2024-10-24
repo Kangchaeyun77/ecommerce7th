@@ -54,11 +54,6 @@
 	var seq_bbs = "${communityDto.seq_bbs}"; 
     loadComments(seq_bbs); // seq_bbs는 필요한 값으로 설정
 });
-	
-	var seq_bbs = "${communityDto.seq_bbs}";
-	window.onload = function() {
-	    loadComments(seq_bbs);  // 페이지 로드 시 댓글 목록을 불러옴
-	};
 
 function loadComments(seq_bbs) {
 	// 게시물 ID가 유효하지 않은 경우
@@ -153,26 +148,6 @@ function loadComments(seq_bbs) {
 				console.error('Error:', error); // 오류 메시지 출력
 			});
 		}
-	// 댓글 또는 대댓글 삭제
-	function deleteComment(seq_comment) {
-		if (confirm('정말 삭제하시겠습니까?')) {
-			fetch('/front/community/comment/delete.web', {
-				method: 'POST',
-				headers: {
-					'Content-Type': 'application/json',
-				},
-				body: JSON.stringify({ seq_comment: seq_comment })
-			})
-			.then(response => response.json())
-			.then(data => {
-				alert('댓글이 삭제되었습니다.');
-				location.reload();  // 삭제 후 페이지 새로고침
-			})
-			.catch((error) => {
-				console.error('Error:', error);
-			});
-		}
-	}
 	//좋아요 이미지 클릭 시 이모지 변경
 	function toggleLike(seq_bbs) {
 		const likeElement = document.getElementById('likeElement'); // 이모지를 표시할 요소
