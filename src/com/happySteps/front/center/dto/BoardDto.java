@@ -49,8 +49,15 @@ public class BoardDto {
 	private int register		= 0;	// 등록자
 	private String dt_upt		= "";	// 수정 일시
 	private int updater			= 0;	// 수정자
+	private int seq_mbr		= 0;	// 회원 일련번호
 	
 	
+	public int getSeq_mbr() {
+		return seq_mbr;
+	}
+	public void setSeq_mbr(int seq_mbr) {
+		this.seq_mbr = seq_mbr;
+	}
 	public String getExtension() {
 		return extension;
 	}
