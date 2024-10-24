@@ -37,7 +37,7 @@ import com.happySteps.front.member.dto.MemberDto;
 public class MemberDao extends BaseDao {
 	
 	public int newPasswd(MemberDto memberDto) {
-		return sqlSessionFront.update(com.happySteps.front.mybatis.member.Member.newPasswd", memberDto);
+		return sqlSessionFront.update("kr.co.himedia.ecommerce.front.mybatis.member.Member.newPasswd", memberDto);
 	}
 	
 	public MemberDto findPasswd(MemberDto memberDto) {

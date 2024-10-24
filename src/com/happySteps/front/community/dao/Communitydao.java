@@ -4,7 +4,6 @@ import java.util.List;
 
 import org.springframework.stereotype.Repository;
 
-import com.happySteps.front.comment.dto.CommentDto;
 import com.happySteps.front.common.dao.BaseDao;
 
 import com.happySteps.front.community.dto.CommunityDto;
@@ -20,48 +19,6 @@ import com.happySteps.front.common.dto.PagingDto;
  */
 @Repository("com.happySteps.front.community.dao.Communitydao")
 public class Communitydao extends BaseDao {
-	
-	
-	/**
-	 * @param communityDto
-	 * @since 2024-10-22
-	 * <p>DESCRIPTION: 댓글 등록</p>
-	 * <p>IMPORTANT:</p>
-	 * <p>EXAMPLE:</p>
-	 */
-	public void insertComment(CommentDto commentDto) {
-		sqlSessionFront.insert("com.happySteps.front.mybatis.community.Community.insertComment", commentDto);
-	}
-	/**
-	 * @param commentDto
-	 * @since 2024-10-22
-	 * <p>DESCRIPTION: 댓글 수정</p>
-	 * <p>IMPORTANT:</p>
-	 * <p>EXAMPLE:</p>
-	 */
-	public void updateComment(CommentDto commentDto) {
-		sqlSessionFront.update("com.happySteps.front.mybatis.community.Community.updateComment", commentDto);
-	}
-	/**
-	 * @param communityDto
-	 * @since 2024-10-22
-	 * <p>DESCRIPTION: 댓글 삭제</p>
-	 * <p>IMPORTANT:</p>
-	 * <p>EXAMPLE:</p>
-	 */
-	public void deleteComment(int seq_comment) {
-		sqlSessionFront.delete("com.happySteps.front.mybatis.community.Community.deleteComment", seq_comment);
-	}
-	/**
-	 * @param communityDto
-	 * @since 2024-10-22
-	 * <p>DESCRIPTION: 댓글 목록 조회</p>
-	 * <p>IMPORTANT:</p>
-	 * <p>EXAMPLE:</p>
-	 */
-	public List<CommentDto> selectComments(int seq_bbs) {
-		return sqlSessionFront.selectList("com.happySteps.front.mybatis.community.Community.selectComments", seq_bbs);
-	}	
 	/**
 	 * @param likeDto
 	 * @return 좋아요 개수

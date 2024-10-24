@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.happySteps.front.mybatis.member.Member">
 
-<update id="newPasswd" parameterType="memberDto">
+	<update id="newPasswd" parameterType="memberDto">
 		UPDATE
 			TB_MBR_MST
 		SET
@@ -136,7 +136,6 @@
 			, mst.MBR_NM
 			, mst.GENDER
 			, mst.PHONE
-			, mst.PETS
 			, dtl.POST
 			, dtl.ADDR1
 			, dtl.ADDR2

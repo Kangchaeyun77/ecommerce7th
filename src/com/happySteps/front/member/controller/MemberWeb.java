@@ -69,72 +69,6 @@ public class MemberWeb extends Common {
 	@Inject
 	private EmailCmpn emailCmpn;
 	
-	@Autowired 
-	private MessageSourceAccessor dynamicProperties;
-	
-	@Inject
-	private EmailCmpn emailCmpn;
-	
-	
-	@Inject
-	private MemberSrvc memberSrvc;
-	
-	/**
-	 * @param request [요청 서블릿]
-	 * @param response [응답 서블릿]
-	 * @return ModelAndView
-	 * 
-	 * @since 2024-09-19
-	 * <p>DESCRIPTION: 이메일 인증</p>
-	 * <p>IMPORTANT:</p>
-	 * <p>EXAMPLE:</p>
-	 */
-	@Autowired 
-	private MessageSourceAccessor dynamicProperties;
-	
-	@Inject
-	private EmailCmpn emailCmpn;
-	
-	
-	@Inject
-	private MemberSrvc memberSrvc;
-	
-	/**
-	 * @param request [요청 서블릿]
-	 * @param response [응답 서블릿]
-	 * @return ModelAndView
-	 * 
-	 * @since 2024-09-19
-	 * <p>DESCRIPTION: 이메일 인증</p>
-	 * <p>IMPORTANT:</p>
-	 * <p>EXAMPLE:</p>
-	 */
-	@Autowired 
-	private MessageSourceAccessor dynamicProperties;
-	
-	@Inject
-	private EmailCmpn emailCmpn;
-	
-	
-	@Inject
-	private MemberSrvc memberSrvc;
-	
-	/**
-	 * @param request [요청 서블릿]
-	 * @param response [응답 서블릿]
-	 * @return ModelAndView
-	 * 
-	 * @since 2024-09-19
-	 * <p>DESCRIPTION: 이메일 인증</p>
-	 * <p>IMPORTANT:</p>
-	 * <p>EXAMPLE:</p>
-	 */
-	@Autowired 
-	private MessageSourceAccessor dynamicProperties;
-	
-	@Inject
-	private EmailCmpn emailCmpn;
-	
 	
 	@Inject
 	private MemberSrvc memberSrvc;
@@ -295,92 +229,6 @@ public class MemberWeb extends Common {
 	 * @return ModelAndView
 	 * 
 	 * @since 2024-08-02
-	 * <p>DESCRIPTION: 비밀번호 찾기 처리</p>
-	 * <p>IMPORTANT:</p>
-	 * <p>EXAMPLE:</p>
-	 */
-	@RequestMapping(value = "/front/member/findPasswdProc.web", method = RequestMethod.POST)
-	public ModelAndView findPasswdProc(HttpServletRequest request, HttpServletResponse response,MemberDto memberDto) {
-
-	    ModelAndView mav = new ModelAndView("redirect:/error.web");
-
-	    try {
-	        // 아이디 찾기 폼에서 입력한 사용자의 이름과 이메일을 가져옴
-	        String id		= request.getParameter("id");
-	        String email	= request.getParameter("email");
-	        String name		= request.getParameter("name");
-	        
-	        logger.debug("인풋이름=" + id);
-	        logger.debug("인풋이메일=" + email);
-	        logger.debug("인풋이메일=" + name);
-	   
-	        // 해쉬 암호화(SHA-256)
-	     	memberDto.setPasswd(HSwithSHA.encode(memberDto.getPasswd()));
-	        
-	        // DB값을 불러오기
-	        String staticKey = staticProperties.getProperty("front.enc.user.aes256.key", "[UNDEFINED]");
-	        SKwithAES aes = new SKwithAES(staticKey);
-	        
-	        // 브라우저에서 입력한 값들을 암호화함
-	        memberDto.setId(aes.encode(id));
-	        memberDto.setEmail(aes.encode(email));
-	        memberDto.setMbr_nm(aes.encode(name));
-	        
-	        //logger.debug("인풋이름=" + aes.encode(id));
-	        
-	        MemberDto _memberDto = memberSrvc.findPasswd(memberDto);
-	        
-	        if (_memberDto != null) {
-	        	
-	            // 랜덤 임시 비밀번호 생성
-	            int length = 8;
-	            StringBuilder sb = new StringBuilder();
-	            Random rd = new Random();
-
-	            for (int i = 0; i < length; i++) {
-	                if (rd.nextBoolean()) {
-	                    sb.append(rd.nextInt(10)); // 0-9 숫자 추가
-	                } else {
-	                    sb.append((char) (rd.nextInt(26) + 65)); // A-Z 대문자 추가
-	                }
-	            }
-	            String temporaryPassword = sb.toString(); // 생성된 임시 비밀번호
-
-	            logger.debug("temporaryPassword=" +temporaryPassword);
-	            // 가입 축하 이메일 발송 
-	            EmailDto emailDto = new EmailDto();
-	            emailDto.setSender(dynamicProperties.getMessage("email.sender.mail"));
-	            emailDto.setTo(new String[]{memberDto.getEmail()});
-	            emailDto.setSubject("임시비밀번호");
-	            emailDto.setMessage("<b>임시 비밀번호</b>: " 
-	            		+ "http://127.0.0.1:8080/front/member/confirmEmail.web?Passwd=" + temporaryPassword 
-	            + "</br>");
-	            
-	            mav.addObject("foundPasswd", HSwithSHA.encode(memberDto.getPasswd()));
-	            
-	            mav.setViewName("front/login/loginForm"); // ID를 보여줄 JSP 페이지로 리디렉션
-	            
-	            logger.debug("비밀번호?="+memberDto.getPasswd());
-	        }
-	        else {
-	            logger.debug("다시 한번 확인해주세요.");
-	            mav.setViewName("front/member/termAgreeForm");
-	        }
-	    } 
-	    catch (Exception e) {
-	        logger.error("[" + this.getClass().getName() + ".findIdProc()] " + e.getMessage(), e);
-	    } 
-	    return mav;
-	}
-	
-	
-	/**
-	 * @param request [요청 서블릿]
-	 * @param response [응답 서블릿]
-	 * @param boardDto [게시판 빈]
-	 * @return ModelAndView
-	 * 
-	 * @since 2024-08-02
 	 * <p>DESCRIPTION: 아이디 찾기 처리</p>
 	 * <p>IMPORTANT:</p>
 	 * <p>EXAMPLE:</p>
@@ -446,6 +294,7 @@ public class MemberWeb extends Common {
 	    } 
 	    return mav;
 	}
+	
 	/**
 	 * @param request [요청 서블릿]
 	 * @param response [응답 서블릿]
@@ -516,7 +365,7 @@ public class MemberWeb extends Common {
 	 * }
 	 */
 			
-/**
+	/**
 	 * @param request [요청 서블릿]
 	 * @param response [응답 서블릿]
 	 * @param boardDto [게시판 빈]
@@ -607,14 +456,6 @@ public class MemberWeb extends Common {
 			_memberDto.setPost(aes.decode(_memberDto.getPost()));
 			_memberDto.setAddr1(aes.decode(_memberDto.getAddr1()));
 			_memberDto.setAddr2(aes.decode(_memberDto.getAddr2()));
-			_memberDto.setId(aes.decode(_memberDto.getId()));
-			
-			String pets = "N"; // 기본값을 'N'으로 설정
-			if (request.getParameter("pets1") != null) pets = pets.substring(0, 0) + "Y"; // 강아지
-			if (request.getParameter("pets2") != null) pets = pets.substring(0, 1) + "Y"; // 고양이
-			if (request.getParameter("pets3") != null) pets = pets.substring(0, 2) + "Y"; // 햄스터
-			if (request.getParameter("pets4") != null) pets = pets.substring(0, 3) + "Y"; // 파충류
-			if (request.getParameter("pets5") != null) pets = pets.substring(0, 4) + "Y"; // 기타
 			
 			mav.addObject("memberDto", _memberDto);
 			

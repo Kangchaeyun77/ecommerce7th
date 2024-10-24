@@ -29,7 +29,6 @@
 <html lang="ko">
 <head>
 	<link rel="stylesheet" href="/css/form.css">
-	<c:set var="nickname" value="${sessionScope.nickname}" />
 	<style></style>
 	<script>
 		function goList() {
@@ -41,7 +40,7 @@
 		function writeProc() {
 			var frmMain = document.getElementById("frmMain");
 			var selectedCtg = document.getElementById("cd_ctg").value; // 선택된 카테고리 값 가져오기
-			var nickname = document.getElementById("nickname").value;//닉네임 값 가져오기
+
 			// 필수 항목 체크
 			if (document.getElementById("title").value === "" ||
 				selectedCtg === "0" ||
@@ -112,9 +111,12 @@
 		
 	</script>
 </head>
+
 <body>
-<input type="hidden" id="nickname" name="nickname" value="${nickname}" />  
-<input type="hidden" id="nickname" name="nickname" value="<%= session.getAttribute("NICKNAME") %>" />
+	<c:set var="nickname" value="${sessionScope.nickname}" />
+	<input type="hidden" id="nickname" name="nickname" value="${nickname}" />  
+	<input type="hidden" id="nickname" name="nickname" value="<%= session.getAttribute("nickname") %>" />
+
 	<div style="position: relative; height: 250px; overflow: hidden; margin-top: 10px;">
 		<a href="/front/">
 			<img src="/images/logo/logo3.png" alt="로고" style="width: 380px; height: 250px; object-fit: cover; display: block; margin: 0 auto;" />
