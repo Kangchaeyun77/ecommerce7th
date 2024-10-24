@@ -136,6 +136,7 @@
 			, mst.MBR_NM
 			, mst.GENDER
 			, mst.PHONE
+			, mst.PETS
 			, dtl.POST
 			, dtl.ADDR1
 			, dtl.ADDR2
@@ -150,7 +151,6 @@
 		WHERE
 			mst.SEQ_MBR = #{seq_mbr}
 	</select>
-	
 	<insert id="insertMaster" parameterType="memberDto">
 		INSERT INTO TB_MBR_MST
 			(SEQ_MBR, ID, PASSWD, NICKNAME, CD_STATE, FLG_PETS, PETS, EMAIL, MBR_NM, GENDER, PHONE, DT_REG, REGISTER)

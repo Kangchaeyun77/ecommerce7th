@@ -364,7 +364,6 @@ public class MemberWeb extends Common {
 	 * 
 	 * }
 	 */
-			
 	/**
 	 * @param request [요청 서블릿]
 	 * @param response [응답 서블릿]
@@ -456,6 +455,14 @@ public class MemberWeb extends Common {
 			_memberDto.setPost(aes.decode(_memberDto.getPost()));
 			_memberDto.setAddr1(aes.decode(_memberDto.getAddr1()));
 			_memberDto.setAddr2(aes.decode(_memberDto.getAddr2()));
+			_memberDto.setId(aes.decode(_memberDto.getId()));
+			
+			String pets = "N"; // 기본값을 'N'으로 설정
+			if (request.getParameter("pets1") != null) pets = pets.substring(0, 0) + "Y"; // 강아지
+			if (request.getParameter("pets2") != null) pets = pets.substring(0, 1) + "Y"; // 고양이
+			if (request.getParameter("pets3") != null) pets = pets.substring(0, 2) + "Y"; // 햄스터
+			if (request.getParameter("pets4") != null) pets = pets.substring(0, 3) + "Y"; // 파충류
+			if (request.getParameter("pets5") != null) pets = pets.substring(0, 4) + "Y"; // 기타
 			
 			mav.addObject("memberDto", _memberDto);
 			
