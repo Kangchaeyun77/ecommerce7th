@@ -3,12 +3,10 @@ package com.happySteps.front.community.controller;
 import java.io.File;
 import java.util.Hashtable;
 import java.util.LinkedList;
-import java.util.List;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -39,7 +37,7 @@ import com.happySteps.front.community.service.CommunitySrvc;
  * <p>DESCRIPTION: 커뮤니티(전체글/인기글/자유게시판/Q&A/입양후기/정보글) 컨트롤러</p>
  * <p>IMPORTANT:</p>
  */
-@Controller("com.happySteps.front.community.controller.Community")
+@Controller("com.happySteps.front.community.controller.CommunityWeb")
 public class CommunityWeb extends Common {
 	
 	/** Logger */
@@ -421,15 +419,14 @@ public class CommunityWeb extends Common {
 			// 글을 쓸 때 세션에서 seq_mbr값을 체크
 			communityDto.setRegister(Integer.parseInt(getSession(request, "SEQ_MBR")));
 			
-			// 글 쓰기 처리 과정에서 세션에서 닉네임을 가져옴
-			HttpSession session = request.getSession();
-			String nickname = (String) session.getAttribute("NICKNAME");
-			request.setAttribute("NICKNAME", nickname);
+			String nickname = getSession(request, "NICKNAME");
+			logger.debug("NICKNAME = " + nickname);
+			
 			communityDto.setNickname(nickname);
 			
 			//닉네임이 없으면 에러 처리
 			if(nickname == null) {
-				//logger.error("닉네임="+nickname);
+				logger.error("없니 닉네임="+nickname);
 				request.setAttribute("script", "alert('닉네임이 없습니다. 로그인 후 다시 시도해 주세요.');");
 				request.setAttribute("redirect", "/front/login/loginForm.web"); 
 				

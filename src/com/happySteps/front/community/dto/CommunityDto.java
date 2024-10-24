@@ -2,33 +2,53 @@ package com.happySteps.front.community.dto;
 
 public class CommunityDto {
 	
-	private int rnum			= 0;	// 글 순번
-	private int seq_bbs		= 0;	// 글 일련번호
-	private int seq_bbs_parent	= 0;	// 글 상위 일련번호
-	private int seq_reply		= 0;	// 답변 일련번호
-	private int cd_bbs_type	= 0;	// 게시판 종류: 공지사항(1),FAQ(2),문의(3),입양(4),커뮤니티(전체글)(5)인기글(6),자유게시판(7),Q&A(8),입양후기(9),정보글(11),기타(12)
-	private String title		= "";	// 제목
-	private int cd_ctg			= 0;	// 카테고리 코드 자유게시판(7),Q&A(8),입양후기(9),정보글(11)
-	private int cd_ctg_pet		= 0;	// 카테고리 코드:강아지(1),고양이(2),햄스터(3),파충류(4),기타(5)
-	private String ctg_nm		= "";	// 카테고리 명칭
-	private String content		= "";	// 내용
-	private String tag			= "";	// 태그
-	private String nickname		= "";	// 닉네임
-	private String flg_delete	= "";	// 삭제 여부
-	private String flg_top		= "";	// 최상위 여부
-	private String flg_reply	= "";	// 답변 여부
-	private int readed			= 0;	// 조회수
-	private String file_save	= "";	// 저장 파일명
-	private String file_orig	= "";	// 원본 파일명
-	private String extension	= "";	// 원본 파일명 확장자
-	private String dt_reg		= "";	// 등록 일시
-	private int register		= 0;	// 등록자
-	private String dt_upt		= "";	// 수정 일시
-	private int updater		= 0;	// 수정자
+	private int rnum				= 0;	// 글 순번
+	private int seq_bbs			= 0;	// 글 일련번호
+	private int seq_bbs_parent		= 0;	// 글 상위 일련번호
+	private int seq_comment		= 0;	// 댓글 일련번호
+	private int seq_comment_parent	= 0;	// 글 상위 일련번호
+	private int seq_reply			= 0;	// 답변 일련번호
+	private int cd_bbs_type		= 0;	// 게시판 종류: 공지사항(1),FAQ(2),문의(3),입양(4),커뮤니티(전체글)(5)인기글(6),자유게시판(7),Q&A(8),입양후기(9),정보글(11),기타(12)
+	private String title			= "";	// 제목
+	private int cd_ctg				= 0;	// 카테고리 코드 자유게시판(7),Q&A(8),입양후기(9),정보글(11)
+	private int cd_ctg_pet			= 0;	// 카테고리 코드:강아지(1),고양이(2),햄스터(3),파충류(4),기타(5)
+	private String ctg_nm			= "";	// 카테고리 명칭
+	private String content			= "";	// 내용
+	private String tag				= "";	// 태그
+	private String nickname			= "";	// 닉네임
+	private String flg_delete		= "";	// 삭제 여부
+	private String flg_top			= "";	// 최상위 여부
+	private String flg_reply		= "";	// 답변 여부
+	private int readed				= 0;	// 조회수
+	private String file_save		= "";	// 저장 파일명
+	private String file_orig		= "";	// 원본 파일명
+	private String extension		= "";	// 원본 파일명 확장자
+	private String dt_reg			= "";	// 등록 일시
+	private int register			= 0;	// 등록자
+	private String dt_upt			= "";	// 수정 일시
+	private int updater				= 0;	// 수정자
 	
-	private int like_count		= 0;
+	private int like_count			= 0;	// 좋아요 카운트
+	private int seq_mbr				= 0;	// 회원 일련번호
 	
-	
+	public int getSeq_mbr() {
+		return seq_mbr;
+	}
+	public void setSeq_mbr(int seq_mbr) {
+		this.seq_mbr = seq_mbr;
+	}
+	public int getSeq_comment() {
+		return seq_comment;
+	}
+	public void setSeq_comment(int seq_comment) {
+		this.seq_comment = seq_comment;
+	}
+	public int getSeq_comment_parent() {
+		return seq_comment_parent;
+	}
+	public void setSeq_comment_parent(int seq_comment_parent) {
+		this.seq_comment_parent = seq_comment_parent;
+	}
 	public int getLike_count() {
 		return like_count;
 	}
