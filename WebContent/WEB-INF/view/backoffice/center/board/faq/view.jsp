@@ -26,10 +26,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<%@ include file="/include/console/header.jsp" %>
-	<link rel="stylesheet" type="text/css" title="common stylesheet" href="/css/layoutSubmain.css" />
-	<link rel="stylesheet" type="text/css" title="common stylesheet" href="/css/table.css" />
-	<style></style>
+	<%@ include file="/include/bfc/header.jsp" %>
 	<script>
 		function remove(value) {
 			var frmMain = document.getElementById("frmMain");
@@ -56,31 +53,23 @@
 		}
 	</script>
 </head>
-<body>
+<body class="nav-md">
+<%@ include file="/include/bfc/navi.jsp" %>
 <form id="frmMain" method="POST">
 <input type="hidden" id="cd_bbs_type"	name="cd_bbs_type" />
 <input type="hidden" id="seq_bbs"		name="seq_bbs"		value="${boardDto.seq_bbs}" />
-<div class="container">
-	<header>
-		<%@ include file="/include/console/top.jsp" %>
-	</header>
-	<nav>
-		<%@ include file="/include/console/gnb.jsp" %>
-	</nav>
-	<section class="content">
-		<nav>
-			<%@ include file="/include/console/lnbCenter.jsp" %>
-		</nav>
-		<article class="txtCenter">
-			<table class="headLeft_01" style="width: 900px; margin-left: auto; margin-right: auto">
+<div class="table">
+	<section class="right_col">
+		<article class="x_panel">
+			<table class="table table-striped" style="width: 100%; margin-left: auto; margin-right: auto">
 				<tr>
-					<th style="width: 150px;">제목</th>
+					<th style="width: 150px;border-left:3px solid #369;">제목</th>
 					<td>
 						${boardDto.title}
 					</td>
 				</tr>
 				<tr>
-					<th>카테고리</th>
+					<th style="width: 150px;border-left:3px solid #369;">카테고리</th>
 					<td>
 						<select id="cd_ctg" name="cd_ctg" disabled>
 							<option value="0"<c:if test="${boardDto.cd_ctg == '0'}"> selected</c:if>>선택</option>
@@ -95,19 +84,19 @@
 					</td>
 				</tr>
 				<tr>
-					<th>내용</th>
-					<td class="content">
+					<th style="width: 150px;border-left:3px solid #369;">내용</th>
+					<td style="height:300px;">
 						${boardDto.content}
 					</td>
 				</tr>
 				<tr>
-					<th>등록 일자</th>
+					<th style="width: 150px;border-left:3px solid #369;">등록 일자</th>
 					<td>
 						${boardDto.dt_reg}
 					</td>
 				</tr>
 			</table>
-			<div style="width: 900px; margin-left: auto; margin-right: auto">
+			<div class="col-md-12 col-sm-12 col-xs-12" style="text-align: center;">
 				<input type="button" value="삭제" style="width:100px" onclick="javascript:remove(2);" />
 				 <input type="button" value="수정" style="width:100px" onclick="javascript:modifyForm(2);" />
 				 <input type="button" value="목록" style="width:100px" onclick="javascript:goList(2);"/>
@@ -116,7 +105,7 @@
 		<aside></aside>
 	</section>
 	<footer>
-		<%@ include file="/include/console/footer.jsp" %>
+		<%@ include file="/include/bfc/footer.jsp" %>
 	</footer>
 </div>
 </form>

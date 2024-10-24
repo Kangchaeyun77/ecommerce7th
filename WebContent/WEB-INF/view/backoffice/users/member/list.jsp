@@ -27,9 +27,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<%@ include file="/include/console/header.jsp" %>
-	<link rel="stylesheet" type="text/css" title="common stylesheet" href="/css/layoutSubmain.css" />
-	<link rel="stylesheet" type="text/css" title="common stylesheet" href="/css/table.css" />
+	<%@ include file="/include/bfc/header.jsp" %>
 	<style></style>
 	<script>
 		
@@ -66,24 +64,16 @@
 		}
 	</script>
 </head>
-<body>
+<body class="nav-md">
+<%@ include file="/include/bfc/navi.jsp" %>
 <form id="frmMain" method="POST" action="/console/users/member/list.web">
 <input type="hidden" name="seq_mbr"		id="seq_mbr" />
 <input type="hidden" name="cd_state"	id="cd_state" />
 <input type="hidden" name="currentPage"	id="currentPage" value="${paging.currentPage}" />
-<div class="container">
-	<header>
-		<%@ include file="/include/console/top.jsp" %>
-	</header>
-	<nav>
-		<%@ include file="/include/console/gnb.jsp" %>
-	</nav>
-	<section class="content">
-		<nav>
-			<%@ include file="/include/console/lnbUsers.jsp" %>
-		</nav>
-		<article class="txtCenter">
-			<div class="brdSearchArea">
+<div class="table">
+	<section class="right_col">
+		<article class="x_panel">
+			<div class="form-group pull-right">
 				<select name="searchKey">
 					<option value="id"<c:if test="${paging.searchKey == 'id'}"> selected</c:if>>아이디</option>
 					<option value="nickname"<c:if test="${paging.searchKey == 'nickname'}"> selected</c:if>>닉네임</option>
@@ -91,15 +81,15 @@
 				</select>
 				<input type="text" name="searchWord" id="searchWord" value="${paging.searchWord}" /> <input type="submit" value="검색"/>
 			</div>
-			<div class="brdInfo">전체 ${paging.totalLine}개[${paging.currentPage}/${paging.totalPage} 페이지]</div>
-			<table class="headTop_01" style="width: 900px; margin-left: auto; margin-right: auto">
+			<div class="col-md-3 col-sm-3 col-xs-3">전체 ${paging.totalLine}개[${paging.currentPage}/${paging.totalPage} 페이지]</div>
+			<table class="table table-striped">
 				<tr>
-					<th style="width: 5%">NO</th>
-					<th>아이디</th>
-					<th>닉네임</th>
+					<th style="width: 5%; border-left:3px solid #369;">NO</th>
+					<th style="width: 10%">아이디</th>
+					<th style="width: 10%">닉네임</th>
 					<th style="width: 10%">상태</th>
-					<th style="width: 15%">성명</th>
-					<th style="width: 10%">성별</th>
+					<th style="width: 10%">성명</th>
+					<th style="width: 7%">성별</th>
 					<th style="width: 10%">등록일</th>
 				</tr>
 				<c:choose>
@@ -111,10 +101,10 @@
 					<c:otherwise>
 						<c:forEach items="${list}" var="list">
 						<tr>
-							<td>
+							<td style="border-left:3px solid #369;">
 								${list.rnum}
 							</td>
-							<td class="txtRight">
+							<td class="txtCenter">
 								<a href="javascript:goModifyForm(${list.seq_mbr});">
 									<plutozoneUtilTag:masking text="${list.id}" letter="*" count="3" mode="right" />
 								</a>
@@ -134,7 +124,7 @@
 								</select>
 							</td>
 							<td>
-								<plutozoneUtilTag:masking text="${list.mbr_nm}" letter="*" count="1" mode="left" />
+								<plutozoneUtilTag:masking text="${list.mbr_nm}" letter="*" count="1" mode="right" />
 							</td>
 							<td>
 								<c:choose>
@@ -151,12 +141,14 @@
 				</c:choose>
 			</table>
 			<br/>
-			<plutozoneUtilTag:page styleID="admin_text" currentPage="${paging.currentPage}" linePerPage="${paging.linePerPage}" totalLine="${paging.totalLine}" scriptFunction="goPage" />
+			<div class="col-md-12 col-sm-12 col-xs-12" style="text-align: center;">
+				<plutozoneUtilTag:page styleID="admin_text" currentPage="${paging.currentPage}" linePerPage="${paging.linePerPage}" totalLine="${paging.totalLine}" scriptFunction="goPage" />
+			</div>
 		</article>
 		<aside></aside>
 	</section>
 	<footer>
-		<%@ include file="/include/console/footer.jsp" %>
+		<%@ include file="/include/bfc/footer.jsp" %>
 	</footer>
 </div>
 </form>

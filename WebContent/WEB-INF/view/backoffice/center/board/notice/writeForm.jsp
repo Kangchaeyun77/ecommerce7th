@@ -25,10 +25,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<%@ include file="/include/console/header.jsp" %>
-	<link rel="stylesheet" type="text/css" title="common stylesheet" href="/css/layoutSubmain.css" />
-	<link rel="stylesheet" type="text/css" title="common stylesheet" href="/css/table.css" />
-	<style></style>
+	<%@ include file="/include/bfc/header.jsp" %>
 	<script type="text/javascript" src="/js/package/tinymce/tinymce.min.js"></script>
 	<script type="text/javascript" src="/js/package/tinymce.js"></script>
 	<script>
@@ -65,27 +62,21 @@
 		}
 	</script>
 </head>
-<body>
+<body class="nav-md">
+<%@ include file="/include/bfc/navi.jsp" %>
 <form id="frmMain" method="POST" enctype="multipart/form-data">
 <input type="hidden" id="cd_bbs_type" name="cd_bbs_type" />
-<div class="container">
-	<header>
-		<%@ include file="/include/console/top.jsp" %>
-	</header>
-	<nav>
-		<%@ include file="/include/console/gnb.jsp" %>
-	</nav>
-	<section class="content">
-		<nav>
-			<%@ include file="/include/console/lnbCenter.jsp" %>
-		</nav>
-		<article class="txtCenter">
-			<table class="headLeft_01" style="width: 900px; margin-left: auto; margin-right: auto">
+<div class="table">
+	<section class="right_col">
+		<article class="x_panel">
+			<table class="table table-striped" style="width: 100%; margin-left: auto; margin-right: auto">
 				<tr>
 					<th style="width: 150px;">제목(*)</th>
 					<td>
-						<input type="text" id="title" name="title" style="width: 650px;" required />
-						 <input type="checkbox" id= "flg_top" name="flg_top" value=""/> 최상위
+						<input value="${boardDto.title}" type="text" id="title" name="title" style="width: 80%;" required />
+						<div class="pull-right" >
+							<input type="checkbox" id="flg_top" name="flg_top" <c:if test="${boardDto.flg_top == 'Y'}">checked</c:if>> 최상위
+						</div>
 					</td>
 				</tr>
 				<tr>
@@ -101,12 +92,12 @@
 						<!--
 						<input type="file" id="files[1]" name="files[1]" />
 						<input type="file" id="files[2]" name="files[2]" />
-						-->
-						<input type="file" id="files[11]" name="files[11]" />
+						
+						<input type="file" id="files[11]" name="files[11]" />-->
 					</td>
 				</tr>
 			</table>
-			<div style="width: 900px; margin-left: auto; margin-right: auto">
+			<div class="col-md-12 col-sm-12 col-xs-12" style="text-align: center;">
 				<input type="button" value="등록" style="width:100px" onclick="javascript:writeProc(1);" />
 				 <input type="button" value="목록" style="width:100px" onclick="javascript:goList(1);"/>
 			</div>
@@ -114,7 +105,7 @@
 		<aside></aside>
 	</section>
 	<footer>
-		<%@ include file="/include/console/footer.jsp" %>
+		<%@ include file="/include/bfc/footer.jsp" %>
 	</footer>
 </div>
 </form>

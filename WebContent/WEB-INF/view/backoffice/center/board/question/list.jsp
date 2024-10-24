@@ -27,10 +27,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<%@ include file="/include/console/header.jsp" %>
-	<link rel="stylesheet" type="text/css" title="common stylesheet" href="/css/layoutSubmain.css" />
-	<link rel="stylesheet" type="text/css" title="common stylesheet" href="/css/table.css" />
-	<style></style>
+	<%@ include file="/include/bfc/header.jsp" %>
 	<script>
 		function goPage(value) {
 			
@@ -54,23 +51,15 @@
 		}
 	</script>
 </head>
-<body>
+<body class="nav-md">
+<%@ include file="/include/bfc/navi.jsp" %>
 <form id="frmMain" method="POST">
 <input type="hidden" name="cd_bbs_type" id="cd_bbs_type" value="${paging.cd_bbs_type}" />
 <input type="hidden" name="currentPage" id="currentPage" value="${paging.currentPage}" />
-<div class="container">
-	<header>
-		<%@ include file="/include/console/top.jsp" %>
-	</header>
-	<nav>
-		<%@ include file="/include/console/gnb.jsp" %>
-	</nav>
-	<section class="content">
-		<nav>
-			<%@ include file="/include/console/lnbCenter.jsp" %>
-		</nav>
-		<article class="txtCenter">
-			<div class="brdSearchArea">
+<div class="table">
+	<section class="right_col">
+		<article class="x_panel">
+			<div class="form-group pull-right">
 				<select name="searchKey">
 					<option value="title"<c:if test="${paging.searchKey == 'title'}"> selected</c:if>>제목</option>
 					<option value="contents"<c:if test="${paging.searchKey == 'contents'}"> selected</c:if>>내용</option>
@@ -78,29 +67,43 @@
 				</select>
 				<input type="text" name="searchWord" id="searchWord" value="${paging.searchWord}" /> <input type="submit" value="검색"/>
 			</div>
-			<div class="brdInfo">전체 ${paging.totalLine}개[${paging.currentPage}/${paging.totalPage} 페이지]</div>
-			<table class="headTop_01" style="width: 900px; margin-left: auto; margin-right: auto">
+			<div class="brdInfo">
+				<div class="col-md-3 col-sm-3 col-xs-3">전체 ${paging.totalLine}개[${paging.currentPage}/${paging.totalPage} 페이지] </div>
+				<div class="col-md-3 col-sm-3 col-xs-3 pull-right"> 고객문의 관리 </div>
+			</div>
+			<table class="table table-striped" style="width: 100%; margin-left: auto; margin-right: auto">
 				<tr>
-					<th style="width: 5%">NO</th>
-					<th>제목</th>
-					<th style="width: 10%">등록일</th>
+					<th style="width: 3%; border-left:3px solid #369;">NO</th>
+					<th style="width: 3%">카테고리</th>
+					<th style="width: 10%">제목</th>
+					<th style="width: 5%">등록일</th>
 				</tr>
 				<c:choose>
 					<c:when test="${empty list}">
 						<tr>
-							<td colspan="3">등록된 글이 없습니다.</td>
+							<td colspan="7" style="text-align: center;">등록된 글이 없습니다.</td>
 						</tr>
 					</c:when>
 					<c:otherwise>
 						<c:forEach items="${list}" var="list">
 						<tr>
-							<td>
+							<td style="border-left:3px solid #369;">
 								${list.rnum}
+							</td>
+							<td>
+							<c:if test="${list.cd_ctg == '0'}">선택</c:if>
+							<c:if test="${list.cd_ctg == '1'}">가입 및 탈퇴</c:if>
+							<c:if test="${list.cd_ctg == '2'}">상품</c:if>
+							<c:if test="${list.cd_ctg == '3'}">구매</c:if>
+							<c:if test="${list.cd_ctg == '4'}">결제</c:if>
+							<c:if test="${list.cd_ctg == '5'}">배송</c:if>
+							<c:if test="${list.cd_ctg == '6'}">환불</c:if>
+							<c:if test="${list.cd_ctg == '9'}">기타</c:if>
 							</td>
 							<td style="text-align: left">
 								<a href="/console/center/board/view.web?cd_bbs_type=3&seq_bbs=${list.seq_bbs}">
-									<c:if test="${list.seq_reply == 0}">[미답변] </c:if>
-									<c:if test="${list.seq_reply > 0}">[답변 완료] </c:if>
+									<c:if test="${list.seq_reply == 0}"><span style="color: red;">[미답변]</span> </c:if>
+									<c:if test="${list.seq_reply > 0}"><span style="color: blue;">[답변 완료]</span> </c:if>
 									${list.title}
 								</a>
 							</td>
@@ -113,7 +116,9 @@
 				</c:choose>
 			</table>
 			<br/>
-			<plutozoneUtilTag:page styleID="admin_text" currentPage="${paging.currentPage}" linePerPage="${paging.linePerPage}" totalLine="${paging.totalLine}" scriptFunction="goPage" />
+			<div class="col-md-12 col-sm-12 col-xs-12" style="text-align: center;">
+				<plutozoneUtilTag:page styleID="admin_text" currentPage="${paging.currentPage}" linePerPage="${paging.linePerPage}" totalLine="${paging.totalLine}" scriptFunction="goPage" />
+			</div>
 			<br/>
 			<div style="width: 900px; margin-left: auto; margin-right: auto">
 			</div>
@@ -121,7 +126,7 @@
 		<aside></aside>
 	</section>
 	<footer>
-		<%@ include file="/include/console/footer.jsp" %>
+		<%@ include file="/include/bfc/footer.jsp" %>
 	</footer>
 </div>
 </form>

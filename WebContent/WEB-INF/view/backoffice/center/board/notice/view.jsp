@@ -27,10 +27,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<%@ include file="/include/console/header.jsp" %>
-	<link rel="stylesheet" type="text/css" title="common stylesheet" href="/css/layoutSubmain.css" />
-	<link rel="stylesheet" type="text/css" title="common stylesheet" href="/css/table.css" />
-	<style></style>
+	<%@ include file="/include/bfc/header.jsp" %>
 	<script>
 		
 		function download(type, sequence) {
@@ -72,35 +69,29 @@
 		}
 	</script>
 </head>
-<body>
+<body class="nav-md">
+<%@ include file="/include/bfc/navi.jsp" %>
 <form id="frmMain" method="POST">
 <input type="hidden" id="type"		name="type" />
 <input type="hidden" id="sequence"	name="sequence" />
 <input type="hidden" id="cd_bbs_type"	name="cd_bbs_type"	value="${boardDto.cd_bbs_type}" />
 <input type="hidden" id="seq_bbs"		name="seq_bbs"		value="${boardDto.seq_bbs}" />
-<div class="container">
-	<header>
-		<%@ include file="/include/console/top.jsp" %>
-	</header>
-	<nav>
-		<%@ include file="/include/console/gnb.jsp" %>
-	</nav>
-	<section class="content">
-		<nav>
-			<%@ include file="/include/console/lnbCenter.jsp" %>
-		</nav>
-		<article class="txtCenter">
-			<table class="headLeft_01" style="width: 900px; margin-left: auto; margin-right: auto">
+<div class="table">
+	<section class="right_col">
+		<article class="x_panel">
+			<table class="table table-striped" style="width: 100%; margin-left: auto; margin-right: auto">
 				<tr>
 					<th style="width: 150px;">제목</th>
 					<td>
 						${fn:escapeXml(boardDto.title)}
-						<input type="checkbox" style="margin-left: 500px;" id="flg_top" name="flg_top" disabled <c:if test="${boardDto.flg_top == 'Y'}">checked</c:if>> 최상위
+						<div class="pull-right">
+						<input type="checkbox"  id="flg_top" name="flg_top" disabled <c:if test="${boardDto.flg_top == 'Y'}">checked</c:if>> 최상위
+						</div>
 					</td>
 				</tr>
 				<tr>
 					<th>내용</th>
-					<td class="content">
+					<td style="height:300px;">
 						${boardDto.content}
 					</td>
 				</tr>
@@ -126,7 +117,7 @@
 					</td>
 				</tr>
 			</table>
-			<div style="width: 900px; margin-left: auto; margin-right: auto">
+			<div class="col-md-12 col-sm-12 col-xs-12" style="text-align: center;">
 				<input type="button" value="삭제" style="width:100px" onclick="javascript:remove(1);" />
 				 <input type="button" value="수정" style="width:100px" onclick="javascript:modifyForm(1);" />
 				 <input type="button" value="목록" style="width:100px" onclick="javascript:goList(1);"/>
@@ -135,7 +126,7 @@
 		<aside></aside>
 	</section>
 	<footer>
-		<%@ include file="/include/console/footer.jsp" %>
+		<%@ include file="/include/bfc/footer.jsp" %>
 	</footer>
 </div>
 <iframe name="frmBlank" id="frmBlank" width="0" height="0"></iframe>

@@ -43,7 +43,7 @@
 			
 			if (document.getElementById("id").value.length < 5
 					|| document.getElementById("id").value.length > 32) {
-				alert("아이디를 5 ~ 16자 이내로 입력하세요!");
+				alert("아이디를 6 ~ 16자 이내로 입력하세요!");
 				document.getElementById("id").focus();
 				return;
 			}
@@ -63,14 +63,13 @@
 <body>
 <form id="frmMain" name="frmMain" method="POST">
 <div class="container">
-	<header>
-		<%@ include file="/include/console/top.jsp" %>
-	</header>
-	<nav>
-		<%@ include file="/include/console/gnb.jsp" %>
-	</nav>
-	<section class="content">
-		<nav></nav>
+	<section class="txtCenter">
+		<article class="txtCenter">
+			<a href="/"><img src="/images/logo/logo.jpg" alt="로고" width="200px" /></a>
+			<h3>관리자 로그인</h3><br/>
+		</article>
+	</section>
+	<section class="txtCenter">
 		<article class="txtCenter">
 			<table class="headLeft_01" style="width: 320px; margin-left: auto; margin-right: auto">
 				<tr>
@@ -91,9 +90,7 @@
 		</article>
 		<aside></aside>
 	</section>
-	<footer>
-		<%@ include file="/include/console/footer.jsp" %>
-	</footer>
+
 </div>
 </form>
 </body>

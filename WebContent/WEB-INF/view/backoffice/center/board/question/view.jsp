@@ -26,9 +26,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<%@ include file="/include/console/header.jsp" %>
-	<link rel="stylesheet" type="text/css" title="common stylesheet" href="/css/layoutSubmain.css" />
-	<link rel="stylesheet" type="text/css" title="common stylesheet" href="/css/table.css" />
+	<%@ include file="/include/bfc/header.jsp" %>
 	<style></style>
 	<script>
 		function remove() {
@@ -53,24 +51,15 @@
 		}
 	</script>
 </head>
-<body>
+<body class="nav-md">
+<%@ include file="/include/bfc/navi.jsp" %>
 <form id="frmMain" method="POST">
 <input type="hidden" id="cd_bbs_type"	name="cd_bbs_type"	value="${boardDto.cd_bbs_type}" />
 <input type="hidden" id="seq_bbs"		name="seq_bbs"		value="${boardReplyDto.seq_bbs}" />
-<div class="container">
-	<header>
-		<%@ include file="/include/console/top.jsp" %>
-	</header>
-	<nav>
-		<%@ include file="/include/console/gnb.jsp" %>
-	</nav>
-	<section class="content">
-		<nav>
-			<%@ include file="/include/console/lnbCenter.jsp" %>
-		</nav>
-		<article class="txtCenter">
-			<div style="color: #369; font-size: 10pt; font-weight: bold;">[문의]</div>
-			<table class="headLeft_01" style="width: 900px; margin-left: auto; margin-right: auto">
+<div class="table">
+	<section class="right_col">
+		<article class="x_panel">
+			<table class="table table-striped" style="width: 100%; margin-left: auto; margin-right: auto">
 				<tr>
 					<th style="width: 150px;">카테고리</th>
 					<td>
@@ -94,7 +83,7 @@
 				</tr>
 				<tr>
 					<th>내용</th>
-					<td>
+					<td style="height:300px;">
 						${boardDto.content}
 					</td>
 				</tr>
@@ -116,7 +105,7 @@
 			<c:if test="${boardDto.seq_reply > 0}">
 				<br/>
 				<div style="color: #369; font-size: 10pt; font-weight: bold;">[답변]</div>
-				<table class="headLeft_01" style="width: 900px; margin-left: auto; margin-right: auto">
+				<table class="table table-striped" style="width: 100%; margin-left: auto; margin-right: auto">
 					<tr>
 						<th style="width: 150px;">제목</th>
 						<td>
@@ -125,7 +114,7 @@
 					</tr>
 					<tr>
 						<th>내용</th>
-						<td>
+						<td style="height:300px;">
 							${boardReplyDto.content}
 						</td>
 					</tr>
@@ -145,9 +134,9 @@
 					</tr>
 				</table>
 			</c:if>
-			<div style="width: 900px; margin-left: auto; margin-right: auto">
+			<div class="col-md-12 col-sm-12 col-xs-12" style="text-align: center;">
 				<c:if test="${boardDto.seq_reply == 0}">
-					<a href="/console/center/board/writeForm.web?cd_bbs_type=3&seq_bbs=${boardDto.seq_bbs}" class="btnBasic">답변 등록</a>
+					<a href="/console/center/board/writeForm.web?cd_bbs_type=3&seq_bbs=${boardDto.seq_bbs}" class="btn btn-primary">답변 등록</a>
 				</c:if>
 				<c:if test="${boardDto.seq_reply > 0}">
 					 <input type="button" value="답변 삭제" style="width:100px" onclick="javascript:remove();" />
@@ -159,7 +148,7 @@
 		<aside></aside>
 	</section>
 	<footer>
-		<%@ include file="/include/console/footer.jsp" %>
+		<%@ include file="/include/bfc/footer.jsp" %>
 	</footer>
 </div>
 </form>

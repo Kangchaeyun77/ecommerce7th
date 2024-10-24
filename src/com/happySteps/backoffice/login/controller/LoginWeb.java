@@ -120,9 +120,10 @@ public class LoginWeb extends Common {
 				session.setAttribute("SEQ_MNG", Integer.toString(managerDto.getSeq_mng()));
 				session.setAttribute("NAME", managerDto.getMng_nm());
 				session.setAttribute("ID", managerDto.getId());
+				session.setAttribute("NICKNAME", managerDto.getNickname());
 				session.setAttribute("DT_LOGIN", Datetime.getNow("yyyy-MM-dd HH:mm:ss"));
 				
-				request.setAttribute("script", "alert('" + session.getAttribute("NAME")
+				request.setAttribute("script", "alert('" + session.getAttribute("NICKNAME")
 												+ "님이 "
 												+ session.getAttribute("DT_LOGIN")
 												+ "에 로그인하였습니다."

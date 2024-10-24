@@ -25,7 +25,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<%@ include file="/include/console/header.jsp" %>
+	<%@ include file="/include/bfc/header.jsp" %>
 	<link rel="stylesheet" type="text/css" title="common stylesheet" href="/css/layoutSubmain.css" />
 	<style></style>
 	<script>
@@ -39,22 +39,13 @@
 		}
 	</script>
 </head>
-<body>
+<body class="nav-md">
 <form id="frmMain" method="POST">
+<%@ include file="/include/bfc/navi.jsp" %>
 <input type="hidden" id="cd_bbs_type" name="cd_bbs_type" />
-<div class="container">
-	<nav>
-		<%@ include file="/include/console/gnb.jsp" %>
-	</nav>
-	<nav>
-			<%@ include file="/include/console/lnbCenter.jsp" %>
-	</nav>
-	<header>
-		<%@ include file="/include/console/top.jsp" %>
-	</header>
-	
-	
-	<section class="content">
+<div class="right_col" role="main">
+
+	<section class="x_panel">
 		
 		<article class="txtCenter">
 			여기는 "고객센터" 페이지입니다.
@@ -62,7 +53,7 @@
 		<aside></aside>
 	</section>
 	<footer>
-		<%@ include file="/include/console/footer.jsp" %>
+		<%@ include file="/include/bfc/footer.jsp" %>
 	</footer>
 </div>
 </form>

@@ -25,9 +25,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<%@ include file="/include/console/header.jsp" %>
-	<link rel="stylesheet" type="text/css" title="common stylesheet" href="/css/layoutSubmain.css" />
-	<link rel="stylesheet" type="text/css" title="common stylesheet" href="/css/table.css" />
+	<%@ include file="/include/bfc/header.jsp" %>
 	<style></style>
 	<script type="text/javascript" src="/js/package/tinymce/tinymce.min.js"></script>
 	<script type="text/javascript" src="/js/package/tinymce.js"></script>
@@ -59,24 +57,16 @@
 		}
 	</script>
 </head>
-<body>
+<body class="nav-md">
+<%@ include file="/include/bfc/navi.jsp" %>
 <form id="frmMain" method="POST" enctype="multipart/form-data">
 <input type="hidden" id="cd_bbs_type"	name="cd_bbs_type"	value="${boardDto.cd_bbs_type}" />
 <input type="hidden" id="seq_bbs"		name="seq_bbs"		value="${boardDto.seq_bbs}" />
-<div class="container">
-	<header>
-		<%@ include file="/include/console/top.jsp" %>
-	</header>
-	<nav>
-		<%@ include file="/include/console/gnb.jsp" %>
-	</nav>
-	<section class="content">
-		<nav>
-			<%@ include file="/include/console/lnbCenter.jsp" %>
-		</nav>
-		<article class="txtCenter">
+<div class="table">
+	<section class="right_col">
+		<article class="x_panel">
 			<div style="color: #369; font-size: 10pt; font-weight: bold;">[문의]</div>
-			<table class="headLeft_01" style="width: 900px; margin-left: auto; margin-right: auto">
+			<table class="table table-striped" style="width: 100%; margin-left: auto; margin-right: auto">
 				<tr>
 					<th style="width: 150px;">카테고리</th>
 					<td>
@@ -121,11 +111,11 @@
 			</table>
 			<br/>
 			<div style="color: #369; font-size: 10pt; font-weight: bold;">[답변]</div>
-			<table class="headLeft_01" style="width: 900px; margin-left: auto; margin-right: auto">
+			<table class="table table-striped" style="width: 100%; margin-left: auto; margin-right: auto">
 				<tr>
 					<th style="width: 150px;">제목(*)</th>
 					<td>
-						<input type="text" id="title" name="title" style="width: 700px;" required />
+						<input type="text" id="title" name="title" style="width: 80%;" required />
 					</td>
 				</tr>
 				<tr>
@@ -141,7 +131,7 @@
 					</td>
 				</tr>
 			</table>
-			<div style="width: 900px; margin-left: auto; margin-right: auto">
+			<div class="col-md-12 col-sm-12 col-xs-12" style="text-align: center;">
 				<input type="button" value="답변 등록" style="width:100px" onclick="javascript:writeProc(3);" />
 				 <input type="button" value="목록" style="width:100px" onclick="javascript:goList(3);"/>
 			</div>
@@ -149,7 +139,7 @@
 		<aside></aside>
 	</section>
 	<footer>
-		<%@ include file="/include/console/footer.jsp" %>
+		<%@ include file="/include/bfc/footer.jsp" %>
 	</footer>
 </div>
 </form>

@@ -1,6 +1,24 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.happySteps.backoffice.mybatis.users.Manager">
+
+	<select id="select" parameterType="managerDto" resultType="managerDto">
+		SELECT
+			SEQ_MNG
+			, ID
+			, NICKNAME
+			, EMAIL
+			, CD_STATE
+			, MNG_NM
+			, PHONE
+			, POST
+			, ADDR1
+			, ADDR2
+		FROM
+			TB_MNG
+		WHERE
+			SEQ_MNG = #{seq_mng}
+	</select>
 	
 	<select id="selectIdDuplicate" parameterType="managerDto" resultType="java.lang.Integer">
 		SELECT
@@ -70,7 +88,7 @@
 		INSERT INTO TB_MNG
 			(SEQ_MNG, ID, PASSWD, CD_STATE, MNG_NM, EMAIL, PHONE, POST, ADDR1, ADDR2, DT_REG, REGISTER, NICKNAME)
 		VALUES
-			(#{seq_mng}, #{id}, #{passwd}, 1, #{mng_nm}, #{email}, #{phone}, #{post}, #{addr1}, #{addr2}, SYSDATE, #{register}, #{nickname})
+			(#{seq_mng}, #{id}, #{passwd}, 0, #{mng_nm}, #{email}, #{phone}, #{post}, #{addr1}, #{addr2}, SYSDATE, #{register}, #{nickname})
 	</insert>
 	
 	<select id="sequence" resultType="java.lang.Integer">

@@ -115,6 +115,7 @@ public class MemberWeb extends Common {
 			_memberDto.setId(aes.decode(_memberDto.getId()));
 			_memberDto.setMbr_nm(aes.decode(_memberDto.getMbr_nm()));
 			_memberDto.setPhone(aes.decode(_memberDto.getPhone()));
+			_memberDto.setEmail(aes.decode(_memberDto.getEmail()));
 			_memberDto.setPost(aes.decode(_memberDto.getPost()));
 			_memberDto.setAddr1(aes.decode(_memberDto.getAddr1()));
 			_memberDto.setAddr2(aes.decode(_memberDto.getAddr2()));

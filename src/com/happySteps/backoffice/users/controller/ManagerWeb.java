@@ -44,7 +44,7 @@ import com.happySteps.backoffice.users.service.ManagerSrvc;
  * @version 1.0.0
  * @author kbs@happySteps.com
  * 
- * @since 2024-07-26
+ * @since 2024-10-23
  * <p>DESCRIPTION:</p>
  * <p>IMPORTANT:</p>
  */
@@ -56,6 +56,58 @@ public class ManagerWeb extends Common {
 	
 	@Inject
 	private ManagerSrvc managerSrvc;
+	
+	/**
+	 * @param request [요청 서블릿]
+	 * @param response [응답 서블릿]
+	 * @param managerDto [관리자 빈]
+	 * @return ModelAndView
+	 * 
+	 * @since 2024-10-23
+	 * <p>DESCRIPTION: 수정폼</p>
+	 * <p>IMPORTANT:</p>
+	 * <p>EXAMPLE:</p>
+	 */
+	
+	@RequestMapping(value = "/console/users/manager/modifyForm.web")
+	public ModelAndView modifyForm(HttpServletRequest request, HttpServletResponse response, ManagerDto managerDto) {
+		
+		ModelAndView mav	= new ModelAndView("redirect:/error.web");
+		
+		try {
+			
+			ManagerDto _managerDto = managerSrvc.select(managerDto);
+			
+			_managerDto.setId(_managerDto.getId());
+			_managerDto.setMng_nm(_managerDto.getMng_nm());
+			_managerDto.setPhone( _managerDto.getPhone());
+			_managerDto.setPost( _managerDto.getPost());
+			_managerDto.setAddr1( _managerDto.getAddr1());
+			_managerDto.setAddr2( _managerDto.getAddr2());
+			
+			mav.addObject("managerDto", _managerDto);
+			
+			mav.setViewName("backoffice/users/manager/modifyForm");
+		}
+		catch (Exception e) {
+			logger.error("[" + this.getClass().getName() + ".modifyForm()] " + e.getMessage(), e);
+		}
+		finally {}
+		
+		return mav;
+	}
+	
+	/**
+	 * @param request [요청 서블릿]
+	 * @param response [응답 서블릿]
+	 * @param managerDto [관리자 빈]
+	 * @return ModelAndView
+	 * 
+	 * @since 2024-10-23
+	 * <p>DESCRIPTION: 아이디체크</p>
+	 * <p>IMPORTANT:</p>
+	 * <p>EXAMPLE:</p>
+	 */
 	
 	@RequestMapping(value = "/console/users/manager/checkIdDuplicate.json", method = RequestMethod.POST, 
 				headers = {"content-type=application/json; charset=UTF-8", "accept=application/json"}, 
@@ -79,6 +131,17 @@ public class ManagerWeb extends Common {
 	
 	return idDuplicate;
 	}
+	/**
+	 * @param request [요청 서블릿]
+	 * @param response [응답 서블릿]
+	 * @param managerDto [관리자 빈]
+	 * @return ModelAndView
+	 * 
+	 * @since 2024-10-23
+	 * <p>DESCRIPTION: 닉네임체크</p>
+	 * <p>IMPORTANT:</p>
+	 * <p>EXAMPLE:</p>
+	 */
 	@RequestMapping(value = "/console/users/manager/checkNickDuplicate.json", method = RequestMethod.POST, 
 				headers = {"content-type=application/json; charset=UTF-8", "accept=application/json"}, 
 				consumes="application/json; charset=UTF-8", produces="application/json; charset=UTF-8")
@@ -109,8 +172,8 @@ public class ManagerWeb extends Common {
 	 * @param managerDto [관리자 빈]
 	 * @return ModelAndView
 	 * 
-	 * @since 2024-07-26
-	 * <p>DESCRIPTION: 가입 처리</p>
+	 * @since 2024-10-23
+	 * <p>DESCRIPTION: 리스트</p>
 	 * <p>IMPORTANT:</p>
 	 * <p>EXAMPLE:</p>
 	 */
@@ -154,7 +217,7 @@ public class ManagerWeb extends Common {
 	 * @param mebmerDto [회원 빈]
 	 * @return ModelAndView
 	 * 
-	 * @since 2024-07-26
+	 * @since 2024-10-23
 	 * <p>DESCRIPTION: 가입 처리</p>
 	 * <p>IMPORTANT:</p>
 	 * <p>EXAMPLE:</p>
@@ -187,7 +250,7 @@ public class ManagerWeb extends Common {
 	 * @param response [응답 서블릿]
 	 * @return ModelAndView
 	 * 
-	 * @since 2024-07-26
+	 * @since 2024-10-23
 	 * <p>DESCRIPTION: 가입 폼</p>
 	 * <p>IMPORTANT:</p>
 	 * <p>EXAMPLE:</p>

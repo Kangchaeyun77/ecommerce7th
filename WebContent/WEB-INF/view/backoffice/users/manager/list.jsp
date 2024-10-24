@@ -27,9 +27,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<%@ include file="/include/console/header.jsp" %>
-	<link rel="stylesheet" type="text/css" title="common stylesheet" href="/css/layoutSubmain.css" />
-	<link rel="stylesheet" type="text/css" title="common stylesheet" href="/css/table.css" />
+	<%@ include file="/include/bfc/header.jsp" %>
 	<style></style>
 	<script>
 		
@@ -65,36 +63,24 @@
 			frmMain.submit();
 		}
 	</script>
-<%	String ID = (String) session.getAttribute("ID");
-	if (ID == null || !"admin".equals(ID)) {
-%>
-		<script>
-			alert("최고관리자만 접속 가능합니다.");
-			window.location.href = "/console/index.web";  // 로그인 페이지로 리다이렉트
-		</script>
-<%
-		return;
-	}
-%>
+	<%	String ID = (String) session.getAttribute("ID");
+		if (ID == null || !"admin".equals(ID)) { %>
+			<script>
+				alert("최고관리자만 접속 가능합니다.");
+				window.location.href = "/console/index.web";
+			</script>
+	<% return; } %>
 </head>
-<body>
+<body class="nav-md">
+<%@ include file="/include/bfc/navi.jsp" %>
 <form id="frmMain" method="POST" action="/console/users/manager/list.web">
 <input type="hidden" name="seq_mng"		id="seq_mng" />
 <input type="hidden" name="cd_state"	id="cd_state" />
 <input type="hidden" name="currentPage"	id="currentPage" value="${paging.currentPage}" />
-<div class="container">
-	<header>
-		<%@ include file="/include/console/top.jsp" %>
-	</header>
-	<nav>
-		<%@ include file="/include/console/gnb.jsp" %>
-	</nav>
-	<section class="content">
-		<nav>
-			<%@ include file="/include/console/lnbUsers.jsp" %>
-		</nav>
-		<article class="txtCenter">
-			<div class="brdSearchArea">
+<div class="table">
+	<section class="right_col">
+		<article class="x_panel">
+			<div class="form-group pull-right">
 				<select name="searchKey">
 					<option value="id"<c:if test="${paging.searchKey == 'id'}"> selected</c:if>>아이디</option>
 					<option value="nickname"<c:if test="${paging.searchKey == 'nickname'}"> selected</c:if>>닉네임</option>
@@ -102,26 +88,26 @@
 				</select>
 				<input type="text" name="searchWord" id="searchWord" value="${paging.searchWord}" /> <input type="submit" value="검색"/>
 			</div>
-			<div class="brdInfo">전체 ${paging.totalLine}개[${paging.currentPage}/${paging.totalPage} 페이지]</div>
-			<table class="headTop_01" style="width: 900px; margin-left: auto; margin-right: auto">
+			<div class="col-md-3 col-sm-3 col-xs-3">전체 ${paging.totalLine}개[${paging.currentPage}/${paging.totalPage} 페이지]</div>
+			<table class="table table-striped">
 				<tr>
-					<th style="width: 5%">NO</th>
-					<th>아이디</th>
-					<th>닉네임</th>
+					<th style="width: 5%; border-left:3px solid #369;">NO</th>
+					<th style="width: 10%">아이디</th>
+					<th style="width: 10%">닉네임</th>
 					<th style="width: 10%">상태</th>
-					<th style="width: 15%">성명</th>
+					<th style="width: 10%">성명</th>
 					<th style="width: 10%">등록일</th>
 				</tr>
 				<c:choose>
 					<c:when test="${empty list}">
 						<tr>
-							<td colspan="7">등록된 관리자가 없습니다.</td>
+							<td colspan="7" style="text-align: center;">등록된 관리자가 없습니다.</td>
 						</tr>
 					</c:when>
 					<c:otherwise>
 						<c:forEach items="${list}" var="list">
 						<tr>
-							<td>
+							<td style="border-left:3px solid #369;">
 								${list.rnum}
 							</td>
 							<td class="txtCenter">
@@ -153,14 +139,16 @@
 				</c:choose>
 			</table>
 			<br/>
+			<div class="col-md-12 col-sm-12 col-xs-12" style="text-align: center;">
 			<plutozoneUtilTag:page styleID="admin_text" currentPage="${paging.currentPage}" linePerPage="${paging.linePerPage}" totalLine="${paging.totalLine}" scriptFunction="goPage" />
+			</div>
 		</article>
 		<aside></aside>
 	</section>
-	<footer>
-		<%@ include file="/include/console/footer.jsp" %>
-	</footer>
 </div>
 </form>
+	<footer>
+		<%@ include file="/include/bfc/footer.jsp" %>
+	</footer>
 </body>
 </html>

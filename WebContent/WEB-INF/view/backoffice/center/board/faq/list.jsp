@@ -27,10 +27,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<%@ include file="/include/console/header.jsp" %>
-	<link rel="stylesheet" type="text/css" title="common stylesheet" href="/css/layoutSubmain.css" />
-	<link rel="stylesheet" type="text/css" title="common stylesheet" href="/css/table.css" />
-	<style></style>
+	<%@ include file="/include/bfc/header.jsp" %>
+
 	<script>
 		function goPage(value) {
 			
@@ -54,23 +52,15 @@
 		}
 	</script>
 </head>
-<body>
+<body class="nav-md">
+<%@ include file="/include/bfc/navi.jsp" %>
 <form id="frmMain" method="POST">
 <input type="hidden" name="cd_bbs_type" id="cd_bbs_type" value="${paging.cd_bbs_type}" />
 <input type="hidden" name="currentPage" id="currentPage" value="${paging.currentPage}" />
-<div class="container">
-	<header>
-		<%@ include file="/include/console/top.jsp" %>
-	</header>
-	<nav>
-		<%@ include file="/include/console/gnb.jsp" %>
-	</nav>
-	<section class="content">
-		<nav>
-			<%@ include file="/include/console/lnbCenter.jsp" %>
-		</nav>
-		<article class="txtCenter">
-			<div class="brdSearchArea">
+<div class="table">
+	<section class="right_col">
+		<article class="x_panel">
+			<div class="form-group pull-right">
 				<select name="searchKey">
 					<option value="title"<c:if test="${paging.searchKey == 'title'}"> selected</c:if>>제목</option>
 					<option value="contents"<c:if test="${paging.searchKey == 'contents'}"> selected</c:if>>내용</option>
@@ -78,23 +68,25 @@
 				</select>
 				<input type="text" name="searchWord" id="searchWord" value="${paging.searchWord}" /> <input type="submit" value="검색"/>
 			</div>
-			<div class="brdInfo">전체 ${paging.totalLine}개[${paging.currentPage}/${paging.totalPage} 페이지]</div>
-			<table class="headTop_01" style="width: 900px; margin-left: auto; margin-right: auto">
+			<div class="col-md-3 col-sm-3 col-xs-3">전체 ${paging.totalLine}개[${paging.currentPage}/${paging.totalPage} 페이지]</div>
+			<div class="col-md-3 col-sm-3 col-xs-3 pull-right"> 자주찾는질문 관리 </div>
+			<table class="table table-striped" style="width: 100%; margin-left: auto; margin-right: auto">
 				<tr>
-					<th style="width: 5%">NO</th>
-					<th>제목</th>
-					<th style="width: 10%">등록일</th>
+				
+					<th style="width: 5%;border-left:3px solid #369;">NO</th>
+					<th style="width: 10%">제목</th>
+					<th style="width: 5%">등록일</th>
 				</tr>
 				<c:choose>
 					<c:when test="${empty list}">
 						<tr>
-							<td colspan="3">등록된 글이 없습니다.</td>
+							<td colspan="7" style="text-align: center;">등록된 글이 없습니다.</td>
 						</tr>
 					</c:when>
 					<c:otherwise>
 						<c:forEach items="${list}" var="list">
 						<tr>
-							<td>
+							<td style="border-left:3px solid #369;">
 								${list.rnum}
 							</td>
 							<td style="text-align: left">
@@ -111,16 +103,18 @@
 				</c:choose>
 			</table>
 			<br/>
+			<div class="col-md-12 col-sm-12 col-xs-12" style="text-align: center;">
 			<plutozoneUtilTag:page styleID="admin_text" currentPage="${paging.currentPage}" linePerPage="${paging.linePerPage}" totalLine="${paging.totalLine}" scriptFunction="goPage" />
-			<br/>
-			<div style="width: 900px; margin-left: auto; margin-right: auto">
-				<a href="/console/center/board/writeForm.web?cd_bbs_type=2" class="btnBasic">등록</a>
+			</div>
+			<br/><br/>
+			<div class="col-md-12 col-sm-12 col-xs-12" style="text-align: center;">
+				<a href="/console/center/board/writeForm.web?cd_bbs_type=2" class="btn btn-round btn-primary">글쓰기</a>
 			</div>
 		</article>
 		<aside></aside>
 	</section>
 	<footer>
-		<%@ include file="/include/console/footer.jsp" %>
+		<%@ include file="/include/bfc/footer.jsp" %>
 	</footer>
 </div>
 </form>

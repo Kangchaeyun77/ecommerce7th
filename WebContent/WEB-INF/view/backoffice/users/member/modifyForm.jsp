@@ -26,9 +26,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<%@ include file="/include/console/header.jsp" %>
-	<link rel="stylesheet" type="text/css" title="common stylesheet" href="/css/layoutSubmain.css" />
-	<link rel="stylesheet" type="text/css" title="common stylesheet" href="/css/table.css" />
+	<%@ include file="/include/bfc/header.jsp" %>
 	<script type="text/javascript" src="/js/console.js"></script>
 	<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 	<style></style>
@@ -51,26 +49,18 @@
 }		
 	</script>
 </head>
-<body>
+<body class="nav-md">
+<%@ include file="/include/bfc/navi.jsp" %>
 <form id="frmMain" method="POST" action="/console/users/member/modifyProc.web">
 <input type="hidden" name="seq_mbr" value="${memberDto.seq_mbr}"/>
 <input type="hidden" name="phone" id="phone" />
-<div class="container">
-	<header>
-		<%@ include file="/include/console/top.jsp" %>
-	</header>
-	<nav>
-		<%@ include file="/include/console/gnb.jsp" %>
-	</nav>
-	<section class="content">
-		<nav>
-			<%@ include file="/include/console/lnbUsers.jsp" %>
-		</nav>
-		<article class="txtCenter">
+<div class="table">
+	<section class="right_col">
+		<article class="x_panel">
 			(*) 표시는 필수 입력 사항입니다.
-			<table class="headLeft_01" style="width: 1000px; margin-left: auto; margin-right: auto">
+			<table class="table table-striped" style="width: 1000px; margin-left: auto; margin-right: auto">
 				<tr>
-					<th>아이디</th>
+					<th style="width: 150px;border-left:3px solid #369;">아이디</th>
 					<td >
 						${memberDto.id}&nbsp;&nbsp;&nbsp;
 						<select name="cd_state" style="background:white">
@@ -87,7 +77,7 @@
 					</td>
 				</tr>
 				<tr>
-					<th style="width: 150px;">성명</th>
+					<th style="width: 150px;border-left:3px solid #369;">성명</th>
 					<td>
 						${memberDto.mbr_nm}
 					</td>
@@ -100,7 +90,7 @@
 					</td>
 				</tr>
 				<tr>
-					<th style="width: 150px;">IP</th>
+					<th style="width: 150px;border-left:3px solid #369;">IP</th>
 					<td>
 						${memberDto.last_ip}
 					</td>
@@ -110,10 +100,13 @@
 					</td>
 				</tr>
 				<tr>
-					
+					<th style="width: 150px;border-left:3px solid #369;">이메일</th>
+					<td>
+						${memberDto.email}
+					</td>
 				</tr>
 				<tr>
-					<th>연락처(*)</th>
+					<th style="width: 150px;border-left:3px solid #369;">연락처(*)</th>
 					<td colspan="3">
 						<input type="text" id="phone1" name="phone1" maxlength="3"    value="${fn:split(memberDto.phone, '-')[0]}" style="text-align:center;width:30px" required oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" />
 						 - <input type="text" id="phone2" name="phone2" maxlength="4" value="${fn:split(memberDto.phone, '-')[1]}" style="text-align:center;width:40px" required oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" />
@@ -121,7 +114,7 @@
 					</td>
 				</tr>
 				<tr>
-					<th>주소(*)</th>
+					<th style="width: 150px;border-left:3px solid #369;">주소(*)</th>
 					<td colspan="3">
 						<input type="text" maxlength="5" style="text-align:center;width:50px;background-color:#F0F0F0;pointer-events:none" id="post" name="post" required readonly value="${memberDto.post}"/>
 						도로명 <input type="text" size="40" required id="addr1" name="addr1" style="background-color:#F0F0F0;pointer-events:none" readonly value="${memberDto.addr1}"/>
@@ -133,7 +126,7 @@
 					</td>
 				</tr>
 				<tr>
-					<th>반려동물 유/무</th>
+					<th style="width: 150px;border-left:3px solid #369;">반려동물 유/무</th>
 					<td colspan="3">
 						<input type="radio" name="flg_pets" value="Y" id="btnPetYes" onclick="togglePetOptions()"
 							<c:if test="${memberDto.flg_pets == 'Y'}">checked</c:if> /> 있음
@@ -142,7 +135,7 @@
 					</td>
 				</tr>
 				<tr id="petOptions">
-					<th>반려동물 종류</th>
+					<th style="width: 150px;border-left:3px solid #369;">반려동물 종류</th>
 					<td colspan="3">
 						<input type="checkbox" name="pet1" id="pet1" value="Y" 
 							<c:if test="${fn:substring(memberDto.pets, 0, 1) == 'Y'}"> checked</c:if> /> 강아지 &nbsp;&nbsp;
@@ -161,7 +154,7 @@
 					</td>
 				</tr>
 				<tr>
-					<th>마케팅 수신 동의</th>
+					<th style="width: 150px;border-left:3px solid #369;">마케팅 수신 동의</th>
 					<td colspan="3">
 						SMS <input type="checkbox" name="flg_sms" 
 							<c:if test="${memberDto.flg_sms == 'Y'}"> checked</c:if>/>
@@ -171,7 +164,7 @@
 				</tr>
 				<tr>
 					<td colspan="4" style="text-align:center; padding-top: 10px;padding-bottom: 10px">
-						<input type="submit" value="목록" style="width:100px" onclick="javascript:goList();" />
+						<input type="submit" value="목록" style="width:100px" onclick="javascript:goList();" />&nbsp;&nbsp;&nbsp;&nbsp;
 						<input type="submit" value="수정 하기" style="width:100px" />
 					</td>
 				</tr>
@@ -180,7 +173,7 @@
 		<aside></aside>
 	</section>
 	<footer>
-		<%@ include file="/include/console/footer.jsp" %>
+		<%@ include file="/include/bfc/footer.jsp" %>
 	</footer>
 </div>
 </form>

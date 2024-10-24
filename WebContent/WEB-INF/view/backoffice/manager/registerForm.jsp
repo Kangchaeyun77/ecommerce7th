@@ -21,7 +21,7 @@
  */
 %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" trimDirectiveWhitespaces="true" %>
-<%@ page info="/WEB-INF/view/backoffice/member/registerForm.jsp" %>
+<%@ page info="/WEB-INF/view/backoffice/manager/registerForm.jsp" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -33,44 +33,83 @@
 	<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 	<style></style>
 	<script>
+		
+		// 아이디 중복 여부
+		var idDuplicate = true;
+		
 		$(function() {
 			var $frm = $("#frmMain");
 			
 			$("#btnId").on("click", function(e) {
 				
 				// 이메일이 7자리 이하 또는 @가 없으면
-				if ($("#email").val().length <=7 || $("#email").val().indexOf("@") <= 0) {
-					alert("이메일/아이디를(@ 포함) 8자리 이상으로 입력하세요!");
+				if ($("#id").val().length <=3) {
+					alert("아이디를 4자리 이상으로 입력하세요!");
 					return false;
 				}
 				
-				//var myData = $frm.serialize();
-				var myData = "email=" + $("#email").val();
-				//alert(myData);
+				var myData = {id: $("#id").val()};
 				
 				$.ajax({
 					type: "POST",
-					url: "/console/member/checkDuplicate.web",
-					data: myData,
+					async: false,
+					url: "/console/users/manager/checkIdDuplicate.json",
+					dataType: "json",
+					contentType: "application/json; charset=UTF-8",
+					data: JSON.stringify(myData),
 					success:function(res) {
-						//alert(res);
-						if (res) {
-							var jsonData = JSON.parse(res);
-							//alert(jsonData);
-							
-							var message = "";
-							//alert("[" + jsonData.email + "]");
-							
-							if (jsonData.email != "") {
-								// [2024-07-25][kbs@happySteps.com][TODO: 회원 상태 확인 포함]
-								message = jsonData.email + "은 이미 사용중(cd_state=1)입니다!";
-							}
-							else {
-								message = $("#email").val() + "은 사용 가능합니다.";
-							}
-							
-							// [2024-06-12][thekbs@hotmail.com][TODO: 가입자에게 사용 가능 여부 알리고 중복 정보를 히든으로 저장]
-							$(".container").html(message);
+						if (res != true) {
+							idDuplicate = false;
+							$("#id").attr("readonly",true);
+							$("#id").css("background-color", "#d3d3d3");
+							alert($("#id").val() + "는 사용 가능하며 변경할 수 없습니다.");
+						}
+						else {
+							alert($("#id").val() + "는 사용 불가능! 다른 아이디 입력하세요!");
+							$("#id").val("");
+							$("#id").focus();
+						}
+					}
+				});
+			});
+		});
+		
+	</script>
+	
+	<script>
+		// 닉네임 중복 여부
+		var nickDuplicate = true;
+		
+		$(function() {
+			var $frm = $("#frmMain");
+			
+			$("#btnNick").on("click", function(e) {
+				if ($("#nickname").val().length <=1) {
+					alert("닉네임을 2자리 이상으로 입력하세요!");
+					return false;
+				}
+				
+				var nickData = {nickname: $("#nickname").val()};
+				
+				$.ajax({
+					type: "POST",
+					async: false,
+					url: "/console/users/manager/checkNickDuplicate.json",
+					dataType: "json",
+					contentType: "application/json; charset=UTF-8",
+					data: JSON.stringify(nickData),
+					success:function(res) {
+						// 중복이 안 될 경우
+						if (res != true) {
+							nickDuplicate = false;
+							$("#nickname").attr("readonly",true);
+							$("#nickname").css("background-color", "#d3d3d3");
+							alert($("#nickname").val() + "는 사용 가능하며 변경할 수 없습니다.");
+						}
+						else {
+							alert($("#nickname").val() + "는 사용 불가능! 다른 닉네임을 입력하세요!");
+							$("#nickname").val("");
+							$("#nickname").focus();
 						}
 					}
 				});
@@ -83,14 +122,14 @@
 <input type="hidden" name="width" value="100" />
 <input type="hidden" name="phone" id="phone" />
 <div class="container">
-	<header>
-		<%@ include file="/include/console/top.jsp" %>
-	</header>
-	<nav>
-		<%@ include file="/include/console/gnb.jsp" %>
-	</nav>
+	<section class="txtCenter">
+		<article class="txtCenter">
+			<a href="/"><img src="/images/logo/logo.jpg" alt="로고" width="200px" /></a>
+			<h3>관리자 가입</h3><br/>
+			<h1>최고 관리자의 승인 이후 사용 가능합니다.</h1><br/>
+		</article>
+	</section>
 	<section class="content">
-		<nav></nav>
 		<article class="txtCenter">
 			(*) 표시는 필수 입력 사항입니다.
 			<table class="headLeft_01" style="width: 900px; margin-left: auto; margin-right: auto">
@@ -157,9 +196,6 @@
 		</article>
 		<aside></aside>
 	</section>
-	<footer>
-		<%@ include file="/include/console/footer.jsp" %>
-	</footer>
 </div>
 </form>
 </body>

@@ -45,6 +45,7 @@ import com.happySteps.backoffice.common.Common;
 public class MainWeb extends Common {
 	/** Logger */
 	private static Logger logger = LoggerFactory.getLogger(MainWeb.class);
+	
 	/**
 	 * @param request [요청 서블릿]
 	 * @param response [응답 서블릿]
