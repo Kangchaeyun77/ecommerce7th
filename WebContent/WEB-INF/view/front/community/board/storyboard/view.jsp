@@ -34,7 +34,146 @@
 	<link rel="stylesheet" href="/css/brdSearchArea.css">
 	<link rel="stylesheet" href="/css/view.css">
 		<title>커뮤니티 자유게시판 상세보기</title>
+<style>
+	.comment-item {
+    padding: 10px; /* 여백 */
+    margin: 10px 0; /* 상하 여백 */
+    border: 1px solid #F9F3EC; /* 테두리 색상 */
+    border-radius: 10px; /* 둥근 모서리 */
+    background-color: #f9f9f9; /* 배경색 */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* 미세한 그림자 효과 */
+    max-height: none; /* 최대 높이 제한을 없애줌 */
+    overflow: visible; /* 내용이 넘칠 때 잘리지 않게 설정 */
+    
+}
+</style>
 	<script>
+	// 서버에서 JSP로 넘어온 seq_bbs 값을 JavaScript 변수로 할당
+	
+	document.addEventListener('DOMContentLoaded', () => {
+	var seq_bbs = "${communityDto.seq_bbs}"; 
+    loadComments(seq_bbs); // seq_bbs는 필요한 값으로 설정
+});
+	
+	var seq_bbs = "${communityDto.seq_bbs}";
+	window.onload = function() {
+	    loadComments(seq_bbs);  // 페이지 로드 시 댓글 목록을 불러옴
+	};
+
+function loadComments(seq_bbs) {
+	// 게시물 ID가 유효하지 않은 경우
+	if (!seq_bbs || seq_bbs === "") {
+		console.error("seq_bbs 값이 유효하지 않습니다.");
+		return;
+	} else {
+		// 댓글을 불러올 URL 생성
+		var requestUrl = "/front/comment/view.web?seq_bbs=" + seq_bbs;
+		
+		// Fetch API를 사용하여 댓글 데이터 요청
+		fetch(requestUrl, {
+			method: 'GET',
+			headers: { 'Content-Type': 'application/json' }
+		})
+		.then(response => {
+			// 응답이 성공적이지 않은 경우 오류 처리
+			if (!response.ok) {
+				throw new Error('댓글을 불러오는 중 오류 발생');
+			}
+			return response.json(); // JSON 형태로 응답 데이터 변환
+		})
+		.then(data => {
+			console.log(data); // 응답 데이터 로그 출력
+
+			// 댓글 목록을 출력할 영역 선택
+			const commentListContainer = document.getElementById('commentListContainer');
+
+			// 기존 댓글 목록을 지우기 (선택 사항)
+			commentListContainer.innerHTML = ''; // 기존 댓글 목록 초기화
+
+			// 댓글 데이터가 있는지 확인
+			if (data.commentList && data.commentList.length > 0) {
+				// 댓글 데이터 배열을 순회하며 DOM 요소 생성
+				data.commentList.forEach(comment => {
+					// 각 댓글을 위한 DIV 요소 생성
+					const commentElement = document.createElement('div');
+					commentElement.classList.add('comment-item');
+
+					// 댓글 작성자 표시
+					const author = document.createElement('p');
+					author.textContent = '작성자: ' + comment.nickname;
+					commentElement.appendChild(author);
+
+					// 댓글 내용 표시
+					const content = document.createElement('p');
+					content.textContent = '내용: ' + comment.content;
+					commentElement.appendChild(content);
+					
+					// 댓글 작성 시간 표시
+					const dt_reg = document.createElement('p');
+					dt_reg.textContent = '등록시간: ' + comment.dt_reg;
+					commentElement.appendChild(dt_reg);
+					
+					// 댓글 요소를 목록에 추가
+					commentListContainer.appendChild(commentElement);
+				});
+			} 
+		})
+		.catch((error) => {
+			console.error('Error:', error); // 오류 메시지 출력
+		});
+	}
+}
+
+	// 댓글 등록
+		function addComment(seq_bbs) {
+			const seq_mbr = sessionStorage.getItem('SEQ_MBR');
+			const nickname = sessionStorage.getItem('NICKNAME');// 세션에서 닉네임 가져오기
+			const dt_reg = sessionStorage.getItem('DT_REG');
+			const content = document.getElementById('commentContent').value; 
+			//console.log("닉네임:", sessionStorage.getItem('NICKNAME'));
+			//alert("게시글번호 가져옴?=" + seq_bbs);
+			//alert("댓글내용 가져옴?=" + content);
+			
+			fetch('/front/comment/add.web', {
+				method: 'POST',
+				headers: { 'Content-Type': 'application/json' },
+				body: JSON.stringify({ seq_bbs: seq_bbs, seq_mbr: seq_mbr, content: content, nickname: nickname, dt_reg: dt_reg}) // 오타 수정
+			})
+			.then(response => {
+				if (!response.ok) {
+					throw new Error('오류발생');
+				}
+				return response.json();
+			})
+			.then(data => {
+				alert('댓글이 등록되었습니다.'); // 성공 메시지
+				location.reload();  // 등록 후 페이지 새로고침
+			})
+			.catch((error) => {
+				console.error('Error:', error); // 오류 메시지 출력
+			});
+		}
+	// 댓글 또는 대댓글 삭제
+	function deleteComment(seq_comment) {
+		if (confirm('정말 삭제하시겠습니까?')) {
+			fetch('/front/community/comment/delete.web', {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json',
+				},
+				body: JSON.stringify({ seq_comment: seq_comment })
+			})
+			.then(response => response.json())
+			.then(data => {
+				alert('댓글이 삭제되었습니다.');
+				location.reload();  // 삭제 후 페이지 새로고침
+			})
+			.catch((error) => {
+				console.error('Error:', error);
+			});
+		}
+	}
+	//좋아요 이미지 클릭 시 이모지 변경
 	function toggleLike(seq_bbs) {
 		const likeElement = document.getElementById('likeElement'); // 이모지를 표시할 요소
 		const seq_mbr = sessionStorage.getItem('SEQ_MBR');
@@ -62,7 +201,7 @@
 			console.error('Error:', error);
 		});
 	}
-
+	//좋아요 카운트
 	function fetchLikeCount(seq_bbs) {
 		fetch('/front/community/board/like_count.web', {
 			method: 'POST',
@@ -188,7 +327,60 @@
 			<div style="display: flex; justify-content: center; margin-top: 20px;">
 				<input type="button" value="목록" style="width:50%; height:60px;" onclick="javascript:goList();" />
 			</div>
+			<hr>
+			<div style="font-size:30px; margin-top: 20px;">댓글 </div>
+			<c:set var="seq_mbr" value="${sessionScope.seq_mbr}" />
+				<textarea id="commentContent" rows="5" cols="50"style="width: 100%; font-size: 18px;" placeholder="댓글을 입력하세요."></textarea>
+				<button type="button" style="width: 100%; height: 50px; margin-top: 10px; font-size: 18px;" onclick="addComment(${communityDto.seq_bbs},<%= session.getAttribute("seq_mbr") %>,'${communityDto.nickname}','${communityDto.dt_reg}');">댓글 등록</button>
 			</div>
+
+<div class="comment-list" id="commentListContainer">
+	<c:if test="${not empty commentList}">
+		<c:forEach var="comment" items="${commentList}">
+			<div class="comment-item">
+				<div class="comment-author">
+					<strong>작성자:</strong> 
+					<c:out value="${comment.nickname}"/> 
+				</div>
+				<div class="comment-content">
+					<strong>내용:</strong>
+					<span id="commentContent_${comment.seq_comment}">
+						<c:out value="${comment.content}"/> 
+					</span>
+					<div class="comment-date">
+					<strong>등록일:</strong> <c:out value="${comment.dt_reg}"/> 
+					</div>
+					<textarea id="editComment_${comment.seq_comment}">
+						<c:out value="${comment.content}"/> 
+					</textarea>
+				</div>
+				<div class="comment-actions" style="text-align: right;">
+				    <button type="button" style="padding: 5px 10px; color: white; background-color: blue; border: none; cursor: pointer;" onclick="showEditForm(${comment.seq_comment})">수정</button> 
+				    <button type="button" style="padding: 5px 10px; color: white; background-color: red; border: none; cursor: pointer;" onclick="deleteComment(${comment.seq_comment})">삭제</button> 
+				</div>
+			</div>
+
+			<!-- 대댓글 처리 -->
+			<c:forEach var="reply" items="${replyList}">
+				<c:if test="${reply.seq_comment_parent == comment.seq_comment}">
+					<div class="reply-item" style="padding-left: 40px;">
+						<b>대댓글 - ${reply.nickname}</b>
+						<span id="replyContent_${reply.seq_comment}">
+							<c:out value="${reply.content}"/> 
+						</span>
+						<textarea id="editReply_${reply.seq_comment}" style="display:none;">
+							<c:out value="${reply.content}"/> 
+						</textarea>
+						<div class="reply-actions" style="text-align: right;">
+							<button type="button" onclick="showEditForm(${reply.seq_comment}, true)">수정</button>
+							<button type="button" onclick="deleteComment(${reply.seq_comment})">삭제</button>
+						</div>
+					</div>
+				</c:if>
+			</c:forEach>
+		</c:forEach>
+	</c:if>
+</div>
 		</article>
 		<aside></aside>
 	</section>
