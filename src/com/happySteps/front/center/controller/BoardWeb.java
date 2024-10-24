@@ -169,14 +169,15 @@ public class BoardWeb extends Common {
 			boardDto.setUpdater(Integer.parseInt(getSession(request, "SEQ_MBR")));
 			
 			if (boardSrvc.deleteFlag(boardDto)) {
-				request.setAttribute("script"	, "alert('삭제되었습니다.');");
-				request.setAttribute("redirect"	, "/front/center/board/list.web?cd_bbs_type=" + boardDto.getCd_bbs_type());
+				
+				mav.addObject("script", "alert('수정되었습니다.');");
+	            mav.addObject("cd_bbs_type", boardDto.getCd_bbs_type());
 			}
 			else {
 				request.setAttribute("script"	, "alert('시스템 관리자에게 문의하세요!');");
 				request.setAttribute("redirect"	, "/");
 			}
-			mav.setViewName("forward:/servlet/result.web");
+			mav.setViewName("forward:/front/center/board/list.web");
 		}
 		catch (Exception e) {
 			logger.error("[" + this.getClass().getName() + ".remove()] " + e.getMessage(), e);
@@ -199,28 +200,26 @@ public class BoardWeb extends Common {
 	 */
 	@RequestMapping(value = "/front/center/board/modifyProc.web", method = RequestMethod.POST)
 	public ModelAndView modifyProc(HttpServletRequest request, HttpServletResponse response, BoardDto boardDto) {
-		
-		ModelAndView mav = new ModelAndView("redirect:/error.web");
-		
-		try {
-			boardDto.setUpdater(Integer.parseInt(getSession(request, "SEQ_MBR")));
-			
-			if (boardSrvc.update(boardDto)) {
-				request.setAttribute("script"	, "alert('수정되었습니다.');");
-				request.setAttribute("redirect"	, "/front/center/board/list.web?cd_bbs_type=" + boardDto.getCd_bbs_type());
-			}
-			else {
-				request.setAttribute("script"	, "alert('시스템 관리자에게 문의하세요!');");
-				request.setAttribute("redirect"	, "/");
-			}
-			mav.setViewName("forward:/servlet/result.web");
-		}
-		catch (Exception e) {
-			logger.error("[" + this.getClass().getName() + ".modifyProc()] " + e.getMessage(), e);
-		}
-		finally {}
-		
-		return mav;
+	    ModelAndView mav = new ModelAndView("redirect:/error.web");
+
+	    try {
+	        boardDto.setUpdater(Integer.parseInt(getSession(request, "SEQ_MBR")));
+	        
+	        if (boardSrvc.update(boardDto)) {
+	            // 성공 시, 필요한 데이터를 속성으로 설정
+	            mav.addObject("script", "alert('수정되었습니다.');");
+	            mav.addObject("cd_bbs_type", boardDto.getCd_bbs_type());
+	        }
+	        else {
+	            mav.addObject("script", "alert('시스템 관리자에게 문의하세요!');");
+	        }
+	        mav.setViewName("forward:/front/center/board/list.web");
+	    } 
+	    catch (Exception e) {
+	        logger.error("[" + this.getClass().getName() + ".modifyProc()] " + e.getMessage(), e);
+	    }
+	    
+	    return mav;
 	}
 	
 	/**
