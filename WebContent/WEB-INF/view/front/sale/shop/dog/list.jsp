@@ -75,8 +75,9 @@
 	        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
         }
         .product_name {
-        	font-size: 1.1em;
-        
+        	font-size: 21px;
+        	font-weight: bold;
+        	margin : 20px;
         }
 	</style>
 </head>
@@ -165,7 +166,7 @@
 									<div>
 										<div class="product_name">
 											<a href="javascript:goWriteForm(${list.seq_sle});">
-											<span><strong>${list.sle_nm}</strong></span>
+											<span>${list.sle_nm}</span>
 											</a>
 										</div>
 										<div class="card-text">

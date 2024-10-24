@@ -57,6 +57,20 @@ public class MemberSrvc {
 	@Inject
 	StatisticMemberDao statisticMemberDao;
 
+	@Transactional("txFront")
+	public boolean newPasswd(MemberDto memberDto) {
+		
+		if (memberDao.newPasswd(memberDto) == 1) return true;
+		else {
+			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+			return false;
+		}
+	}
+	
+	public MemberDto findPasswd(MemberDto memberDto) {
+		return memberDao.findPasswd(memberDto);
+	}
+	
 	public MemberDto findId(MemberDto memberDto) {
 		return memberDao.findId(memberDto);
 	}

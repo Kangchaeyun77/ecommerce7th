@@ -19,7 +19,7 @@
 	<typeAlias type="com.happySteps.front.common.dto.PagingDto"				alias="pagingDto" />
 	<typeAlias type="com.happySteps.front.sale.dto.SaleDto"					alias="saleDto" />
 	<typeAlias type="com.happySteps.front.like.dto.LikeDto"					alias="LikeDto" />
-	
+	<typeAlias type="com.happySteps.front.comment.dto.CommentDto"			alias="CommentDto" />
 	</typeAliases>
 	<mappers>
 		<mapper resource="com/happySteps/front/mybatis/login/Login.xml" />

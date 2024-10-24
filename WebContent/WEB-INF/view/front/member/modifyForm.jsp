@@ -39,9 +39,9 @@
 <form id="frmMain" method="POST">
 <input type="hidden" name="phone" id="phone" />
 <input type="hidden" name="pets" id="pets" />
-<input type="hidden" name="_pets" id="_pets"			value ="${memberDto.pets}" />			<!-- 기존 취미 값 -->
+<input type="hidden" name="_pets" id="_pets"				value ="${memberDto.pets}" />				<!-- 기존 반려동물 값 -->
 <input type="hidden" name="_flg_sms" id="_flg_sms"			value ="${memberDto.flg_sms}" />			<!-- 기존 문자 수신동의 값 -->
-<input type="hidden" name="_flg_email" id="_flg_email"		value ="${memberDto.flg_email}" />	<!-- 기존 이메일 수신동의 값 -->
+<input type="hidden" name="_flg_email" id="_flg_email"		value ="${memberDto.flg_email}" />			<!-- 기존 이메일 수신동의 값 -->
 <div class="container">
 		<article class="txtCenter">
 			(*) 표시는 필수 입력 사항입니다.
@@ -99,17 +99,18 @@
 						<input type="button" value="우편번호 찾기" style="width:100px" onClick="execDaumPostcode();" />
 					</td>
 				</tr>
-				<%-- 
 				<tr>
-					<th>취미</th>
-					<td colspan="3">
-						독서<input type="checkbox" name="hobby" id="hobby1"<c:if test="${memberDto.hobbys.substring(0, 1) == 'Y'}"> checked</c:if>/>
-						운동<input type="checkbox" name="hobby" id="hobby2"<c:if test="${memberDto.hobbys.substring(1, 2) == 'Y'}"> checked</c:if>/>
-						영화<input type="checkbox" name="hobby" id="hobby3"<c:if test="${memberDto.hobbys.substring(2, 3) == 'Y'}"> checked</c:if>/>
+					<th>반려동물</th>
+					<td colspan="5">
+						강아지<input type="checkbox" name="pets" id="pets1" <c:if test="${memberDto.pets.substring(0, 1) == 'Y'}"> checked</c:if> />
+						고양이<input type="checkbox" name="pets" id="pets2" <c:if test="${memberDto.pets.substring(1, 2) == 'Y'}"> checked</c:if> />
+						햄스터<input type="checkbox" name="pets" id="pets3" <c:if test="${memberDto.pets.substring(2, 3) == 'Y'}"> checked</c:if> />
+						파충류<input type="checkbox" name="pets" id="pets4" <c:if test="${memberDto.pets.substring(3, 4) == 'Y'}"> checked</c:if> />
+						기타  <input type="checkbox" name="pets" id="pets5" <c:if test="${memberDto.pets.substring(4, 5) == 'Y'}"> checked</c:if> />
 					</td>
 				</tr>
+
 				<tr>
-				--%>
 					<th>마케팅 수신 동의</th>
 					<td colspan="3">
 						SMS <input type="checkbox" name="flg_sms" id="flg_sms" value="Y"<c:if test="${memberDto.flg_sms == 'Y'}"> checked</c:if>/>
@@ -124,7 +125,6 @@
 			</table>
 		</article>
 		<aside></aside>
-	</section>
 	<footer>
 		<%@ include file="/include/front/footer.jsp" %>
 	</footer>

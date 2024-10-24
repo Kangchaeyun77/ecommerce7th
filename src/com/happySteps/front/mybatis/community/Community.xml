@@ -2,6 +2,43 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.happySteps.front.mybatis.community.Community">
 	
+	<!-- 댓글 목록 조회 -->
+	<select id="selectComments" parameterType="int" resultType="CommentDto">
+		SELECT
+			SEQ_COMMENT, SEQ_BBS, CONTENT, NICKNAME, TO_CHAR(DT_REG, 'YYYY-MM-DD') dt_reg
+		FROM
+			TB_CMT
+		WHERE
+			SEQ_BBS = #{seq_bbs}
+		ORDER BY 
+			DT_REG DESC
+	</select>
+	
+	<!-- 댓글 삭제 -->
+	<delete id="deleteComment" parameterType="int">
+		DELETE FROM
+			TB_CMT
+		WHERE 
+			SEQ_COMMENT = #{seq_comment}
+	</delete>
+	
+	<!-- 댓글 수정 -->
+	<update id="updateComment" parameterType="CommentDto">
+		UPDATE 
+			TB_CMT
+		SET 
+			CONTENT = #{content}, DT_UPT = SYSDATE
+		WHERE 
+			SEQ_COMMENT = #{seq_comment}
+	</update>
+	
+	<!-- 댓글 등록 -->
+	<insert id="insertComment" parameterType="CommentDto">
+		INSERT INTO 
+			TB_CMT (SEQ_COMMENT, SEQ_BBS, CONTENT, DT_REG, FLG_REPLY, FLG_DELETE, SEQ_MBR, NICKNAME)
+		VALUES (SEQ_COMMENT.NEXTVAL, #{seq_bbs},#{content}, SYSDATE,'N','N', #{seq_mbr}, #{nickname})
+	</insert>
+	
 	<select id="getLikeCount" parameterType="int" resultType="int">
 		SELECT
 			COUNT(*) 
@@ -38,7 +75,6 @@
 	<select id="selectReply" parameterType="communityDto" resultType="communityDto">
 		SELECT
 			SEQ_BBS
-			, TITLE
 			, CONTENT
 			, FILE_SAVE
 			, FILE_ORIG

@@ -9,6 +9,7 @@
 			TB_SLE
 		WHERE
 			CD_STATE_SALE = 1
+			<include refid="where" />
 	</select>
 	
 	<select id="list" parameterType="pagingDto" resultType="saleDto">

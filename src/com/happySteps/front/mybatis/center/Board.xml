@@ -110,9 +110,9 @@
 	
 	<insert id="insert" parameterType="boardDto">
 		INSERT INTO TB_BBS
-			(SEQ_BBS, CD_BBS_TYPE, TITLE, CD_CTG, CONTENT, FILE_SAVE, FILE_ORIG, READED, DT_REG, REGISTER)
+			(SEQ_BBS, SEQ_MBR, CD_BBS_TYPE, TITLE, CD_CTG, CONTENT, FILE_SAVE, FILE_ORIG, READED, DT_REG, REGISTER)
 		VALUES
-			(#{seq_bbs}, #{cd_bbs_type}, #{title}, #{cd_ctg}, #{content}, #{file_save}, #{file_orig}, 0, SYSDATE, #{register})
+			(#{seq_bbs}, #{seq_mbr}, #{cd_bbs_type}, #{title}, #{cd_ctg}, #{content}, #{file_save}, #{file_orig}, 0, SYSDATE, #{register})
 	</insert>
 	
 	<update id="update" parameterType="boardDto">
