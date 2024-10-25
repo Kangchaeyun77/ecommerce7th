@@ -127,6 +127,7 @@ integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJ
 							</a>
 						</li>
 						<li style="margin: 0 8px;">
+							<a href="/front/basket/index.web">
 								 <img src="/images/cart.png" class="fs-4 position-relative" style="width: 50px; vertical-align: middle; margin-top: 7px;" />
 							</a>
 						</li>
