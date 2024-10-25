@@ -3,6 +3,7 @@ package com.happySteps.front.community.controller;
 import java.io.File;
 import java.util.Hashtable;
 import java.util.LinkedList;
+import java.util.List;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
@@ -22,6 +23,8 @@ import com.happySteps.common.dto.FileDownloadDto;
 import com.happySteps.common.dto.FileDto;
 import com.happySteps.common.dto.FileUploadDto;
 import com.happySteps.common.file.FileUpload;
+import com.happySteps.front.comment.dto.CommentDto;
+import com.happySteps.front.comment.service.CommentSrvc;
 import com.happySteps.front.common.Common;
 import com.happySteps.front.common.component.SessionCmpn;
 import com.happySteps.front.common.dto.PagingDto;
@@ -51,6 +54,9 @@ public class CommunityWeb extends Common {
 	
 	@Inject
 	CommunitySrvc communitySrvc;
+	
+	@Inject
+	private CommentSrvc commentsrvc;
 	
 	/**
 	 * @param type
@@ -252,19 +258,37 @@ public class CommunityWeb extends Common {
 			communityDto.getSeq_bbs();
 			//logger.error("가져와짐?="+communityDto.getSeq_bbs());
 			if (communityDto.getCd_bbs_type() == 6) {
+				
 				mav.setViewName("front/community/board/popular/view");
+				List<CommentDto> commentList = commentsrvc.getComments(communityDto.getSeq_bbs());
+				mav.addObject("commentList", commentList);
 				_communityDto = communitySrvc.allSelect(communityDto);
 				mav.addObject("communityDto", _communityDto);
 				mav.setViewName("front/community/board/all/view"); 
 						
 			} else if (communityDto.getCd_bbs_type() == 7) {
+				
+				List<CommentDto> commentList = commentsrvc.getComments(communityDto.getSeq_bbs());
+				mav.addObject("commentList", commentList);
 				mav.setViewName("front/community/board/storyboard/view");
+				
 			} else if (communityDto.getCd_bbs_type() == 8) {
+				
 				mav.setViewName("front/community/board/qna/view");
+				List<CommentDto> commentList = commentsrvc.getComments(communityDto.getSeq_bbs());
+				mav.addObject("commentList", commentList);
+				
 			} else if (communityDto.getCd_bbs_type() == 9) {
+				
 				mav.setViewName("front/community/board/adap/view");
+				List<CommentDto> commentList = commentsrvc.getComments(communityDto.getSeq_bbs());
+				mav.addObject("commentList", commentList);
+				
 			} else if (communityDto.getCd_bbs_type() == 11) {
+				
 				mav.setViewName("front/community/board/information/view");
+				List<CommentDto> commentList = commentsrvc.getComments(communityDto.getSeq_bbs());
+				mav.addObject("commentList", commentList);
 				// DB 부하 감소를 위해 답변이 있을 때만
 				if (_communityDto.getSeq_reply() > 0) {
 					CommunityDto boardReplyDto = communitySrvc.selectReply(communityDto);
@@ -276,6 +300,8 @@ public class CommunityWeb extends Common {
 				_communityDto = communitySrvc.allSelect(communityDto);
 				mav.addObject("communityDto", _communityDto);
 				mav.setViewName("front/community/board/all/view"); // 전체 글을 보여주는 뷰
+				List<CommentDto> commentList = commentsrvc.getComments(communityDto.getSeq_bbs());
+				mav.addObject("commentList", commentList);
 			} else {
 				request.setAttribute("redirect" , "/");
 				mav.setViewName("forward:/servlet/result.web");
@@ -289,48 +315,8 @@ public class CommunityWeb extends Common {
 		return mav;
 	}
 	
-	/*
-	@RequestMapping(value = "/front/community/board/view.web", method = RequestMethod.POST)
-	public ModelAndView view(HttpServletRequest request, HttpServletResponse response, CommunityDto communityDto) {
-		
-		ModelAndView mav = new ModelAndView("redirect:/error.web");
-		
-		try {
-			CommunityDto _communityDto = communitySrvc.select(communityDto);
-			
-			mav.addObject("communityDto", _communityDto);
-			
-			if (communityDto.getCd_bbs_type() == 6) {
-				mav.setViewName("front/community/board/popular/view");
-			} else if (communityDto.getCd_bbs_type() == 7) {
-				mav.setViewName("front/community/board/storyboard/view");
-			} else if (communityDto.getCd_bbs_type() == 8) {
-				mav.setViewName("front/community/board/qna/view");
-			} else if (communityDto.getCd_bbs_type() == 9) {
-				mav.setViewName("front/community/board/adap/view");
-			} else if (communityDto.getCd_bbs_type() == 11) {
-				mav.setViewName("front/community/board/information/view");
-				// DB 부하 감소를 위해 답변이 있을 때만
-				if (_communityDto.getSeq_reply() > 0) {
-					CommunityDto boardReplyDto = communitySrvc.selectReply(communityDto);
-					mav.addObject("boardReplyDto", boardReplyDto);
-				}
-				
-				mav.setViewName("front/community/board/qna/view");
-			}
-			else {
-				request.setAttribute("redirect"	, "/");
-				mav.setViewName("forward:/servlet/result.web");
-			}
-		}
-		catch (Exception e) {
-			logger.error("[" + this.getClass().getName() + ".view()] " + e.getMessage(), e);
-		}
-		finally {}
-		
-		return mav;
-	}
-	*/
+	
+
 	/**
 	 * @param request [요청 서블릿]
 	 * @param response [응답 서블릿]

@@ -58,13 +58,91 @@ import com.happySteps.front.common.Common;
 public class CommentWeb extends Common{
 
 	/** Logger */
-	@SuppressWarnings("unused")
 	private static Logger logger = LoggerFactory.getLogger(CommentWeb.class);
 
 	@Autowired
 	private CommentSrvc commentsrvc;
 	
 	
+	/**
+	 * @return responseMap
+	 * @since  2024-10-25
+	 * <p>DESCRIPTION: 댓글 삭제</p>
+	 * <p>IMPORTANT:</p>
+	 * <p>EXAMPLE:</p>
+	 */
+	@RequestMapping(value = "/front/comment/delete.json", method = RequestMethod.POST, produces = "application/json; charset=UTF-8") 
+	@ResponseBody
+	public Map<String, Object> deleteComment(@RequestBody CommentDto commentDto, HttpSession session, HttpServletRequest request, HttpServletResponse response) {
+		
+			Map<String, Object> responseMap = new HashMap<>();
+		try {
+			
+			String seq_mbr = (String) session.getAttribute("SEQ_MBR");
+			// 댓글을 수정할때 세션에서 seq_mbr 값 체크 // 세션 정보가 없으면 에러 처리
+			if (seq_mbr == null){
+				responseMap.put("error", "로그인 정보가 없습니다. 로그인 후 다시 시도해 주세요.");
+				return responseMap;
+			}
+
+			// commentDto에 세션 정보 설정
+			commentDto.setSeq_mbr(Integer.parseInt(seq_mbr));
+			commentDto.setSeq_mbr(Integer.parseInt(getSession(request, "SEQ_MBR"))); // seq_mbr 가져오기
+			// seq_mbr이 없으면 에러 처리
+			if (commentDto.getSeq_mbr() == 0) {
+				responseMap.put("error", "사용자 세션 정보가 없습니다.");
+				return responseMap;
+		}
+			
+			logger.debug(commentDto.getSeq_comment() + "");
+			commentsrvc.deleteComment(commentDto);
+			
+			} catch (Exception e) {
+				responseMap.put("error", "댓글 삭제 중 오류가 발생했습니다.");
+				logger.error("댓글 삭제 중 오류", e);
+			}
+				return responseMap;
+	}
+	
+	/**
+	 * @return responseMap
+	 * @since  2024-10-25
+	 * <p>DESCRIPTION: 댓글 수정</p>
+	 * <p>IMPORTANT:</p>
+	 * <p>EXAMPLE:</p>
+	 */
+	@RequestMapping(value = "/front/comment/edit.json", method = RequestMethod.POST, produces = "application/json; charset=UTF-8") 
+	@ResponseBody
+	public Map<String, Object> editComment(@RequestBody CommentDto commentDto, HttpSession session, HttpServletRequest request, HttpServletResponse response) {
+		
+			Map<String, Object> responseMap = new HashMap<>();
+		try {
+			
+			String seq_mbr = (String) session.getAttribute("SEQ_MBR");
+			// 댓글을 수정할때 세션에서 seq_mbr 값 체크 // 세션 정보가 없으면 에러 처리
+			if (seq_mbr == null){
+				responseMap.put("error", "로그인 정보가 없습니다. 로그인 후 다시 시도해 주세요.");
+				return responseMap;
+			}
+
+			// commentDto에 세션 정보 설정
+			commentDto.setSeq_mbr(Integer.parseInt(seq_mbr));
+			commentDto.setSeq_mbr(Integer.parseInt(getSession(request, "SEQ_MBR"))); // seq_mbr 가져오기
+			// seq_mbr이 없으면 에러 처리
+			if (commentDto.getSeq_mbr() == 0) {
+				responseMap.put("error", "사용자 세션 정보가 없습니다.");
+				return responseMap;
+		}
+			
+			logger.debug(commentDto.getSeq_comment() + "");
+			commentsrvc.editComment(commentDto);
+			
+			} catch (Exception e) {
+				responseMap.put("error", "댓글 수정 중 오류가 발생했습니다.");
+				logger.error("댓글 수정 중 오류", e);
+			}
+				return responseMap;
+	}
 	
 	/**
 	 * @return responseMap
@@ -73,44 +151,7 @@ public class CommentWeb extends Common{
 	 * <p>IMPORTANT:</p>
 	 * <p>EXAMPLE:</p>
 	 */
-
-	/*
-	@RequestMapping(value = "/front/comment/view.web", method = RequestMethod.GET, produces = "application/json; charset=UTF-8")
-	@ResponseBody
-	public ResponseEntity<Map<String, Object>> getCommentList(@RequestParam(value = "seq_bbs", required = true) String str_seq_bbs, HttpSession session, HttpServletRequest request, CommentDto commentDto) {
-		// 해당 게시물
-		Map<String, Object> responseMap = new HashMap<>();
-		try {
-			int seq_bbs = Integer.parseInt(str_seq_bbs);
-			// 세션에서 사용자 정보를 체크
-			commentDto.setSeq_mbr(Integer.parseInt(getSession(request, "SEQ_MBR"))); // seq_mbr 가져오기
-			commentDto.setSeq_bbs(seq_bbs);
-			commentDto.setNickname(getSession(request, "NICKNAME")); // 닉네임 바로 설정
-			logger.debug("getCommentList 메서드 호출됨, seq_bbs: " + str_seq_bbs);
-			// 해당 게시물의 댓글 목록 조회
-			List<CommentDto> commentList = commentsrvc.getComments(seq_bbs);
-			request.setAttribute("commentList", commentList);
-			// 댓글 목록이 비어있는 경우 처리
-			if (commentList.isEmpty()) {
-				responseMap.put("message", "댓글이 없습니다.");
-			} else {
-				responseMap.put("commentList", commentList);
-				responseMap.put("message", "댓글 목록을 가져왔습니다.");
-			}
-
-			return new ResponseEntity<>(responseMap, HttpStatus.OK);
-		} catch (IllegalArgumentException e) {
-			responseMap.put("error", "잘못된 요청입니다.");
-			logger.error("잘못된 요청", e);
-			return new ResponseEntity<>(responseMap, HttpStatus.BAD_REQUEST);
-		} catch (Exception e) {
-			responseMap.put("error", "댓글 목록을 조회하는 중 오류가 발생했습니다.");
-			logger.error("댓글 목록 조회 중 오류", e);
-			return new ResponseEntity<>(responseMap, HttpStatus.INTERNAL_SERVER_ERROR);
-		}
-	}
-*/
-	@RequestMapping(value = "/front/comment/view.web", method = RequestMethod.GET, produces = "application/json; charset=UTF-8")
+	@RequestMapping(value = "/front/comment/view.json", method = RequestMethod.GET, produces = "application/json; charset=UTF-8")
 	@ResponseBody
 	public Map<String, Object> getCommentList(@RequestParam(value = "seq_bbs", required = true) String str_seq_bbs, HttpSession session, HttpServletRequest request, CommentDto commentDto) {
 		
@@ -152,7 +193,7 @@ public class CommentWeb extends Common{
 	 * <p>IMPORTANT:</p>
 	 * <p>EXAMPLE:</p>
 	 */
-	@RequestMapping(value = "/front/comment/add.web", method = RequestMethod.POST, produces = "application/json; charset=UTF-8")
+	@RequestMapping(value = "/front/comment/add.json", method = RequestMethod.POST, produces = "application/json; charset=UTF-8")
 	@ResponseBody
 	public Map<String, Object> addComment(@RequestBody CommentDto commentDto, HttpSession session, HttpServletRequest request, HttpServletResponse response) {
 		
@@ -191,57 +232,4 @@ public class CommentWeb extends Common{
 		
 		return responseMap;
 	}
-	/*
-	@RequestMapping(value = "/front/comment/add.web", method = RequestMethod.POST, produces = "application/json; charset=UTF-8")
-	@ResponseBody
-	public Map<String, Object> addComment(@RequestBody CommentDto commentDto, HttpSession session, HttpServletRequest request, HttpServletResponse response) {
-		
-		Map<String, Object> responseMap = new HashMap<>();
-		try {
-			// 글을 쓸 때 세션에서 seq_mbr값을 체크
-			commentDto.setSeq_mbr(Integer.parseInt(getSession(request, "SEQ_MBR")));
-			String nickname = getSession(request, "NICKNAME");
-			logger.debug("NICKNAME = " + nickname);
-			
-			commentDto.setNickname(nickname);
-			
-			//닉네임이 없으면 에러 처리
-			if(nickname == null) {
-				logger.error("없니 닉네임="+nickname);
-				request.setAttribute("script", "alert('닉네임이 없습니다. 로그인 후 다시 시도해 주세요.');");
-				request.setAttribute("redirect", "/front/login/loginForm.web"); 
-				}
-			if(commentDto.getSeq_mbr() != 0) {
-				// 댓글 추가
-				commentsrvc.addComment(commentDto);
-				responseMap.put("message", "댓글이 등록되었습니다.");
-			}else {
-				responseMap.put("error", "사용자 세션 정보가 없습니다.");
-			}
-		}catch (Exception e) {
-			responseMap.put("error", "댓글 등록 중 오류가 발생했습니다.");
-			logger.error("댓글 등록 중 오류", e);
-		}
-		return responseMap;
-	}
-*/
-		// 댓글 수정
-	@RequestMapping(value = "/update", method = RequestMethod.POST) // POST /community/comment/update
-		public String updateComment(@RequestBody CommentDto CommentDto) {
-			commentsrvc.updateComment(CommentDto);
-			return "댓글이 수정되었습니다.";
-		}
-
-		// 댓글 삭제
-	@RequestMapping(value = "/delete", method = RequestMethod.POST) // POST /community/comment/delete
-		public String deleteComment(@RequestBody CommentDto CommentDto) {
-			commentsrvc.deleteComment(CommentDto.getSeq_comment());
-			return "댓글이 삭제되었습니다.";
-		}
-	/*
-		// 댓글 목록 조회
-	@RequestMapping(value = "/{seq_bbs}", method = RequestMethod.GET) // GET /community/comment/{seq_bbs}
-		public List<CommentDto> getComments(@PathVariable int seq_bbs, CommentDto CommentDto) {
-			return commentsrvc.getComments(seq_bbs);
-		}*/
 }

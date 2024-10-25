@@ -3,6 +3,7 @@ package com.happySteps.front.community.dao;
 import java.util.List;
 
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.happySteps.front.comment.dto.CommentDto;
 import com.happySteps.front.common.dao.BaseDao;
@@ -39,7 +40,7 @@ public class Communitydao extends BaseDao {
 	 * <p>IMPORTANT:</p>
 	 * <p>EXAMPLE:</p>
 	 */
-	public void updateComment(CommentDto commentDto) {
+	public void editComment(CommentDto commentDto) {
 		sqlSessionFront.update("com.happySteps.front.mybatis.community.Community.updateComment", commentDto);
 	}
 	/**
@@ -49,8 +50,9 @@ public class Communitydao extends BaseDao {
 	 * <p>IMPORTANT:</p>
 	 * <p>EXAMPLE:</p>
 	 */
-	public void deleteComment(int seq_comment) {
-		sqlSessionFront.delete("com.happySteps.front.mybatis.community.Community.deleteComment", seq_comment);
+	@Transactional("txFront")
+	public void deleteComment(CommentDto commentDto) {
+		sqlSessionFront.delete("com.happySteps.front.mybatis.community.Community.deleteComment", commentDto);
 	}
 	/**
 	 * @param communityDto

@@ -61,13 +61,17 @@ public class CommentSrvc {
 
 		// 댓글 수정
 
-		public void updateComment(CommentDto commentDto) {
-			communitydao.updateComment(commentDto);
+		public void editComment(CommentDto commentDto) {
+			try {	
+				communitydao.editComment(commentDto);
+		}catch (Exception e) {
+			logger.error("댓글 수정 중 오류 발생: " + e.getMessage(), e);
 		}
-
+	}
+		
 		// 댓글 삭제
-		public void deleteComment(int seq_comment) {
-			communitydao.deleteComment(seq_comment);
+		public void deleteComment(CommentDto commentDto) {
+			communitydao.deleteComment(commentDto);
 		}
 
 		// 댓글 목록 조회
