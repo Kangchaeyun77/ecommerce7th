@@ -9,17 +9,20 @@
 		FROM
 			TB_CMT
 		WHERE
-			SEQ_BBS = #{seq_bbs}
+			SEQ_BBS = #{seq_bbs} AND flg_delete = 'N'
 		ORDER BY 
 			DT_REG DESC
 	</select>
 	
 	<!-- 댓글 삭제 -->
 	<delete id="deleteComment" parameterType="int">
-		DELETE FROM
+		UPDATE 
 			TB_CMT
-		WHERE 
-			SEQ_COMMENT = #{seq_comment}
+		SET 
+			FLG_DELETE = 'Y'
+			, DT_UPT = SYSDATE
+	WHERE 
+		SEQ_COMMENT = #{seq_comment}
 	</delete>
 	
 	<!-- 댓글 수정 -->
@@ -27,7 +30,8 @@
 		UPDATE 
 			TB_CMT
 		SET 
-			CONTENT = #{content}, DT_UPT = SYSDATE
+			CONTENT = #{content}
+			, DT_UPT = SYSDATE
 		WHERE 
 			SEQ_COMMENT = #{seq_comment}
 	</update>
