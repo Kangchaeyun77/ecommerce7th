@@ -32,7 +32,7 @@ public class LikeWeb extends Common {
 	@Autowired
 	private LikeSrvc likeSrvc;
 	
-	@RequestMapping(value = "/front/community/board/like.web", method = RequestMethod.POST, consumes = "application/json; charset=UTF-8", produces = "application/json; charset=UTF-8")
+	@RequestMapping(value = "/front/community/board/like.json", method = RequestMethod.POST, consumes = "application/json; charset=UTF-8", produces = "application/json; charset=UTF-8")
 	@ResponseBody	
 	public Map<String, Object> addLike(@RequestBody LikeDto likeDto, HttpSession session, HttpServletRequest request, HttpServletResponse response) {
 		
