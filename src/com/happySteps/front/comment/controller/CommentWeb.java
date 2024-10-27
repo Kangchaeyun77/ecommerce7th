@@ -67,6 +67,54 @@ public class CommentWeb extends Common{
 	/**
 	 * @return responseMap
 	 * @since  2024-10-25
+	 * <p>DESCRIPTION: 대 댓글 저장</p>
+	 * <p>IMPORTANT:</p>
+	 * <p>EXAMPLE:</p>
+	 */
+	@RequestMapping(value = "/front/comment/saveReply.json", method = RequestMethod.POST, produces = "application/json; charset=UTF-8")
+	@ResponseBody
+	public Map<String, Object> saveReply(@RequestBody CommentDto commentDto, HttpSession session, HttpServletRequest request, HttpServletResponse response) {
+		
+		Map<String, Object> responseMap = new HashMap<>();
+	
+		try {
+			// 글을 쓸 때 세션에서 seq_mbr 값 체크
+			commentDto.setSeq_mbr(Integer.parseInt(getSession(request, "SEQ_MBR"))); // seq_mbr 가져오기
+			commentDto.setNickname(getSession(request, "NICKNAME")); // nickname 가져오기
+			// seq_mbr이 없으면 에러 처리
+			if (commentDto.getSeq_mbr() == 0) {
+				responseMap.put("error", "사용자 세션 정보가 없습니다.");
+				return responseMap;
+			}
+			
+			// 닉네임이 없으면 에러 처리
+			if (commentDto.getNickname() == null) {
+				responseMap.put("error", "닉네임이 없습니다. 로그인 후 다시 시도해 주세요.");
+				request.setAttribute("script", "alert('닉네임이 없습니다. 로그인 후 다시 시도해 주세요.');");
+				request.setAttribute("redirect", "/front/login/loginForm.web"); 
+				return responseMap;
+			}
+			if (commentDto.getContent() == null || commentDto.getContent().equals("")) {
+				responseMap.put("error", "댓글내용이 없습니다. 다시 시도해 주세요.");
+				request.setAttribute("script", "alert('댓글내용이 없습니다. 다시 시도해 주세요.');");
+				return responseMap;
+			}
+			// 댓글 추가
+			commentsrvc.saveReply(commentDto);
+			responseMap.put("message", "댓글이 등록되었습니다.");
+			
+		} catch (Exception e) {
+			responseMap.put("error", "댓글 등록 중 오류가 발생했습니다.");
+			logger.error("댓글 등록 중 오류", e);
+		}
+		
+		return responseMap;
+}
+
+	
+	/**
+	 * @return responseMap
+	 * @since  2024-10-25
 	 * <p>DESCRIPTION: 댓글 삭제</p>
 	 * <p>IMPORTANT:</p>
 	 * <p>EXAMPLE:</p>

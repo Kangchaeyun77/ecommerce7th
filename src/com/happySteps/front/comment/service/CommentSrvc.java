@@ -49,6 +49,17 @@ public class CommentSrvc {
 	@Inject
 	Communitydao communitydao;
 	
+	// 대댓글 등록
+
+		public void saveReply(CommentDto commentDto) {
+			try {
+				communitydao.insertReply(commentDto);
+				} catch (Exception e) {
+					logger.error("댓글 추가 중 오류 발생: " + e.getMessage(), e);
+			}
+		}
+
+	
 	// 댓글 등록
 
 	public void addComment(CommentDto commentDto) {

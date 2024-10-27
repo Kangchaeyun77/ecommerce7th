@@ -12,12 +12,21 @@ public class CommentDto {
 	private String dt_upt				= ""; // 수정일시
 	private String nickname				= ""; // 닉네임
 
+	private int depth = 0; // 댓글의 깊이
 	
 	@Override
 	public String toString() {
 		return "CommentDto [nickname=" + nickname + ", content=" + content + "dt_reg=" + dt_reg +", seq_comment=" + seq_comment + "]";
 	}
 	
+	public int getDepth() {
+		return depth;
+	}
+
+	public void setDepth(int depth) {
+		this.depth = depth;
+	}
+
 	public String getNickname() {
 		return nickname;
 	}

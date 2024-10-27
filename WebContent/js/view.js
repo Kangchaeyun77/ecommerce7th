@@ -6,6 +6,53 @@
  * <p>IMPORTANT:</p>
  */
 
+
+// 답글 저장
+	function saveReply(seq_comment_parent, depth, seq_bbs) {
+		const seq_mbr = sessionStorage.getItem('SEQ_MBR');
+		const content = document.getElementById(`replyContent_${seq_comment_parent}`).value;
+		const commentElement = document.querySelector(`div[data-seq-bbs]`);
+		if (!content.trim()) {
+			alert('답글 내용을 입력해 주세요.');
+			return;
+		}
+
+		fetch(`/front/comment/saveReply.json`, {
+			method: 'POST',
+			headers: { 
+				'Content-Type': 'application/json; charset=UTF-8' 
+			},
+			body: JSON.stringify({ 
+				seq_bbs: seq_bbs,
+				seq_comment_parent: seq_comment_parent, 
+				seq_mbr: seq_mbr, 
+				content: content, 
+				depth: depth 
+			})
+		})
+		.then(response => {
+			if (!response.ok) throw new Error('오류 발생');
+			return response.json();
+		})
+		.then(data => {
+			if (data.error) {
+				alert(data.error);
+			} else {
+				alert('답글이 등록되었습니다.');
+				location.reload();  // 등록 후 페이지 새로고침
+			}
+		})
+		.catch(error => {
+			console.error('Error:', error);
+			alert('답글 등록 중 오류가 발생했습니다.');
+		});
+	}
+
+// 답글 폼 보여주기
+function showReplyForm(seq_comment) {
+		document.getElementById(`replyForm_${seq_comment}`).style.display = 'block';
+	}
+
 // 댓글 삭제
 function deleteComment(seq_comment) {
 	//const seq_mbr = sessionStorage.getItem('SEQ_MBR');
@@ -33,7 +80,7 @@ function deleteComment(seq_comment) {
 			alert(data.error); // 서버에서 에러 메시지가 있는 경우 표시
 		} else {
 			alert('댓글이 삭제되었습니다.'); // 성공 메시지
-			location.reload(); // 삭제 후 페이지 새로고침
+		location.reload(); // 삭제 후 페이지 새로고침
 		}
 	})
 	.catch((error) => {
@@ -73,13 +120,13 @@ function editComment(seq_comment) {
 		if (data.error) {
 			alert(data.error); // 서버에서 에러 메시지가 있는 경우 표시
 		} else {
-			alert('댓글이 수정되었으니 그냥 그대로 있어!'); // 성공 메시지
+			alert('댓글이 수정되었습니다'); // 성공 메시지
 			location.reload(); // 수정 후 페이지 새로고침
 		}
 	})
 	.catch((error) => {
 		console.error('Error:', error); // 오류 메시지 출력
-		alert('댓글 수정 중 오류가 발생했습니다.'); // 사용자에게 오류 알림
+		alert('댓글 수정 중 오류가 발생했습니다.', error); // 사용자에게 오류 알림
 	});
 }
 //댓글 수정 폼 보여주기

@@ -258,7 +258,6 @@ public class CommunityWeb extends Common {
 			communityDto.getSeq_bbs();
 			//logger.error("가져와짐?="+communityDto.getSeq_bbs());
 			if (communityDto.getCd_bbs_type() == 6) {
-				
 				mav.setViewName("front/community/board/popular/view");
 				List<CommentDto> commentList = commentsrvc.getComments(communityDto.getSeq_bbs());
 				mav.addObject("commentList", commentList);
@@ -267,7 +266,6 @@ public class CommunityWeb extends Common {
 				mav.setViewName("front/community/board/all/view"); 
 						
 			} else if (communityDto.getCd_bbs_type() == 7) {
-				
 				List<CommentDto> commentList = commentsrvc.getComments(communityDto.getSeq_bbs());
 				mav.addObject("commentList", commentList);
 				mav.setViewName("front/community/board/storyboard/view");

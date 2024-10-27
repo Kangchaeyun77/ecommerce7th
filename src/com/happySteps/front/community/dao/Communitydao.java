@@ -23,6 +23,18 @@ import com.happySteps.front.common.dto.PagingDto;
 public class Communitydao extends BaseDao {
 	
 	
+
+	/**
+	 * @param communityDto
+	 * @since 2024-10-27
+	 * <p>DESCRIPTION: 대댓글 등록</p>
+	 * <p>IMPORTANT:</p>
+	 * <p>EXAMPLE:</p>
+	 */
+	public void insertReply(CommentDto commentDto) {
+		sqlSessionFront.insert("com.happySteps.front.mybatis.community.Community.insertReply", commentDto);
+	}
+	
 	/**
 	 * @param communityDto
 	 * @since 2024-10-22
@@ -198,7 +210,6 @@ public class Communitydao extends BaseDao {
 	 * <p>EXAMPLE:</p>
 	 */
 	public CommunityDto select(CommunityDto communityDto) {
-		
 		return sqlSessionFront.selectOne("com.happySteps.front.mybatis.community.Community.select", communityDto);
 	}
 	/**
