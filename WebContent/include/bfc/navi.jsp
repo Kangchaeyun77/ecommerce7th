@@ -89,7 +89,7 @@
 									</a>
 									<ul class="nav child_menu">
 										<li>
-											<a href="#">상품관리</a>
+											<a href="/console/product/list.web">상품관리</a>
 										</li>
 										<li>
 											<a href="#">주문관리</a>
