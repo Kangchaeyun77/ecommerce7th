@@ -8,7 +8,7 @@ public class CommentDto {
 	private String flg_delete			= ""; // 삭제여부
 	private String dt_reg				= ""; // 등록일시
 	private int seq_bbs				= 0; // 게시판일련번호
-	private int seq_mbr				= 0; // 댓글을 작성한 회원 일련번호
+	private Integer seq_mbr				= 0; // 댓글을 작성한 회원 일련번호
 	private String dt_upt				= ""; // 수정일시
 	private String nickname				= ""; // 닉네임
 
@@ -75,10 +75,10 @@ public class CommentDto {
 	public void setSeq_bbs(int seq_bbs) {
 		this.seq_bbs = seq_bbs;
 	}
-	public int getSeq_mbr() {
+	public Integer getSeq_mbr() {
 		return seq_mbr;
 	}
-	public void setSeq_mbr(int seq_mbr) {
+	public void setSeq_mbr(Integer seq_mbr) {
 		this.seq_mbr = seq_mbr;
 	}
 	public String getDt_upt() {

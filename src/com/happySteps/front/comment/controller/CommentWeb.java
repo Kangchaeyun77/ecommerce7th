@@ -44,6 +44,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.happySteps.front.comment.dto.CommentDto;
 import com.happySteps.front.comment.service.CommentSrvc;
 import com.happySteps.front.common.Common;
+import com.happySteps.front.community.dto.CommunityDto;
 
 
 /**
@@ -73,20 +74,27 @@ public class CommentWeb extends Common{
 	 */
 	@RequestMapping(value = "/front/comment/saveReply.json", method = RequestMethod.POST, produces = "application/json; charset=UTF-8")
 	@ResponseBody
-	public Map<String, Object> saveReply(@RequestBody CommentDto commentDto, HttpSession session, HttpServletRequest request, HttpServletResponse response) {
+	public Map<String, Object> saveReply(@RequestBody CommentDto commentDto, HttpSession session, HttpServletRequest request, HttpServletResponse response, CommunityDto communityDto) {
 		
 		Map<String, Object> responseMap = new HashMap<>();
 	
 		try {
 			// 글을 쓸 때 세션에서 seq_mbr 값 체크
 			commentDto.setSeq_mbr(Integer.parseInt(getSession(request, "SEQ_MBR"))); // seq_mbr 가져오기
+			logger.debug("제이슨씨="+ getSession(request, "SEQ_MBR"));
+			communityDto.setSeq_mbr(Integer.parseInt(getSession(request, "SEQ_MBR"))); // seq_mbr 가져오기
+			logger.debug("제이슨씨222="+ getSession(request, "SEQ_MBR"));
 			commentDto.setNickname(getSession(request, "NICKNAME")); // nickname 가져오기
+			
+			String seq_mbr = getSession(request, "SEQ_MBR");
 			// seq_mbr이 없으면 에러 처리
-			if (commentDto.getSeq_mbr() == 0) {
+			
+			if (seq_mbr != null) {
+				commentDto.setSeq_mbr(Integer.parseInt(seq_mbr)); // seq_mbr 가져오기
+			} else {
 				responseMap.put("error", "사용자 세션 정보가 없습니다.");
 				return responseMap;
 			}
-			
 			// 닉네임이 없으면 에러 처리
 			if (commentDto.getNickname() == null) {
 				responseMap.put("error", "닉네임이 없습니다. 로그인 후 다시 시도해 주세요.");
@@ -243,13 +251,14 @@ public class CommentWeb extends Common{
 	 */
 	@RequestMapping(value = "/front/comment/add.json", method = RequestMethod.POST, produces = "application/json; charset=UTF-8")
 	@ResponseBody
-	public Map<String, Object> addComment(@RequestBody CommentDto commentDto, HttpSession session, HttpServletRequest request, HttpServletResponse response) {
+	public Map<String, Object> addComment(@RequestBody CommentDto commentDto, HttpSession session, HttpServletRequest request, HttpServletResponse response, CommunityDto communityDto) {
 		
 		Map<String, Object> responseMap = new HashMap<>();
 	
 		try {
 			// 글을 쓸 때 세션에서 seq_mbr 값 체크
 			commentDto.setSeq_mbr(Integer.parseInt(getSession(request, "SEQ_MBR"))); // seq_mbr 가져오기
+			communityDto.setSeq_mbr(Integer.parseInt(getSession(request, "SEQ_MBR"))); // seq_mbr 가져오기
 			commentDto.setNickname(getSession(request, "NICKNAME")); // nickname 가져오기
 			// seq_mbr이 없으면 에러 처리
 			if (commentDto.getSeq_mbr() == 0) {

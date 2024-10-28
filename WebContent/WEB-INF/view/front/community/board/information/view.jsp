@@ -105,10 +105,11 @@
 <form id="frmMain" method="POST">
 <input type="hidden" id="type"			name="type" />
 <input type="hidden" id="sequence"		name="sequence" />
-<input type="hidden" id="cd_ctg" name="cd_ctg" value="${communityDto.cd_ctg}" />  
-<input type="hidden" id="cd_bbs_type"	name="cd_bbs_type" />
+<input type="hidden" id="cd_ctg" 		name="cd_ctg"		value="${communityDto.cd_ctg}" />
+<input type="hidden" id="cd_bbs_type"	name="cd_bbs_type"	value="${cd_bbs_type}" />
 <c:set var="seq_mbr" value="${sessionScope.seq_mbr}" />
 <input type="hidden" id="seq_mbr" name="seq_mbr" value="<%= session.getAttribute("seq_mbr") %>" />
+<input type="hidden" id="seq_mbr"		name="seq_mbr"		value="${communityDto.seq_mbr}" />
 <input type="hidden" id="seq_bbs"		name="seq_bbs"		value="${communityDto.seq_bbs}" />
 <div class="container">
 	<section class="content">

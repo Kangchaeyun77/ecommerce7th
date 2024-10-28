@@ -8,6 +8,7 @@ import java.util.List;
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -15,8 +16,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.support.MessageSourceAccessor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.happySteps.common.dto.FileDownloadDto;
@@ -246,17 +249,41 @@ public class CommunityWeb extends Common {
 	 */
 	
 	@RequestMapping(value = "/front/community/board/view.web", method = RequestMethod.POST)
-	public ModelAndView view(HttpServletRequest request, HttpServletResponse response, CommunityDto communityDto) {
+	public ModelAndView view(HttpServletRequest request, HttpServletResponse response
+			, CommunityDto communityDto, CommentDto commentDto){
+			//, CommunityDto communityDto, HttpSession session,Model model){
 		
 		ModelAndView mav = new ModelAndView("redirect:/error.web");
 		
 		try {
+			
+			// model.addAttribute("communityDto", communityDto);
+			
+			
+			int seq_mbr = Integer.parseInt(getSession(request, "SEQ_MBR"));
+			communityDto.setSeq_mbr(seq_mbr);
+			
+			mav.addObject("seq_mbr", seq_mbr);
+			
+			logger.debug("회원일련번호?="+seq_mbr);
+			
+			int cd_ctg = communityDto.getCd_bbs_type();
+			mav.addObject("cd_ctg", cd_ctg);
+			
+			logger.debug("********************************************");
+			logger.debug("cd_bbs_type = " + communityDto.getCd_bbs_type());
+			logger.debug("********************************************");
+			mav.addObject("cd_bbs_type", communityDto.getCd_bbs_type());
+			
+			logger.debug("가져와짐?="+cd_ctg);
+			
 			CommunityDto _communityDto = communitySrvc.select(communityDto);
 			mav.addObject("communityDto", _communityDto);
 			//logger.error("가져와짐?="+_communityDto);
 			//logger.error("가져와짐?="+communityDto);
 			communityDto.getSeq_bbs();
 			//logger.error("가져와짐?="+communityDto.getSeq_bbs());
+			
 			if (communityDto.getCd_bbs_type() == 6) {
 				mav.setViewName("front/community/board/popular/view");
 				List<CommentDto> commentList = commentsrvc.getComments(communityDto.getSeq_bbs());

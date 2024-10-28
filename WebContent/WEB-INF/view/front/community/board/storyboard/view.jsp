@@ -37,8 +37,8 @@
 		// 서버에서 JSP로 넘어온 seq_bbs 값을 JavaScript 변수로 할당
 		document.addEventListener('DOMContentLoaded', () => {
 		var seq_bbs = "${communityDto.seq_bbs}"; 
-		// loadComments(seq_bbs); // seq_bbs는 필요한 값으로 설정
 	});
+	const cd_ctg = document.getElementById("cd_ctg").value;
 	</script>
 	<title>커뮤니티 자유게시판 상세보기</title>
 </head>
@@ -46,17 +46,16 @@
 <form id="frmMain" method="POST">
 <input type="hidden" id="type"			name="type" />
 <input type="hidden" id="sequence"		name="sequence" />
-<input type="hidden" id="cd_ctg" name="cd_ctg" value="${communityDto.cd_ctg}" />  
 <input type="hidden" id="cd_ctg_pet"	name="cd_ctg_pet" />
-<input type="hidden" id="cd_bbs_type"	name="cd_bbs_type" />
-<c:set var="seq_mbr" value="${sessionScope.seq_mbr}" />
-<input type="hidden" id="seq_mbr" name="seq_mbr" value="<%= session.getAttribute("seq_mbr") %>" />
+<input type="hidden" id="cd_bbs_type"	name="cd_bbs_type"	value="${cd_bbs_type}" />
+<input type="hidden" id="seq_mbr"		name="seq_mbr"		value="${seq_mbr}" />
 <input type="hidden" id="seq_bbs"		name="seq_bbs"		value="${communityDto.seq_bbs}" />
+<input type="hidden" id="cd_ctg"		name="cd_ctg" 		value="${communityDto.cd_ctg}" />  
 <div class="container">
 	<section class="content">
 		<article class="txtCenter">
 		 <div class="content-container"> 
-			<h2 class="title">제목: ${communityDto.title}</h2>			
+			<h2 class="title">제목: ${communityDto.title}</h2>		
 			<div class="icon-cd_ctg_pet" style="display: flex; justify-content: center; align-items: flex-start; flex-direction: column;">
 				<c:choose>
 					<c:when test="${communityDto.cd_ctg_pet == 1}">
@@ -129,9 +128,9 @@
 			</div>
 			<hr>
 			<div style="font-size:30px; margin-top: 20px;">댓글 </div>
-			<c:set var="seq_mbr" value="${sessionScope.seq_mbr}" />
+			<c:set var="seq_mbr" value="${seq_mbr}" />-
 				<textarea id="commentContent" rows="5" cols="50"style="width: 100%; font-size: 18px;" placeholder="댓글을 입력하세요."></textarea>
-				<button type="button" style="width: 100%; height: 50px; margin-top: 10px; font-size: 18px;" onclick="addComment(${communityDto.seq_bbs},<%= session.getAttribute("seq_mbr") %>,'${communityDto.nickname}','${communityDto.dt_reg}');">댓글 등록</button>
+				<button type="button" style="width: 100%; height: 50px; margin-top: 10px; font-size: 18px;" onclick="addComment(${communityDto.seq_bbs},'${seq_mbr}','${communityDto.nickname}','${communityDto.dt_reg}');">댓글 등록</button>
 			</div>
 			<br>
 <h3>댓글 목록</h3>

@@ -6,11 +6,14 @@
  * <p>IMPORTANT:</p>
  */
 
-
 // 답글 저장
 	function saveReply(seq_comment_parent, depth, seq_bbs) {
-		const seq_mbr = sessionStorage.getItem('SEQ_MBR');
+		//const seq_mbr = sessionStorage.getItem('SEQ_MBR');
+		//console.log("회원번호 가져오셨나요??제출 해주세요"+seq_mbr);
 		const content = document.getElementById(`replyContent_${seq_comment_parent}`).value;
+		const seq_mbr = document.getElementById("seq_mbr").value;
+		console.log("회원번호 가져오셨나요??제출 해주세요"+seq_mbr);
+		const cd_ctg = document.getElementById("cd_ctg").value;
 		const commentElement = document.querySelector(`div[data-seq-bbs]`);
 		if (!content.trim()) {
 			alert('답글 내용을 입력해 주세요.');
@@ -25,7 +28,7 @@
 			body: JSON.stringify({ 
 				seq_bbs: seq_bbs,
 				seq_comment_parent: seq_comment_parent, 
-				seq_mbr: seq_mbr, 
+				//seq_mbr: seq_mbr,
 				content: content, 
 				depth: depth 
 			})
@@ -39,7 +42,7 @@
 				alert(data.error);
 			} else {
 				alert('답글이 등록되었습니다.');
-				location.reload();  // 등록 후 페이지 새로고침
+				location.reload();// 등록 후 페이지 새로고침
 			}
 		})
 		.catch(error => {
@@ -311,7 +314,7 @@ function loadComments(seq_bbs) {
 			headers: {
 				'Content-Type': 'application/json',
 			},
-			body: JSON.stringify({ seq_bbs: seq_bbs, seq_mbr: seq_mbr, cd_ctg: cd_ctg}) // seq_bbs를 포함
+			body: JSON.stringify({ seq_bbs: seq_bbs, seq_mbr: seq_mbr, cd_ctg: cd_ctg})
 		})
 		.then(response => response.json())
 		.then(data => {
