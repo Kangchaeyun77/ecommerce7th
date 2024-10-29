@@ -23,6 +23,7 @@ package com.happySteps.front.basket.controller;
 
 import java.util.List;
 import java.util.Properties;
+import java.util.stream.Collectors;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
@@ -35,6 +36,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.happySteps.front.basket.dto.BasketDto;
@@ -70,41 +72,38 @@ public class BasketWeb extends Common {
 	@Autowired
 	Properties staticProperties;
 	
-	
-	@RequestMapping(value = "/front/pay/payment.web")
-	public ModelAndView payment(HttpServletRequest request, HttpServletResponse response) {
+
+	@RequestMapping(value = "/front/pay/payment.web", method = RequestMethod.POST)
+	public ModelAndView payment(@RequestParam("selectedItems") List<Integer> selectedItems, HttpServletRequest request) {
 		ModelAndView mav = new ModelAndView("front/pay/payment");
 
 		try {
 			int seq_mbr = Integer.parseInt(getSession(request, "SEQ_MBR"));
 			
-			String staticKey	= staticProperties.getProperty("front.enc.user.aes256.key", "[UNDEFINED]");
-			SKwithAES aes		= new SKwithAES(staticKey);
-			
-			// 기본 생성자 사용
-			MemberDto memberDto = new MemberDto(); 
-			memberDto.setSeq_mbr(seq_mbr); // seq_mbr 설정
-			
-			// MemberSrvc를 이용하여 회원 정보 조회
+			// 회원 정보 조회
+			String staticKey = staticProperties.getProperty("front.enc.user.aes256.key", "[UNDEFINED]");
+			SKwithAES aes = new SKwithAES(staticKey);
+			MemberDto memberDto = new MemberDto();
+			memberDto.setSeq_mbr(seq_mbr);
 			memberDto = memberSrvc.select(memberDto);
-			
 			memberDto.setMbr_nm(aes.decode(memberDto.getMbr_nm()));
 			memberDto.setPhone(aes.decode(memberDto.getPhone()));
 			memberDto.setPost(aes.decode(memberDto.getPost()));
 			memberDto.setAddr1(aes.decode(memberDto.getAddr1()));
 			memberDto.setAddr2(aes.decode(memberDto.getAddr2()));
-			
 			mav.addObject("member", memberDto);
 
-			// 장바구니 리스트 가져오기
-			List<BasketDto> basketList = basketSrvc.getBasketByUser(seq_mbr);
+			// 선택된 항목만 가져오기
+			List<BasketDto> basketList = basketSrvc.getBasketByUser(seq_mbr)
+				.stream()
+				.filter(basket -> selectedItems.contains(basket.getSeq_bsk()))
+				.collect(Collectors.toList());
 			mav.addObject("basketList", basketList);
-			
+
 			// 총 결제 금액 계산
 			int totalPrice = basketList.stream().mapToInt(basket -> basket.getPrice() * basket.getCount()).sum();
 			mav.addObject("totalPrice", totalPrice);
 			
-		 // 첫 번째 상품명과 총 상품 개수 계산
 			String firstItem = basketList.size() > 0 ? basketList.get(0).getSle_nm() : "";
 			String itemName = basketList.size() > 1 ? firstItem + " 외 " + (basketList.size() - 1) + "개" : firstItem;
 			mav.addObject("itemName", itemName);

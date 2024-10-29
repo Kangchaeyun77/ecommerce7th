@@ -20,7 +20,9 @@
  */
 package com.happySteps.front.basket.dao;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.stereotype.Repository;
 
@@ -37,6 +39,13 @@ import com.happySteps.front.common.dao.BaseDao;
  */
 @Repository("com.happySteps.front.basket.dao.BasketDao")
 public class BasketDao extends BaseDao {
+	
+	public List<BasketDto> getSelectedItems(int seq_mbr, List<Integer> selectedItems) {
+		Map<String, Object> params = new HashMap<>();
+		params.put("seq_mbr", seq_mbr);
+		params.put("selectedItems", selectedItems);
+		return sqlSessionFront.selectList("com.happySteps.front.mybatis.basket.Basket.getSelectedItems", params);
+	}
 
 	public List<BasketDto> listing(int seq_mbr) {
 		return sqlSessionFront.selectList("com.happySteps.front.mybatis.basket.Basket.listing", seq_mbr);

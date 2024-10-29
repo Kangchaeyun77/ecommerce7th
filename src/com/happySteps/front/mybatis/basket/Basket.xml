@@ -2,6 +2,19 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.happySteps.front.mybatis.basket.Basket">
 	
+	<select id="getSelectedItems" parameterType="map" resultType="basketDto">
+	SELECT 
+		* 
+	FROM
+		TB_BSK 
+	WHERE
+		SEQ_MBR = #{seq_mbr} 
+		AND SEQ_BSK 
+		IN 
+		<foreach item="item" collection="selectedItems" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</select>
 	
 	<!-- 장바구니에 상품 추가 -->
 	<insert id="insert" parameterType="basketDto">

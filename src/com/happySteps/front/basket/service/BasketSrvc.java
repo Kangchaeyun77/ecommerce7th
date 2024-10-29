@@ -21,6 +21,7 @@
 package com.happySteps.front.basket.service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.inject.Inject;
 
@@ -42,6 +43,13 @@ public class BasketSrvc {
 
 	@Inject
 	BasketDao basketDao;
+	
+	public List<BasketDto> getSelectedItemsByUser(int seq_mbr, List<Integer> selectedItems) {
+		return basketDao.listing(seq_mbr)
+						.stream()
+						.filter(item -> selectedItems.contains(item.getSeq_bsk()))
+						.collect(Collectors.toList());
+	}
 
 	public boolean insertOrUpdate(BasketDto basketDto) {
 		List<BasketDto> existingItems = basketDao.listing(basketDto.getSeq_mbr());
