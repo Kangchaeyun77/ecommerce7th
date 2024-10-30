@@ -20,6 +20,7 @@
 	<typeAlias type="com.happySteps.front.sale.dto.SaleDto"					alias="saleDto" />
 	<typeAlias type="com.happySteps.front.like.dto.LikeDto"					alias="LikeDto" />
 	<typeAlias type="com.happySteps.front.comment.dto.CommentDto"			alias="CommentDto" />
+	<typeAlias type="com.happySteps.front.comment.dto.CommentListDto"		alias="CommentListDto" />
 	<typeAlias type="com.happySteps.front.pay.dto.PayDto"					alias="payDto" />
 	</typeAliases>
 	<mappers>

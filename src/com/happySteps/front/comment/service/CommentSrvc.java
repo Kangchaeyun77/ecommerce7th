@@ -58,7 +58,6 @@ public class CommentSrvc {
 					logger.error("댓글 추가 중 오류 발생: " + e.getMessage(), e);
 			}
 		}
-
 	
 	// 댓글 등록
 

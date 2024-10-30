@@ -7,7 +7,29 @@
 		TB_CMT (SEQ_COMMENT,SEQ_COMMENT_PARENT, SEQ_MBR, SEQ_BBS, CONTENT, DEPTH, DT_REG, NICKNAME, FLG_DELETE, FLG_REPLY)
 		VALUES (SEQ_TB_CMT.NEXTVAL, #{seq_comment_parent}, #{seq_mbr}, #{seq_bbs}, #{content}, #{depth}, SYSDATE, #{nickname},'N','N')
 </insert>
-	<!-- 댓글 및 대댓글 계층형 조회 -->
+<select id="selectComments" parameterType="int" resultType="CommentDto">
+    SELECT	
+        SEQ_COMMENT, 
+        SEQ_BBS, 
+        CONTENT, 
+        NICKNAME, 
+        TO_CHAR(DT_REG, 'YYYY-MM-DD') AS dt_reg, 
+        SEQ_COMMENT_PARENT, 
+        DEPTH AS depth 
+    FROM	
+        TB_CMT 
+    START WITH 
+        SEQ_COMMENT_PARENT IS NULL 
+    CONNECT BY 
+    	NOCYCLE	
+        PRIOR SEQ_COMMENT = SEQ_COMMENT_PARENT 
+		AND PRIOR SEQ_COMMENT != SEQ_COMMENT 
+    ORDER BY
+        CASE WHEN DEPTH IS NULL THEN SEQ_COMMENT ELSE SEQ_COMMENT_PARENT END,
+        NVL(DEPTH, 0), 
+        SEQ_COMMENT
+</select>
+	<!--  
 	<select id="selectComments" parameterType="int" resultType="CommentDto">
 		SELECT
 			SEQ_COMMENT,
@@ -24,17 +46,6 @@
 		ORDER BY 
 			COALESCE(SEQ_COMMENT_PARENT, SEQ_COMMENT),
 			DT_REG ASC
-	</select>
-	<!--  
-	<select id="selectComments" parameterType="int" resultType="CommentDto">
-		SELECT
-			SEQ_COMMENT, SEQ_BBS, CONTENT, NICKNAME, TO_CHAR(DT_REG, 'YYYY-MM-DD') dt_reg
-		FROM
-			TB_CMT
-		WHERE
-			SEQ_BBS = #{seq_bbs} AND flg_delete = 'N'
-		ORDER BY 
-			DT_REG DESC
 	</select>
 	-->
 	<!-- 댓글 삭제 -->

@@ -1,5 +1,7 @@
 package com.happySteps.front.comment.dto;
 
+import java.util.List;
+
 public class CommentDto {
 	private int seq_comment			= 0; // 댓글 일련번호
 	private int seq_comment_parent		= 0; // 상위댓글 일련번호
@@ -13,12 +15,27 @@ public class CommentDto {
 	private String nickname				= ""; // 닉네임
 
 	private int depth = 0; // 댓글의 깊이
+	private List<CommentDto> commentDtolist; // 대댓글 목록 추가
 	
 	@Override
 	public String toString() {
 		return "CommentDto [nickname=" + nickname + ", content=" + content + "dt_reg=" + dt_reg +", seq_comment=" + seq_comment + "]";
 	}
 	
+
+
+	public List<CommentDto> getCommentDtolist() {
+		return commentDtolist;
+	}
+
+
+
+	public void setCommentDtolist(List<CommentDto> commentDtolist) {
+		this.commentDtolist = commentDtolist;
+	}
+
+
+
 	public int getDepth() {
 		return depth;
 	}

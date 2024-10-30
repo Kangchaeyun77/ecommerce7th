@@ -138,22 +138,22 @@
 <div class="comment-list" id="commentListContainer" style="border: 1px solid red;">
 	<c:if test="${not empty commentList}">
 		<c:forEach var="comment" items="${commentList}">
-			<div class="comment-item">
-				<div class="comment-author"style="margin-bottom: 5px;">
+			<div class="comment-item" style="margin-left: <c:out value="${comment.depth * 20}"/>px;">
+				<div class="comment-author" style="margin-bottom: 5px;">
 					<strong>작성자:</strong> 
 					<c:out value="${comment.nickname}"/> 
 				</div>
-				<div class="comment-content"style="margin-bottom: 5px;">
+				<div class="comment-content" style="margin-bottom: 5px;">
 					<strong>내용:</strong>
 					<span id="commentContent_${comment.seq_comment}">
 						<c:out value="${comment.content}"/> 
 					</span>
-					<div class="comment-date"style="margin-bottom: 10px;">
-					<strong>등록일:</strong> <c:out value="${comment.dt_reg}"/> 
+					<div class="comment-date" style="margin-bottom: 10px;">
+						<strong>등록일:</strong> <c:out value="${comment.dt_reg}"/> 
 					</div>
 				</div>
-				<div id="commentEditArea_${comment.seq_comment}" style="display: none;"> <!-- 각 댓글에 대해 고유한 ID 사용 -->
-					<textarea id="editCommentContent_${comment.seq_comment}"style="width: 100%;height: 60px;border-radius: 4px;border: 1px solid #ccc;padding: 5px;">${comment.content}</textarea>
+				<div id="commentEditArea_${comment.seq_comment}" style="display: none;">
+					<textarea id="editCommentContent_${comment.seq_comment}" style="width: 100%; height: 60px; border-radius: 4px; border: 1px solid #ccc; padding: 5px;">${comment.content}</textarea>
 					<button onclick="editComment(${comment.seq_comment})">댓글수정</button>
 					<button onclick="cancelEdit(${comment.seq_comment})">취소</button>
 				</div>
@@ -163,35 +163,66 @@
 					<button type="button" onclick="deleteComment(${comment.seq_comment})">삭제</button>
 					<button type="button" onclick="showReplyForm(${comment.seq_comment})">답글</button>
 				</div>
-				
-				<div class="comment" data-seq-bbs="${comment.seq_bbs}">
-				<div id="replyForm_${comment.seq_comment}" style="display: none; margin-top: 10px;">
+
+				<!-- 답글 입력 폼 -->
+				<div class="reply-form" id="replyForm_${comment.seq_comment}" style="display: none; margin-top: 10px;">
 					<textarea id="replyContent_${comment.seq_comment}" style="width: 100%; height: 60px; border-radius: 4px; border: 1px solid #ccc; padding: 5px;" placeholder="답글을 입력하세요"></textarea>
 					<button onclick="saveReply(${comment.seq_comment}, ${comment.depth + 1}, ${communityDto.seq_bbs})">저장</button>
 					<button onclick="cancelReply(${comment.seq_comment})">취소</button>
 				</div>
+				
+				<!-- 대댓글 표시 -->
+<%-- 
+<div class="replies">
+	<c:if test="${not empty comment.commentDtolist}">
+		<c:forEach var="reply" items="${comment.commentDtolist}">
+			<div class="reply" style="margin-left: <c:out value="${reply.depth * 20}"/>px;">
+				<strong>작성자:</strong> <c:out value="${reply.nickname}"/> 
+				<span>${reply.content}</span>
+				<div class="reply-actions" style="text-align: right;">
+					<button type="button" onclick="showReplyForm(${reply.seq_comment})">답글</button>
 				</div>
-			<%-- 
-				<!-- 대댓글 처리 -->
-				<c:forEach var="reply" items="${comment.replyList}">
-				<div class="reply-item" style="padding-left: 40px;">
-					<b>대댓글 - ${reply.nickname}</b>
-						<div class="reply-item" style="padding-left: 40px;">
-							<b>대댓글 - ${reply.nickname}</b>
-							<span id="replyContent_${reply.seq_comment}">
-							<c:out value="${reply.content}"/> 
-						</span>
-						<div class="reply-actions" style="text-align: right;">
-							<button type="button" onclick="showEditForm(${reply.seq_comment}, true)">수정</button>
-							<button type="button" onclick="deleteComment(${reply.seq_comment})">삭제</button>
-							</div>
-						</div>
-						--%>
+				<!-- 대댓글 입력 폼 -->
+				<div class="reply-form" id="replyForm_${reply.seq_comment}" style="display: none; margin-top: 10px;">
+					<textarea id="replyContent_${reply.seq_comment}" style="width: 100%; height: 60px; border-radius: 4px; border: 1px solid #ccc; padding: 5px;" placeholder="답글을 입력하세요"></textarea>
+					<button onclick="saveReply(${reply.seq_comment}, ${reply.depth + 1}, ${communityDto.seq_bbs})">저장</button>
+					<button onclick="cancelReply(${reply.seq_comment})">취소</button>
+				</div>
+			</div> <!-- reply 종료 -->
+		</c:forEach>
+	</c:if>
+</div> 
+--%>
+				
+				<%-- 
+		<!-- 대댓글 표시 -->
+				<div class="replies">
+					<c:if test="${not empty comment.replies}">
+						<c:forEach var="reply" items="${comment.replies}">
+							<div class="reply" style="margin-left: 20px;">
+								<strong>작성자:</strong> <c:out value="${reply.nickname}"/> 
+								<span>${reply.content}</span>
+								<div class="reply-actions" style="text-align: right;">
+									<button type="button" onclick="showReplyForm(${reply.seq_comment})">답글</button>
+								</div>
+								<!-- 대댓글 입력 폼 -->
+								<div class="reply-form" id="replyForm_${reply.seq_comment}" style="display: none; margin-top: 10px;">
+									<textarea id="replyContent_${reply.seq_comment}" style="width: 100%; height: 60px; border-radius: 4px; border: 1px solid #ccc; padding: 5px;" placeholder="답글을 입력하세요"></textarea>
+									<button onclick="saveReply(${reply.seq_comment}, ${reply.depth + 1}, ${communityDto.seq_bbs})">저장</button>
+									<button onclick="cancelReply(${reply.seq_comment})">취소</button>
+								</div>
+								
+							</div> <!-- reply 종료 -->
+							
+						</c:forEach>
+					</c:if>
+				</div>
+				--%>
 			</div> <!-- comment-item 종료 -->
 		</c:forEach>
-		<%-- </c:forEach>--%>
 	</c:if>
 </div>
+
 		</article>
 		<aside></aside>
 	</section>

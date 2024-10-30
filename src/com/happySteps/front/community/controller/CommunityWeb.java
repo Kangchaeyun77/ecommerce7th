@@ -255,14 +255,17 @@ public class CommunityWeb extends Common {
 
 		try {
 			int seq_mbr = Integer.parseInt(getSession(request, "SEQ_MBR"));
+			 if ((getSession(request, "SEQ_MBR") == null)) {
+				 throw new IllegalArgumentException("사용자 세션 정보가 없습니다.");
+			}
 			communityDto.setSeq_mbr(seq_mbr);
 			mav.addObject("seq_mbr", seq_mbr);
 
 			CommunityDto _communityDto = communitySrvc.select(communityDto);
 			mav.addObject("communityDto", _communityDto);
-
 			mav.addObject("cd_bbs_type", communityDto.getCd_bbs_type());
 
+			
 			if (communityDto.getCd_bbs_type() == 6) {
 				mav.setViewName("front/community/board/popular/view");
 				List<CommentDto> commentList = commentsrvc.getComments(communityDto.getSeq_bbs());

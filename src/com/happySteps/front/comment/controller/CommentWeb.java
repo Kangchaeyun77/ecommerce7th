@@ -42,6 +42,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.happySteps.front.comment.dto.CommentDto;
+import com.happySteps.front.comment.dto.CommentListDto;
 import com.happySteps.front.comment.service.CommentSrvc;
 import com.happySteps.front.common.Common;
 import com.happySteps.front.community.dto.CommunityDto;
@@ -81,9 +82,9 @@ public class CommentWeb extends Common{
 		try {
 			// 글을 쓸 때 세션에서 seq_mbr 값 체크
 			commentDto.setSeq_mbr(Integer.parseInt(getSession(request, "SEQ_MBR"))); // seq_mbr 가져오기
-			logger.debug("제이슨씨="+ getSession(request, "SEQ_MBR"));
+			//logger.debug("제이슨씨="+ getSession(request, "SEQ_MBR"));
 			communityDto.setSeq_mbr(Integer.parseInt(getSession(request, "SEQ_MBR"))); // seq_mbr 가져오기
-			logger.debug("제이슨씨222="+ getSession(request, "SEQ_MBR"));
+			//logger.debug("제이슨씨222="+ getSession(request, "SEQ_MBR"));
 			commentDto.setNickname(getSession(request, "NICKNAME")); // nickname 가져오기
 			
 			String seq_mbr = getSession(request, "SEQ_MBR");
@@ -93,6 +94,11 @@ public class CommentWeb extends Common{
 				commentDto.setSeq_mbr(Integer.parseInt(seq_mbr)); // seq_mbr 가져오기
 			} else {
 				responseMap.put("error", "사용자 세션 정보가 없습니다.");
+				return responseMap;
+			}
+			// 자기 자신에게 댓글을 다는 경우 처리
+			if (commentDto.getSeq_comment_parent() != 0 && commentDto.getSeq_comment_parent() == commentDto.getSeq_comment()) {
+				responseMap.put("error", "자기 자신에게 댓글을 달 수 없습니다.");
 				return responseMap;
 			}
 			// 닉네임이 없으면 에러 처리
@@ -207,6 +213,79 @@ public class CommentWeb extends Common{
 	 * <p>IMPORTANT:</p>
 	 * <p>EXAMPLE:</p>
 	 */
+	
+	@RequestMapping(value = "/front/comment/view.json", method = RequestMethod.GET, produces = "application/json; charset=UTF-8")
+	@ResponseBody
+	public CommentListDto getCommentList(@RequestParam(value = "seq_bbs", required = true) String str_seq_bbs, HttpSession session, HttpServletRequest request, CommentDto commentDto) {
+		CommentListDto commentListDto = new CommentListDto();
+		try {
+			// 게시물 시퀀스 번호 파싱
+			int seq_bbs = Integer.parseInt(str_seq_bbs);
+			// 세션에서 사용자 정보 설정
+			commentDto.setSeq_mbr(Integer.parseInt(getSession(request, "SEQ_MBR"))); // seq_mbr 가져오기
+			commentDto.setSeq_bbs(seq_bbs);
+			commentDto.setNickname(getSession(request, "NICKNAME")); // 닉네임 설정
+			logger.debug("getCommentList 메서드 호출됨, seq_bbs: " + str_seq_bbs);
+			
+			// 해당 게시물의 댓글 목록 조회
+			List<CommentDto> commentList = commentsrvc.getComments(seq_bbs);
+			logger.debug("리스트 내용확인? " + commentList);
+			
+			// 각 댓글에 대해 대댓글 조회 및 설정
+			for (CommentDto comment : commentList) {
+				List<CommentDto> replies = commentsrvc.getComments(comment.getSeq_comment()); // 대댓글 조회
+				comment.setCommentDtolist(replies); // 대댓글 설정
+			}
+
+			// 댓글 목록이 있는지 확인 후 응답 데이터에 담음
+			if (commentList != null && !commentList.isEmpty()) {
+				commentListDto.setCommentList(commentList); // 댓글 리스트 설정
+				logger.debug("댓글 목록을 가져왔습니다.");
+			} else {
+				logger.debug("댓글이 없습니다.");
+			}
+		} catch (Exception e) {
+			logger.error("댓글 목록 조회 중 오류", e);
+		}
+		
+		return commentListDto; // CommentListDto 반환
+	}
+
+	
+	/*
+	@RequestMapping(value = "/front/comment/view.json", method = RequestMethod.GET, produces = "application/json; charset=UTF-8")
+	@ResponseBody
+	public CommentListDto getCommentList(@RequestParam(value = "seq_bbs", required = true) String str_seq_bbs, HttpSession session, HttpServletRequest request, CommentDto commentDto) {
+		CommentListDto commentListDto = new CommentListDto();
+		try {
+			// 세션에서 사용자 정보를 체크 (선택 사항, 필요할 경우)
+			int seq_bbs = Integer.parseInt(str_seq_bbs);
+			// 세션에서 사용자 정보를 체크
+			commentDto.setSeq_mbr(Integer.parseInt(getSession(request, "SEQ_MBR"))); // seq_mbr 가져오기
+			commentDto.setSeq_bbs(seq_bbs);
+			commentDto.setNickname(getSession(request, "NICKNAME")); // 닉네임 바로 설정
+			logger.debug("getCommentList 메서드 호출됨, seq_bbs: " + str_seq_bbs);
+			
+			// 해당 게시물의 댓글 목록 조회
+			List<CommentDto> commentList = commentsrvc.getComments(seq_bbs);
+			logger.debug("리스트 내용확인? " + commentList);
+			
+			// 댓글이 있는지 확인 후 응답 데이터에 담음
+			if (commentList != null && !commentList.isEmpty()) {
+				commentListDto.setCommentList(commentList); // 댓글 리스트 설정
+				logger.debug("댓글 목록을 가져왔습니다.");
+			} else {
+				logger.debug("댓글이 없습니다.");
+			}
+		} catch (Exception e) {
+			logger.error("댓글 목록 조회 중 오류", e);
+		}
+		
+		return commentListDto; // CommentListDto 반환
+	}
+*/
+	
+	/*
 	@RequestMapping(value = "/front/comment/view.json", method = RequestMethod.GET, produces = "application/json; charset=UTF-8")
 	@ResponseBody
 	public Map<String, Object> getCommentList(@RequestParam(value = "seq_bbs", required = true) String str_seq_bbs, HttpSession session, HttpServletRequest request, CommentDto commentDto) {
@@ -240,7 +319,7 @@ public class CommentWeb extends Common{
 		}
 		return responseMap;
 	}
-
+*/
 	
 	/**
 	 * @return responseMap
