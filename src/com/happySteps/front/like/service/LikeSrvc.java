@@ -35,15 +35,13 @@ public class LikeSrvc {
 
 		// 좋아요 상태를 확인
 		 boolean isLiked = communityDao.isLiked(likeDto);  // LikeDto 객체 전달
-		 logger.debug("?="+isLiked);
+		//logger.debug("?="+isLiked);
 		// 좋아요 추가 또는 제거
 		 if (isLiked) {
-			 logger.debug("1231");
 			 likeDto.setFlg_lke("N"); // 좋아요 상태를 기본 "N"으로 설정
 				return communityDao.removeLike(likeDto) > 0; // 좋아요 제거 성공 시 true 반환
 			} else {
 				likeDto.setFlg_lke("Y"); // 좋아요 상태를 "Y"로 설정
-				logger.debug("3333");
 				return communityDao.addLike(likeDto) > 0; // 좋아요 추가 성공 시 true 반환
 			}
 	}
@@ -54,7 +52,7 @@ public class LikeSrvc {
 	* @return 좋아요 개수
 	*/
 	public int getLikeCount(LikeDto likeDto) {
-		 logger.debug("좋아요 개수를 준다고 하던데="+communityDao.getLikeCount(likeDto));
+		logger.debug("좋아요 개수를 준다고 하던데="+communityDao.getLikeCount(likeDto));
 		return communityDao.getLikeCount(likeDto); // 좋아요 개수 반환
 		
 	}

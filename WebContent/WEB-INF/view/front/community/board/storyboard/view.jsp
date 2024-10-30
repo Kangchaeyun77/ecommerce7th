@@ -111,7 +111,7 @@
 				<th>좋아요</th>
 				<td>
 					<span id="likeElement" style="cursor: pointer; font-size: 24px;" onclick="toggleLike(${communityDto.seq_bbs})">🤍</span>
-					<span id="like_count">${communityDto.like_count}</span>
+				<%--	<span id="like_count">${communityDto.like_count}개</span> --%>
 				</td>
 			</tr>
 				<c:if test="${communityDto.file_orig != ''}">

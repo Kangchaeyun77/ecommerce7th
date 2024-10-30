@@ -303,36 +303,37 @@ function loadComments(seq_bbs) {
 				console.error('Error:', error); // 오류 메시지 출력
 			});
 		}
-	//좋아요 이미지 클릭 시 이모지 변경
-	function toggleLike(seq_bbs) {
-		const likeElement = document.getElementById('likeElement'); // 이모지를 표시할 요소
-		const seq_mbr = sessionStorage.getItem('SEQ_MBR');
-		const cd_bbs_type = document.getElementById("cd_bbs_type").value;
+// 좋아요 이미지 클릭 시 이모지 변경
+function toggleLike(seq_bbs) {
+	const likeElement = document.getElementById('likeElement'); // 이모지를 표시할 요소
+	const seq_mbr = sessionStorage.getItem('SEQ_MBR');
+	const cd_bbs_type = document.getElementById("cd_bbs_type").value;
 
-		fetch('/front/community/board/like.json', {
-			method: 'POST',
-			headers: {
-				'Content-Type': 'application/json',
-			},
-			body: JSON.stringify({ seq_bbs: seq_bbs, seq_mbr: seq_mbr, cd_bbs_type: cd_bbs_type})
-		})
-		.then(response => response.json())
-		.then(data => {
-			document.getElementById('like_count').innerText = data.like_count;
-			
-			// 이모지 변경
-			if (data.liked) {
-				likeElement.innerText = '❤️'; // 눌린 하트 이모지
-			} else {
-				likeElement.innerText = '🤍'; // 기본 하트 이모지
-			}
-		})
-		.catch((error) => {
-			console.error('Error:', error);
-		});
-	}
+	fetch('/front/community/board/like.json', {
+		method: 'POST',
+		headers: {
+			'Content-Type': 'application/json',
+		},
+		body: JSON.stringify({ seq_bbs: seq_bbs, seq_mbr: seq_mbr, cd_bbs_type: cd_bbs_type })
+	})
+	.then(response => response.json())
+	.then(data => {
+		// 이모지 상태 토글
+		if (likeElement.innerText === '🤍') {
+			likeElement.innerText = '❤️'; // 좋아요 추가
+		} else {
+			likeElement.innerText = '🤍'; // 좋아요 취소
+		}
+
+		// 좋아요 수 업데이트
+		LikeCount.innerText = `${data.like_count}개`;
+	})
+	.catch((error) => {
+		console.error('Error:', error);
+	});
+}
 	//좋아요 카운트
-	function fetchLikeCount(seq_bbs) {
+	function LikeCount(seq_bbs) {
 		fetch('/front/community/board/like_count.json', {
 			method: 'POST',
 			headers: {

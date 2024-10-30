@@ -249,110 +249,78 @@ public class CommunityWeb extends Common {
 	 */
 	
 	@RequestMapping(value = "/front/community/board/view.web", method = RequestMethod.POST)
-	public ModelAndView view(HttpServletRequest request, HttpServletResponse response
-			, CommunityDto communityDto, CommentDto commentDto){
-			//, CommunityDto communityDto, HttpSession session,Model model){
-		
+	public ModelAndView view(HttpServletRequest request, HttpServletResponse response, CommunityDto communityDto, CommentDto commentDto) {
+
 		ModelAndView mav = new ModelAndView("redirect:/error.web");
-		
+
 		try {
-			
-			// model.addAttribute("communityDto", communityDto);
-			
-			
 			int seq_mbr = Integer.parseInt(getSession(request, "SEQ_MBR"));
 			communityDto.setSeq_mbr(seq_mbr);
-			
 			mav.addObject("seq_mbr", seq_mbr);
-			
-			logger.debug("회원일련번호?="+seq_mbr);
-			
-			//int cd_ctg = communityDto.getCd_bbs_type();
-			//mav.addObject("cd_ctg", cd_ctg);
-			
-			logger.debug("********************************************");
-			logger.debug("cd_bbs_type = " + communityDto.getCd_bbs_type());
-			logger.debug("********************************************");
-			
-			mav.addObject("cd_bbs_type", communityDto.getCd_bbs_type());
-			
-			//logger.debug("가져와짐?="+cd_ctg);
-			
+
 			CommunityDto _communityDto = communitySrvc.select(communityDto);
 			mav.addObject("communityDto", _communityDto);
-			//logger.error("가져와짐?="+_communityDto);
-			//logger.error("가져와짐?="+communityDto);
-			communityDto.getSeq_bbs();
-			//logger.error("가져와짐?="+communityDto.getSeq_bbs());
-			
+
+			mav.addObject("cd_bbs_type", communityDto.getCd_bbs_type());
+
 			if (communityDto.getCd_bbs_type() == 6) {
 				mav.setViewName("front/community/board/popular/view");
 				List<CommentDto> commentList = commentsrvc.getComments(communityDto.getSeq_bbs());
 				mav.addObject("commentList", commentList);
-				
 				_communityDto = communitySrvc.allSelect(communityDto);
-			
 				mav.addObject("communityDto", _communityDto);
-				mav.setViewName("front/community/board/all/view"); 
-						
+				mav.setViewName("front/community/board/all/view");
+
 			} else if (communityDto.getCd_bbs_type() == 7) {
 				List<CommentDto> commentList = commentsrvc.getComments(communityDto.getSeq_bbs());
-				
 				mav.addObject("commentList", commentList);
 				mav.setViewName("front/community/board/storyboard/view");
-				
+
 			} else if (communityDto.getCd_bbs_type() == 8) {
-				
 				mav.setViewName("front/community/board/qna/view");
 				List<CommentDto> commentList = commentsrvc.getComments(communityDto.getSeq_bbs());
-				
 				mav.addObject("commentList", commentList);
-				
+
 			} else if (communityDto.getCd_bbs_type() == 9) {
 				mav.setViewName("front/community/board/adap/view");
 				List<CommentDto> commentList = commentsrvc.getComments(communityDto.getSeq_bbs());
-				
 				mav.addObject("commentList", commentList);
-				
+
 			} else if (communityDto.getCd_bbs_type() == 11) {
 				mav.setViewName("front/community/board/information/view");
 				List<CommentDto> commentList = commentsrvc.getComments(communityDto.getSeq_bbs());
-				
 				mav.addObject("commentList", commentList);
-				// DB 부하 감소를 위해 답변이 있을 때만
+
 				if (_communityDto.getSeq_reply() > 0) {
 					CommunityDto boardReplyDto = communitySrvc.selectReply(communityDto);
 					mav.addObject("boardReplyDto", boardReplyDto);
 				}
 				mav.setViewName("front/community/board/qna/view");
-			// cd_bbs_type 5일 때 모든 게시글 조회
-			} else if (communityDto.getCd_bbs_type() == 5){
+
+			} else if (communityDto.getCd_bbs_type() == 5) {
 				_communityDto = communitySrvc.allSelect(communityDto);
-				
 				mav.addObject("communityDto", _communityDto);
-				mav.setViewName("front/community/board/all/view"); // 전체 글을 보여주는 뷰
-				
+				mav.setViewName("front/community/board/all/view");
+
 				List<CommentDto> commentList = commentsrvc.getComments(communityDto.getSeq_bbs());
 				mav.addObject("commentList", commentList);
+
 			} else {
-				request.setAttribute("redirect" , "/");
+				request.setAttribute("redirect", "/");
 				mav.setViewName("forward:/servlet/result.web");
-				}
 			}
-		catch (Exception e) {
+		} catch (Exception e) {
 			logger.error("[" + this.getClass().getName() + ".view()] " + e.getMessage(), e);
 		}
-		finally {}
-		
+
 		return mav;
 	}
-	
-	
 
+	
 	/**
 	 * @param request [요청 서블릿]
 	 * @param response [응답 서블릿]
-	 * @param boardDto [게시판 빈]
+	 * @param communityDto [게시판 빈]
 	 * @return ModelAndView
 	 * 
 	 * @since 2024-10-13
@@ -410,7 +378,6 @@ public class CommunityWeb extends Common {
 		} finally {
 			
 		}
-
 		return mav;
 	}
 

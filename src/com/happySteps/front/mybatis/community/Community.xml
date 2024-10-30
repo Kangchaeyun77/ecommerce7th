@@ -94,12 +94,13 @@
 	
 	<select id="isLiked" parameterType="LikeDto" resultType="int">
 	SELECT
-		COUNT(*) 
+		COUNT(*)
 	FROM 
-		TB_LKE 
+		TB_LKE
 	WHERE
 		SEQ_BBS = #{seq_bbs}
-	</select>		
+		AND FLG_LKE = 'Y'
+	</select>	
 	
 	<select id="selectReply" parameterType="communityDto" resultType="communityDto">
 		SELECT
