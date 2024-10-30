@@ -33,18 +33,18 @@
 	<style></style>
 	<script>
 		function goList() {
-			var cd_ctg = document.getElementById("cd_ctg").value;
-			redirectUrl = "/front/community/board/list.web?cd_bbs_type=" + cd_ctg;
+			var cd_bbs_type = document.getElementById("cd_bbs_type").value;
+			redirectUrl = "/front/community/board/list.web?cd_bbs_type=" + cd_bbs_type;
 			window.location.href = redirectUrl;
 		}
 
 		function writeProc() {
 			var frmMain = document.getElementById("frmMain");
-			var selectedCtg = document.getElementById("cd_ctg").value; // 선택된 카테고리 값 가져오기
+			var selected_cd_bbs_type = document.getElementById("cd_bbs_type").value; // 선택된 카테고리 값 가져오기
 			var nickname = document.getElementById("nickname").value;//닉네임 값 가져오기
 			// 필수 항목 체크
 			if (document.getElementById("title").value === "" ||
-				selectedCtg === "0" ||
+				selected_cd_bbs_type === "0" ||
 				document.getElementById("cd_ctg_pet").value === "0" ||
 				document.getElementById("content").value === "") {
 				alert("필수 항목을 입력하세요!");
@@ -63,7 +63,7 @@
 			frmMain.appendChild(tagHiddenInput);
 
 			// 게시판 유형에 따른 처리
-			frmMain.action = "/front/community/board/writeProc.web?cd_bbs_type=" + selectedCtg;
+			frmMain.action = "/front/community/board/writeProc.web?cd_bbs_type=" + selected_cd_bbs_type;
 			frmMain.submit();
 		}
 
@@ -107,7 +107,7 @@
 			});
 		}
 		// 게시판 유형에 따른 처리
-		frmMain.action = "/front/community/board/writeProc.web?cd_bbs_type=" + selectedCtg; // 수정된 부분
+		frmMain.action = "/front/community/board/writeProc.web?cd_bbs_type=" + selected_cd_bbs_type; // 수정된 부분
 		frmMain.submit();
 		
 	</script>
@@ -139,7 +139,7 @@
 							<th>카테고리(*)</th>
 							<td>
 								<div class="category-container">
-									<select id="cd_ctg" name="cd_ctg" required class="category-select">
+									<select id="cd_bbs_type" name="cd_bbs_type" required class="category-select">
 										<option value="0">선택</option>
 										<option value="7">자유게시판</option>
 										<option value="9">입양후기</option>

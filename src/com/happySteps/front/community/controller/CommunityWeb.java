@@ -429,7 +429,10 @@ public class CommunityWeb extends Common {
 		try {
 			// 글을 쓸 때 세션에서 seq_mbr값을 체크
 			communityDto.setRegister(Integer.parseInt(getSession(request, "SEQ_MBR")));
-			
+			//커뮤니티 게시판의 cd_ctg값은 8이기 때문에 모든 커뮤니티 게시판의 cd_ctg값이 8로 지정되도록 함
+			communityDto.setCd_ctg(8);
+			//register = seq_mbr 이기 때문에 관련 코드로 회원일련번호를 설정함
+			communityDto.setSeq_mbr(communityDto.getRegister());
 			String nickname = getSession(request, "NICKNAME");
 			logger.debug("NICKNAME = " + nickname);
 			
@@ -445,21 +448,17 @@ public class CommunityWeb extends Common {
 				return mav;
 				}
 
-			// cd_ctg을 조건에 따라 설정(예: 특정 요청 파라미터에 따라 설정)
-			String cd_ctgParam  = request.getParameter("cd_ctg");
-			int cd_ctg;//글번호를 클라이언트측에서 받아옴
-			if (cd_ctgParam == null || (!cd_ctgParam.equals("7") && 
-									 !cd_ctgParam.equals("8") && 
-									 !cd_ctgParam.equals("9") && 
-									 !cd_ctgParam.equals("11"))) {
+			// cd_bbs_type을 조건에 따라 설정(예: 특정 요청 파라미터에 따라 설정)
+			String cd_bbs_type  = request.getParameter("cd_bbs_type");
+			if (cd_bbs_type == null || (!cd_bbs_type.equals("7") && 
+									 !cd_bbs_type.equals("8") && 
+									 !cd_bbs_type.equals("9") && 
+									 !cd_bbs_type.equals("11"))) {
 				request.setAttribute("script", "alert('잘못된 요청입니다.');");
 				request.setAttribute("redirect", "/front/community/index.web");
 				mav.setViewName("forward:/servlet/result.web");
 				return mav;
 				}
-
-			// 유효한 게시판 번호일 경우 해당 번호로 설정
-			cd_ctg = Integer.parseInt(cd_ctgParam);
 
 			// **************************
 			// For Board File
