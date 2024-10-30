@@ -188,46 +188,46 @@
 	
 	<select id="popular_allList" parameterType="pagingDto" resultType="communityDto">
 		SELECT
-		    *
+			*
 		FROM
-		    (
-		    SELECT
-		        /*+ first_rows(10) */ ROW_NUMBER() OVER (ORDER BY l.like_count ASC, b.FLG_TOP,  b.FLG_REPLY DESC, b.DT_REG DESC) rnum
-		        , b.SEQ_BBS
-		        , (SELECT tb_reply.SEQ_BBS FROM TB_BBS tb_reply WHERE tb_reply.SEQ_BBS_PARENT = b.SEQ_BBS) seq_reply
-		        , DECODE(b.CD_CTG_PET, 1, '강아지', 2, '고양이', 3, '햄스터', 4, '파충류 및 양서류', 5, '기타', '미정') CTG_NM
-		        , b.TITLE
-		        , b.FILE_ORIG
-		        , DECODE(LOWER(SUBSTR(b.FILE_ORIG, INSTR(b.FILE_ORIG, '.', -1, 1) + 1))
-		            , 'xlsx', 'xls'
-		            , 'xls' , 'xls'
-		            , 'docx', 'doc'
-		            , 'doc' , 'doc'
-		            , 'pptx', 'ppt'
-		            , 'ppt' , 'ppt'
-		            , 'hwp' , 'hwp'
-		            , 'pdf' , 'pdf'
-		            , NULL  , ''
-		            , 'etc') extension
-		        , b.FLG_TOP
-		        , TO_CHAR(b.DT_REG, 'YYYY-MM-DD') dt_reg
-		        , NVL(l.like_count, 0) AS like_count
-		        , b.READED
-		    FROM
-		        TB_BBS b
-		    LEFT JOIN 
-		        (SELECT SEQ_BBS, COUNT(*) AS like_count FROM TB_LKE GROUP BY SEQ_BBS) l
-		    ON b.SEQ_BBS = l.SEQ_BBS
-		    WHERE
-		        <include refid="all_where" />
-		    )
+			(
+			SELECT
+				/*+ first_rows(10) */ ROW_NUMBER() OVER (ORDER BY l.like_count ASC, b.FLG_TOP,  b.FLG_REPLY DESC, b.DT_REG DESC) rnum
+				, b.SEQ_BBS
+				, (SELECT tb_reply.SEQ_BBS FROM TB_BBS tb_reply WHERE tb_reply.SEQ_BBS_PARENT = b.SEQ_BBS) seq_reply
+				, DECODE(b.CD_CTG_PET, 1, '강아지', 2, '고양이', 3, '햄스터', 4, '파충류 및 양서류', 5, '기타', '미정') CTG_NM
+				, b.TITLE
+				, b.FILE_ORIG
+				, DECODE(LOWER(SUBSTR(b.FILE_ORIG, INSTR(b.FILE_ORIG, '.', -1, 1) + 1))
+					, 'xlsx', 'xls'
+					, 'xls' , 'xls'
+					, 'docx', 'doc'
+					, 'doc' , 'doc'
+					, 'pptx', 'ppt'
+					, 'ppt' , 'ppt'
+					, 'hwp' , 'hwp'
+					, 'pdf' , 'pdf'
+					, NULL  , ''
+					, 'etc') extension
+				, b.FLG_TOP
+				, TO_CHAR(b.DT_REG, 'YYYY-MM-DD') dt_reg
+				, NVL(l.like_count, 0) AS like_count
+				, b.READED
+			FROM
+				TB_BBS b
+			LEFT JOIN 
+				(SELECT SEQ_BBS, COUNT(*) AS like_count FROM TB_LKE GROUP BY SEQ_BBS) l
+			ON b.SEQ_BBS = l.SEQ_BBS
+			WHERE
+				<include refid="all_where" />
+			)
 		<![CDATA[
 		WHERE
-		    rnum >= (${currentPage} - 1) * ${linePerPage} + 1 AND rnum <= ${currentPage} * ${linePerPage}
+			rnum >= (${currentPage} - 1) * ${linePerPage} + 1 AND rnum <= ${currentPage} * ${linePerPage}
 		]]> 
 		ORDER BY
-		    FLG_TOP, rnum
-	</select>
+			FLG_TOP, rnum
+</select>
 	
 	<select id="allList" parameterType="pagingDto" resultType="communityDto">
 	   	SELECT
@@ -322,7 +322,7 @@
 				</if>
 			</if>
 			<if test="cd_ctg != 0">
-				AND CD_CTG = #{cd_ctg}
+				AND CD_CTG = 8
 			</if>
 	</sql>
 	
@@ -341,7 +341,7 @@
 			</if>
 		</if>
 		<if test="cd_ctg != 0">
-			AND CD_CTG = #{cd_ctg}
+			AND CD_CTG = 8
 		</if>
 	</sql>
 	
@@ -367,9 +367,9 @@
 	
 	<insert id="insert" parameterType="CommunityDto">
 		INSERT INTO TB_BBS
-			(SEQ_BBS, CD_BBS_TYPE, TITLE, CD_CTG,CD_CTG_PET, CONTENT, NICKNAME, TAG, FILE_SAVE, FILE_ORIG, READED, DT_REG, REGISTER)
+			(SEQ_BBS, CD_BBS_TYPE, TITLE, CD_CTG,CD_CTG_PET, CONTENT, NICKNAME, TAG, FILE_SAVE, FILE_ORIG, READED, DT_REG, REGISTER, SEQ_MBR)
 		VALUES
-			(#{seq_bbs}, #{cd_bbs_type}, #{title}, #{cd_ctg},#{cd_ctg_pet}, #{content},#{nickname},#{tag}, #{file_save}, #{file_orig}, 0, SYSDATE, #{register})
+			(#{seq_bbs}, #{cd_bbs_type}, #{title}, 8 ,#{cd_ctg_pet}, #{content},#{nickname},#{tag}, #{file_save}, #{file_orig}, 0, SYSDATE, #{register}, #{seq_mbr})
 	</insert>
 	
 	<update id="update" parameterType="CommunityDto">

@@ -168,7 +168,7 @@
 							<th>태그</th>
 							<td>
 								<div class="tag-container">
-									<input type="text" id="tagInput" name="tagInput" placeholder="태그를 입력하세요" style="width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 5px;">
+									<input type="text" id="tagInput" name="tagInput" placeholder="태그를 입력하세요" style="width: 90%; padding: 8px; border: 1px solid #ccc; border-radius: 5px;">
 								</div>
 							</td>
 						</tr>
