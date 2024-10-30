@@ -31,9 +31,6 @@
 <head>
 	<%@ include file="/include/front/header.jsp" %>
 	<%@ include file="/include/front/top.jsp" %>
-	<div style="text-align: center;">
-		<%@ include file="/include/front/gnb_shopping.jsp" %>
-	</div>
 	<style>
 		    .brdSearchArea {
 	        display: flex;
@@ -61,6 +58,9 @@
 		    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
 		    gap: 20px;
 		    justify-items: center;
+		    flex-wrap: wrap;
+		    margin: 30px;
+		    margin-left: 0px"
 		}
 		.product {
 		    background-color: white;
@@ -72,8 +72,8 @@
 		    transition: transform 0.3s ease-in-out;
 		}
 		.product:hover {
-        transform: translateY(-10px);
-        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+	        transform: translateY(-10px);
+	        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
         }
         .product_name {
         	font-size: 21px;
@@ -81,13 +81,20 @@
         	margin : 20px;
         }
 	</style>
-	<script>
-	
+</head>
+<body>
+<form id="frmMain" method="POST">
+<input type="hidden" id="cd_ctg_pet" 	name="cd_ctg_pet"	value="${paging.cd_ctg_pet}"/>
+<input type="hidden" id="species" 		name="species"		value="${paging.species}"/>
+<input type="hidden" id="seq_sle"		name="seq_sle"		value="${paging.seq_sle}">
+<input type="hidden" id="seq_mbr"		name="seq_mbr"/>
+<input type="hidden" id="sequence"		name="sequence" />
+<input type="hidden" id="currentPage"	name="currentPage"	value="${paging.currentPage}" />
+<div style="text-align: center;">
+	<%@ include file="/include/front/gnb_shopping.jsp" %>
+</div>
+<script>
 		function goWriteForm(value) {
-			
-			// document.getElementById("currentPage").remove();
-			// document.getElementById("searchKey").remove();
-			// document.getElementById("searchWord").remove();
 			
 			var frmMain = document.getElementById("frmMain");
 			
@@ -97,7 +104,7 @@
 			frmMain.submit();
 		}
 		function goPage(value) {
-		
+			
 			var frmMain = document.getElementById("frmMain");
 			
 			frmMain.currentPage.setAttribute("value", value);
@@ -115,7 +122,19 @@
 			frmMain.action="/front/sale/shop/list.web";
 			frmMain.submit();
 		}
-	
+		// 하트 토글 함수
+		function toggleHeart(element) {
+			
+		    const heart = element.querySelector('span');
+
+		    if (heart.textContent === '❤︎') {
+		        heart.innerHTML = '&#9825;';  // 빈 하트로 변경
+		        heart.style.color = 'black';  // 검정색으로 변경
+		    } else {
+		        heart.innerHTML = '❤︎';  // 채워진 하트로 변경
+		        heart.style.color = 'red';  // 빨간색으로 변경
+		    }
+		}
 		<%--
 		function goShop(value) {
 			
@@ -130,85 +149,78 @@
 		}
 		--%>
 	</script>
-</head>
-<body>
-<form id="frmMain" method="POST">
-<input type="hidden" id="cd_ctg_pet" 	name="cd_ctg_pet"	value="${paging.cd_ctg_pet}"/>
-<input type="hidden" id="pet_items" 	name="pet_items" 	value="${paging.pet_items}"/>
-<input type="hidden" id="seq_sle"		name="seq_sle"		value="${paging.seq_sle}">
-<input type="hidden" id="seq_mbr"		name="seq_mbr"/>
-<input type="hidden" id="sequence"		name="sequence" />
-<input type="hidden" id="currentPage"	name="currentPage"	value="${paging.currentPage}" />
-<div class="container" id="content">
-	<section class="content">
-		<article class="txtCenter">
-			<div class="brdSearchArea" style="margin: 30px; margin-left: 0px">
-				<select name="searchKey">
-					<option value="sle_nm">상품명</option>
-					<option value="sle_desces">상품설명</option>
-					<option value="sle_desces_and_nm">상품명 및 설명</option>
-				</select>
-				<select id="pet_items" name="pet_items" required>
-				<option value="31">사료</option>
-					<option value="32">간식</option>
-					<option value="33">하우스</option>
-					<option value="34">기타</option>
-				</select>
-				<input type="text" name="searchWord" id="searchWord" value="${paging.searchWord}"/ ><input type="submit" value="검색"/>
-			</div>
-			<div class="brdInfo">전체 ${paging.totalLine}개[${paging.currentPage}/${paging.totalPage} 페이지]</div>
-				<div class="product-container" style="display: flex; flex-wrap: wrap; margin: 30px; margin-left: 0px">
-					<c:choose>
-						<c:when test="${empty list}">
-							등록된 상품이 없습니다.
-						</c:when>
-						<c:otherwise>
-							<c:forEach items="${list}" var="list">
-								<div class="product"><a href="javascript:goWriteForm(${list.seq_sle});">
-									<img src="${list.img}" class="img-fluid rounded-4" alt="image"></a>
-									<div>
-										<div class="product_name">
-											<a href="javascript:goWriteForm(${list.seq_sle});">
-											<span>${list.sle_nm}</span>
-											</a>
-										</div>
-										<div class="card-text">
-											<span class="rating secondary-font">
-											    ⭐️
-											    ⭐️
-											    ⭐️
-											    ⭐️
-											    ⭐️
-											    5.0
-											</span>
-											<h3 class="secondary-font text-primary"><fmt:formatNumber value="${list.price_sale}" pattern="#,###" />원</h3>
-												<div class="d-flex flex-wrap mt-3">
-													<a href="javascript:addToCart(${list.seq_sle}, ${list.seq_prd}, '${list.sle_nm}', ${list.price_sale}, '${list.img}');" 
-														class="btn-cart me-3 px-3 pt-2 pb-2" style="display: flex; align-items: center; justify-content: center; font-size: 18px;">
-													    <span class="text-uppercase m-0">장바구니</span>
-													</a>
-													    <a href="#" class="btn-wishlist px-4 pt-3" style="display: inline-block; border: 1px solid #ccc; border-radius: 5px; text-decoration: none; text-align: center; padding: 10px;">
-													        <span  class="fs-5" style="color: black; font-size: 20px; line-height: 1;">❤︎</span>
+	<div class="container" id="content">
+		<section class="content">
+			<article class="txtCenter">
+				<div class="brdSearchArea" style="margin: 30px; margin-left: 0px">
+					<select id="pet_items" name="pet_items" required>
+				        <option value="0" <c:if test="${paging.pet_items == 0}">selected</c:if>>전체</option>
+				        <option value="31" <c:if test="${paging.pet_items == 31}">selected</c:if>>사료</option>
+				        <option value="32" <c:if test="${paging.pet_items == 32}">selected</c:if>>간식</option>
+				        <option value="33" <c:if test="${paging.pet_items == 33}">selected</c:if>>하우스</option>
+				        <option value="34" <c:if test="${paging.pet_items == 34}">selected</c:if>>기타</option>
+				    </select>
+					<select name="searchKey">
+				        <option value="sle_nm" <c:if test="${paging.searchKey == 'sle_nm'}">selected</c:if>>상품명</option>
+				        <option value="sle_desces" <c:if test="${paging.searchKey == 'sle_desces'}">selected</c:if>>상품설명</option>
+				        <option value="sle_desces_and_nm" <c:if test="${paging.searchKey == 'sle_desces_and_nm'}">selected</c:if>>상품명 및 설명</option>
+				    </select>
+					<input type="text" name="searchWord" id="searchWord" value="${paging.searchWord}"/ ><input type="submit" value="검색"/>
+				</div>
+				<div class="brdInfo">전체 ${paging.totalLine}개[${paging.currentPage}/${paging.totalPage} 페이지]</div>
+					<div class="product-container" style="display: flex; flex-wrap: wrap; margin: 30px; margin-left: 0px">
+						<c:choose>
+							<c:when test="${empty list}">
+								등록된 상품이 없습니다.
+							</c:when>
+							<c:otherwise>
+								<c:forEach items="${list}" var="list" >
+									<div class="product">
+										<a href="javascript:goWriteForm(${list.seq_sle});" >
+										<img src="${list.img}" class="img-fluid rounded-4" alt="image"></a>
+										<div>
+											<div class="product_name">
+												<a href="javascript:goWriteForm(${list.seq_sle});">
+												<span><strong>${list.sle_nm}</strong></span>
+												</a>
+											</div>
+											<div class="card-text">
+												<span class="rating secondary-font">
+												    ⭐️
+												    ⭐️
+												    ⭐️
+												    ⭐️
+												    ⭐️
+												    5.0
+												</span>
+												<h3 class="secondary-font text-primary"><fmt:formatNumber value="${list.price_sale}" pattern="#,###" />원</h3>
+													<div class="d-flex flex-wrap mt-3">
+														<a href="#" class="btn-cart me-3 px-3 pt-2 pb-2" style="display: flex; align-items: center; justify-content: center; font-size: 18px;">
+														    <span class="text-uppercase m-0">장바구니</span>
 														</a>
-												 </div>
+														    <a href="#" class="btn-wishlist px-4 pt-3" style="display: inline-block; border: 1px solid #ccc; border-radius: 5px; text-decoration: none; text-align: center; padding: 10px;" onclick="toggleHeart(this)">
+															    <span class="fs-5" style="color: black; font-size: 20px; line-height: 1;">&#9825;</span>
+															</a>
+													 </div>
+											</div>
 										</div>
 									</div>
-								</div>
-							</c:forEach>
-						</c:otherwise>
-					</c:choose>
-				</div>
-<br/>
-<div class="center-container"  style= "display: flex; justify-content: center;">
-<plutozoneUtilTag:page styleID="admin_text" currentPage="${paging.currentPage}" linePerPage="${paging.linePerPage}" totalLine="${paging.totalLine}" scriptFunction="goPages"/>
-</div><br/>
-</article>
-<aside></aside>
-</section>
-<footer>
-	<%@ include file="/include/front/footer.jsp" %>
-</footer>
-</div>
+								</c:forEach>
+							</c:otherwise>
+						</c:choose>
+					</div>
+				<br/>
+			<div class="center-container"  style= "display: flex; justify-content: center;">
+			<plutozoneUtilTag:page styleID="front_image" currentPage="${paging.currentPage}" linePerPage="${paging.linePerPage}" totalLine="${paging.totalLine}" scriptFunction="goPage" />
+			</div>
+			<br/>
+		</article>
+		<aside></aside>
+	</section>
+	<footer>
+		<%@ include file="/include/front/footer.jsp" %>
+	</footer>
+	</div>
 </form>
 </body>
 </html>
