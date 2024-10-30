@@ -67,27 +67,29 @@
 	</insert>
 	
 	<select id="getLikeCount" parameterType="int" resultType="int">
-		SELECT
-			COUNT(*) 
-		FROM 
-			TB_LKE
-		WHERE
-			SEQ_BBS = #{seq_bbs}
+	SELECT
+		COUNT(*)
+	FROM 
+		TB_LKE
+	WHERE
+		SEQ_BBS = #{seq_bbs}
+		AND FLG_LKE = 'Y'
 	</select>
 	
-	<delete id="removeLike" parameterType="LikeDto">
-		DELETE 
-		FROM 
-			TB_LKE
-		WHERE
-			SEQ_BBS 		= #{seq_bbs} 
-			AND REGISTER	= #{register}
-	</delete>
+	<update id="removeLike" parameterType="LikeDto">
+	UPDATE 
+		TB_LKE
+	SET 
+		FLG_LKE = 'N'
+	WHERE
+		SEQ_BBS = #{seq_bbs} 
+		AND REGISTER = #{register}
+	</update>
 	
 	<insert id="addLike" parameterType="LikeDto">
 	INSERT INTO 
 		TB_LKE (SEQ_LKE, SEQ_BBS, REGISTER, DT_REG, FLG_LKE, SEQ_MBR,CD_CTG)
-	VALUES (SEQ_LKE.NEXTVAL, #{seq_bbs}, #{register}, SYSDATE, #{flg_lke}, #{seq_mbr}, #{cd_ctg})
+	VALUES (SEQ_LKE.NEXTVAL, #{seq_bbs}, #{register}, SYSDATE, 'Y', #{seq_mbr}, #{cd_ctg})
 	</insert>
 	
 	<select id="isLiked" parameterType="LikeDto" resultType="int">
@@ -130,6 +132,7 @@
 		WHERE
 			SEQ_BBS = #{seq_bbs}
 	</select>
+	
 	<select id="count" parameterType="pagingDto" resultType="java.lang.Integer">
 		SELECT
 			COUNT(ROWNUM)

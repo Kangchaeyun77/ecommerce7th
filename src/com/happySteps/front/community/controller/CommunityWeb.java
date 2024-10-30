@@ -267,15 +267,16 @@ public class CommunityWeb extends Common {
 			
 			logger.debug("회원일련번호?="+seq_mbr);
 			
-			int cd_ctg = communityDto.getCd_bbs_type();
-			mav.addObject("cd_ctg", cd_ctg);
+			//int cd_ctg = communityDto.getCd_bbs_type();
+			//mav.addObject("cd_ctg", cd_ctg);
 			
 			logger.debug("********************************************");
 			logger.debug("cd_bbs_type = " + communityDto.getCd_bbs_type());
 			logger.debug("********************************************");
+			
 			mav.addObject("cd_bbs_type", communityDto.getCd_bbs_type());
 			
-			logger.debug("가져와짐?="+cd_ctg);
+			//logger.debug("가져와짐?="+cd_ctg);
 			
 			CommunityDto _communityDto = communitySrvc.select(communityDto);
 			mav.addObject("communityDto", _communityDto);
@@ -288,12 +289,15 @@ public class CommunityWeb extends Common {
 				mav.setViewName("front/community/board/popular/view");
 				List<CommentDto> commentList = commentsrvc.getComments(communityDto.getSeq_bbs());
 				mav.addObject("commentList", commentList);
+				
 				_communityDto = communitySrvc.allSelect(communityDto);
+			
 				mav.addObject("communityDto", _communityDto);
 				mav.setViewName("front/community/board/all/view"); 
 						
 			} else if (communityDto.getCd_bbs_type() == 7) {
 				List<CommentDto> commentList = commentsrvc.getComments(communityDto.getSeq_bbs());
+				
 				mav.addObject("commentList", commentList);
 				mav.setViewName("front/community/board/storyboard/view");
 				
@@ -301,18 +305,19 @@ public class CommunityWeb extends Common {
 				
 				mav.setViewName("front/community/board/qna/view");
 				List<CommentDto> commentList = commentsrvc.getComments(communityDto.getSeq_bbs());
+				
 				mav.addObject("commentList", commentList);
 				
 			} else if (communityDto.getCd_bbs_type() == 9) {
-				
 				mav.setViewName("front/community/board/adap/view");
 				List<CommentDto> commentList = commentsrvc.getComments(communityDto.getSeq_bbs());
+				
 				mav.addObject("commentList", commentList);
 				
 			} else if (communityDto.getCd_bbs_type() == 11) {
-				
 				mav.setViewName("front/community/board/information/view");
 				List<CommentDto> commentList = commentsrvc.getComments(communityDto.getSeq_bbs());
+				
 				mav.addObject("commentList", commentList);
 				// DB 부하 감소를 위해 답변이 있을 때만
 				if (_communityDto.getSeq_reply() > 0) {
@@ -323,8 +328,10 @@ public class CommunityWeb extends Common {
 			// cd_bbs_type 5일 때 모든 게시글 조회
 			} else if (communityDto.getCd_bbs_type() == 5){
 				_communityDto = communitySrvc.allSelect(communityDto);
+				
 				mav.addObject("communityDto", _communityDto);
 				mav.setViewName("front/community/board/all/view"); // 전체 글을 보여주는 뷰
+				
 				List<CommentDto> commentList = commentsrvc.getComments(communityDto.getSeq_bbs());
 				mav.addObject("commentList", commentList);
 			} else {

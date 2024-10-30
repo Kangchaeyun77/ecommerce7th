@@ -38,7 +38,7 @@
 		document.addEventListener('DOMContentLoaded', () => {
 		var seq_bbs = "${communityDto.seq_bbs}"; 
 	});
-	const cd_ctg = document.getElementById("cd_ctg").value;
+	//const cd_ctg = document.getElementById("cd_ctg").value;
 	</script>
 	<title>커뮤니티 자유게시판 상세보기</title>
 </head>

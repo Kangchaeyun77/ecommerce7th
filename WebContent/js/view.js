@@ -307,14 +307,14 @@ function loadComments(seq_bbs) {
 	function toggleLike(seq_bbs) {
 		const likeElement = document.getElementById('likeElement'); // 이모지를 표시할 요소
 		const seq_mbr = sessionStorage.getItem('SEQ_MBR');
-		const cd_ctg = document.getElementById("cd_ctg").value;
+		const cd_bbs_type = document.getElementById("cd_bbs_type").value;
 
 		fetch('/front/community/board/like.json', {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json',
 			},
-			body: JSON.stringify({ seq_bbs: seq_bbs, seq_mbr: seq_mbr, cd_ctg: cd_ctg})
+			body: JSON.stringify({ seq_bbs: seq_bbs, seq_mbr: seq_mbr, cd_bbs_type: cd_bbs_type})
 		})
 		.then(response => response.json())
 		.then(data => {
