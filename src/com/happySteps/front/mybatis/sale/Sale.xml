@@ -11,7 +11,6 @@
 			CD_STATE_SALE = 1
 			<include refid="where" />
 	</select>
-	
 	<select id="list" parameterType="pagingDto" resultType="saleDto">
 		SELECT
 			*
@@ -23,6 +22,7 @@
 				, SLE_NM
 				, IMG
 				, DESCES
+				, DESCES_IMG
 				, CD_STATE_SALE
 				, PRICE_SALE
 				, TO_CHAR(DT_REG, 'YYYY-MM-DD') dt_reg
@@ -39,13 +39,15 @@
 		ORDER BY
 			rnum
 	</select>
-
 	<sql id="where">
 		<if test="cd_ctg_pet != null and cd_ctg_pet != 0">
 			AND CD_CTG_PET = #{cd_ctg_pet}
 		</if>
 		<if test="pet_items != null and pet_items != 0">
 			AND PET_ITEMS = #{pet_items}
+		</if>
+		<if test="species != null and species != 0">
+			AND SPECIES = #{species}
 		</if>
 		<if test="searchWord != null and searchWord != ''">
 			<if test="searchKey == 'sle_nm'">
@@ -68,6 +70,7 @@
 			, PRICE_SALE
 			, IMG
 			, DESCES
+			, DESCES_IMG
 		FROM
 			TB_SLE
 		WHERE
