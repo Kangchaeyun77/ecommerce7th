@@ -157,126 +157,193 @@
 			font-size:16px;
 		}
 	</style>
+	<script>
+
+	<c:if test="${empty sessionScope.SEQ_MBR}">
+	var isLogin = false;
+	</c:if>
 	
-		<script>
-	
-		<c:if test="${empty sessionScope.SEQ_MBR}">
-		var isLogin = false;
-		</c:if>
-		
-		<c:if test="${not empty sessionScope.SEQ_MBR}">
-		var isLogin = true;
-		</c:if>
-		
-		function writeProc() {
-			
-			if (!isLogin) {
-				alert("로그인이 필요합니다!");
-				return;
-			}
-			
-			var frmMain = document.getElementById("frmMain");
-			frmMain.action = "/front/buy/writeProc.web";
-			frmMain.submit();
-		}
-		
-		function goList(value) {
-			var frmMain = document.getElementById("frmMain");
-			
-			// value가 숫자인지 확인하고 정수로 변환
-			var intValue = parseInt(value, 10);
-			
-			// intValue가 NaN일 경우 0으로 설정
-			if (isNaN(intValue)) {
-				intValue = 1; // 기본값으로 1을 설정
-			}
-			
-			document.getElementById("cd_ctg_pet").value = intValue;
-			
-			frmMain.action = "/front/sale/shop/list.web";
-			frmMain.submit();
-		}
-		
-		
-		function addToCart(seqSle, seqPrd, sleNm, price, img) {
-			
-			const count = parseInt(document.getElementById("count").value);
-			
-			const data = {
-				seq_sle: seqSle,
-				seq_prd: seqPrd, 
-				sle_nm: sleNm,
-				price: price,
-				count: count, 
-				img: img
-			};
+	<c:if test="${not empty sessionScope.SEQ_MBR}">
+	var isLogin = true;
+	</c:if>
 
-			$.ajax({
-				url: '/front/basket/addItem.web', // 장바구니 추가 요청을 처리할 URL
-				type: 'POST',
-				contentType: 'application/json',
-				data: JSON.stringify(data),
-				success: function(response) {
-					if (confirm('상품이 장바구니에 추가되었습니다. 장바구니 페이지로 이동할까요?')) {
-						window.location.href ='/front/basket/index.web'; // 장바구니 페이지로 이동
-					}
-				},
-				error: function(xhr, status, error) {
-					alert('장바구니 추가 중 오류가 발생했습니다.');
-				}
-			});
-		}
-		
-		function changeQuantity(delta) {
-			var countInput = document.getElementById("count");
-			var currentValue = parseInt(countInput.value) || 0; // 현재 수량 가져오기
-			var newValue = currentValue + delta; // 새로운 수량 계산하기
-			if (newValue >= 1) { // 최소 수량 제한
-				countInput.value = newValue; // 새로운 수량 설정
-			}
-		}
-		function validateInput(input) {
-			// 숫자가 아닌 문자 제거
-			input.value = input.value.replace(/[^0-9]/g, '');
+	<%
+	// [2024-10-17][pluto@himedia.co.kr][INSERT: Payup 신규 연동 규격서를 기반으로 한 결제 연동 예제]
+	%>
 
-			// 입력값이 1보다 작으면 1로 설정
-			if (input.value === '' || parseInt(input.value) < 1) {
-				input.value = '1';
-			}
-		}
-		function openTab(evt, tabName) {
-			// 모든 탭 내용을 숨김
-			const tabcontents = document.querySelectorAll('.tabcontent');
-			tabcontents.forEach(tab => {
-				tab.style.display = "none";
-			});
+	// 인증 완료 시 콜백 함수(해당 함수명, 폼 아이디 등 절대 변경 금지)
+	function payupPaymentSubmit(payForm) {
+		var formData = $("#PayupPaymentStandardForm").serializeArray();
 
-			// 클릭한 탭 버튼 활성화
-			const tablinks = document.querySelectorAll('.tablinks');
-			tablinks.forEach(tab => {
-				tab.classList.remove('active');
-			});
-
-			// 클릭한 탭 내용 표시 및 버튼 활성화
-			document.getElementById(tabName).style.display = "block";
-			evt.currentTarget.classList.add('active');
-		}
-
-		// 기본적으로 첫 번째 탭 열기
-		document.addEventListener('DOMContentLoaded', () => {
-			document.querySelector('.tablinks').click(); // 첫 번째 탭 클릭
+		var dataObject = {};
+		$.each(formData, function(index, field) {
+			dataObject[field.name] = field.value;
 		});
+
+		$.ajax({
+			url: '/front/interface/payup/pay.json',
+			type: 'POST',
+			contentType: 'application/json',
+			data: JSON.stringify(dataObject),
+			success: function(responseObject) {
+				
+				if (responseObject.responseCode != "0000") {
+					alert("[" + responseObject.responseCode + "]" + responseObject.responseMsg);
+				}
+				else {
+					alert(responseObject.responseMsg);
+				}
+				location.href="/front/sale/shop/index";
+			},
+			error: function(error) {
+				alert("연동 에러");
+			}
+		});
+	}
+
+	function order(){
+
+		if (!isLogin) {
+			alert("로그인이 필요합니다!");
+			return;
+		}
+
+		$.ajax({
+			url: '/front/interface/payup/order.json',
+			type: 'POST',
+			dataType: "json",
+			data: $("#frmMain").serialize(),
+			success: function(responseObject) {
+				
+				if (responseObject.responseCode != "0000") {
+					alert(responseObject.responseMsg + "[" + responseObject.responseCode + "]");
+					location.href="/front/sale/shop/index";
+				}
+				else {
+					var data = {
+						merchantId: responseObject.merchantId,
+						itemName: responseObject.itemName,
+						amount: responseObject.amount,
+						userName: responseObject.userName,
+						orderNumber: responseObject.orderNumber,
+						returnUrl: responseObject.returnUrl
+					};
+					// 표준결제창 SDK 실행
+					goPayupPay(data);
+				}
+			},
+			error: function(error) {
+				alert("연동 에러");
+			}
+		});
+	}
+
+	function writeProc() {
+		
+		if (!isLogin) {
+			alert("로그인이 필요합니다!");
+			return;
+		}
+		
+		var frmMain = document.getElementById("frmMain");
+		frmMain.action = "/front/buy/writeProc.web";
+		frmMain.submit();
+	}
+
+	function goList(value) {
+		var frmMain = document.getElementById("frmMain");
+
+		// value가 숫자인지 확인하고 정수로 변환
+		var intValue = parseInt(value, 10);
+
+		// intValue가 NaN일 경우 0으로 설정
+		if (isNaN(intValue)) {
+			intValue = 1; // 기본값으로 1을 설정
+		}
+
+		document.getElementById("cd_ctg_pet").value = intValue;
+		
+		frmMain.action = "/front/sale/shop/list.web";
+		frmMain.submit();
+	}
+	
+	
+	function addToCart(seqSle, seqPrd, sleNm, price, img) {
+		
+		const count = parseInt(document.getElementById("count").value);
+		
+		const data = {
+			seq_sle: seqSle,
+			seq_prd: seqPrd, 
+			sle_nm: sleNm,
+			price: price,
+			count: count, 
+			img: img
+		};
+
+		$.ajax({
+			url: '/front/basket/addItem.web', // 장바구니 추가 요청을 처리할 URL
+			type: 'POST',
+			contentType: 'application/json',
+			data: JSON.stringify(data),
+			success: function(response) {
+				if (confirm('상품이 장바구니에 추가되었습니다. 장바구니 페이지로 이동할까요?')) {
+					window.location.href ='/front/basket/index.web'; // 장바구니 페이지로 이동
+				}
+			},
+			error: function(xhr, status, error) {
+				alert('장바구니 추가 중 오류가 발생했습니다.');
+			}
+		});
+	}
+	
+	function changeQuantity(delta) {
+		var countInput = document.getElementById("count");
+		var currentValue = parseInt(countInput.value) || 0; // 현재 수량 가져오기
+		var newValue = currentValue + delta; // 새로운 수량 계산하기
+		if (newValue >= 1) { // 최소 수량 제한
+			countInput.value = newValue; // 새로운 수량 설정
+		}
+	}
+	function validateInput(input) {
+		// 숫자가 아닌 문자 제거
+		input.value = input.value.replace(/[^0-9]/g, '');
+
+		// 입력값이 1보다 작으면 1로 설정
+		if (input.value === '' || parseInt(input.value) < 1) {
+			input.value = '1';
+		}
+	}
+	function openTab(evt, tabName) {
+		// 모든 탭 내용을 숨김
+		const tabcontents = document.querySelectorAll('.tabcontent');
+		tabcontents.forEach(tab => {
+			tab.style.display = "none";
+		});
+
+		// 클릭한 탭 버튼 활성화
+		const tablinks = document.querySelectorAll('.tablinks');
+		tablinks.forEach(tab => {
+			tab.classList.remove('active');
+		});
+
+		// 클릭한 탭 내용 표시 및 버튼 활성화
+		document.getElementById(tabName).style.display = "block";
+		evt.currentTarget.classList.add('active');
+	}
+
+	// 기본적으로 첫 번째 탭 열기
+	document.addEventListener('DOMContentLoaded', () => {
+		document.querySelector('.tablinks').click(); // 첫 번째 탭 클릭
+	});
 	</script>
 </head>
 <body>
 <form id="frmMain" method="POST">
-<input type="hidden" name="seq_prd" 	id="seq_prd"	value="${saleDto.seq_prd}" />
-<input type="hidden" name="seq_sle" 	id="seq_sle"	value="${saleDto.seq_sle}" />
-<input type="hidden" name="sle_nm" 		id="sle_nm"		value="${saleDto.sle_nm}" />
-<input type="hidden" name="price_sale" 	id="price_sale"	value="${saleDto.price_sale}" />
-<input type="hidden" name="cd_ctg_pet"  id="cd_ctg_pet"	value="${saleDto.cd_ctg_pet}"/>
+<input type="hidden" name="buyList[0].price" 			value="${saleDto.price_sale}" />
 <input type="hidden" name="buyList[0].seq_sle" 			value="${saleDto.seq_sle}" />
 <input type="hidden" name="buyList[0].seq_prd" 			value="${saleDto.seq_prd}" />
+<input type="hidden" name="buyList[0].sle_nm" 			value="${saleDto.sle_nm}" />
 <div class="container">
 	<div style="text-align: center;">
 	<%@ include file="/include/front/gnb_shopping.jsp" %>
@@ -287,7 +354,7 @@
 				<div class="product-image">
 					<img src="${saleDto.img}" class="img-fluid rounded-4" />
 				</div>
-				<div class="product-biginfo" style="flex: 1; text-align: left;"">
+				<div class="product-biginfo" style="flex: 1; text-align: left;">
 					<div class="product-info">
 						<h1 class="product-name">${saleDto.sle_nm}</h1>
 						<p class="product-description">${saleDto.desces}</p>
@@ -315,9 +382,9 @@
 				</div>
 			</div>
 			<div class="button-container" style="text-align:center; padding-top:30px; padding-bottom:60px">
-				<button class="button list-button" onclick="javascript:goList();" >목록</button>
-				<button class="button buy-button" onclick="#">구매</button>
-				<button class="button cart-button" onclick="javascript:addToCart(${saleDto.seq_sle}, ${saleDto.seq_prd}, '${saleDto.sle_nm}', ${saleDto.price_sale}, '${saleDto.img}');">장바구니</button>
+				<button class="button list-button"	type="button"	onclick="javascript:goList();">목록</button>
+				<button class="button buy-button"	type="button"	onclick="javascript:order();">구매</button>
+				<button class="button cart-button"	type="button"	onclick="javascript:addToCart(${saleDto.seq_sle}, ${saleDto.seq_prd}, '${saleDto.sle_nm}', ${saleDto.price_sale}, '${saleDto.img}');">장바구니</button>
 			</div>
 			<div class="item_goods_tab">
 				<ul style="list-style: none; padding: 0; margin: 0; display: flex; justify-content: center;">

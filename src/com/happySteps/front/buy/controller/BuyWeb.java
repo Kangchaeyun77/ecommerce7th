@@ -20,6 +20,7 @@
  */
 package com.happySteps.front.buy.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -36,7 +37,10 @@ import com.happySteps.front.common.Common;
 import com.happySteps.front.sale.dto.SaleDto;
 import com.happySteps.front.sale.service.SaleSrvc;
 import com.happySteps.front.buy.controller.BuyWeb;
+import com.happySteps.front.buy.dto.BuyDetailDto;
+import com.happySteps.front.buy.dto.BuyDetailListDto;
 import com.happySteps.front.buy.dto.BuyDto;
+import com.happySteps.front.buy.dto.BuyMasterDto;
 import com.happySteps.front.buy.service.BuySrvc;
 
 //import com.happySteps.front.buy.dto.BuyDto;
@@ -62,6 +66,76 @@ public class BuyWeb extends Common{
 	
 	@Inject
 	SaleSrvc saleSrvc;
+	
+	@RequestMapping(value = "/front/buy/writeProc.web")
+	public ModelAndView writeProc(HttpServletRequest request, HttpServletResponse response, BuyDetailListDto buyDetailListDto) {
+		
+		ModelAndView mav = new ModelAndView("redirect:/error.web");
+		
+		try {
+			//logger.debug("" + buyDetailListDto.getBuyList().size());
+			
+			String finalSleName = "";	// 마지막 판매 상품명
+			
+			int totalCount = 0;			// 총 갯수
+			int totalPrice = 0;			// 총 가격
+			
+			ArrayList<BuyDetailDto> listBuyDetailDto = new ArrayList<BuyDetailDto>();
+			
+			if (buyDetailListDto.getBuyList() != null) {
+				for (int loop = 0; loop < buyDetailListDto.getBuyList().size(); loop++) {
+					
+					if (buyDetailListDto.getBuyList().get(loop).getCount() >= 1) {
+						
+						//logger.debug(loop + " : seq_prd(" + buyDetailListDto.getBuyList().get(loop).getSeq_prd() + ")" + " + count(" + buyDetailListDto.getBuyList().get(loop).getCount() + ")");
+						
+						// 갯수가 1개 이상인 상품
+						listBuyDetailDto.add(buyDetailListDto.getBuyList().get(loop));
+						
+						// 전체 상품 갯수 및 금액 그리고 구매명
+						totalCount += buyDetailListDto.getBuyList().get(loop).getCount();
+						totalPrice += buyDetailListDto.getBuyList().get(loop).getCount() * buyDetailListDto.getBuyList().get(loop).getPrice();
+						finalSleName = buyDetailListDto.getBuyList().get(loop).getSle_nm();
+					}
+				}
+			}
+			//logger.debug("count=" + listBuyDetailDto.size());
+			
+			// 선택된 상품이 1개 이상을 경우만 구매 실행
+			if (listBuyDetailDto.size() > 0) {
+				
+				// 마스터 설정
+				BuyMasterDto buyMasterDto = new BuyMasterDto();
+				buyMasterDto.setSeq_mbr(Integer.parseInt(getSession(request, "SEQ_MBR")));
+				buyMasterDto.setBuy_info(finalSleName + "-포함(총 개수: " + totalCount + ")");
+				buyMasterDto.setBuy_count(totalCount);
+				buyMasterDto.setBuy_price(totalPrice);
+				buyMasterDto.setRegister(Integer.parseInt(getSession(request, "SEQ_MBR")));
+				
+				if (buySrvc.insertByDealNum(buyMasterDto, listBuyDetailDto, "[INF]NO PAYMENT")) {
+					request.setAttribute("script"	, "alert('추후 결제 페이지로 이동 예정');");
+					request.setAttribute("redirect"	, "/front/main/main.web");
+				}
+				else {
+					request.setAttribute("script"	, "alert('구매에 실패했습니다! 잠시 후에 이용 바랍니다!');");
+					request.setAttribute("redirect"	, "/front/main/main.web");
+				}
+			}
+			else {
+				request.setAttribute("script"	, "alert('선택된 상품이 없습니다!');");
+				request.setAttribute("redirect"	, "/");
+			}
+			
+			request.setAttribute("redirect"	, "/front/");
+			mav.setViewName("forward:/servlet/result.web");
+		}
+		catch (Exception e) {
+			logger.error("[" + this.getClass().getName() + ".writeProc()] " + e.getMessage(), e);
+		}
+		finally {}
+		
+		return mav;
+	}
 	
 	@RequestMapping(value = "/front/buy/writeForm.web")
 	public ModelAndView writeForm(HttpServletRequest request, HttpServletResponse response, SaleDto saleDto) {

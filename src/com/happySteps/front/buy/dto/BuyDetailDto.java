@@ -39,6 +39,14 @@ public class BuyDetailDto {
 	private String dt_reg			= "";	// 등록일시
 	private int register			= 0;	// 등록자
 	private String cd_state_buy		="";	// 주문상태코드 : 주문전(NULL), 주문확정(Y) 주문취소(C) 주문교환(E) 주문환불(R)
+	private String sle_nm			= "";	// 판매 상품이름
+	
+	public String getSle_nm() {
+		return sle_nm;
+	}
+	public void setSle_nm(String sle_nm) {
+		this.sle_nm = sle_nm;
+	}
 	
 	public int getSeq_buy_dtl() {
 		return seq_buy_dtl;
