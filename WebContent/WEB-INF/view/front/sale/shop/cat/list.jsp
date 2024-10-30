@@ -30,9 +30,6 @@
 <head>
 	<%@ include file="/include/front/header.jsp" %>
 	<%@ include file="/include/front/top.jsp" %>
-	<div style="text-align: center;">
-		<%@ include file="/include/front/gnb_shopping.jsp" %>
-	</div>
 	<style>
 		    .brdSearchArea {
 	        display: flex;
@@ -84,10 +81,6 @@
 	
 		function goWriteForm(value) {
 			
-			// document.getElementById("currentPage").remove();
-			// document.getElementById("searchKey").remove();
-			// document.getElementById("searchWord").remove();
-			
 			var frmMain = document.getElementById("frmMain");
 			
 			document.getElementById("seq_sle").value = value;
@@ -114,7 +107,19 @@
 			frmMain.action="/front/sale/shop/list.web";
 			frmMain.submit();
 		}
-	
+		// 하트 토글 함수
+		function toggleHeart(element) {
+			
+		    const heart = element.querySelector('span');
+
+		    if (heart.textContent === '❤︎') {
+		        heart.innerHTML = '&#9825;';  // 빈 하트로 변경
+		        heart.style.color = 'black';  // 검정색으로 변경
+		    } else {
+		        heart.innerHTML = '❤︎';  // 채워진 하트로 변경
+		        heart.style.color = 'red';  // 빨간색으로 변경
+		    }
+		}
 		<%--
 		function goShop(value) {
 			
@@ -133,26 +138,30 @@
 <body>
 <form id="frmMain" method="POST">
 <input type="hidden" id="cd_ctg_pet" 	name="cd_ctg_pet"	value="${paging.cd_ctg_pet}"/>
-<input type="hidden" id="pet_items" 	name="pet_items" 	value="${paging.pet_items}"/>
+<input type="hidden" id="species" 		name="species"		value="${paging.species}"/>
 <input type="hidden" id="seq_sle"		name="seq_sle"		value="${paging.seq_sle}">
 <input type="hidden" id="seq_mbr"		name="seq_mbr"/>
 <input type="hidden" id="sequence"		name="sequence" />
 <input type="hidden" id="currentPage"	name="currentPage"	value="${paging.currentPage}" />
+<div style="text-align: center;">
+	<%@ include file="/include/front/gnb_shopping.jsp" %>
+</div>
 <div class="container" id="content">
 	<section class="content">
 		<article class="txtCenter">
 			<div class="brdSearchArea" style="margin: 30px; margin-left: 0px">
-				<select name="searchKey">
-					<option value="sle_nm">상품명</option>
-					<option value="sle_desces">상품설명</option>
-					<option value="sle_desces_and_nm">상품명 및 설명</option>
-				</select>
 				<select id="pet_items" name="pet_items" required>
-					<option value="21">사료</option>
-					<option value="22">간식</option>
-					<option value="23">하우스</option>
-					<option value="24">기타</option>
-				</select>
+			        <option value="0" <c:if test="${paging.pet_items == 0}">selected</c:if>>전체</option>
+			        <option value="21" <c:if test="${paging.pet_items == 21}">selected</c:if>>사료</option>
+			        <option value="22" <c:if test="${paging.pet_items == 22}">selected</c:if>>간식</option>
+			        <option value="23" <c:if test="${paging.pet_items == 23}">selected</c:if>>하우스</option>
+			        <option value="24" <c:if test="${paging.pet_items == 24}">selected</c:if>>기타</option>
+			    </select>
+				<select name="searchKey">
+			        <option value="sle_nm" <c:if test="${paging.searchKey == 'sle_nm'}">selected</c:if>>상품명</option>
+			        <option value="sle_desces" <c:if test="${paging.searchKey == 'sle_desces'}">selected</c:if>>상품설명</option>
+			        <option value="sle_desces_and_nm" <c:if test="${paging.searchKey == 'sle_desces_and_nm'}">selected</c:if>>상품명 및 설명</option>
+			    </select>
 				<input type="text" name="searchWord" id="searchWord" value="${paging.searchWord}"/ ><input type="submit" value="검색"/>
 			</div>
 			<div class="brdInfo">전체 ${paging.totalLine}개[${paging.currentPage}/${paging.totalPage} 페이지]</div>
@@ -186,8 +195,8 @@
 														class="btn-cart me-3 px-3 pt-2 pb-2" style="display: flex; align-items: center; justify-content: center; font-size: 18px;">
 													    <span class="text-uppercase m-0">장바구니</span>
 													</a>
-													    <a href="#" class="btn-wishlist px-4 pt-3" style="display: inline-block; border: 1px solid #ccc; border-radius: 5px; text-decoration: none; text-align: center; padding: 10px;">
-													        <span  class="fs-5" style="color: black; font-size: 20px; line-height: 1;">❤︎</span>
+													    <a href="#" class="btn-wishlist px-4 pt-3" style="display: inline-block; border: 1px solid #ccc; border-radius: 5px; text-decoration: none; text-align: center; padding: 10px;" onclick="toggleHeart(this)">
+														    <span class="fs-5" style="color: black; font-size: 20px; line-height: 1;">&#9825;</span>
 														</a>
 												 </div>
 										</div>

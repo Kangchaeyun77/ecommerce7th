@@ -36,51 +36,55 @@
 	<%@ include file="/include/front/header.jsp" %>
 	<%@ include file="/include/front/top.jsp" %>
 	<style>
-		.brdSearchArea {
-			display: flex;
-			justify-content: flex-start;
-			gap: 5px; /* 요소 간의 간격 조정 */
-		}
-		.brdSearchArea select,
-		.brdSearchArea input[type="text"],
-		.brdSearchArea input[type="submit"] {
-			font-size: 14px; /* 글씨 크기 조정 */
-			border: 0;
+	    .brdSearchArea {
+	        display: flex;
+	        justify-content: flex-start;
+	        gap: 5px; /* 요소 간의 간격 조정 */
+	    }
+	    .brdSearchArea select,
+	    .brdSearchArea input[type="text"],
+	    .brdSearchArea input[type="submit"] {
+	        font-size: 14px; /* 글씨 크기 조정 */
+	        border: 0;
 			border-radius: 15px;
 			outline: none;
 			background-color: #F5F5F5
-		}
-		/* 필요에 따라 최대 너비 설정 */
-		.brdSearchArea select {
-			width: 100px; /* 예: select 박스 너비 설정 */
-		}
-		.brdSearchArea input[type="text"] {
-			width: 150px; /* 예: 텍스트 입력 박스 너비 설정 */
-		}
-		.product-container {
-			display: grid;
-			grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-			gap: 20px;
-			justify-items: center;
+	    }
+	    /* 필요에 따라 최대 너비 설정 */
+	    .brdSearchArea select {
+	        width: 100px; /* 예: select 박스 너비 설정 */
+	    }
+	    .brdSearchArea input[type="text"] {
+	        width: 150px; /* 예: 텍스트 입력 박스 너비 설정 */
+	    }
+	    .product-container {
+		    display: grid;
+		    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+		    gap: 20px;
+		    justify-items: center;
+		    flex-wrap: wrap;
+		    margin: 30px;
+		    margin-left: 0px"
 		}
 		.product {
-			background-color: white;
-			border: 1px solid #ddd;
-			border-radius: 8px;
-			padding: 20px;
-			width: 250px;
-			text-align: center;
-			transition: transform 0.3s ease-in-out;
+		    background-color: white;
+		    border: 1px solid #ddd;
+		    border-radius: 8px;
+		    padding: 20px;
+		    width: 250px;
+		    text-align: center;
+		    transition: transform 0.3s ease-in-out;
 		}
 		.product:hover {
-		transform: translateY(-10px);
-		box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
-		}
-		.product_name {
+	        transform: translateY(-10px);
+	        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+        }
+        .product_name {
         	font-size: 21px;
         	font-weight: bold;
         	margin : 20px;
         }
+        
 	</style>
 </head>
 <body>
@@ -95,7 +99,7 @@
 	<%@ include file="/include/front/gnb_shopping.jsp" %>
 </div>
 <script>
-
+	
 	function goPage(value) {
 		
 		var frmMain = document.getElementById("frmMain");
@@ -104,21 +108,24 @@
 		frmMain.action="/front/sale/shop/index.web";
 		frmMain.submit();
 	}
+	
 	function goList(value) {
 		var frmMain = document.getElementById("frmMain");
+		
 		document.getElementById("cd_ctg_pet").value = value;
-		frmMain.action = "/front/sale/shop/list.web";
+		frmMain.action="/front/sale/shop/list.web";
 		frmMain.submit();
 	}
 
 	function goWriteForm(value) {
-		var frmMain = document.getElementById("frmMain");
-		document.getElementById("cd_ctg_pet").value = value;
-		document.getElementById("seq_sle").value = value;
-		frmMain.action = "/front/buy/writeForm.web";
-		frmMain.submit();
+	    var frmMain = document.getElementById("frmMain");
+	    
+	    document.getElementById("cd_ctg_pet").value = value;
+	    document.getElementById("seq_sle").value = value;
+	    frmMain.action = "/front/buy/writeForm.web";
+	    
+	    frmMain.submit();
 	}
-
 	function addToCart(seqSle, seqPrd, sleNm, price, img) {
 
 		const data = {
@@ -145,18 +152,37 @@
 			}
 		});
 	}
-	</script>
+
+	// 하트 토글 함수
+	function toggleHeart(element) {
+		
+	    const heart = element.querySelector('span');
+
+	    if (heart.textContent === '❤︎') {
+	        heart.innerHTML = '&#9825;';  // 빈 하트로 변경
+	        heart.style.color = 'black';  // 검정색으로 변경
+	    } else {
+	        heart.innerHTML = '❤︎';  // 채워진 하트로 변경
+	        heart.style.color = 'red';  // 빨간색으로 변경
+	    }
+	}
+</script>
 <div class="container" id="content">
 	<section class="content">
 		<article class="txtCenter">
 			<div class="brdSearchArea" style="margin: 30px; margin-left: 0px; margin-bottom: 15px">
-				<select id="cd_ctg_pet" name="cd_ctg_pet" required>
-					<option value="0"<c:if test="${paging.cd_ctg_pet == 0}"> selected</c:if>>전체</option>
-					<option value="1"<c:if test="${paging.cd_ctg_pet == 1}"> selected</c:if>>강아지</option>
-					<option value="2"<c:if test="${paging.cd_ctg_pet == 2}"> selected</c:if>>고양이</option>
-					<option value="3"<c:if test="${paging.cd_ctg_pet == 3}"> selected</c:if>>햄스터</option>
-					<option value="4"<c:if test="${paging.cd_ctg_pet == 4}"> selected</c:if>>파충류</option>
-				</select>
+			    <select id="species" name="species" required >
+			        <option value="0" <c:if test="${paging.species == 0}">selected</c:if>>전체</option>
+			        <option value="1" <c:if test="${paging.species == 1}">selected</c:if>>강아지</option>
+			        <option value="2" <c:if test="${paging.species == 2}">selected</c:if>>고양이</option>
+			        <option value="3" <c:if test="${paging.species == 3}">selected</c:if>>햄스터</option>
+			        <option value="4" <c:if test="${paging.species == 4}">selected</c:if>>파충류</option>
+			    </select>
+				<select name="searchKey">
+			        <option value="sle_nm" <c:if test="${paging.searchKey == 'sle_nm'}">selected</c:if>>상품명</option>
+			        <option value="sle_desces" <c:if test="${paging.searchKey == 'sle_desces'}">selected</c:if>>상품설명</option>
+			        <option value="sle_desces_and_nm" <c:if test="${paging.searchKey == 'sle_desces_and_nm'}">selected</c:if>>상품명 및 설명</option>
+			    </select>
 				<input type="text" name="searchWord" id="searchWord" value="${paging.searchWord}"/><input type="submit" value="검색"/>
 			</div>
 			<div class="brdInfo">전체 ${paging.totalLine}개[${paging.currentPage}/${paging.totalPage} 페이지]</div>
@@ -167,16 +193,14 @@
 						</c:when>
 						<c:otherwise>
 							<c:forEach items="${list}" var="list">
-								<div class="product" style="text-decoration: none;">
+								<div class="product">
 									<a href="javascript:goWriteForm(${list.seq_sle});"><img src="${list.img}" class="img-fluid rounded-4" alt="image"></a>
 									<div>
-										<div class="product_name">
-											<a href="javascript:goWriteForm(${list.seq_sle});">
-											<span>${list.sle_nm}</span>
-											</a>
-										</div>
+										<a href="javascript:goWriteForm(${list.seq_sle});">
+										<span><strong>${list.sle_nm}</strong></span>
+										</a>
 										<div class="card-text">
-											<span class="rating secondary-font">
+											<span class="rating star" >
 											    ⭐️
 											    ⭐️
 											    ⭐️
@@ -185,15 +209,15 @@
 											    5.0
 											</span>
 											<h3 class="secondary-font text-primary"><fmt:formatNumber value="${list.price_sale}" pattern="#,###" />원</h3>
-											<div class="d-flex flex-wrap mt-3">
-												<a href="javascript:addToCart(${list.seq_sle}, ${list.seq_prd}, '${list.sle_nm}', ${list.price_sale}, '${list.img}');" 
-													class="btn-cart me-3 px-3 pt-2 pb-2" style="display: flex; align-items: center; justify-content: center; font-size: 18px;">
-												<span class="text-uppercase m-0">장바구니</span>
-												</a>
-												<a href="#" class="btn-wishlist px-4 pt-3" style="display: inline-block; border: 1px solid #ccc; border-radius: 5px; text-decoration: none; text-align: center; padding: 10px;">
-													<span  class="fs-5" style="color: black; font-size: 20px; line-height: 1;">❤︎</span>
-												</a>
-											</div>
+												<div class="d-flex flex-wrap mt-3">
+													<a href="javascript:addToCart(${list.seq_sle}, ${list.seq_prd}, '${list.sle_nm}', ${list.price_sale}, '${list.img}');" 
+														class="btn-cart me-3 px-3 pt-2 pb-2" style="display: flex; align-items: center; justify-content: center; font-size: 18px;">
+													<span class="text-uppercase m-0">장바구니</span>
+													</a>
+													    <a href="#" class="btn-wishlist px-4 pt-3" style="display: inline-block; border: 1px solid #ccc; border-radius: 5px; text-decoration: none; text-align: center; padding: 10px;" onclick="toggleHeart(this)">
+														    <span class="fs-5" style="color: black; font-size: 20px; line-height: 1;">&#9825;</span>
+														</a>
+												 </div>
 										</div>
 									</div>
 								</div>
@@ -203,7 +227,7 @@
 				</div>
 			<br/>
 			<div class="center-container"  style= "display: flex; justify-content: center;">
-			<plutozoneUtilTag:page styleID="front_image" currentPage="${paging.currentPage}" linePerPage="${paging.linePerPage}" totalLine="${paging.totalLine}" scriptFunction="goPage"/>
+				<plutozoneUtilTag:page styleID="front_image" currentPage="${paging.currentPage}" linePerPage="${paging.linePerPage}" totalLine="${paging.totalLine}" scriptFunction="goPage" />
 			</div>
 			<br/>
 		</article>
