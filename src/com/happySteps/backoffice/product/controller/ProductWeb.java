@@ -75,7 +75,7 @@ public class ProductWeb extends Common {
 			
 			if (productSrvc.update(productDto)) {
 				request.setAttribute("script"	, "alert('수정되었습니다.');");
-				request.setAttribute("redirect"	, "/console/product/list.web");
+				request.setAttribute("redirect"	, "/console/product/list.web?seq_prd=" + productDto.getSeq_prd());
 			}
 			else {
 				request.setAttribute("script"	, "alert('시스템 관리자에게 문의하세요!');");
@@ -138,6 +138,8 @@ public class ProductWeb extends Common {
 		try {
 			ProductDto _productDto = productSrvc.select(productDto);
 			
+			logger.debug("productDto.seq_prd: " + productDto.getSeq_prd());
+			
 			mav.addObject("productDto", _productDto);
 			mav.setViewName("backoffice/product/view");
 		}
@@ -164,10 +166,10 @@ public class ProductWeb extends Common {
 
 		ModelAndView mav = new ModelAndView("redirect:/error.web");
 		
-		logger.debug("productDto.seq_prd: " + productDto.getSeq_prd());
-		
 		try {
 			productDto.setUpdater(Integer.parseInt(getSession(request, "SEQ_MNG")));
+			
+			logger.debug("productDto.seq_prd: " + productDto.getSeq_prd());
 			
 			if (productSrvc.deleteFlag(productDto)) {
 				request.setAttribute("script"	, "alert('삭제되었습니다.');");
@@ -206,6 +208,9 @@ public class ProductWeb extends Common {
 		try {
 			productDto.setRegister(Integer.parseInt(getSession(request, "SEQ_MNG")));
 			
+			//logger.debug("productDto.seq_prd: " + productDto.getSeq_prd());
+			
+			
 			if (productSrvc.insert(productDto)) {
 				request.setAttribute("script"	, "alert('등록되었습니다.');");
 				request.setAttribute("redirect"	, "/console/product/list.web");
@@ -242,6 +247,9 @@ public class ProductWeb extends Common {
 		try {
 			productDto.setRegister(Integer.parseInt(getSession(request, "SEQ_MNG")));
 			
+			logger.debug("productDto.seq_prd: " + productDto.getSeq_prd());
+			
+			
 			mav.setViewName("backoffice/product/writeForm");
 		}
 		catch (Exception e) {
@@ -269,6 +277,8 @@ public class ProductWeb extends Common {
 		
 		try {
 			pagingDto.setRegister(Integer.parseInt(getSession(request, "SEQ_MNG")));
+			
+			logger.debug("PagingDto.seq_prd: " + pagingDto.getSeq_prd());
 			
 			PagingListDto pagingListDto = productSrvc.list(pagingDto);
 	    	

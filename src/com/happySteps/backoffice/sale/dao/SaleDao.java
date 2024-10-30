@@ -13,12 +13,12 @@
  * Program		: com.happySteps
  * Description	:
  * Environment	: JRE 1.7 or more
- * File			: ProductDao.java
+ * File			: SaleDao.java
  * Notes		:
  * History		: [NO][Programmer][Description]
  *				: [202410010900][hyeen103#gmail.com][CREATE: Initial Release]
  */
-package com.happySteps.backoffice.product.dao;
+package com.happySteps.backoffice.sale.dao;
 
 import java.util.List;
 
@@ -26,7 +26,8 @@ import org.springframework.stereotype.Repository;
 
 import com.happySteps.backoffice.common.dao.BaseDao;
 import com.happySteps.backoffice.common.dto.PagingDto;
-import com.happySteps.backoffice.product.dto.ProductDto;
+import com.happySteps.backoffice.sale.dto.SaleDto;
+
 
 
 /**
@@ -37,35 +38,50 @@ import com.happySteps.backoffice.product.dto.ProductDto;
  * <p>DESCRIPTION:</p>
  * <p>IMPORTANT:</p>
  */
-@Repository("com.happySteps.backoffice.product.service. ProductDao")
-public class ProductDao extends BaseDao {
+@Repository("com.happySteps.backoffice.sale.dao.SaleDao")
+public class SaleDao extends BaseDao{
 	
-	public int update(ProductDto productDto) {
-		return sqlSessionBackoffice.update("com.happySteps.backoffice.mybatis.product.Product.update", productDto);
+	/**
+	 * @return List<SaleDto>
+	 * 
+	 * @since 2024-08-18
+	 * <p>DESCRIPTION:</p>
+	 * <p>IMPORTANT:</p>
+	 * <p>EXAMPLE:</p>
+	 */
+	public List<SaleDto> listPrd(SaleDto saleDto) {
+		return sqlSessionBackoffice.selectList("com.happySteps.backoffice.mybatis.sale.Sale.listPrd", saleDto);
 	}
 	
-	public ProductDto select(ProductDto productDto) {
-		return sqlSessionBackoffice.selectOne("com.happySteps.backoffice.mybatis.product.Product.select", productDto);
+	/**
+	 * @return SaleDto
+	 * 
+	 * @since 2024-08-08
+	 * <p>DESCRIPTION:판매 view</p>
+	 * <p>IMPORTANT:</p>
+	 * <p>EXAMPLE:</p>
+	 */
+	public SaleDto select(SaleDto saleDto) {
+		return sqlSessionBackoffice.selectOne("com.happySteps.backoffice.mybatis.sale.Sale.select", saleDto);
 	}
-	
-	public int deleteFlag(ProductDto productDto) {
-		return sqlSessionBackoffice.update("com.happySteps.backoffice.mybatis.product.Product.deleteFlag", productDto);
+	/**
+	 * @return List<SaleDto>
+	 * 
+	 * @since 2024-08-08
+	 * <p>DESCRIPTION: 판매 목록</p>
+	 * <p>IMPORTANT:</p>
+	 * <p>EXAMPLE:</p>
+	 */
+	public List<SaleDto> list(PagingDto pagingDto) {
+		return sqlSessionBackoffice.selectList("com.happySteps.backoffice.mybatis.sale.Sale.list", pagingDto);
 	}
 	
 	public int count(PagingDto pagingDto) {
-		return sqlSessionBackoffice.selectOne("com.happySteps.backoffice.mybatis.product.Product.count", pagingDto);
-	}
-	
-	public List<ProductDto> list(PagingDto pagingDto) {
-		return sqlSessionBackoffice.selectList("com.happySteps.backoffice.mybatis.product.Product.list", pagingDto);
-	}
-	
-	public int insert(ProductDto productDto) {
-		return sqlSessionBackoffice.insert("com.happySteps.backoffice.mybatis.product.Product.insert", productDto);
+		return sqlSessionBackoffice.selectOne("com.happySteps.backoffice.mybatis.sale.Sale.count", pagingDto);
 	}
 	
 	public int sequence() {
-		return sqlSessionBackoffice.selectOne("com.happySteps.backoffice.mybatis.product.Product.sequence");
+		return sqlSessionBackoffice.selectOne("com.happySteps.backoffice.mybatis.sale.Sale.sequence");
 	}
 
 }

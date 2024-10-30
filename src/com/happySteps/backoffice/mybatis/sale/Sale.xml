@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.happySteps.backoffice.mybatis.sale.Sale">
+	
+	<select id="listPrd" parameterType="saleDto" resultType="saleDto">
+		SELECT
+			SEQ_PRD
+			, PRD_NM
+		FROM
+			TB_PRD
+		WHERE
+			CD_STATE_PRD	= 1
+			AND REGISTER	= #{register}
+		ORDER BY	
+			DT_REG DESC
+	</select>
+	
+	<select id="select" parameterType="saleDto" resultType="saleDto">
+		SELECT
+			SEQ_SLE
+			, SLE_NM
+			, SPECIES
+			, PET_ITEMS
+			, DESCES
+			, PRICE_SALE
+			, CD_STATE_SALE
+			, IMG
+			, TO_CHAR(DT_SALE_START, 'YYYY-MM-DD')	dt_sale_start
+			, TO_CHAR(DT_SALE_END, 'YYYY-MM-DD')	dt_sale_end
+		FROM
+			TB_SLE
+		WHERE
+			REGISTER		= #{register}
+			AND SEQ_SLE		= #{seq_sle}
+	</select>
+	
+	<select id="count" parameterType="pagingDto" resultType="java.lang.Integer">
+		SELECT
+			COUNT(ROWNUM)
+		FROM
+			TB_SLE sle INNER JOIN TB_PRD prd ON sle.SEQ_PRD = prd.SEQ_PRD
+		WHERE
+			<include refid="where" />
+	</select>
+	
+	<select id="list" parameterType="pagingDto" resultType="saleDto">
+		SELECT
+			*
+		FROM
+			(
+			SELECT
+				/*+ first_rows(10) */ ROW_NUMBER() OVER (ORDER BY sle.DT_REG DESC) rnum
+				, sle.SEQ_SLE
+				, sle.SLE_NM
+				, sle.SPECIES
+				, sle.PET_ITEMS
+				, sle.DESCES
+				, sle.CD_STATE_SALE
+				, sle.PRICE_SALE
+				, TO_CHAR(sle.DT_REG, 'YYYY-MM-DD') dt_reg
+			FROM
+				TB_SLE sle INNER JOIN TB_PRD prd ON sle.SEQ_PRD = prd.SEQ_PRD
+			WHERE
+				<include refid="where" />
+			)
+		<![CDATA[
+		WHERE
+			rnum >= (${currentPage} - 1) * ${linePerPage} + 1 AND rnum <= ${currentPage} * ${linePerPage}
+		]]> 
+		ORDER BY
+			rnum
+	</select>
+	
+	<sql id="where">
+			sle.REGISTER = #{register}
+		<if test="searchWord != null and searchWord != ''">
+			<if test="searchKey == 'sle_nm'">
+				AND UPPER(sle.SLE_NM) LIKE UPPER('%' || #{searchWord} || '%')
+			</if>
+			<if test="searchKey == 'sle_desces'">
+				AND UPPER(sle.DESCES) LIKE UPPER('%' || #{searchWord} || '%')
+			</if>
+			<if test="searchKey == 'sle_desces_and_nm'">
+				AND (
+					UPPER(sle.DESCES) LIKE UPPER('%' || #{searchWord} || '%')
+					OR
+					UPPER(sle.SLE_NM) LIKE UPPER('%' || #{searchWord} || '%')
+				)
+			</if>
+		</if>
+		<choose>
+			<when test="cd_state_sale != null and cd_state_sale != ''">
+				AND sle.CD_STATE_SALE = #{cd_state_sale}
+			</when>
+			<otherwise>
+				AND sle.CD_STATE_SALE IN (1, 2, 9)
+			</otherwise>
+		</choose>
+	</sql>
+	
+	<select id="sequence" resultType="java.lang.Integer">
+		SELECT SQ_SEQ_SLE.NEXTVAL FROM DUAL
+	</select>
+	
+</mapper>

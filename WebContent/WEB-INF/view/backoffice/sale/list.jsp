@@ -21,7 +21,7 @@
  */
 %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" trimDirectiveWhitespaces="true" %>
-<%@ page info="/WEB-INF/view/backoffice/product/list.jsp" %>
+<%@ page info="/WEB-INF/view/backoffice/sale/list.jsp" %>
 <%@ taglib prefix="c"					uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt"					uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="plutozoneUtilTag"	uri="/WEB-INF/tld/com.plutozone.util.tld" %>
@@ -97,22 +97,23 @@
 <body class="nav-md">
 <form id="frmMain" method="POST">
 <input type="hidden" id="currentPage"	name="currentPage"	value="${paging.currentPage}" />
-<input type="hidden" id="seq_prd"		name="seq_prd" 		value="${paging.seq_prd}" />
+<input type="hidden" id="currentPage"	name="currentPage"	value="${paging.currentPage}" />
+<input type="hidden" id="seq_sle"		name="seq_sle" 		value="${paging.seq_sle}"/>
 <input type="hidden" id="sequence"		name="sequence" />
+<input type="hidden" id="cd_state_prd" 	name="cd_state_prd"	/>
 <input type="hidden" id="cd_ctg_pet" 	name="cd_ctg_pet"	value="${paging.cd_ctg_pet}"/>
 <input type="hidden" id="species" 		name="species"		value="${paging.species}"/>
 <input type="hidden" id="pet_items" 	name="pet_items" 	value="${paging.pet_items}"/>
-<input type="hidden" id="count_stock" 	name="count_stock" 	value="${paging.count_stock}"/>
 		<%@ include file="/include/bfc/navi.jsp" %>
 			<div class="right_col" role="main">
 			<!-- top tiles -->
 				 <article class="x_panel">
 					<div class="form-group pull-right">
 						<select name="cd_state_prd">
-						    <option value="1" <c:if test="${paging.cd_state_prd == 1}">selected</c:if>>판매중</option>
-						    <option value="2" <c:if test="${paging.cd_state_prd == 2}">selected</c:if>>판매중지</option>
-						    <option value="3" <c:if test="${paging.cd_state_prd == 3}">selected</c:if>>반려</option>
-						    <option value="9" <c:if test="${paging.cd_state_prd == 9}">selected</c:if>>재고소진</option>
+						    <option value="1" <c:if test="${paging.cd_state_sale == 1}">selected</c:if>>판매중</option>
+						    <option value="2" <c:if test="${paging.cd_state_sale == 2}">selected</c:if>>판매중지</option>
+						    <option value="3" <c:if test="${paging.cd_state_sale == 3}">selected</c:if>>반려</option>
+						    <option value="9" <c:if test="${paging.cd_state_sale == 9}">selected</c:if>>재고소진</option>
 						</select>
 						<select id="species" name="species" required >
 					        <option value="0" <c:if test="${paging.species == 0}">selected</c:if>>전체 카테고리</option>
@@ -122,7 +123,7 @@
 					        <option value="4" <c:if test="${paging.species == 4}">selected</c:if>>파충류</option>
 					    </select>
 						<select name="searchKey">
-							<option value="prd_nm">상품명</option>
+							<option value="sle_nm">상품명</option>
 						</select>
 						<input type="text" name="searchWord" id="searchWord" value="${paging.searchWord}" /> <input type="submit" value="검색"/>
 					</div>
@@ -133,15 +134,13 @@
 							<th>상품명</th>
 							<th>상품 상태</th>
 							<th style="width: 10%">카테고리</th>
-							<th style="width: 10%">원가</th>
-							<th style="width: 7%">재고</th>
+							<th style="width: 10%">기격</th>
 							<th style="width: 10%">등록일</th>
-							<th style="width: 10%">삭제</th>
 						</tr>
 						<c:choose>
 							<c:when test="${empty list}">
 								<tr>
-									<td colspan="8">등록된 상품이 없습니다.</td>
+									<td colspan="7">등록된 상품이 없습니다.</td>
 								</tr>
 							</c:when>
 							<c:otherwise>
@@ -151,31 +150,19 @@
 										${list.rnum}
 									</td>
 									<td style="text-align: center">
-										<a href="/console/product/view.web?seq_prd=${list.seq_prd}">${list.prd_nm} </a>
+										<a href="/console/sale/view.web?seq_sle=${list.seq_sle}">${list.sle_nm} </a>
 									</td>
 									<td>
-										<c:if test="${list.cd_state_prd == '1'}">판매중</c:if>
-										<c:if test="${list.cd_state_prd == '2'}">판매중지</c:if>
-										<c:if test="${list.cd_state_prd == '3'}">반려</c:if>
-										<c:if test="${list.cd_state_prd == '9'}">재고소진</c:if>
+										${list.cd_state_sale}
 									</td>
 									<td>
 										동물: ${list.species}/ 상품: ${list.pet_items}
 									</td>
 									<td>
-										<fmt:formatNumber value="${list.price_cost}" type="number" />
-									</td>
-									<td>
-										<fmt:formatNumber value="${list.count_stock}" type="number" />
+										<fmt:formatNumber value="${list.price_sale}" type="number" />
 									</td>
 									<td>
 										${list.dt_reg}
-									</td>
-									<td>
-										<input type="checkbox" id="flg_delete" name="flg_delete" value="N" 
-										onclick="javascript:location.href='/console/product/remove.web?seq_prd=${productDto.seq_prd}';"
-										<c:if test="${list.flg_delete}"> checked</c:if>/><label for="flg_delete"></label>
-										
 									</td>
 								</tr>
 								</c:forEach>
@@ -188,7 +175,7 @@
 					</div>
 					<br/>
 					<div class="center-container"  style= "display: flex; justify-content: center;">
-						<a href="/console/product/writeForm.web" class="btnBasic">등록</a>
+						<a href="/console/sale/writeForm.web" class="btnBasic">판매 등록</a>
 					</div>
 				</article>
 				 <!-- /top tiles -->
@@ -198,8 +185,6 @@
 	</footer>
 	<!-- /footer content -->
 <script>
-
-		
 function removeList(seqPrd) {
 	$.ajax({
 		url: '/console/product/removeList.web', // 상품 리스트 삭제 URL

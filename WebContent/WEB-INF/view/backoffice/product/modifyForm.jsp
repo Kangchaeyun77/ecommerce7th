@@ -31,83 +31,117 @@
 	<%@ include file="/include/bfc/header.jsp" %>
 <style>
 	
-    /* 헤더 스타일 */
-    th {
-        background-color: #f2f2f2;
-        color: #333;
-        padding: 10px;
-        border-bottom: 2px solid #ddd;
-        text-align: center;
+    .styled-table {
+    width: 900px;
+    margin: 20px auto;
+    border-collapse: collapse;
+    border: 1px solid #ddd; /* 테이블 외부 경계 */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* 그림자 효과 */
+	}
+	
+	.styled-table thead {
+	    background-color: #f2f2f2; /* 헤더 배경 색상 */
+	}
+	
+	.styled-table th,
+	.styled-table td {
+	    border: 1px solid #ddd; /* 셀 경계 */
+	    padding: 12px; /* 셀 안쪽 여백 */
+	    text-align: left; /* 텍스트 왼쪽 정렬 */
+	}
+	
+	.styled-table tbody tr:hover {
+	    background-color: #f1f1f1; /* 마우스 오버 시 행 배경 색상 */
+	}
+	
+	.no-data {
+	    text-align: center; /* 중앙 정렬 */
+	    font-weight: bold; /* 굵게 표시 */
+	    color: #888; /* 색상 변경 */
+	}
+	table {
+        width: 900px;
+        margin: 20px auto;
+        border-collapse: collapse;
+        font-family: Arial, sans-serif;
     }
 
-    /* 데이터 셀 스타일 */
+    /* 테이블 제목 셀 스타일 */
+    th {
+        width: 150px;
+        padding: 10px;
+        text-align: left;
+        background-color: #f2f2f2;
+        border-bottom: 2px solid #ddd;
+    }
+
+    /* 일반 데이터 셀 스타일 */
     td {
         padding: 10px;
         border-bottom: 1px solid #ddd;
-        text-align: center;
     }
 
-    /* 링크 스타일 */
-    td a {
-        color: #337ab7;
-        text-decoration: none;
-    }
-    td a:hover {
-        color: #0056b3;
-        text-decoration: underline;
-    }
-
-    /* 홀수 줄 배경색 */
-    tr:nth-child(odd) {
-        background-color: #f9f9f9;
+    /* 각 입력 필드 스타일 */
+    input[type="text"], select {
+        width: 95%;
+        padding: 8px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+        font-size: 14px;
     }
 
-    /* 빈 데이터 행 스타일 */
-    .emptyRow td {
-        text-align: center;
-        color: #777;
-        font-style: italic;
+    /* 필수 입력항목 스타일 */
+    input[required] {
+        border-color: #0073e6;
     }
+
+    /* 상품 항목 선택 컨테이너 */
+    #items-container {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        width: 100%;
+    }
+
     /* 버튼 스타일 */
-	a.btnBasic {
-	    display: inline-block; /* a 태그를 버튼처럼 보이게 하기 위해 추가 */
-	    width: 100px;
-	    padding: 10px;
-	    font-weight: bold;
-	    color: white;
-	    background-color: #3B5368;
-	    text-align: center; /* 텍스트 가운데 정렬 */
-	    text-decoration: none; /* 밑줄 제거 */
-	    border: none;
-	    border-radius: 4px;
-	    cursor: pointer;
-	}
-	
-	/* 버튼 hover 효과 */
-	a.btnBasic:hover {
-	    background-color: #005bb5;
-	}
-	.inputText {
-	    width: calc(100% - 24px); /* 테두리와 여백을 고려하여 너비 조정 */
-	    padding: 8px;
-	    border: 1px solid #ccc;
-	    border-radius: 4px;
-	    box-sizing: border-box;
-	}
+    input[type="button"] {
+        width: 100px;
+        padding: 10px;
+        font-weight: bold;
+        color: white;
+        background-color: #3B5368;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+
+    /* 버튼 hover 효과 */
+    input[type="button"]:hover {
+        background-color: #005bb5;
+    }
+
+    /* 마지막 줄 중앙 정렬 */
+    tr:last-child td {
+        text-align: center;
+        padding-top: 10px;
+        padding-bottom: 10px;
+    }
 </style>
 </head>
 <body class="nav-md">
 <form id="frmMain" method="POST">
 <input type="hidden" id="seq_prd"		name="seq_prd" 		value="${productDto.seq_prd}"	/>
 <input type="hidden" id="sequence"		name="sequence" />
-<input type="hidden" id="cd_state_prd" 	name="cd_state_prd"	/>
 <input type="hidden" id="cd_ctg_pet" 	name="cd_ctg_pet"	value="${productDto.cd_ctg_pet}"/>
+<input type="hidden" id="species" 		name="species"		value="${productDto.species}"/>
 <input type="hidden" id="pet_items" 	name="pet_items" 	value="${productDto.pet_items}"/>
+<input type="hidden" id="cd_state_prd" 	name="cd_state_prd" value="${productDto.cd_state_prd}"/>
 		<%@ include file="/include/bfc/navi.jsp" %>
 			<div class="right_col" role="main">
 			<!-- top tiles -->
 				 <article class="x_panel">
-					<table style="width: 100%; max-width: 1000px; margin-left: auto; margin-right: auto;">
+					<table style="width: 900px; margin-left: auto; margin-right: auto">
 						<tr>
 					<th style="width: 150px;">상품명(*)</th>
 					<td>
@@ -128,7 +162,46 @@
 						<tr>
 							<th>카테고리(*)</th>
 							<td>
-							
+								<div style="display: flex; align-items: center; gap: 10px;">
+									<select id="species" name="species" required onchange="showPetItems(this.value)">
+									    <option value="0">종류</option>
+									    <option value="01">강아지</option>
+									    <option value="02">고양이</option>
+									    <option value="03">햄스터</option>
+									    <option value="04">파충류</option>
+									    <option value="05">물고기</option>
+									</select>
+									
+									<div id="items-container">
+									    <select id="dog_items" name="pet_items" required style="display:none">
+									        <option value="11" <c:if test="${productDto.pet_items == 11}">selected</c:if>>사료</option>
+									        <option value="12" <c:if test="${productDto.pet_items == 12}">selected</c:if>>간식</option>
+									        <option value="13" <c:if test="${productDto.pet_items == 13}">selected</c:if>>하우스</option>
+									        <option value="14" <c:if test="${productDto.pet_items == 14}">selected</c:if>>기타</option>
+									    </select>
+									
+									    <select id="cat_items" name="pet_items" required style="display:none">
+									        <option value="21" <c:if test="${productDto.pet_items == 21}">selected</c:if>>사료</option>
+									        <option value="22" <c:if test="${productDto.pet_items == 22}">selected</c:if>>간식</option>
+									        <option value="23" <c:if test="${productDto.pet_items == 23}">selected</c:if>>하우스</option>
+									        <option value="24" <c:if test="${productDto.pet_items == 24}">selected</c:if>>기타</option>
+									    </select>
+									
+									    <select id="hamster_items" name="pet_items" required style="display:none">
+									        <option value="31" <c:if test="${productDto.pet_items == 31}">selected</c:if>>사료</option>
+									        <option value="32" <c:if test="${productDto.pet_items == 32}">selected</c:if>>간식</option>
+									        <option value="33" <c:if test="${productDto.pet_items == 33}">selected</c:if>>하우스</option>
+									        <option value="34" <c:if test="${productDto.pet_items == 34}">selected</c:if>>기타</option>
+									    </select>
+									
+									    <select id="reptile_items" name="pet_items" required style="display:none">
+									        <option value="41" <c:if test="${productDto.pet_items == 41}">selected</c:if>>사료</option>
+									        <option value="42" <c:if test="${productDto.pet_items == 42}">selected</c:if>>간식</option>
+									        <option value="43" <c:if test="${productDto.pet_items == 43}">selected</c:if>>하우스</option>
+									        <option value="44" <c:if test="${productDto.pet_items == 44}">selected</c:if>>기타</option>
+									    </select>
+									</div>
+								</div>
 							</td>
 						</tr>
 						<tr>
@@ -141,16 +214,12 @@
 						</tr>
 						<tr>
 							<td colspan="2" style="text-align:center;padding-top: 10px;padding-bottom: 10px">
-								<input type="button" value="수정" style="width:100px" onclick="javascript:modifyProc();" />
+								<input type="button" value="수정" style="width:100px" onclick="javascript:modifyProc(${productDto.seq_prd});" />
 								 <input type="button" value="목록" style="width:100px" onclick="javascript:location.href='/console/product/list.web';" />
 							</td>
 						</tr>
 					</table>
 					<br/>
-					<br/>
-					<div class="center-container"  style= "display: flex; justify-content: center;">
-						<a href="/console/product/writeForm.web" class="btnBasic">등록</a>
-					</div>
 				</article>
 				 <!-- /top tiles -->
 			</div>	 
@@ -159,8 +228,9 @@
 	</footer>
 	<!-- /footer content -->
 <script>
-	function modifyProc() {
+	function modifyProc(value) {
 		var frmMain = document.getElementById("frmMain");
+		document.getElementById("seq_prd").value = value;
 		
 		if (document.getElementById("prd_nm").value == ""
 				|| document.getElementById("cd_ctg_pet").value == ""
@@ -178,7 +248,24 @@
 		frmMain.action="/console/product/modifyProc.web";
 		frmMain.submit();
 	}
+	function showPetItems(value) {
+	    // 모든 아이템 셀렉트박스를 숨깁니다.
+	    document.getElementById('dog_items').style.display = 'none';
+	    document.getElementById('cat_items').style.display = 'none';
+	    document.getElementById('hamster_items').style.display = 'none';
+	    document.getElementById('reptile_items').style.display = 'none';
 
+	    // 선택된 값에 따라 특정 아이템 셀렉트박스를 표시합니다.
+	    if (value === "01") {
+	        document.getElementById('dog_items').style.display = 'block';
+	    } else if (value === "02") {
+	        document.getElementById('cat_items').style.display = 'block';
+	    } else if (value === "03") {
+	        document.getElementById('hamster_items').style.display = 'block';
+	    } else if (value === "04") {
+	        document.getElementById('reptile_items').style.display = 'block';
+	    }
+	}
 </script>
 </form>
 </body>

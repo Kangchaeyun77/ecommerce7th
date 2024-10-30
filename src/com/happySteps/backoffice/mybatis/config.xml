@@ -12,6 +12,7 @@
 		<typeAlias type="com.happySteps.backoffice.users.dto.MemberDto"							alias="memberDto" />
 		<typeAlias type="com.happySteps.backoffice.statistics.dto.MemberRegionDto"				alias="memberRegionDto" />
 		<typeAlias type="com.happySteps.backoffice.product.dto.ProductDto"						alias="productDto" />
+		<typeAlias type="com.happySteps.backoffice.sale.dto.SaleDto"							alias="saleDto" />
 	</typeAliases>
 	<mappers>
 		<mapper resource="com/happySteps/backoffice/mybatis/center/Board.xml" />
@@ -20,5 +21,6 @@
 		<mapper resource="com/happySteps/backoffice/mybatis/users/Member.xml" />
 		<mapper resource="com/happySteps/backoffice/mybatis/statistics/Member.xml" />
 		<mapper resource="com/happySteps/backoffice/mybatis/product/Product.xml" />
+		<mapper resource="com/happySteps/backoffice/mybatis/sale/Sale.xml" />
 	</mappers>
 </configuration>

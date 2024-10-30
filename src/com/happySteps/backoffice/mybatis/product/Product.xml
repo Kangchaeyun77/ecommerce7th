@@ -3,15 +3,16 @@
 <mapper namespace="com.happySteps.backoffice.mybatis.product.Product">
 	
 	<update id="update" parameterType="productDto">
-		UPDATE TB_PRD
+		UPDATE 
+			TB_PRD
 		SET
 			DT_UPT = SYSDATE
 			, UPDATER = #{register}
 			<if test="prd_nm != null and prd_nm != ''">
 			, PRD_NM = #{prd_nm}
 			</if>
-			<if test="cd_ctg_pet != null and cd_ctg_pet != ''">
-			, CD_CTG_PET = #{cd_ctg_pet}
+			<if test="species != null and species != ''">
+			, SPECIES = #{species}
 			</if>
 			<if test="price_cost != null and price_cost != ''">
 			, PRICE_COST = #{price_cost}
@@ -31,6 +32,7 @@
 			SEQ_PRD
 			, PRD_NM
 			, CD_CTG_PET
+			, SPECIES
 			, PET_ITEMS
 			, PRICE_COST
 			, COUNT_STOCK
@@ -57,9 +59,9 @@
 	
 	<insert id="insert" parameterType="productDto">
 		INSERT INTO TB_PRD
-			(SEQ_PRD, PRD_NM, CD_CTG_PET, PET_ITEMS, PRICE_COST, COUNT_STOCK, FLG_DELETE, CD_STATE_PRD, DT_REG, REGISTER)
+			(SEQ_PRD, PRD_NM, CD_CTG_PET, SPECIES, PET_ITEMS, PRICE_COST, COUNT_STOCK, FLG_DELETE, CD_STATE_PRD, DT_REG, REGISTER)
 		VALUES
-			(#{seq_prd}, #{prd_nm}, #{cd_ctg_pet}, #{pet_items}, #{price_cost}, #{count_stock}, 'N', #{cd_state_prd}, SYSDATE, #{register})
+			(#{seq_prd}, #{prd_nm}, #{cd_ctg_pet}, #{species}, #{pet_items}, #{price_cost}, #{count_stock}, 'N', #{cd_state_prd}, SYSDATE, #{register})
 	</insert>
 	
 	<select id="count" parameterType="pagingDto" resultType="java.lang.Integer">
@@ -81,7 +83,10 @@
 				, SEQ_PRD
 				, PRD_NM
 				, CD_STATE_PRD
+				, SPECIES
+				, PET_ITEMS
 				, PRICE_COST
+				, COUNT_STOCK
 				, TO_CHAR(DT_REG, 'YYYY-MM-DD') dt_reg
 			FROM
 				TB_PRD

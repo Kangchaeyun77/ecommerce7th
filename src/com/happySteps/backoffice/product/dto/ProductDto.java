@@ -33,6 +33,7 @@ public class ProductDto {
 	private int seq_prd		= 0;
 	private String prd_nm 		= "";
 	private int cd_ctg_pet 	= 0;
+	private int species 		= 0;
 	private int pet_items 		= 0;
 	private int price_cost		= 0;
 	private int count_stock	= 0;
@@ -45,6 +46,12 @@ public class ProductDto {
 	private int rnum			= 0;	// 글 순번
 	
 	
+	public int getSpecies() {
+		return species;
+	}
+	public void setSpecies(int species) {
+		this.species = species;
+	}
 	public int getRnum() {
 		return rnum;
 	}

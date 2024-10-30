@@ -89,7 +89,21 @@
 									</a>
 									<ul class="nav child_menu">
 										<li>
-											<a href="/console/product/list.web">상품관리</a>
+											<a>
+												상품관리 
+												<span class="fa fa-chevron-down"></span>
+											</a>
+											<ul class="nav child_menu">
+								                <li>
+								                    <a href="/console/product/list.web">상품 목록</a>
+								                </li>
+								                <li>
+								                    <a href="/console/sale/list.web">판매 목록</a>
+								                </li>
+								                <li>
+								                    <a href="#">상품 리뷰</a>
+								                </li>
+								            </ul>
 										</li>
 										<li>
 											<a href="#">주문관리</a>

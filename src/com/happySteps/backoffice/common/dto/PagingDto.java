@@ -43,13 +43,27 @@ public class PagingDto {
 	private int cd_state_prd	= 0;	// [판매상품상태코드]: 대기(0), 승인(1), 중지(2),반려(3), 재고소진(9)
 	private String flg_delete	= "";	// 삭제 여부
 	private int cd_ctg_pet		= 0;	// 카테고리:강아지(1),고양이(2),햄스터(3),파충류(4),기타(5)
+	private int species		= 0;	// 동물 카테고리:강아지(1),고양이(2),햄스터(3),파충류(4),기타(5)
 	private int pet_items		= 0;	// 판매 상품 카테고리 : 사료(x1), 간식(x2), 하우스(x3), 기타(x4)
 	private int register		= 0;	// 등록자
 	private int seq_prd		= 0;	// 상품 일련번호
 	private int count_stock	= 0;	// 상품 재고
+	private int cd_state_sale	= 0;	// 판매상품상태코드: 대기(0), 승인(1),중지(2), 반려(3), 품절(9)
 	
 	
 	
+	public int getSpecies() {
+		return species;
+	}
+	public void setSpecies(int species) {
+		this.species = species;
+	}
+	public int getCd_state_sale() {
+		return cd_state_sale;
+	}
+	public void setCd_state_sale(int cd_state_sale) {
+		this.cd_state_sale = cd_state_sale;
+	}
 	public int getCount_stock() {
 		return count_stock;
 	}

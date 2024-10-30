@@ -21,7 +21,7 @@
  */
 %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" trimDirectiveWhitespaces="true" %>
-<%@ page info="/WEB-INF/view/backoffice/product/view.jsp" %>
+<%@ page info="/WEB-INF/view/backoffice/sale/view.jsp" %>
 <%@ taglib prefix="c"					uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt"					uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="plutozoneUtilTag"	uri="/WEB-INF/tld/com.plutozone.util.tld" %>
@@ -73,78 +73,78 @@
 </head>
 <body class="nav-md">
 <form id="frmMain" method="POST">
-<input type="hidden" id="seq_prd"		name="seq_prd" 		value="${productDto.seq_prd}" />
+<input type="hidden" id="seq_prd"		name="seq_prd" 		value="${saleDto.seq_prd}"/>
+<input type="hidden" id="seq_sle"		name="seq_sle" 		value="${saleDto.seq_sle}"/>
 <input type="hidden" id="sequence"		name="sequence" />
-<input type="hidden" id="cd_state_prd" 	name="cd_state_prd"	value="${productDto.cd_state_prd}"/>
-<input type="hidden" id="cd_ctg_pet" 	name="cd_ctg_pet"	value="${productDto.cd_ctg_pet}"/>
-<input type="hidden" id="species" 		name="species" 		value="${productDto.species}"/>
-<input type="hidden" id="pet_items" 	name="pet_items" 	value="${productDto.pet_items}"/>
+<input type="hidden" id="cd_state_sale" name="cd_state_sale"value="${saleDto.cd_state_sale}"/>
+<input type="hidden" id="cd_ctg_pet" 	name="cd_ctg_pet"	value="${saleDto.cd_ctg_pet}"/>
+<input type="hidden" id="species" 		name="species" 		value="${saleDto.species}"/>
+<input type="hidden" id="pet_items" 	name="pet_items" 	value="${saleDto.pet_items}"/>
 		<%@ include file="/include/bfc/navi.jsp" %>
 			<div class="right_col" role="main">
 			<!-- top tiles -->
 				 <article class="x_panel">
 					<table style="width: 100%; max-width: 1600px; margin-left: auto; margin-right: auto;">
 						<tr>
-							<th style="width: 150px;">상품명</th>
-							<td>
-								${productDto.prd_nm}
-							</td>
+					<th style="width: 150px;" >판매명</th>
+					<td>
+						${saleDto.sle_nm}
+					</td>
 						</tr>
-						<c:if test="${productDto.flg_delete == 'N'}">
-							<tr>
-								<th>상품 상태</th>
-								<td>
-									<c:if test="${productDto.cd_state_prd == 1}">판매중</c:if>
-									<c:if test="${productDto.cd_state_prd == 2}">판매중지</c:if>
-									<c:if test="${productDto.cd_state_prd == 3}">반려</c:if>
-									<c:if test="${productDto.cd_state_prd == 9}">재고소진</c:if>
-								</td>
-							</tr>
-						</c:if>
 						<tr>
 							<th>카테고리</th>
 							<td>
-								동물: ${productDto.species}/ 상품: ${productDto.pet_items}
+								동물: ${saleDto.species}/ 상품: ${saleDto.pet_items}
 							</td>
 						</tr>
 						<tr>
-							<th>상품 원가</th>
-							<td>
-								<fmt:formatNumber value="${productDto.price_cost}" type="number" /> 원
+							<th>설명</th>
+							<td class="content">
+								${saleDto.desces}
 							</td>
 						</tr>
 						<tr>
-							<th>재고 수량(*)</th>
+							<th>판매 가격</th>
 							<td>
-								${productDto.count_stock} 개
+								<fmt:formatNumber value="${saleDto.price_sale}" type="number" />원
 							</td>
 						</tr>
 						<tr>
-							<th>등록일</th>
+							<th>판매 상태</th>
 							<td>
-								${productDto.dt_reg}
+								<select id="cd_state_sale" name="cd_state_sale" disabled>
+									<option value="1"<c:if test="${saleDto.cd_state_sale == '1'}"> selected</c:if>>판매중</option>
+									<option value="2"<c:if test="${saleDto.cd_state_sale == '2'}"> selected</c:if>>판매 중지</option>
+									<option value="3"<c:if test="${saleDto.cd_state_sale == '3'}"> selected</c:if>>반려</option>
+									<option value="9"<c:if test="${saleDto.cd_state_sale == '9'}"> selected</c:if>>품절</option>
+								</select>
 							</td>
 						</tr>
-						<%-- <tr>
-						<th>이미지</th>
-							<td>
-								<img src="/image/sale/${saleDto.img}" height="100"/>
-							</td>
-						</tr> --%>
 						<tr>
-							<th>수정일</th>
+							<th>이미지(대표)</th>
 							<td>
-								${productDto.dt_upt}
+								<img src="/image/sale/${saleDto.img}" height="200"/>
+							</td>
+						</tr>
+						<tr>
+							<th>판매 시작일</th>
+							<td>
+								${saleDto.dt_sale_start}
+							</td>
+						</tr>
+						<tr>
+							<th>판매 종료일</th>
+							<td>
+								${saleDto.dt_sale_end}
 							</td>
 						</tr>
 						<tr>
 							<td colspan="2" style="text-align:center;padding-top: 10px;padding-bottom: 10px">
-								<c:if test="${productDto.flg_delete == 'N'}">
-									<input type="button" value="삭제" style="width:100px" onclick="javascript:location.href='/console/product/remove.web?seq_prd=${productDto.seq_prd}';" />
-									<input type="button" value="수정" style="width:100px" onclick="javascript:location.href='/console/product/modifyForm.web?seq_prd=${productDto.seq_prd}&cd_state_prd=${productDto.cd_state_prd}';" />
-																						
-								</c:if>
-								<input type="button" value="목록" style="width:100px" onclick="javascript:location.href='/console/product/list.web'"/>
+								<input type="button" value="판매 중지" style="width:100px" onclick="javascript:stop();" />
+								<input type="button" value="판매 재개" style="width:100px" onclick="javascript:re();" />
+								<input type="button" value="품절" style="width:100px" onclick="javascript:out();" />
+								 <input type="button" value="수정" style="width:100px" onclick="javascript:modifyForm();" />
+								 <input type="button" value="목록" style="width:100px" onclick="javascript:location.href='/seller/sale/list.web';"/>
 							</td>
 						</tr>
 					</table>
@@ -161,6 +161,41 @@
 	</footer>
 	<!-- /footer content -->
 <script>
+	function modifyForm() {
+		var frmMain = document.getElementById("frmMain");
+		
+		document.getElementById("seq_prd").value = seq_prd;
+		
+		frmMain.action = "/console/product/modifyForm.web";
+		frmMain.submit();
+	}
+	function stop(value) {
+		var frmMain = document.getElementById("frmMain");
+		
+		frmMain.action="/console/sale/stop.web";
+		frmMain.submit();
+	}
+	
+	function re(value) {
+		var frmMain = document.getElementById("frmMain");
+		
+		frmMain.action="/console/sale/re.web";
+		frmMain.submit();
+	}
+	
+	function out(value) {
+		var frmMain = document.getElementById("frmMain");
+		
+		frmMain.action="/console/sale/out.web";
+		frmMain.submit();
+	}
+	
+	function modifyForm(value) {
+		var frmMain = document.getElementById("frmMain");
+		
+		frmMain.action="/console/sale/modifyForm.web";
+		frmMain.submit();
+	}
 </script>
 </form>
 </body>
