@@ -158,18 +158,18 @@
 				<c:if test="${not empty basketList}">
 					<table id="productBasket" class="headTop_01" style="width: 900px; margin-left: auto; margin-right: auto;">
 						<tr>
+							<th>이미지</th>
 							<th>상품명</th>
 							<th>수량</th>
 							<th>1개당 가격</th>
-							<th>이미지</th>
 							<th>삭제</th>
 						</tr>
 						<c:forEach var="item" items="${basketList}">
 							<tr>
-								<td>${item.sle_nm}</td>
+								<td><a href="/front/buy/writeForm.web?seq_sle=${item.seq_sle}"><img src="${item.img}" alt="상품 이미지" height="100px"/></a></td>
+								<td><a href="/front/buy/writeForm.web?seq_sle=${item.seq_sle}">${item.sle_nm}</a></td>
 								<td>${item.count}</td>
 								<td>${item.price} 원</td>
-								<td><img src="${item.img}" alt="상품 이미지" height="100px"/></td>
 								<td><a href="javascript:void(0);" onclick="removeItem(${item.seq_bsk})">삭제</a></td>
 							</tr>
 						</c:forEach>
@@ -203,7 +203,8 @@
 					</table>
 				</c:if>
 				<c:if test="${empty basketList}">
-					<p>장바구니가 비어 있습니다.</p>
+					
+					<p style="width: 900px; margin-left: auto; margin-right: auto; text-align:center;">장바구니가 비어 있습니다.</p>
 				</c:if>
 			</c:if>
 		</form>
