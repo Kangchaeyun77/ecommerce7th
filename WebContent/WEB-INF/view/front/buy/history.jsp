@@ -22,22 +22,22 @@
 %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" trimDirectiveWhitespaces="true" %>
 <%@ page info="/WEB-INF/view/buy/history.jsp" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="c"			uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" 		uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
-	<%@ include file="/include/front/header_mypage.jsp" %>
+	<%@ include file="/include/front/header.jsp" %>
+	<%@ include file="/include/front/top.jsp" %>
 	<link rel="stylesheet" type="text/css" title="common stylesheet" href="/css/layoutSubmain.css" />
 	<link rel="stylesheet" type="text/css" title="common stylesheet" href="/css/table.css" />
+	<link rel="stylesheet" href="/css/lnb.css">
 	<style></style>
 	<script></script>
 </head>
 <body>
 <form id="frmMain" method="POST">
 <div class="container">
-	<header>
-		<%@ include file="/include/front/top_mypage.jsp" %>
-	</header>
 	<nav>
 	</nav>
 	<section class="content">
@@ -45,11 +45,11 @@
 			<%@ include file="/include/front/lnbMyPage.jsp" %>
 		</nav>
 		<article class="txtCenter">
-			<P style="width:900px;margin:0 auto;text-align:left;font-weight:bold;">총 구매 금액 : <fmt:formatNumber type="number" maxFractionDigits="3" value="${total_price}" />원</p>
+			<P style="width:900px;margin:0 auto;text-align:right;font-weight:bold;">총 구매 금액 : <fmt:formatNumber type="number" maxFractionDigits="3" value="${total_price}" />원</p>
 			<table class="headTop_01" style="width: 900px; margin-left: auto; margin-right: auto">
 				<tr>
 					<th style="width: 5%">NO</th>
-					<th>상품명</th>
+					<th style="width: 20%">상품명</th>
 					<th style="width: 10%">구매 가격</th>
 					<th style="width: 8%">구매 수량</th>
 					<th style="width: 10%">구매일</th>
