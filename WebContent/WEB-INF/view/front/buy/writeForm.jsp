@@ -157,6 +157,8 @@
 			font-size:16px;
 		}
 	</style>
+	<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+	<script src="https://standard.testpayup.co.kr/assets/js/payup_standard_dev-1.0.js"></script>
 	<script>
 
 	<c:if test="${empty sessionScope.SEQ_MBR}">
