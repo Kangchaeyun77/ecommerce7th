@@ -35,6 +35,7 @@ public class SaleDto {
 	private int seq_prd			= 0;
 	private String sle_nm 			= "";
 	private String desces			= "";
+	private String desces_img		= "";
 	private String img				= "";
 	private int price_sale			= 0;
 	private String cd_state_sale	= "";
@@ -46,12 +47,28 @@ public class SaleDto {
 	private int updater			= 0;
 	private String cd_where			= "";
 	private String cd_where_ctg 	= "";
-	private int cd_ctg_pet			= 0;	// [상품 카테고리] 강아지(1), 고양이(2), 햄스터(3), 파충류(4)
+	private int cd_ctg_pet			= 0;	// [상품페이지 카테고리] 강아지(1), 고양이(2), 햄스터(3), 파충류(4)
+	private int species			= 0;	// [동물 카테고리] 강아지(1), 고양이(2), 햄스터(3), 파충류(4)
+	
 	
 	private String searchKey		= "";
 	private String searchWord		= "";
 	
 	
+	
+	
+	public String getDesces_img() {
+		return desces_img;
+	}
+	public void setDesces_img(String desces_img) {
+		this.desces_img = desces_img;
+	}
+	public int getSpecies() {
+		return species;
+	}
+	public void setSpecies(int species) {
+		this.species = species;
+	}
 	public int getCd_ctg_pet() {
 		return cd_ctg_pet;
 	}

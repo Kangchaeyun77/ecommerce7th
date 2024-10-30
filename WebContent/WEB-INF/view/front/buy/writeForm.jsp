@@ -338,9 +338,8 @@
 					</li>
 				</ul>
 			</div>
-			<div id="details" class="tabcontent">
-				<h3>상품상세정보</h3>
-				<p>여기에 상품 상세 정보가 표시됩니다. ${saleDto.desces}</p>
+			<div id="details" class="tabcontent" style="text-align: center;">
+			    <img src="${saleDto.desces_img}" style="display: inline-block; margin: 0 auto;" />
 			</div>
 		
 			<div id="delivery" class="tabcontent">
@@ -388,13 +387,70 @@
 			</div>
 		
 			<div id="reviews" class="tabcontent">
-				<h3>상품후기</h3>
-				<p>여기에 상품 후기가 표시됩니다.</p>
-			</div>
+		        <h3>상품후기</h3>
+		        <p>여기에 상품 후기가 표시됩니다.</p>
+		        <a href="javascript:goReview();" style="color: #DEAD6F; font-weight: bold; text-decoration: none;">상품 리뷰 작성하기></a>
+				<div class="rating_star">		        	
+					<span class="rating secondary-font">
+					    ⭐️
+					    ⭐️
+					    ⭐️
+					    ⭐️
+					    ⭐️
+					    5.0
+					</span>
+		        </div>
+		    </div>
 		
-			<div id="inquiries" class="tabcontent">
-				<h3>상품문의</h3>
-				<p>여기에 상품 문의 내용이 표시됩니다.</p>
+			<div id="inquiries" class="tabcontent" style="margin-left: auto; margin-right: auto">
+		        <h3>상품문의</h3>
+		        <br/>
+		        <a href="javascript:goWriteForm();" style="color: #DEAD6F; font-weight: bold; text-decoration: none;">상품문의하기></a>
+		        <a href="/front/sale/shop/writeForm.web" style="color: #DEAD6F; font-weight: bold; text-decoration: none;">?상품문의하기></a>
+		        <br/>
+		        <div class="brdSearchArea" >
+					<select name="searchKey">
+						<option value="title"<c:if test="${paging.searchKey == 'title'}"> selected</c:if>>제목</option>
+						<option value="contents"<c:if test="${paging.searchKey == 'contents'}"> selected</c:if>>내용</option>
+						<option value="title+contents"<c:if test="${paging.searchKey == 'title+contents'}"> selected</c:if>>제목 또는 내용</option>
+					</select>
+					<input type="text" name="searchWord" id="searchWord" value="${paging.searchWord}" /> <input type="submit" value="검색"/>
+				</div>
+				<br/>
+					<table style="width: 1200px; margin-left: auto; margin-right: auto">
+						<tr>
+						</tr>
+						<c:choose>
+							<c:when test="${empty list}">
+								<tr>
+									<td style="text-align: center;" colspan="2">등록된 글이 없습니다.</td>
+								</tr>
+							</c:when>
+							<c:otherwise>
+								<c:set var="inquiryCount" value="${paging.totalLine}" />
+								<c:forEach items="${list}" var="list">
+								<tr style="border-bottom: 1px solid #ccc;">
+									<td style="text-align: left; padding: 15px;">
+										<a href="javascript:goView(${list.seq_bbs});">
+											<c:if test="${list.seq_reply == 0}">[미답변] </c:if>
+											<c:if test="${list.seq_reply > 0}">[답변 완료] </c:if>
+											${list.title}
+										</a>
+									</td>
+									<td>
+										${list.dt_reg}
+									</td>
+								</tr>
+								</c:forEach>
+							</c:otherwise>
+						</c:choose>
+					</table>
+					
+				<br/>
+				<div class="center-container"  style= "display: flex; justify-content: center;">
+					<plutozoneUtilTag:page styleID="front_image" currentPage="${paging.currentPage}" linePerPage="${paging.linePerPage}" totalLine="${paging.totalLine}" scriptFunction="goPage" />
+				</div>
+				<br/>
 			</div>
 			
 		</article>
