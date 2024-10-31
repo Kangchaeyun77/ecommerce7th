@@ -247,5 +247,5 @@ function toggleLike(seq_bbs) {
 		}
 //목록 가기
 		function goList(value) {
-			location.href = "/front/community/board/list.web?cd_bbs_type=7";
+			location.href = "/front/community/board/list.web?cd_bbs_type=" + value;
 		}

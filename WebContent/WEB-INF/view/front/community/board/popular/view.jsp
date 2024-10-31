@@ -33,30 +33,28 @@
 	<meta charset="UTF-8">
 	<link rel="stylesheet" href="/css/brdSearchArea.css">
 	<link rel="stylesheet" href="/css/view.css">
-		<title>커뮤니티 인기글 상세보기</title>
 	<script type="text/javascript" src="/js/view.js">
-	// 서버에서 JSP로 넘어온 seq_bbs 값을 JavaScript 변수로 할당
-	document.addEventListener('DOMContentLoaded', () => {
-	var seq_bbs = "${communityDto.seq_bbs}"; 
-});
-		function goList(value) {
-			location.href = "/front/community/board/list.web?cd_bbs_type=6";
-		}
+		// 서버에서 JSP로 넘어온 seq_bbs 값을 JavaScript 변수로 할당
+		document.addEventListener('DOMContentLoaded', () => {
+		var seq_bbs = "${communityDto.seq_bbs}"; 
+	});
 	</script>
+	<title>커뮤니티 인기글 상세보기</title>
 </head>
 <body>
 <form id="frmMain" method="POST">
 <input type="hidden" id="type"			name="type" />
 <input type="hidden" id="sequence"		name="sequence" />
-<input type="hidden" id="cd_ctg"		name="cd_ctg" 		value="${communityDto.cd_ctg}" />  
 <input type="hidden" id="cd_ctg_pet"	name="cd_ctg_pet" />
-<input type="hidden" id="seq_bbs"		name="seq_bbs"		value="${communityDto.seq_bbs}" />
 <input type="hidden" id="cd_bbs_type"	name="cd_bbs_type"	value="${cd_bbs_type}" />
+<input type="hidden" id="seq_mbr"		name="seq_mbr"		value="${seq_mbr}" />
+<input type="hidden" id="seq_bbs"		name="seq_bbs"		value="${communityDto.seq_bbs}" />
+<input type="hidden" id="cd_ctg"		name="cd_ctg" 		value="${communityDto.cd_ctg}" />  
 <div class="container">
 	<section class="content">
 		<article class="txtCenter">
 		 <div class="content-container"> 
-			<h2 class="title">제목: ${communityDto.title}</h2>			
+			<h2 class="title">제목: ${communityDto.title}</h2>		
 			<div class="icon-cd_ctg_pet" style="display: flex; justify-content: center; align-items: flex-start; flex-direction: column;">
 				<c:choose>
 					<c:when test="${communityDto.cd_ctg_pet == 1}">
@@ -75,7 +73,7 @@
 						<img src="/images/icon/community/default.png" alt="Default Pet" style="width: 10%; height: 10%;" />
 					</c:otherwise>
 				</c:choose>
-		</div>
+			</div>
 					<div class="tag-container">
 						테그: ${communityDto.tag}
 					</div>
