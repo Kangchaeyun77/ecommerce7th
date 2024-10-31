@@ -9,6 +9,7 @@
 			TB_BUY_MST
 		WHERE
 			SEQ_MBR = #{seq_mbr}
+			AND tb_buy_mst.CD_STATE_PAY	= 'Y'
 	</select>
 	
 	<select id="list" parameterType="buyDto" resultType="buyDto">
@@ -22,6 +23,7 @@
 			TB_BUY_MST
 		WHERE
 			SEQ_MBR = #{seq_mbr}
+			AND tb_buy_mst.CD_STATE_PAY	= 'Y'
 		ORDER BY
 			DT_REG DESC
 	</select>
