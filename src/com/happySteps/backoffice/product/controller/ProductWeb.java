@@ -278,8 +278,6 @@ public class ProductWeb extends Common {
 		try {
 			pagingDto.setRegister(Integer.parseInt(getSession(request, "SEQ_MNG")));
 			
-			logger.debug("PagingDto.seq_prd: " + pagingDto.getSeq_prd());
-			
 			PagingListDto pagingListDto = productSrvc.list(pagingDto);
 	    	
 	    	mav.addObject("paging", pagingListDto.getPaging());

@@ -137,12 +137,11 @@
 							<th style="width: 10%">원가</th>
 							<th style="width: 7%">재고</th>
 							<th style="width: 10%">등록일</th>
-							<th style="width: 10%">삭제</th>
 						</tr>
 						<c:choose>
 							<c:when test="${empty list}">
 								<tr>
-									<td colspan="8">등록된 상품이 없습니다.</td>
+									<td colspan="7">등록된 상품이 없습니다.</td>
 								</tr>
 							</c:when>
 							<c:otherwise>
@@ -172,12 +171,6 @@
 									<td>
 										${list.dt_reg}
 									</td>
-									<td>
-										<input type="checkbox" id="flg_delete" name="flg_delete" value="N" 
-										onclick="javascript:location.href='/console/product/remove.web?seq_prd=${productDto.seq_prd}';"
-										<c:if test="${list.flg_delete}"> checked</c:if>/><label for="flg_delete"></label>
-										
-									</td>
 								</tr>
 								</c:forEach>
 							</c:otherwise>
@@ -199,22 +192,6 @@
 	</footer>
 	<!-- /footer content -->
 <script>
-
-		
-function removeList(seqPrd) {
-	$.ajax({
-		url: '/console/product/removeList.web', // 상품 리스트 삭제 URL
-		type: 'POST',
-		data: { seq_prd: seqPrd },
-		success: function(response) {
-			alert('상품이 삭제되었습니다.');
-			window.location.reload(); // 페이지를 새로고침하여 장바구니를 다시 로드
-		},
-		error: function(xhr, status, error) {
-			alert('상품 삭제 중 오류가 발생했습니다.');
-		}
-	});
-}
 </script>
 </form>
 </body>

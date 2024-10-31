@@ -210,7 +210,7 @@
 				</tr>
 				<tr>
 					<th>상품 원가(*)</th>
-					<td><input type="text" name="price_cost" id="price_cost" maxlength="11" style="text-align:right;" onkeyup="commaValue(this);" required /> 원</td>
+					<td><input type="text" name="price_cost" id="price_cost" maxlength="11" style="text-align:right;" required /> 원</td>
 				</tr>
 				<tr>
 					<th>재고 수량(*)</th>
@@ -232,13 +232,7 @@
 	</footer>
 	<!-- /footer content -->
 <script>
-	function commaValue(input) {
-	    // 입력된 값에서 숫자만 남기고 포맷팅
-	    let value = input.value.replace(/,/g, '');  // 기존 쉼표 제거
-	    value = Number(value).toLocaleString();     // 숫자에 콤마 추가
-	    input.value = value;                        // 변환된 값 다시 입력 필드에 설정
-	}
-
+	
 	function writeProc() {
 		var frmMain = document.getElementById("frmMain");
 		

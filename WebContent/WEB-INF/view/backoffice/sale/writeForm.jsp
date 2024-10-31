@@ -235,7 +235,7 @@
 				<tr>
 					<th>판매 가격</th>
 					<td>
-						<input type="text" id="price_sale" name="price_sale" style="width:100px; text-align:right" onkeyup="commaValue(this);" required/>원
+						<input type="text" id="price_sale" name="price_sale" style="width:100px; text-align:right" required/>원
 					</td>
 				</tr>
 				<tr>
@@ -285,12 +285,6 @@
 	window.onload = function () {
 		// HTML Editor
 		tinymce.init({selector:'textarea'});
-	}
-	function commaValue(input) {
-	    // 입력된 값에서 숫자만 남기고 포맷팅
-	    let value = input.value.replace(/,/g, '');  // 기존 쉼표 제거
-	    value = Number(value).toLocaleString();     // 숫자에 콤마 추가
-	    input.value = value;                        // 변환된 값 다시 입력 필드에 설정
 	}
 	
 	function writeProc() {
