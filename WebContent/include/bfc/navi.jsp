@@ -106,7 +106,7 @@
 								            </ul>
 										</li>
 										<li>
-											<a href="#">주문관리</a>
+											<a href="/console/buy/history.web">주문관리</a>
 										</li>
 										<li>
 											<a href="#">후원관리</a>
