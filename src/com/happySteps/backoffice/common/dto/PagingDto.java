@@ -49,9 +49,15 @@ public class PagingDto {
 	private int seq_prd		= 0;	// 상품 일련번호
 	private int count_stock	= 0;	// 상품 재고
 	private int cd_state_sale	= 0;	// 판매상품상태코드: 대기(0), 승인(1),중지(2), 반려(3), 품절(9)
+	private int seq_sle		= 0;	// 판매상품 일련번호
 	
 	
-	
+	public int getSeq_sle() {
+		return seq_sle;
+	}
+	public void setSeq_sle(int seq_sle) {
+		this.seq_sle = seq_sle;
+	}
 	public int getSpecies() {
 		return species;
 	}
