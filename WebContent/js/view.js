@@ -228,6 +228,24 @@ function toggleLike(seq_bbs) {
 			console.error('Error:', error);
 		});
 	}
+//글삭제
+	function remove(value) {
+		var frmMain = document.getElementById("frmMain");
+		
+		document.getElementById("cd_bbs_type").value = value;
+		frmMain.action="/front/community/board/remove.web";
+		frmMain.submit();
+	}
+	
+//수정폼 보여주기
+	function modifyForm(value) {
+		var frmMain = document.getElementById("frmMain");
+		
+		document.getElementById("cd_bbs_type").value = value;
+		frmMain.action="/front/community/board/modifyForm.web";
+		frmMain.submit();
+	}
+
 //다운로드
 		function download(type, sequence) {
 			var frmMain = document.getElementById("frmMain");

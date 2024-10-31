@@ -33,7 +33,16 @@ public class PagingListDto {
 	private PagingDto paging	= null;
 	private Object list			= null;
 	private Object writeForm	= null;
+	private Object modifyForm	= null;
 	
+	
+	
+	public Object getModifyForm() {
+		return modifyForm;
+	}
+	public void setModifyForm(Object modifyForm) {
+		this.modifyForm = modifyForm;
+	}
 	public PagingDto getPaging() {
 		return paging;
 	}

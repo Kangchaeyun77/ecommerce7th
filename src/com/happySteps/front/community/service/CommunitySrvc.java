@@ -95,8 +95,8 @@ public class CommunitySrvc {
 	 * @param communityDto [게시판 빈]
 	 * @return boolean
 	 * 
-	* @since 2024-10-09
-	 * <p>DESCRIPTION: 고객센터 수정</p>
+	* @since 2024-10-31
+	 * <p>DESCRIPTION: 커뮤니티 글 수정</p>
 	 * <p>IMPORTANT:</p>
 	 * <p>EXAMPLE:</p>
 	 */

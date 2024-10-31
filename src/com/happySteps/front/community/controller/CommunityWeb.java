@@ -126,11 +126,11 @@ public class CommunityWeb extends Common {
 	/**
 	 * @param request [요청 서블릿]
 	 * @param response [응답 서블릿]
-	 * @param boardDto [게시판 빈]
+	 * @param communityDto [게시판 빈]
 	 * @return ModelAndView
 	 * 
-	 * @since 2024-07-04
-	 * <p>DESCRIPTION: 고객센터 삭제</p>
+	 * @since 2024-10-31
+	 * <p>DESCRIPTION: 커뮤니티 글 삭제</p>
 	 * <p>IMPORTANT:</p>
 	 * <p>EXAMPLE:</p>
 	 */
@@ -145,7 +145,7 @@ public class CommunityWeb extends Common {
 			
 			if (communitySrvc.deleteFlag(communityDto)) {
 				request.setAttribute("script"	, "alert('삭제되었습니다.');");
-				request.setAttribute("redirect"	, "/front/center/board/list.web?cd_bbs_type=" + communityDto.getCd_bbs_type());
+				request.setAttribute("redirect"	, "/front/community/board/list.web?cd_bbs_type=" + communityDto.getCd_bbs_type());
 			}
 			else {
 				request.setAttribute("script"	, "alert('시스템 관리자에게 문의하세요!');");
@@ -164,11 +164,11 @@ public class CommunityWeb extends Common {
 	/**
 	 * @param request [요청 서블릿]
 	 * @param response [응답 서블릿]
-	 * @param boardDto [게시판 빈]
+	 * @param communityDto [게시판 빈]
 	 * @return ModelAndView
 	 * 
-	 * @since 2024-07-04
-	 * <p>DESCRIPTION: 고객센터 수정 처리</p>
+	 * @since 2024-10-31
+	 * <p>DESCRIPTION: 커뮤니티 글 수정 처리</p>
 	 * <p>IMPORTANT:</p>
 	 * <p>EXAMPLE:</p>
 	 */
@@ -204,24 +204,41 @@ public class CommunityWeb extends Common {
 	 * @param communityDto [게시판 빈]
 	 * @return ModelAndView
 	 * 
-	 * @since 2024-07-04
+	 * @since 2024-10-31
 	 * <p>DESCRIPTION:커뮤니티 수정 폼</p>
 	 * <p>IMPORTANT:</p>
 	 * <p>EXAMPLE:</p>
 	 */
 	@RequestMapping(value = "/front/community/board/modifyForm.web", method = RequestMethod.POST)
-	public ModelAndView modifyForm(HttpServletRequest request, HttpServletResponse response, CommunityDto communityDto) {
+	public ModelAndView modifyForm(HttpServletRequest request, HttpServletResponse response, CommunityDto communityDto, PagingDto pagingDto) {
 		
 		ModelAndView mav = new ModelAndView("redirect:/error.web");
 		
 		try {
+			PagingListDto pagingListDto = communitySrvc.list(pagingDto);
+			
+			mav.addObject("paging"		, pagingListDto.getPaging());
+			mav.addObject("ModifyForm"	, pagingListDto.getModifyForm());
+			
 			
 			CommunityDto _communityDto = communitySrvc.select(communityDto);
 			
-			mav.addObject("communityDto", communityDto);
+			mav.addObject("communityDto", _communityDto);
 			
-			if (communityDto.getCd_bbs_type() == 7) {
+			if (communityDto.getCd_bbs_type() == 5) {
+				mav.setViewName("front/community/board/all/modifyForm");
+			}
+			else if (pagingDto.getCd_bbs_type() == 7) {
 				mav.setViewName("front/community/board/storyboard/modifyForm");
+			}
+			else if (pagingDto.getCd_bbs_type() == 8) {
+				mav.setViewName("front/community/board/qna/modifyForm");
+			}
+			else if (pagingDto.getCd_bbs_type() == 9) {
+				mav.setViewName("front/community/board/adap/modifyForm");
+			}
+			else if (pagingDto.getCd_bbs_type() == 11) {
+				mav.setViewName("front/community/board/information/modifyForm");
 			}
 			else {
 				request.setAttribute("redirect"	, "/");
@@ -283,7 +300,10 @@ public class CommunityWeb extends Common {
 				mav.setViewName("front/community/board/qna/view");
 				List<CommentDto> commentList = commentsrvc.getComments(communityDto.getSeq_bbs());
 				mav.addObject("commentList", commentList);
-
+				if (_communityDto.getSeq_reply() > 0) {
+					CommunityDto boardReplyDto = communitySrvc.selectReply(communityDto);
+					mav.addObject("boardReplyDto", boardReplyDto);
+				}
 			} else if (communityDto.getCd_bbs_type() == 9) {
 				mav.setViewName("front/community/board/adap/view");
 				List<CommentDto> commentList = commentsrvc.getComments(communityDto.getSeq_bbs());
@@ -293,12 +313,6 @@ public class CommunityWeb extends Common {
 				mav.setViewName("front/community/board/information/view");
 				List<CommentDto> commentList = commentsrvc.getComments(communityDto.getSeq_bbs());
 				mav.addObject("commentList", commentList);
-
-				if (_communityDto.getSeq_reply() > 0) {
-					CommunityDto boardReplyDto = communitySrvc.selectReply(communityDto);
-					mav.addObject("boardReplyDto", boardReplyDto);
-				}
-				mav.setViewName("front/community/board/qna/view");
 
 			} else if (communityDto.getCd_bbs_type() == 5) {
 				_communityDto = communitySrvc.allSelect(communityDto);

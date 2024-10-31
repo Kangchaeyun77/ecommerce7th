@@ -21,7 +21,7 @@
  */
 %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" trimDirectiveWhitespaces="true" %>
-<%@ page info="/WEB-INF/view/front/community/board/storyboard/writeForm.jsp" %>
+<%@ page info="/WEB-INF/view/front/community/board/qna/writeForm.jsp" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page session="true" %>
 
@@ -39,7 +39,8 @@
 
 		function writeProc() {
 			var frmMain = document.getElementById("frmMain");
-			var selected_cd_bbs_type = document.getElementById("cd_bbs_type").value; // 선택된 카테고리 값 가져오기
+			var selected_cd_bbs_type = document.getElementById("cd_bbs_type").value;
+			var nickname = document.getElementById("nickname").value;
 
 			// 필수 항목 체크
 			if (document.getElementById("title").value === "" ||
@@ -57,11 +58,10 @@
 			// 태그 값을 폼에 추가
 			var tagHiddenInput = document.createElement('input');
 			tagHiddenInput.type = 'hidden';
-			tagHiddenInput.name = 'tag'; // 서버에서 사용할 이름
+			tagHiddenInput.name = 'tag';
 			tagHiddenInput.value = escapedValue;
 			frmMain.appendChild(tagHiddenInput);
 
-			// 게시판 유형에 따른 처리
 			frmMain.action = "/front/community/board/writeProc.web?cd_bbs_type=" + selected_cd_bbs_type;
 			frmMain.submit();
 		}
@@ -73,48 +73,35 @@
 
 		function addHashToTag() {
 			var input = document.getElementById('tagInput');
-			var tags = input.value.split(','); // 쉼표로 구분하여 배열로 변환
+			var tags = input.value.split(',');
 
 			// 각 태그에 #이 없으면 붙임
 			for (var i = 0; i < tags.length; i++) {
-				tags[i] = tags[i].trim(); // 앞뒤 공백 제거
+				tags[i] = tags[i].trim();
 				if (tags[i].length > 0 && tags[i].charAt(0) !== '#') {
-					tags[i] = '#' + tags[i]; // 첫 글자가 #이 아니면 추가
+					tags[i] = '#' + tags[i];
 				}
 			}
 
-			// 다시 쉼표로 구분된 문자열로 합침
 			input.value = tags.join(', ');
 		}
 
 		function escapeSpecialChars(str) {
 			return str.replace(/[\\"'&<>]/g, function (char) {
 				switch (char) {
-					case '"':
-						return '&quot;';
-					case "'":
-						return '&#39;';
-					case '&':
-						return '&amp;';
-					case '<':
-						return '&lt;';
-					case '>':
-						return '&gt;';
-					default:
-						return char;
+					case '"': return '&quot;';
+					case "'": return '&#39;';
+					case '&': return '&amp;';
+					case '<': return '&lt;';
+					case '>': return '&gt;';
+					default: return char;
 				}
 			});
 		}
-		// 게시판 유형에 따른 처리
-		frmMain.action = "/front/community/board/writeProc.web?cd_bbs_type=" + selected_cd_bbs_type; // 수정된 부분
-		frmMain.submit();
 	</script>
 </head>
-
 <body>
-	<input type="hidden" id="nickname" name="nickname" value="${nickname}" />  
-	<input type="hidden" id="nickname" name="nickname" value="<%= session.getAttribute("NICKNAME") %>" />
-
+	<input type="hidden" id="nickname" name="nickname" value="${communityDto.nickname}" />  
 	<div style="position: relative; height: 250px; overflow: hidden; margin-top: 10px;">
 		<a href="/front/">
 			<img src="/images/logo/logo3.png" alt="로고" style="width: 380px; height: 250px; object-fit: cover; display: block; margin: 0 auto;" />
@@ -124,7 +111,6 @@
 	<form class="frmMain" id="frmMain" method="POST" enctype="multipart/form-data">
 		<div class="container">
 			<%@ include file="/include/front/gnb_community.jsp" %>
-
 			<br>
 			<section class="content">
 				<article class="txtCenter">
@@ -177,8 +163,8 @@
 						</tr>
 					</table>
 					<div style="display: flex; justify-content: center; width: 70%; margin-left: auto; margin-right: auto;">
-						<button type="button" class="submit-btn" style="margin-right: 10px; font-size: 0.9rem;" onclick="goList();">목록</button>
-						<button type="button" class="submit-btn" onclick="writeProc();">게시글 작성</button>
+						<button type="button" class="submit-btn" style="margin-right: 10px; font-size: 0.9rem;" onclick="goList(8);">목록</button>
+						<button type="button" class="submit-btn" onclick="writeProc(8);">질문등록</button>
 					</div>
 				</article>
 			</section>

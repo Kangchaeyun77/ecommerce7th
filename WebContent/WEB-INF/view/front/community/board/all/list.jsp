@@ -113,13 +113,12 @@
 				<tr>
 					<th style="width: 5%">NO</th>
 					<th>제목</th>
-					<th style="width: 5%">첨부</th>
-					<th style="width: 10%">등록일</th>
+					<th style="width: 20%">등록일</th>
 				</tr>
 				<c:choose>
 					<c:when test="${empty list}">
 						<tr>
-							<td colspan="4">등록된 글이 없습니다.</td>
+							<td colspan="3">등록된 글이 없습니다.</td>
 						</tr>
 					</c:when>
 					<c:otherwise>
@@ -133,11 +132,6 @@
 								<a href="javascript:goView(${list.seq_bbs});">
 									${list.title}
 								</a>
-							</td>
-							<td>
-								<c:if test="${list.extension != null && list.extension != ''}">
-									<a href="javascript:download('BbsNotice', ${list.seq_bbs});" title="${list.file_orig}"><img src="/image/icon/doc/${list.extension}.png" alt="${list.file_orig}" /></a> 
-								</c:if>
 							</td>
 							<td>
 								${list.dt_reg}

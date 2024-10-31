@@ -38,18 +38,19 @@
 		document.addEventListener('DOMContentLoaded', () => {
 		var seq_bbs = "${communityDto.seq_bbs}"; 
 	});
+	
 	</script>
-	<title>커뮤니티 인기글 상세보기</title>
+	<title>커뮤니티 자유게시판 상세보기</title>
 </head>
 <body>
 <form id="frmMain" method="POST">
 <input type="hidden" id="type"			name="type" />
 <input type="hidden" id="sequence"		name="sequence" />
-<input type="hidden" id="cd_ctg_pet"	name="cd_ctg_pet" />
+<input type="hidden" id="cd_ctg_pet"	name="cd_ctg_pet" 	value="${communityDto.cd_ctg_pet}" />
 <input type="hidden" id="cd_bbs_type"	name="cd_bbs_type"	value="${cd_bbs_type}" />
 <input type="hidden" id="seq_mbr"		name="seq_mbr"		value="${seq_mbr}" />
 <input type="hidden" id="seq_bbs"		name="seq_bbs"		value="${communityDto.seq_bbs}" />
-<input type="hidden" id="cd_ctg"		name="cd_ctg" 		value="${communityDto.cd_ctg}" />  
+<input type="hidden" id="cd_ctg"		name="cd_ctg" 		value="${communityDto.cd_ctg}" />
 <div class="container">
 	<section class="content">
 		<article class="txtCenter">
@@ -123,7 +124,7 @@
 				</c:if>
 			</table>
 			<div style="display: flex; justify-content: center; margin-top: 20px;">
-				<input type="button" value="목록" style="width:50%; height:60px;" onclick="javascript:goList();" />
+				<input type="button" value="목록" style="width:35%; height:60px;" onclick="javascript:goPopList(6);" />
 			</div>
 			<hr>
 			<div style="font-size:30px; margin-top: 20px;">댓글 </div>

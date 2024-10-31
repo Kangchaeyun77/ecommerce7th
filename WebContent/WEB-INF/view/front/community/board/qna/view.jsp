@@ -45,8 +45,8 @@
 <form id="frmMain" method="POST">
 <input type="hidden" id="type"			name="type" />
 <input type="hidden" id="sequence"		name="sequence" />
-<input type="hidden" id="cd_ctg_pet"	name="cd_ctg_pet" />
-<input type="hidden" id="cd_bbs_type"	name="cd_bbs_type"	value="${cd_bbs_type}" />
+<input type="hidden" id="cd_ctg_pet"	name="cd_ctg_pet" 	value="${communityDto.cd_ctg_pet}" />
+<input type="hidden" id="cd_bbs_type"	name="cd_bbs_type"	value="${communityDto.cd_bbs_type}" />
 <input type="hidden" id="seq_mbr"		name="seq_mbr"		value="${seq_mbr}" />
 <input type="hidden" id="seq_bbs"		name="seq_bbs"		value="${communityDto.seq_bbs}" />
 <input type="hidden" id="cd_ctg"		name="cd_ctg" 		value="${communityDto.cd_ctg}" />  
@@ -74,11 +74,13 @@
 					</c:otherwise>
 				</c:choose>
 			</div>
-					<div class="tag-container">
-						테그: ${communityDto.tag}
-					</div>
-		<hr>
-			<table class="headLeft_01">
+		<table class="headLeft_01">
+			<tr>
+			<th class="tag-container">Tag: </th>
+				<td>
+				${communityDto.tag}
+				</td>
+			</tr>
 				<tr>
 					<th>작성자</th>
 					<td>
@@ -122,8 +124,10 @@
 				</tr>
 				</c:if>
 			</table>
-			<div style="display: flex; justify-content: center; margin-top: 20px;">
-				<input type="button" value="목록" style="width:50%; height:60px;" onclick="javascript:goList();" />
+				<div style="display: flex; justify-content: right; margin-top: 20px;">
+				<input type="button" value="목록" style="width:15%; height:60px;" onclick="javascript:goList(8);" />
+				<input type="button" value="수정" style="width:15%" onclick="javascript:modifyForm(8);" /> 
+				<input type="button" value="삭제" style="width:15%" onclick="javascript:remove(8);" /> 
 			</div>
 			<hr>
 			<div style="font-size:30px; margin-top: 20px;">댓글 </div>
