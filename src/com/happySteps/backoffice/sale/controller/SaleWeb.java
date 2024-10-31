@@ -20,6 +20,8 @@
  */
 package com.happySteps.backoffice.sale.controller;
 
+import java.util.Hashtable;
+import java.util.LinkedList;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -28,8 +30,11 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.support.MessageSourceAccessor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.happySteps.backoffice.common.Common;
@@ -37,6 +42,9 @@ import com.happySteps.backoffice.common.dto.PagingDto;
 import com.happySteps.backoffice.common.dto.PagingListDto;
 import com.happySteps.backoffice.sale.dto.SaleDto;
 import com.happySteps.backoffice.sale.service.SaleSrvc;
+import com.happySteps.common.dto.FileDto;
+import com.happySteps.common.dto.FileUploadDto;
+import com.happySteps.common.file.FileUpload;
 
 
 
@@ -58,6 +66,9 @@ public class SaleWeb extends Common {
 	@Inject
 	SaleSrvc saleSrvc;
 	
+	@Autowired
+	private MessageSourceAccessor dynamicProperties;
+	
 	/**
 	 * @param request [요청 서블릿]
 	 * @param response [응답 서블릿]
@@ -65,7 +76,280 @@ public class SaleWeb extends Common {
 	 * @return ModelAndView
 	 * 
 	 * @since 2024-08-08
-	 * <p>DESCRIPTION: 판매 목록 작성</p>
+	 * <p>DESCRIPTION: 판매 목록 삭제</p>
+	 * <p>IMPORTANT:</p>
+	 * <p>EXAMPLE:</p>
+	 */
+	@RequestMapping(value = "/console/sale/soldout.web")
+	public ModelAndView out(HttpServletRequest request, HttpServletResponse response, SaleDto saleDto) {
+		
+		ModelAndView mav = new ModelAndView("redirect:/error.web");
+		
+		try {
+			
+			saleDto.setRegister(Integer.parseInt(getSession(request, "SEQ_MNG")));
+			saleDto.setUpdater(Integer.parseInt(getSession(request, "SEQ_MNG")));
+			
+			if (saleSrvc.soldout(saleDto)) {
+				request.setAttribute("script"	, "alert('품절 되었습니다.');");
+				request.setAttribute("redirect"	, "/console/sale/list.web");
+			}
+			else {
+				request.setAttribute("script"	, "alert('시스템 관리자에게 문의하세요!');");
+				request.setAttribute("redirect"	, "/");
+			}
+			mav.setViewName("forward:/servlet/result.web");
+		}
+		catch (Exception e) {
+			logger.error("[" + this.getClass().getName() + ".soldout()] " + e.getMessage(), e);
+		}
+		finally {}
+		
+		return mav;
+	}
+	
+	/**
+	 * @param request [요청 서블릿]
+	 * @param response [응답 서블릿]
+	 * @param boardDto [게시판 빈]
+	 * @return ModelAndView
+	 * 
+	 * @since 2024-08-08
+	 * <p>DESCRIPTION:</p>
+	 * <p>IMPORTANT:</p>
+	 * <p>EXAMPLE:</p>
+	 */
+	@RequestMapping(value = "/console/sale/re.web")
+	public ModelAndView re(HttpServletRequest request, HttpServletResponse response, SaleDto saleDto) {
+		
+		ModelAndView mav = new ModelAndView("redirect:/error.web");
+		
+		try {
+			
+			saleDto.setRegister(Integer.parseInt(getSession(request, "SEQ_MNG")));
+			saleDto.setUpdater(Integer.parseInt(getSession(request, "SEQ_MNG")));
+			
+			if (saleSrvc.re(saleDto)) {
+				request.setAttribute("script"	, "alert('판매 재개가 되었습니다.');");
+				request.setAttribute("redirect"	, "/console/sale/list.web");
+			}
+			else {
+				request.setAttribute("script"	, "alert('시스템 관리자에게 문의하세요!');");
+				request.setAttribute("redirect"	, "/");
+			}
+			mav.setViewName("forward:/servlet/result.web");
+		}
+		catch (Exception e) {
+			logger.error("[" + this.getClass().getName() + ".re()] " + e.getMessage(), e);
+		}
+		finally {}
+		
+		return mav;
+	}
+	
+	/**
+	 * @param request [요청 서블릿]
+	 * @param response [응답 서블릿]
+	 * @param boardDto [게시판 빈]
+	 * @return ModelAndView
+	 * 
+	 * @since 2024-08-08
+	 * <p>DESCRIPTION: 판매 중지</p>
+	 * <p>IMPORTANT:</p>
+	 * <p>EXAMPLE:</p>
+	 */
+	@RequestMapping(value = "/console/sale/stop.web")
+	public ModelAndView stop(HttpServletRequest request, HttpServletResponse response, SaleDto saleDto) {
+		
+		ModelAndView mav = new ModelAndView("redirect:/error.web");
+		
+		try {
+			
+			saleDto.setRegister(Integer.parseInt(getSession(request, "SEQ_MNG")));
+			saleDto.setUpdater(Integer.parseInt(getSession(request, "SEQ_MNG")));
+			
+			if (saleSrvc.stop(saleDto)) {
+				request.setAttribute("script"	, "alert('판매 중지 되었습니다.');");
+				request.setAttribute("redirect"	, "/console/sale/list.web");
+			}
+			else {
+				request.setAttribute("script"	, "alert('시스템 관리자에게 문의하세요!');");
+				request.setAttribute("redirect"	, "/");
+			}
+			mav.setViewName("forward:/servlet/result.web");
+		}
+		catch (Exception e) {
+			logger.error("[" + this.getClass().getName() + ".stop()] " + e.getMessage(), e);
+		}
+		finally {}
+		
+		return mav;
+	}
+	
+	/**
+	 * @param request [요청 서블릿]
+	 * @param response [응답 서블릿]
+	 * @param boardDto [게시판 빈]
+	 * @return ModelAndView
+	 * 
+	 * @since 2024-08-08
+	 * <p>DESCRIPTION: 상품 수정</p>
+	 * <p>IMPORTANT:</p>
+	 * <p>EXAMPLE:</p>
+	 */
+	@RequestMapping(value = "/console/sale/modifyProc.web")
+	public ModelAndView modifyProc(HttpServletRequest request, HttpServletResponse response, SaleDto saleDto) {
+		
+		ModelAndView mav = new ModelAndView("redirect:/error.web");
+		
+		try {
+			saleDto.setUpdater(Integer.parseInt(getSession(request, "SEQ_MNG")));
+			saleDto.setRegister(Integer.parseInt(getSession(request, "SEQ_MNG")));
+			
+			if (saleSrvc.update(saleDto)) {
+				request.setAttribute("script"	, "alert('수정되었습니다.');");
+				request.setAttribute("redirect"	, "/console/sale/list.web");
+			}
+			else {
+				request.setAttribute("script"	, "alert('시스템 관리자에게 문의하세요!');");
+				request.setAttribute("redirect"	, "/");
+			}
+			mav.setViewName("forward:/servlet/result.web");
+		}
+		catch (Exception e) {
+			logger.error("[" + this.getClass().getName() + ".modifyProc()] " + e.getMessage(), e);
+		}
+		finally {}
+		
+		return mav;
+	}
+	
+	/**
+	 * @param request [요청 서블릿]
+	 * @param response [응답 서블릿]
+	 * @param boardDto [게시판 빈]
+	 * @return ModelAndView
+	 * 
+	 * @since 2024-08-08
+	 * <p>DESCRIPTION: 내 판매 수정</p>
+	 * <p>IMPORTANT:</p>
+	 * <p>EXAMPLE:</p>
+	 */
+	@RequestMapping(value = "/console/sale/modifyForm.web")
+	public ModelAndView modifyForm(HttpServletRequest request, HttpServletResponse response, SaleDto saleDto) {
+		
+		ModelAndView mav = new ModelAndView("redirect:/error.web");
+		
+		try {
+			
+			saleDto.setRegister(Integer.parseInt(getSession(request, "SEQ_MNG")));
+			
+			SaleDto _saleDto = saleSrvc.select(saleDto);
+			
+			mav.addObject("saleDto", _saleDto);
+			mav.setViewName("backoffice/sale/modifyForm");
+			}
+		catch (Exception e) {
+			logger.error("[" + this.getClass().getName() + ".modifyForm()] " + e.getMessage(), e);
+		}
+		finally {}
+		
+		return mav;
+	}
+	
+	/**
+	 * @param request [요청 서블릿]
+	 * @param response [응답 서블릿]
+	 * @return ModelAndView
+	 * 
+	 * @since 2024-08-08
+	 * <p>DESCRIPTION: 판매 등록 처리</p>
+	 * <p>IMPORTANT:</p>
+	 * <p>EXAMPLE:</p>
+	 */
+	
+	@SuppressWarnings({ "rawtypes", "unchecked", "unused" })
+	@RequestMapping(value = "/console/sale/writeProc.web")
+	public ModelAndView writeProc(HttpServletRequest request, HttpServletResponse response, SaleDto saleDto, FileUploadDto fileUploadDto){
+
+		ModelAndView mav = new ModelAndView("redirect:/error.web");
+		
+		String message	= "";
+		
+		try {
+			saleDto.setRegister(Integer.parseInt(getSession(request, "SEQ_MNG")));
+			
+			// 이미지(대표)
+			String pathBase		= dynamicProperties.getMessage("seller.upload.path", "[UNDEFINED]");
+			String maxSize		= dynamicProperties.getMessage("seller.upload.file.max5MB"			, "[UNDEFINED]");
+			String allowedExt	= dynamicProperties.getMessage("seller.upload.file.extension.image"	, "[UNDEFINED]");
+			
+			int countFile = 0;
+			if (null != fileUploadDto.getFiles()) countFile = fileUploadDto.getFiles().size();
+			
+			FileDto[] fileDto = new FileDto[countFile];
+			LinkedList<Object> uploadResult = FileUpload.upload(fileUploadDto, pathBase, maxSize, allowedExt, countFile);
+			
+			message	= (String)((Hashtable)uploadResult.getLast()).get("resultID");
+			
+			if (message.equals("success")) {
+				
+				Hashtable<String, String> hashtable	= (Hashtable<String, String>)uploadResult.getLast();
+				
+				String fileNameSrc	= "";
+				String fileNameSve	= "";
+				String fileSize		= "";
+				long totalSize		= 0;
+				
+				for (int loop = 0; loop < countFile; loop++) {
+					fileNameSrc		= (String)hashtable.get("files[" + loop + "]_fileSrcName");
+					fileNameSve		= (String)hashtable.get("files[" + loop + "]_fileSveNameRelative");
+					fileSize		= (String)hashtable.get("files[" + loop + "]_fileSveSize");
+					if (fileSize == null || fileSize == "") fileSize = "0";
+					
+					fileDto[loop] = new FileDto();
+					fileDto[loop].setFileNameOriginal(fileNameSrc);			// 파일 원본명
+					fileDto[loop].setFileNameSave(fileNameSve);				// 파일 저장명(경로 포함)
+					fileDto[loop].setFileSize((Long.parseLong(fileSize)));	// 파일 크기
+					
+					totalSize += Long.parseLong(fileSize);
+				}
+				
+				saleDto.setImg(fileDto[0].getFileNameSave());
+				saleDto.setDt_sale_end(saleDto.getDt_sale_end() + " 23:59:59");
+				
+				if (saleSrvc.insert(saleDto)) {
+					request.setAttribute("script"	, "alert('등록되었습니다.');");
+					request.setAttribute("redirect"	, "/console/sale/list.web");
+				}
+				else {
+					request.setAttribute("script"	, "alert('시스템 관리자에게 문의하세요!');");
+					request.setAttribute("redirect"	, "/");
+				}
+			}
+			else {
+				request.setAttribute("script"	, "alert('" + message + "');");
+				request.setAttribute("redirect"	, "/");
+			}
+			
+			mav.setViewName("forward:/servlet/result.web");
+		}
+		catch (Exception e) {
+			logger.error("[" + this.getClass().getName() + ".writeProc()] " + e.getMessage(), e);
+		}
+		finally {}
+		
+		return mav;
+	}
+	
+	/**
+	 * @param request [요청 서블릿]
+	 * @param response [응답 서블릿]
+	 * @param boardDto [게시판 빈]
+	 * @return ModelAndView
+	 * 
+	 * @since 2024-08-08
+	 * <p>DESCRIPTION: 판매 등록 작성</p>
 	 * <p>IMPORTANT:</p>
 	 * <p>EXAMPLE:</p>
 	 */

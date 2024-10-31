@@ -113,7 +113,7 @@
 				AND CD_STATE_PRD = #{cd_state_prd}
 			</when>
 			<otherwise>
-				AND CD_STATE_PRD = 1
+				AND CD_STATE_PRD IN (1, 2, 3, 9)
 			</otherwise>
 		</choose>
 		<choose>

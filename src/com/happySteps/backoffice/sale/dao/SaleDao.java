@@ -28,8 +28,6 @@ import com.happySteps.backoffice.common.dao.BaseDao;
 import com.happySteps.backoffice.common.dto.PagingDto;
 import com.happySteps.backoffice.sale.dto.SaleDto;
 
-
-
 /**
  * @version 1.0.0
  * @author hyeen103@gmail.com
@@ -40,6 +38,66 @@ import com.happySteps.backoffice.sale.dto.SaleDto;
  */
 @Repository("com.happySteps.backoffice.sale.dao.SaleDao")
 public class SaleDao extends BaseDao{
+	
+	/**
+	 * @return int
+	 * 
+	 * @since 2024-08-08
+	 * <p>DESCRIPTION: 품절(처리)</p>
+	 * <p>IMPORTANT:</p>
+	 * <p>EXAMPLE:</p>
+	 */
+	public int soldout(SaleDto saleDto) {
+		return sqlSessionBackoffice.update("com.happySteps.backoffice.mybatis.sale.Sale.soldout", saleDto);
+	}
+	
+	/**
+	 * @return int
+	 * 
+	 * @since 2024-08-08
+	 * <p>DESCRIPTION: 재개(처리)</p>
+	 * <p>IMPORTANT:</p>
+	 * <p>EXAMPLE:</p>
+	 */
+	public int re(SaleDto saleDto) {
+		return sqlSessionBackoffice.update("com.happySteps.backoffice.mybatis.sale.Sale.re", saleDto);
+	}
+	
+	/**
+	 * @return int
+	 * 
+	 * @since 2024-08-08
+	 * <p>DESCRIPTION: 판매 중지(처리)</p>
+	 * <p>IMPORTANT:</p>
+	 * <p>EXAMPLE:</p>
+	 */
+	public int stop(SaleDto saleDto) {
+		return sqlSessionBackoffice.update("com.happySteps.backoffice.mybatis.sale.Sale.stop", saleDto);
+	}
+	
+	/**
+	 * @return int
+	 * 
+	 * @since 2024-08-18
+	 * <p>DESCRIPTION:</p>
+	 * <p>IMPORTANT:</p>
+	 * <p>EXAMPLE:</p>
+	 */
+	public int update(SaleDto saleDto) {
+		return sqlSessionBackoffice.update("com.happySteps.backoffice.mybatis.sale.Sale.update", saleDto);
+	}
+	
+	/**
+	 * @return int
+	 * 
+	 * @since 2024-07-10
+	 * <p>DESCRIPTION: 상품 등록 처리</p>
+	 * <p>IMPORTANT:</p>
+	 * <p>EXAMPLE:</p>
+	 */
+	public int insert(SaleDto saleDto) {
+		return sqlSessionBackoffice.insert("com.happySteps.backoffice.mybatis.sale.Sale.insert", saleDto);
+	}
 	
 	/**
 	 * @return List<SaleDto>

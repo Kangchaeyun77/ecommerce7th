@@ -97,10 +97,8 @@
 <body class="nav-md">
 <form id="frmMain" method="POST">
 <input type="hidden" id="currentPage"	name="currentPage"	value="${paging.currentPage}" />
-<input type="hidden" id="currentPage"	name="currentPage"	value="${paging.currentPage}" />
 <input type="hidden" id="seq_sle"		name="seq_sle" 		value="${paging.seq_sle}"/>
 <input type="hidden" id="sequence"		name="sequence" />
-<input type="hidden" id="cd_state_prd" 	name="cd_state_prd"	/>
 <input type="hidden" id="cd_ctg_pet" 	name="cd_ctg_pet"	value="${paging.cd_ctg_pet}"/>
 <input type="hidden" id="species" 		name="species"		value="${paging.species}"/>
 <input type="hidden" id="pet_items" 	name="pet_items" 	value="${paging.pet_items}"/>
@@ -109,7 +107,8 @@
 			<!-- top tiles -->
 				 <article class="x_panel">
 					<div class="form-group pull-right">
-						<select name="cd_state_prd">
+						<select name="cd_state_sale">
+						    <option value="0" <c:if test="${paging.cd_state_sale == 0}">selected</c:if>>전체</option>
 						    <option value="1" <c:if test="${paging.cd_state_sale == 1}">selected</c:if>>판매중</option>
 						    <option value="2" <c:if test="${paging.cd_state_sale == 2}">selected</c:if>>판매중지</option>
 						    <option value="3" <c:if test="${paging.cd_state_sale == 3}">selected</c:if>>반려</option>

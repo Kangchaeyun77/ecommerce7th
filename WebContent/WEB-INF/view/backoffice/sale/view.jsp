@@ -112,12 +112,7 @@
 						<tr>
 							<th>판매 상태</th>
 							<td>
-								<select id="cd_state_sale" name="cd_state_sale" disabled>
-									<option value="1"<c:if test="${saleDto.cd_state_sale == '1'}"> selected</c:if>>판매중</option>
-									<option value="2"<c:if test="${saleDto.cd_state_sale == '2'}"> selected</c:if>>판매 중지</option>
-									<option value="3"<c:if test="${saleDto.cd_state_sale == '3'}"> selected</c:if>>반려</option>
-									<option value="9"<c:if test="${saleDto.cd_state_sale == '9'}"> selected</c:if>>품절</option>
-								</select>
+								${saleDto.cd_state_sale}
 							</td>
 						</tr>
 						<tr>
@@ -142,9 +137,9 @@
 							<td colspan="2" style="text-align:center;padding-top: 10px;padding-bottom: 10px">
 								<input type="button" value="판매 중지" style="width:100px" onclick="javascript:stop();" />
 								<input type="button" value="판매 재개" style="width:100px" onclick="javascript:re();" />
-								<input type="button" value="품절" style="width:100px" onclick="javascript:out();" />
+								<input type="button" value="품절" style="width:100px" onclick="javascript:soldout();" />
 								 <input type="button" value="수정" style="width:100px" onclick="javascript:modifyForm();" />
-								 <input type="button" value="목록" style="width:100px" onclick="javascript:location.href='/seller/sale/list.web';"/>
+								 <input type="button" value="목록" style="width:100px" onclick="javascript:location.href='/console/sale/list.web';"/>
 							</td>
 						</tr>
 					</table>
@@ -161,14 +156,7 @@
 	</footer>
 	<!-- /footer content -->
 <script>
-	function modifyForm() {
-		var frmMain = document.getElementById("frmMain");
-		
-		document.getElementById("seq_prd").value = seq_prd;
-		
-		frmMain.action = "/console/product/modifyForm.web";
-		frmMain.submit();
-	}
+
 	function stop(value) {
 		var frmMain = document.getElementById("frmMain");
 		
@@ -183,10 +171,10 @@
 		frmMain.submit();
 	}
 	
-	function out(value) {
+	function soldout(value) {
 		var frmMain = document.getElementById("frmMain");
 		
-		frmMain.action="/console/sale/out.web";
+		frmMain.action="/console/sale/soldout.web";
 		frmMain.submit();
 	}
 	

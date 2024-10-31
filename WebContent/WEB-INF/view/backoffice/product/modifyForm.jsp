@@ -95,9 +95,12 @@
     input[required] {
         border-color: #0073e6;
     }
+    select[required] {
+    	border-color: #0073e6;
+	}
 
     /* 상품 항목 선택 컨테이너 */
-    #items-container {
+    #pet_items {
         display: flex;
         align-items: center;
         gap: 10px;
@@ -136,7 +139,6 @@
 <input type="hidden" id="cd_ctg_pet" 	name="cd_ctg_pet"	value="${productDto.cd_ctg_pet}"/>
 <input type="hidden" id="species" 		name="species"		value="${productDto.species}"/>
 <input type="hidden" id="pet_items" 	name="pet_items" 	value="${productDto.pet_items}"/>
-<input type="hidden" id="cd_state_prd" 	name="cd_state_prd" value="${productDto.cd_state_prd}"/>
 		<%@ include file="/include/bfc/navi.jsp" %>
 			<div class="right_col" role="main">
 			<!-- top tiles -->
@@ -163,7 +165,7 @@
 							<th>카테고리(*)</th>
 							<td>
 								<div style="display: flex; align-items: center; gap: 10px;">
-									<select id="species" name="species" required onchange="showPetItems(this.value)">
+									<select id="species" name="species" required onchange="showPetItems(this.value)" required>
 									    <option value="0">종류</option>
 									    <option value="01">강아지</option>
 									    <option value="02">고양이</option>
@@ -172,41 +174,48 @@
 									    <option value="05">물고기</option>
 									</select>
 									
-									<div id="items-container">
-									    <select id="dog_items" name="pet_items" required style="display:none">
-									        <option value="11" <c:if test="${productDto.pet_items == 11}">selected</c:if>>사료</option>
-									        <option value="12" <c:if test="${productDto.pet_items == 12}">selected</c:if>>간식</option>
-									        <option value="13" <c:if test="${productDto.pet_items == 13}">selected</c:if>>하우스</option>
-									        <option value="14" <c:if test="${productDto.pet_items == 14}">selected</c:if>>기타</option>
-									    </select>
+									<div id="pet_items">
+									    <select id="dog_items" name="pet_items" onchange="document.getElementById('pet_items').value = this.value;" required style="display:none">
+										    <option value="11">사료</option>
+										    <option value="12">간식</option>
+										    <option value="13">하우스</option>
+										    <option value="14">기타</option>
+										</select>
 									
-									    <select id="cat_items" name="pet_items" required style="display:none">
-									        <option value="21" <c:if test="${productDto.pet_items == 21}">selected</c:if>>사료</option>
-									        <option value="22" <c:if test="${productDto.pet_items == 22}">selected</c:if>>간식</option>
-									        <option value="23" <c:if test="${productDto.pet_items == 23}">selected</c:if>>하우스</option>
-									        <option value="24" <c:if test="${productDto.pet_items == 24}">selected</c:if>>기타</option>
-									    </select>
+										<select id="cat_items" name="pet_items" onchange="document.getElementById('pet_items').value = this.value;" required style="display:none">
+										    <option value="21">사료</option>
+										    <option value="22">간식</option>
+										    <option value="23">하우스</option>
+										    <option value="24">기타</option>
+										</select>
 									
-									    <select id="hamster_items" name="pet_items" required style="display:none">
-									        <option value="31" <c:if test="${productDto.pet_items == 31}">selected</c:if>>사료</option>
-									        <option value="32" <c:if test="${productDto.pet_items == 32}">selected</c:if>>간식</option>
-									        <option value="33" <c:if test="${productDto.pet_items == 33}">selected</c:if>>하우스</option>
-									        <option value="34" <c:if test="${productDto.pet_items == 34}">selected</c:if>>기타</option>
-									    </select>
-									
-									    <select id="reptile_items" name="pet_items" required style="display:none">
-									        <option value="41" <c:if test="${productDto.pet_items == 41}">selected</c:if>>사료</option>
-									        <option value="42" <c:if test="${productDto.pet_items == 42}">selected</c:if>>간식</option>
-									        <option value="43" <c:if test="${productDto.pet_items == 43}">selected</c:if>>하우스</option>
-									        <option value="44" <c:if test="${productDto.pet_items == 44}">selected</c:if>>기타</option>
-									    </select>
+										<select id="hamster_items" name="pet_items" onchange="document.getElementById('pet_items').value = this.value;" required style="display:none">
+										    <option value="31">사료</option>
+										    <option value="32">간식</option>
+										    <option value="33">하우스</option>
+										    <option value="34">기타</option>
+										</select>
+										
+										<select id="reptile_items" name="pet_items" onchange="document.getElementById('pet_items').value = this.value;" required style="display:none">
+										    <option value="41">사료</option>
+										    <option value="42">간식</option>
+										    <option value="43">하우스</option>
+										    <option value="44">기타</option>
+										</select>
+										
+										<select id="fish_items" name="pet_items" onchange="document.getElementById('pet_items').value = this.value;" required style="display:none">
+										    <option value="51">사료</option>
+										    <option value="52">간식</option>
+										    <option value="53">하우스</option>
+										    <option value="54">기타</option>
+										</select>
 									</div>
 								</div>
 							</td>
 						</tr>
 						<tr>
 							<th>상품 원가(*)</th>
-							<td><input type="text" name="price_cost" id="price_cost" maxlength="11" value="<fmt:formatNumber value="${productDto.price_cost}" type="number" />" style="text-align:right;" required /> 원</td>
+							<td><input type="text" name="price_cost" id="price_cost" maxlength="11" value="<fmt:formatNumber value="${productDto.price_cost}" type="number" />" style="text-align:right;" onkeyup="commaValue(this);" required /> 원</td>
 						</tr>
 						<tr>
 							<th>재고 수량(*)</th>
@@ -228,12 +237,19 @@
 	</footer>
 	<!-- /footer content -->
 <script>
+	function commaValue(input) {
+	    // 입력된 값에서 숫자만 남기고 포맷팅
+	    let value = input.value.replace(/,/g, '');  // 기존 쉼표 제거
+	    value = Number(value).toLocaleString();     // 숫자에 콤마 추가
+	    input.value = value;                        // 변환된 값 다시 입력 필드에 설정
+	}
 	function modifyProc(value) {
 		var frmMain = document.getElementById("frmMain");
 		document.getElementById("seq_prd").value = value;
 		
 		if (document.getElementById("prd_nm").value == ""
-				|| document.getElementById("cd_ctg_pet").value == ""
+				|| document.getElementById("species").value == "0"
+				|| document.getElementById("pet_items").value == "0"
 				|| document.getElementById("price_cost").value == ""
 				|| document.getElementById("count_stock").value == "") {
 			alert("필수 항목을 입력하세요!");
@@ -249,22 +265,34 @@
 		frmMain.submit();
 	}
 	function showPetItems(value) {
-	    // 모든 아이템 셀렉트박스를 숨깁니다.
+	    // 모든 아이템 셀렉트 박스를 숨깁니다.
 	    document.getElementById('dog_items').style.display = 'none';
 	    document.getElementById('cat_items').style.display = 'none';
 	    document.getElementById('hamster_items').style.display = 'none';
 	    document.getElementById('reptile_items').style.display = 'none';
 
-	    // 선택된 값에 따라 특정 아이템 셀렉트박스를 표시합니다.
+	    // 선택된 값에 따라 특정 아이템 셀렉트 박스를 표시하고, 해당 값을 hidden 필드에 저장합니다.
+	    let selectedPetItems = '';
+
 	    if (value === "01") {
 	        document.getElementById('dog_items').style.display = 'block';
+	        selectedPetItems = document.getElementById('dog_items').value;
 	    } else if (value === "02") {
 	        document.getElementById('cat_items').style.display = 'block';
+	        selectedPetItems = document.getElementById('cat_items').value;
 	    } else if (value === "03") {
 	        document.getElementById('hamster_items').style.display = 'block';
+	        selectedPetItems = document.getElementById('hamster_items').value;
 	    } else if (value === "04") {
 	        document.getElementById('reptile_items').style.display = 'block';
+	        selectedPetItems = document.getElementById('reptile_items').value;
+	    } else if (value === "05") {
+	        document.getElementById('fish_items').style.display = 'block';
+	        selectedPetItems = document.getElementById('fish_items').value;
 	    }
+
+	    // hidden input에 선택된 값을 저장
+	    document.getElementById('pet_items').value = selectedPetItems;
 	}
 </script>
 </form>

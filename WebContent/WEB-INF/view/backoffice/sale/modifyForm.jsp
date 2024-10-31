@@ -21,7 +21,7 @@
  */
 %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" trimDirectiveWhitespaces="true" %>
-<%@ page info="/WEB-INF/view/backoffice/product/writeForm.jsp" %>
+<%@ page info="/WEB-INF/view/backoffice/sale/writeForm.jsp" %>
 <%@ taglib prefix="c"					uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt"					uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="plutozoneUtilTag"	uri="/WEB-INF/tld/com.plutozone.util.tld" %>
@@ -29,6 +29,11 @@
 <html lang="kr">
 <head>
 	<%@ include file="/include/bfc/header.jsp" %>
+<link rel="stylesheet" href="http://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+	<script type="text/javascript" src="/js/package/tinymce/tinymce.min.js"></script>
+	<script type="text/javascript" src="/js/package/tinymce.js"></script>
 <style>
 	.styled-table {
     width: 900px;
@@ -89,12 +94,21 @@
         box-sizing: border-box;
         font-size: 14px;
     }
-
+    
+	/* 각 입력 필드 스타일 */
+    input[type="date"], select {
+        width: 20%;
+        padding: 8px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+        font-size: 14px;
+    }
     /* 필수 입력항목 스타일 */
     input[required] {
         border-color: #0073e6;
     }
-	select[required] {
+    select[required] {
     	border-color: #0073e6;
 	}
     /* 상품 항목 선택 컨테이너 */
@@ -131,33 +145,22 @@
 </style>
 </head>
 <body class="nav-md">
-<form id="frmMain" method="POST">
-<input type="hidden" id="seq_prd"	name="seq_prd" 		value="${productDto.seq_prd}"/>
-<input type="hidden" id="pet_items"	name="pet_items" 		value="${productDto.pet_items}"/>
+<form id="frmMain" method="POST" enctype="multipart/form-data">
+<input type="hidden" id="seq_sle"	name="seq_sle"	value="${saleDto.seq_sle}"/>
+<input type="hidden" id="pet_items" name="pet_items" value="${saleDto.pet_items}" />
 	<%@ include file="/include/bfc/navi.jsp" %>
 		<div class="right_col" role="main">
 		<!-- top tiles -->
-			 <article class="txtCenter">
+		<article class="txtCenter">
 			<table style="width: 900px; margin-left: auto; margin-right: auto">
 				<tr>
-					<th style="width: 150px;">상품명(*)</th>
+					<th style="width: 150px;">판매명</th>
 					<td>
-						<input type="text" id="prd_nm" name="prd_nm" style="width: 700px;" required />
+						<input style="width: 80%;" type="text" name="sle_nm" id="sle_nm" value="${saleDto.sle_nm}" required/>
 					</td>
 				</tr>
 				<tr>
-					<th>상품 상태(*)</th>
-					<td>
-						<select name="cd_state_prd" id="cd_state_prd">
-							<option value="1">판매중</option>
-							<option value="2">판매중지</option>
-							<option value="3">반려</option>
-							<option value="9">재고소진</option>
-						</select>
-					</td>
-				</tr>
-				<tr>
-					<th>카테고리(*)</th>
+					<th>카테고리</th>
 					<td>
 						<div style="display: flex; align-items: center; gap: 10px;">
 							<select id="species" name="species" required onchange="showPetItems(this.value)" required>
@@ -209,17 +212,50 @@
 					</td>
 				</tr>
 				<tr>
-					<th>상품 원가(*)</th>
-					<td><input type="text" name="price_cost" id="price_cost" maxlength="11" style="text-align:right;" onkeyup="commaValue(this);" required /> 원</td>
+					<th>설명</th>
+					<td>
+						<textarea required name="desces" id="desces" style="width: 650px;height:200px;" maxlength="1000">${saleDto.desces}</textarea>
+					</td>
 				</tr>
 				<tr>
-					<th>재고 수량(*)</th>
-					<td><input type="text" name="count_stock" id="count_stock" style="text-align:right;" required /> 개</td>
+					<th>판매 가격</th>
+					<td>
+						<input type="text" id="price_sale" name="price_sale" value="<fmt:formatNumber value="${saleDto.price_sale}" type="number" />" style="width:100px; text-align:right" onkeyup="commaValue(this);" required/>원
+					</td>
+				</tr>
+				<tr>
+					<th>판매 상태</th>
+					<td>
+						<select id="cd_state_sale" name="cd_state_sale" required>
+							<option value="1"<c:if test="${saleDto.cd_state_sale == '1'}"> selected</c:if>>판매중</option>
+							<option value="2"<c:if test="${saleDto.cd_state_sale == '2'}"> selected</c:if>>판매 중지</option>
+							<option value="3"<c:if test="${saleDto.cd_state_sale == '3'}"> selected</c:if>>반려</option>
+							<option value="9"<c:if test="${saleDto.cd_state_sale == '9'}"> selected</c:if>>품절</option>
+						</select>
+					</td>
+				</tr>
+				<tr>
+					<th>첨부 파일</th>
+					<td>
+						<input type="file" id="fileOrig" name="fileOrig" />
+					</td>
+				</tr>
+				<tr>
+					<th>판매 시작일</th>
+					<td>
+						<input type="date" id="dt_sale_start" name="dt_sale_start" value="${saleDto.dt_sale_start}" required/>
+					</td>
+				</tr>
+				<tr>
+					<th>판매 종료일</th>
+					<td>
+						<input type="date" id="dt_sale_end" name="dt_sale_end" value="${saleDto.dt_sale_end}" required/>
+					</td>
 				</tr>
 				<tr>
 					<td colspan="2" style="text-align:center;padding-top: 10px;padding-bottom: 10px">
-						<input type="button" value="등록" style="width:100px" onclick="javascript:writeProc();" />
-						 <input type="button" value="목록" style="width:100px" onclick="javascript:location.href='/console/product/list.web';" />
+						<input type="button" value="등록" style="width:100px" onclick="javascript:modifyProc();" />
+						 <input type="button" value="목록" style="width:100px" onclick="javascript:location.href='/console/sale/list.web';"/>
 					</td>
 				</tr>
 			</table>
@@ -232,37 +268,35 @@
 	</footer>
 	<!-- /footer content -->
 <script>
+	window.onload = function () {
+		// HTML Editor
+		tinymce.init({selector:'textarea'});
+	}
 	function commaValue(input) {
 	    // 입력된 값에서 숫자만 남기고 포맷팅
 	    let value = input.value.replace(/,/g, '');  // 기존 쉼표 제거
 	    value = Number(value).toLocaleString();     // 숫자에 콤마 추가
 	    input.value = value;                        // 변환된 값 다시 입력 필드에 설정
 	}
-
-	function writeProc() {
+	function modifyProc(value) {
 		var frmMain = document.getElementById("frmMain");
 		
-		if (document.getElementById("prd_nm").value == ""
+		if (document.getElementById("sle_nm").value == ""
+				|| document.getElementById("price_sale").value == ""
 				|| document.getElementById("species").value == "0"
 				|| document.getElementById("pet_items").value == "0"
-				|| document.getElementById("price_cost").value == ""
-				|| document.getElementById("count_stock").value == "") {
+				|| document.getElementById("dt_sale_start").value == ""
+				|| document.getElementById("dt_sale_end").value == ""
+				|| document.getElementById("cd_state_sale").value == "0"
+				|| tinymce.activeEditor.getContent() == "") {
 			alert("필수 항목을 입력하세요!");
 			return;
 		}
-		if(document.getElementById("price_cost").value <= 0) {
-			alert("원가를 0원 이상 입력하세요!")
-			return;
-		}
-		if(document.getElementById("count_stock").value < 1) {
-			alert("재고 수량을 1개 이상 입력하세요!")
-			return;
-		}
+		document.getElementById("price_sale").value = document.getElementById("price_sale").value.replaceAll(",", "");
 		
-		frmMain.action="/console/product/writeProc.web";
+		frmMain.action="/console/sale/modifyProc.web";
 		frmMain.submit();
 	}
-	
 	function showPetItems(value) {
 	    // 모든 아이템 셀렉트 박스를 숨깁니다.
 	    document.getElementById('dog_items').style.display = 'none';
@@ -293,7 +327,7 @@
 	    // hidden input에 선택된 값을 저장
 	    document.getElementById('pet_items').value = selectedPetItems;
 	}
-	</script>
+</script>
 </form>
 </body>
 </html>

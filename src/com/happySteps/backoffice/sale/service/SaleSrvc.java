@@ -25,6 +25,8 @@ import java.util.List;
 import javax.inject.Inject;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.transaction.interceptor.TransactionAspectSupport;
 
 import com.happySteps.backoffice.common.dto.PagingDto;
 import com.happySteps.backoffice.common.dto.PagingListDto;
@@ -47,6 +49,113 @@ public class SaleSrvc {
 
 	@Inject
 	SaleDao saleDao;
+	
+	/**
+	 * @return boolean
+	 * 
+	 * @since 2024-08-08
+	 * <p>DESCRIPTION: 품절(처리)</p>
+	 * <p>IMPORTANT:</p>
+	 * <p>EXAMPLE:</p>
+	 */
+	@Transactional("txBackoffice")
+	public boolean soldout(SaleDto saleDto) {
+		
+		int result = saleDao.soldout(saleDto);
+		
+		if (result == 1) return true;
+		else {
+			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+			return false;
+		}
+	}
+	
+	/**
+	 * @return boolean
+	 * 
+	 * @since 2024-08-08
+	 * <p>DESCRIPTION: 재개(처리)</p>
+	 * <p>IMPORTANT:</p>
+	 * <p>EXAMPLE:</p>
+	 */
+	@Transactional("txBackoffice")
+	public boolean re(SaleDto saleDto) {
+		
+		int result = saleDao.re(saleDto);
+		
+		if (result == 1) return true;
+		else {
+			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+			return false;
+		}
+	}
+	
+	/**
+	 * @return boolean
+	 * 
+	 * @since 2024-08-08
+	 * <p>DESCRIPTION: 판매 목록 중지(처리)</p>
+	 * <p>IMPORTANT:</p>
+	 * <p>EXAMPLE:</p>
+	 */
+	@Transactional("txBackoffice")
+	public boolean stop(SaleDto saleDto) {
+		
+		int result = saleDao.stop(saleDto);
+		
+		if (result == 1) return true;
+		else {
+			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+			return false;
+		}
+	}
+	
+	/**
+	 * @return boolean
+	 * 
+	 * @since 2024-08-08
+	 * <p>DESCRIPTION:</p>
+	 * <p>IMPORTANT:</p>
+	 * <p>EXAMPLE:</p>
+	 */
+	@Transactional("txBackoffice")
+	public boolean update(SaleDto saleDto) {
+		
+		int result = saleDao.update(saleDto);
+		
+		if (result == 1) return true;
+		else {
+			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+			return false;
+		}
+	}
+	
+	/**
+	 * @return boolean
+	 * 
+	 * @since 2024-08-08
+	 * <p>DESCRIPTION: 상품 등록 처리</p>
+	 * <p>IMPORTANT:</p>
+	 * <p>EXAMPLE:</p>
+	 */
+	@Transactional("txBackoffice")
+	public boolean insert(SaleDto saleDto) {
+		
+		
+		// 신규 글 번호(seq_bbs)
+		saleDto.setSeq_sle(saleDao.sequence());
+		// 판매하고자 하는 상품 일련번호
+		saleDto.setSeq_prd(saleDto.getSeq_prd());
+		
+		int result = saleDao.insert(saleDto);
+		
+		if (result == 1) return true;
+		else {
+			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+			return false;
+		}
+	}
+	
 	
 	/**
 	 * @return List<SaleDto>

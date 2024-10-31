@@ -109,6 +109,7 @@
 				 <article class="x_panel">
 					<div class="form-group pull-right">
 						<select name="cd_state_prd">
+						    <option value="0" <c:if test="${paging.cd_state_prd == 0}">selected</c:if>>전체</option>
 						    <option value="1" <c:if test="${paging.cd_state_prd == 1}">selected</c:if>>판매중</option>
 						    <option value="2" <c:if test="${paging.cd_state_prd == 2}">selected</c:if>>판매중지</option>
 						    <option value="3" <c:if test="${paging.cd_state_prd == 3}">selected</c:if>>반려</option>
