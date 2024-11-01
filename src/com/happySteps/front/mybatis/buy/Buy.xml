@@ -15,6 +15,7 @@
 	<select id="list" parameterType="buyDto" resultType="buyDto">
 		SELECT
 			SEQ_MBR
+			, SEQ_BUY_MST
 			, BUY_INFO
 			, BUY_PRICE
 			, BUY_COUNT
