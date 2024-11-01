@@ -16,7 +16,9 @@
 			<if test="flg_pets != null and flg_pets != ''">
 			, FLG_PETS	= #{flg_pets}
 			</if>
+			<if test="pets != null and flg_pets != ''">
 			, PETS		= #{pets}
+			</if>
 			, DT_UPT	= SYSDATE
 			, UPDATER	= #{updater}
 		WHERE
