@@ -72,8 +72,8 @@
 					+ "비밀번호=" + document.frmMain.passwd.value);
 			*/
 			// if (document.getElementById("email").value == "") {
-			if (document.getElementById("id").value == "") {
-				alert("아이디를 6 ~ 10자 이내로 입력하세요!");
+			if (document.getElementById("id").value.length < 5) {
+				alert("아이디를 5 ~ 10자 이내로 입력하세요!");
 				document.getElementById("id").focus();
 				// document.getElementById("email").select();
 				return;
