@@ -190,4 +190,28 @@ public class MemberWeb extends Common {
 		
 		return mav;
 	}
+	@RequestMapping(value = "/console/users/member/modifyStateProc.web")
+	public ModelAndView modifyStateProc(HttpServletRequest request, HttpServletResponse response, MemberDto memberDto) {
+		
+		ModelAndView mav = new ModelAndView("redirect:/error.web");
+		
+		try {
+
+			if (memberSrvc.update(memberDto)) {
+				request.setAttribute("script"	, "alert('적용되었습니다.');");
+				request.setAttribute("redirect"	, "/console/users/member/list.web");
+			}
+			else {
+				request.setAttribute("script"	, "alert('시스템 관리자에게 문의하세요!');");
+				request.setAttribute("redirect"	, "/");
+			}
+			mav.setViewName("forward:/servlet/result.web");
+		}
+		catch (Exception e) {
+			logger.error("[" + this.getClass().getName() + ".modifyProc()] " + e.getMessage(), e);
+		}
+		finally {}
+		
+		return mav;
+	}
 }

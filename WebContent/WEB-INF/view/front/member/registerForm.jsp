@@ -44,8 +44,8 @@
 			$("#btnId").on("click", function(e) {
 				
 				// 이메일이 7자리 이하 또는 @가 없으면
-				if ($("#id").val().length <=3) {
-					alert("아이디를 4자리 이상으로 입력하세요!");
+				if ($("#id").val().length < 5) {
+					alert("아이디를 5자리 이상으로 입력하세요!");
 					return false;
 				}
 				
@@ -85,7 +85,7 @@
 			var $frm = $("#frmMain");
 			
 			$("#btnNick").on("click", function(e) {
-				if ($("#nickname").val().length <=1) {
+				if ($("#nickname").val().length <2) {
 					alert("닉네임을 2자리 이상으로 입력하세요!");
 					return false;
 				}
