@@ -39,6 +39,10 @@ import com.happySteps.backoffice.users.dto.ManagerDto;
 @Repository("com.happySteps.backoffice.users.dao.ManagerDao")
 public class ManagerDao extends BaseDao {
 	
+	public int update(ManagerDto managerDto) {
+		return sqlSessionBackoffice.update("com.happySteps.backoffice.mybatis.users.Manager.update", managerDto);
+	}
+	
 	public int selectIdDuplicate(ManagerDto managerDto) {
 		return sqlSessionBackoffice.selectOne("com.happySteps.backoffice.mybatis.users.Manager.selectIdDuplicate", managerDto);
 	}

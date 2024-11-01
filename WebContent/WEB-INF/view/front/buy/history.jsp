@@ -48,7 +48,7 @@
 			<P style="width:900px;margin:0 auto;text-align:right;font-weight:bold;">총 구매 금액 : <fmt:formatNumber type="number" maxFractionDigits="3" value="${total_price}" />원</p>
 			<table class="headTop_01" style="width: 900px; margin-left: auto; margin-right: auto">
 				<tr>
-					<th style="width: 5%">NO</th>
+					<th style="width: 8%">주문번호</th>
 					<th style="width: 20%">상품명</th>
 					<th style="width: 10%">구매 가격</th>
 					<th style="width: 8%">구매 수량</th>
@@ -64,7 +64,7 @@
 						<c:forEach items="${list}" var="list">
 						<tr>
 							<td>
-								-
+								${list.seq_buy_mst}
 							</td>
 							<td style="text-align: left">
 								<a href="#">

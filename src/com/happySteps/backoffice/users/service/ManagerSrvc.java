@@ -45,6 +45,17 @@ public class ManagerSrvc {
 	@Inject
 	ManagerDao managerDao;
 	
+	@Transactional("txBackoffice")
+	public boolean update(ManagerDto managerDto) {
+		
+		if (managerDao.update(managerDto) == 1)
+			return true;
+		else {
+			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+			return false;
+		}
+	}
+	
 	public int selectIdDuplicate(ManagerDto managerDto) {
 		return managerDao.selectIdDuplicate(managerDto);
 	}

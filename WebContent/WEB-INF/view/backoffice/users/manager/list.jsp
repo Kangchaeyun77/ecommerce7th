@@ -31,7 +31,7 @@
 	<style></style>
 	<script>
 		
-		function goModifyState(seq_mbr, cd_state) {
+		function goModifyState(seq_mng, cd_state) {
 			
 			if (confirm("상태를 변경하시겠습니까?")) {
 				var frmMain = document.getElementById("frmMain");
