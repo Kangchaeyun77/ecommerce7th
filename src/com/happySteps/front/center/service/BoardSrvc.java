@@ -46,6 +46,33 @@ public class BoardSrvc {
 	BoardDao boardDao;
 	
 	/**
+	 * @param pagingDto [게시판 빈]
+	 * @return PagingListDto
+	 * 
+	 * @since 2024-07-04
+	 * <p>DESCRIPTION: 상품 문의 이력 목록</p>
+	 * <p>IMPORTANT:</p>
+	 * <p>EXAMPLE:</p>
+	 */
+	public PagingListDto saleList(PagingDto pagingDto) {
+		
+		PagingListDto pagingListDto = new PagingListDto();
+		
+		// 전체 라인(행) 수
+		int totalLine = boardDao.count(pagingDto);
+		// 전체 페이지 수 = 전체 라인(행) 수 / 페이징할 라인수
+		int totalPage = (int) Math.ceil((double)totalLine / (double)pagingDto.getLinePerPage());
+		pagingDto.setTotalLine(totalLine);
+		pagingDto.setTotalPage(totalPage);
+		if (totalPage == 0) pagingDto.setCurrentPage(1);
+		
+		pagingListDto.setPaging(pagingDto);
+		pagingListDto.setList(boardDao.list(pagingDto));
+		
+		return pagingListDto;
+	}
+	
+	/**
 	 * @param boardDto [게시판 빈]
 	 * @return BoardDto
 	 * 

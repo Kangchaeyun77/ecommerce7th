@@ -48,10 +48,18 @@ public class BoardDto {
 	private String dt_reg		= "";	// 등록 일시
 	private int register		= 0;	// 등록자
 	private String dt_upt		= "";	// 수정 일시
-	private int updater			= 0;	// 수정자
+	private int updater		= 0;	// 수정자
 	private int seq_mbr		= 0;	// 회원 일련번호
+	private String nickname		= "";	// 닉네임
 	
 	
+	
+	public String getNickname() {
+		return nickname;
+	}
+	public void setNickname(String nickname) {
+		this.nickname = nickname;
+	}
 	public int getSeq_mbr() {
 		return seq_mbr;
 	}

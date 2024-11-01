@@ -34,6 +34,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.happySteps.front.common.Common;
+import com.happySteps.front.common.dto.PagingDto;
+import com.happySteps.front.common.dto.PagingListDto;
 import com.happySteps.front.sale.dto.SaleDto;
 import com.happySteps.front.sale.service.SaleSrvc;
 import com.happySteps.front.buy.controller.BuyWeb;
@@ -42,6 +44,7 @@ import com.happySteps.front.buy.dto.BuyDetailListDto;
 import com.happySteps.front.buy.dto.BuyDto;
 import com.happySteps.front.buy.dto.BuyMasterDto;
 import com.happySteps.front.buy.service.BuySrvc;
+import com.happySteps.front.center.service.BoardSrvc;
 
 //import com.happySteps.front.buy.dto.BuyDto;
 //import com.happySteps.front.buy.service.BuySrvc;
@@ -66,6 +69,9 @@ public class BuyWeb extends Common{
 	
 	@Inject
 	SaleSrvc saleSrvc;
+	
+	@Inject
+	BoardSrvc boardSrvc;
 	
 	@RequestMapping(value = "/front/buy/writeProc.web")
 	public ModelAndView writeProc(HttpServletRequest request, HttpServletResponse response, BuyDetailListDto buyDetailListDto) {
@@ -138,20 +144,27 @@ public class BuyWeb extends Common{
 	}
 	
 	@RequestMapping(value = "/front/buy/writeForm.web")
-	public ModelAndView writeForm(HttpServletRequest request, HttpServletResponse response, SaleDto saleDto) {
+	public ModelAndView writeForm(HttpServletRequest request
+			, HttpServletResponse response
+			, SaleDto saleDto
+			, PagingDto pagingDto) {
 		
 		ModelAndView mav = new ModelAndView("redirect:/error.web");
 		
 		//logger.debug("내가 확인");
 		
 		try {
+pagingDto.setRegister(Integer.parseInt(getSession(request, "SEQ_MBR")));
 			
-			SaleDto _saleDto	= saleSrvc.select(saleDto);
-			
+			SaleDto _saleDto = saleSrvc.select(saleDto);
 			mav.addObject("saleDto"		, _saleDto);
 			
-			mav.setViewName("/front/buy/writeForm");
+			pagingDto.setCd_bbs_type(3);
+			PagingListDto pagingListDto = boardSrvc.saleList(pagingDto);
+			mav.addObject("paging"	, pagingListDto.getPaging());
+			mav.addObject("list"	, pagingListDto.getList());
 			
+			mav.setViewName("/front/buy/writeForm");
 		}
 		catch (Exception e) {
 			logger.error("[" + this.getClass().getName() + ".writeForm()] " + e.getMessage(), e);

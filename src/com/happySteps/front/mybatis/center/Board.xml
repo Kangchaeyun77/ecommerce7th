@@ -2,6 +2,24 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.happySteps.front.mybatis.center.Board">
 	
+	<select id="saleList" parameterType="pagingDto" resultType="boardDto">
+		SELECT
+			SEQ_BBS
+			, TITLE
+			, (SELECT tb_reply.SEQ_BBS FROM TB_BBS tb_reply WHERE tb_reply.SEQ_BBS_PARENT = TB_BBS.SEQ_BBS) seq_reply
+			, CD_CTG
+			, CONTENT
+			, FILE_SAVE
+			, FILE_ORIG
+			, TO_CHAR(DT_REG, 'YYYY-MM-DD') dt_reg
+			, NICKNAME
+		FROM
+			TB_BBS
+		WHERE
+			CD_BBS_TYPE		= #{cd_bbs_type}
+			AND SEQ_BBS		= #{seq_bbs}
+	</select>
+	
 	<select id="selectReply" parameterType="boardDto" resultType="boardDto">
 		SELECT
 			SEQ_BBS
@@ -110,9 +128,9 @@
 	
 	<insert id="insert" parameterType="boardDto">
 		INSERT INTO TB_BBS
-			(SEQ_BBS, SEQ_MBR, CD_BBS_TYPE, TITLE, CD_CTG, CONTENT, FILE_SAVE, FILE_ORIG, READED, DT_REG, REGISTER)
+			(SEQ_BBS, SEQ_MBR, CD_BBS_TYPE, TITLE, CD_CTG, CONTENT, FILE_SAVE, FILE_ORIG, READED, DT_REG, REGISTER, NICKNAME)
 		VALUES
-			(#{seq_bbs}, #{seq_mbr}, #{cd_bbs_type}, #{title}, #{cd_ctg}, #{content}, #{file_save}, #{file_orig}, 0, SYSDATE, #{register})
+			(#{seq_bbs}, #{seq_mbr}, #{cd_bbs_type}, #{title}, #{cd_ctg}, #{content}, #{file_save}, #{file_orig}, 0, SYSDATE, #{register}, #{nickname})
 	</insert>
 	
 	<update id="update" parameterType="boardDto">

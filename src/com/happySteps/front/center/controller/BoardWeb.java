@@ -331,6 +331,7 @@ public class BoardWeb extends Common {
 		try {
 			boardDto.setSeq_mbr(Integer.parseInt(getSession(request, "SEQ_MBR")));
 			boardDto.setRegister(Integer.parseInt(getSession(request, "SEQ_MBR")));
+			boardDto.setNickname(getSession(request, "NICKNAME"));
 			
 			// **************************
 			// For Board File
