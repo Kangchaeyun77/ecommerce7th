@@ -125,9 +125,9 @@
 				</c:if>
 			</table>
 			<div style="display: flex; justify-content: right; margin-top: 20px;">
-				<input type="button" value="목록1" style="width:35%; height:60px;" onclick="javascript:goList(11);" />
-				<input type="button" value="수정1" style="width:35%" onclick="javascript:modifyForm(11);" /> 
-				<input type="button" value="삭제1" style="width:15%" onclick="javascript:remove(11);" /> 
+				<input type="button" value="목록" style="width:15%; height:60px;" onclick="javascript:goList(11);" />
+				<input type="button" value="수정" style="width:15%" onclick="javascript:modifyForm(11);" /> 
+				<input type="button" value="삭제" style="width:15%" onclick="javascript:remove(11);" /> 
 			</div>
 			<hr>
 			<div style="font-size:30px; margin-top: 20px;">댓글 </div>
