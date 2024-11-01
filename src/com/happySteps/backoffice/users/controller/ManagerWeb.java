@@ -68,6 +68,46 @@ public class ManagerWeb extends Common {
 	 * <p>IMPORTANT:</p>
 	 * <p>EXAMPLE:</p>
 	 */
+	@RequestMapping(value = "/console/users/manager/modifyProc.web")
+	public ModelAndView modifyProc(HttpServletRequest request, HttpServletResponse response, ManagerDto managerDto) {
+		
+		ModelAndView mav = new ModelAndView("redirect:/error.web");
+		
+		try {
+			managerDto.setUpdater(Integer.parseInt(getSession(request, "SEQ_MNG")));
+			
+			
+			String phone1 = request.getParameter("phone1");
+			String phone2 = request.getParameter("phone2");
+			String phone3 = request.getParameter("phone3");
+			if(phone2 != null) {
+				String phone = phone1 + "-" + phone2 + "-" + phone3;
+				managerDto.setPhone(phone);
+			}else {
+				managerDto.setPhone(managerDto.getPhone());
+			}
+			
+			managerDto.setPost(managerDto.getPost());
+			managerDto.setAddr1(managerDto.getAddr1());
+			managerDto.setAddr2(managerDto.getAddr2());
+			
+			if (managerSrvc.update(managerDto)) {
+				request.setAttribute("script"	, "alert('적용되었습니다.');");
+				request.setAttribute("redirect"	, "/console/users/member/list.web");
+			}
+			else {
+				request.setAttribute("script"	, "alert('시스템 관리자에게 문의하세요!');");
+				request.setAttribute("redirect"	, "/");
+			}
+			mav.setViewName("forward:/servlet/result.web");
+		}
+		catch (Exception e) {
+			logger.error("[" + this.getClass().getName() + ".modifyProc()] " + e.getMessage(), e);
+		}
+		finally {}
+		
+		return mav;
+	}
 	
 	@RequestMapping(value = "/console/users/manager/modifyForm.web")
 	public ModelAndView modifyForm(HttpServletRequest request, HttpServletResponse response, ManagerDto managerDto) {

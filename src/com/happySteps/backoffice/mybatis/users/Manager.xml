@@ -1,7 +1,30 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.happySteps.backoffice.mybatis.users.Manager">
-
+	
+		<update id="update" parameterType ="managerDto">
+		UPDATE
+			TB_MNG
+		SET
+			CD_STATE	= #{cd_state}
+			<if test="phone != null and phone != ''">
+			, PHONE	= #{phone}
+			</if>
+			<if test="post != null and post != ''">
+			, POST		= #{post}
+			</if>
+			<if test="addr1 != null and addr1 != ''">
+			, ADDR1		= #{addr1}
+			</if>
+			<if test="addr2 != null and addr2 != ''">
+			, ADDR2		= #{addr2}
+			</if>
+			, DT_UPT	= SYSDATE
+			, UPDATER	= #{updater}
+		WHERE
+			SEQ_MNG = #{seq_mng}
+	</update>
+	
 	<select id="select" parameterType="managerDto" resultType="managerDto">
 		SELECT
 			SEQ_MNG
