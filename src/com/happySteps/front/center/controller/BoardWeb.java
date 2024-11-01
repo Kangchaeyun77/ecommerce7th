@@ -329,7 +329,7 @@ public class BoardWeb extends Common {
 		String message	= "";
 		
 		try {
-			
+			boardDto.setSeq_mbr(Integer.parseInt(getSession(request, "SEQ_MBR")));
 			boardDto.setRegister(Integer.parseInt(getSession(request, "SEQ_MBR")));
 			
 			// **************************
