@@ -56,7 +56,7 @@ public class AdapDto {
 	private String chrgpsn_contct_no =""; 	// 담당자 연락처
 	private String partclr_matr =""; 		// 동물의 특징
 	private String refine_lotno_addr =""; 	// 상세 주소 (지번)
-	private String refine_roadnm_addr =""; // 상세 주소 (도로명)
+	private String refine_roadnm_addr ="";  // 상세 주소 (도로명)
 	private String refine_zip_cd =""; 		// 우편번호
 	private String refine_wgs84_logt =""; 	// WGS84 경도
 	private String refine_wgs84_lat =""; 	// WGS84 위도

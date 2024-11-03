@@ -20,7 +20,13 @@
  */
 package com.happySteps.front.adap.controller;
 
-import java.util.List;
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -54,18 +60,46 @@ public class AdapApi extends Common {
 	* @param requestJson 요청할 JSON 데이터
 	* @return 외부 API의 응답
 	*/
-	@RequestMapping(value = "/front/adap/list.web", method = RequestMethod.POST) // POST 요청 처리
+	@RequestMapping(value = "/front/adap/list.web", method = RequestMethod.POST)
 	public ResponseEntity<String> callExternalApi(@RequestBody String requestJson) {
-		String apiUrl = "https://openapi.gg.go.kr/AbdmAnimalProtect?KEY=e705ae67f910466d9eef16b2618fa1c2&Type=json&pIndex=1&Size=100"; // 외부 API URL
-		String responseJson;
+	    String apiUrl = "https://openapi.gg.go.kr/AbdmAnimalProtect?KEY=e705ae67f910466d9eef16b2618fa1c2&Type=json&pIndex=1&Size=100";
+	    String responseJson = null;
 
-		try {
-			HttpJson httpJson = new HttpJson(apiUrl);
-			responseJson = httpJson.connectPost(requestJson, 3000); // 타임아웃3초
-			return ResponseEntity.ok(responseJson); // 응답을 반환
-		} catch (Exception e) {
-			logger.error("Error calling external API", e);
-			return ResponseEntity.status(500).body("{\"error\":\"" + e.getMessage() + "\"}");
-		}
+	    logger.debug("API 호출 시작: {}", apiUrl);
+	    try {
+	        // URL 객체 생성
+	        URL url = new URL(apiUrl);
+	        HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+
+	        // 요청 방식 설정
+	        conn.setRequestMethod("POST");
+	        conn.setRequestProperty("Content-Type", "application/json");
+	        conn.setDoOutput(true);
+
+	        // 요청 바디 전송
+	        try (OutputStream os = conn.getOutputStream()) {
+	            byte[] input = requestJson.getBytes("utf-8");
+	            os.write(input, 0, input.length);
+	        }
+
+	        // 응답 읽기
+	        try (BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream(), "utf-8"))) {
+	            StringBuilder responseBuilder = new StringBuilder();
+	            String responseLine;
+	            while ((responseLine = br.readLine()) != null) {
+	                responseBuilder.append(responseLine.trim());
+	            }
+	            responseJson = responseBuilder.toString();
+	        }
+
+	        return ResponseEntity.ok(responseJson);
+	        
+	    } catch (RuntimeException e) {
+	        logger.error("API 호출 중 RuntimeException 발생, 상태 코드: {}, 메시지: {}", e.getMessage());
+	        return ResponseEntity.status(500).body("{\"error\":\"" + e.getMessage() + "\"}");
+	    } catch (Exception e) {
+	        logger.error("API 호출 중 오류 발생", e);
+	        return ResponseEntity.status(500).body("{\"error\":\"" + e.getMessage() + "\"}");
+	    }
 	}
 }
