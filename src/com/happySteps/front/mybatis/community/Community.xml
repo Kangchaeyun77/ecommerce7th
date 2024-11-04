@@ -31,25 +31,31 @@
 		NVL(DEPTH, 0),
 		SEQ_COMMENT
 </select>
-	<!--  
+<!-- 
 	<select id="selectComments" parameterType="int" resultType="CommentDto">
-		SELECT
-			SEQ_COMMENT,
-			SEQ_BBS,
-			CONTENT,
-			NICKNAME,
-			TO_CHAR(DT_REG, 'YYYY-MM-DD') AS dt_reg,
-			SEQ_COMMENT_PARENT
-		FROM
-			TB_CMT
-		WHERE
-			SEQ_BBS = #{seq_bbs} 
-			AND flg_delete = 'N'
-		ORDER BY 
-			COALESCE(SEQ_COMMENT_PARENT, SEQ_COMMENT),
-			DT_REG ASC
-	</select>
-	-->
+	SELECT
+		SEQ_COMMENT,
+		SEQ_BBS,
+		CONTENT,
+		NICKNAME,
+		TO_CHAR(DT_REG, 'YYYY-MM-DD') AS dt_reg,
+		SEQ_COMMENT_PARENT,
+		DEPTH AS depth
+	FROM
+		TB_CMT
+	WHERE
+		SEQ_BBS = #{seq_bbs}
+		AND FLG_DELETE = 'N'
+	START WITH
+		SEQ_COMMENT_PARENT IS NULL
+	CONNECT BY
+		NOCYCLE
+		PRIOR SEQ_COMMENT = SEQ_COMMENT_PARENT
+		AND PRIOR SEQ_COMMENT != SEQ_COMMENT
+	ORDER SIBLINGS BY
+    	SEQ_COMMENT
+</select>
+ -->
 	<!-- 댓글 삭제 -->
 	<delete id="deleteComment" parameterType="int">
 		UPDATE 
