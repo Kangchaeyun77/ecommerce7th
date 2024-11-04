@@ -31,7 +31,6 @@
 		SELECT
 			SEQ_PRD
 			, PRD_NM
-			, CD_CTG_PET
 			, SPECIES
 			, PET_ITEMS
 			, PRICE_COST

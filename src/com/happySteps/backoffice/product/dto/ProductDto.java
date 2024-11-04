@@ -32,7 +32,6 @@ public class ProductDto {
 	
 	private int seq_prd		= 0;
 	private String prd_nm 		= "";
-	private int cd_ctg_pet 	= 0;
 	private int species 		= 0;
 	private int pet_items 		= 0;
 	private int price_cost		= 0;
@@ -69,12 +68,6 @@ public class ProductDto {
 	}
 	public void setPrd_nm(String prd_nm) {
 		this.prd_nm = prd_nm;
-	}
-	public int getCd_ctg_pet() {
-		return cd_ctg_pet;
-	}
-	public void setCd_ctg_pet(int cd_ctg_pet) {
-		this.cd_ctg_pet = cd_ctg_pet;
 	}
 	public int getPet_items() {
 		return pet_items;

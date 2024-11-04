@@ -136,7 +136,6 @@
 <form id="frmMain" method="POST">
 <input type="hidden" id="seq_prd"		name="seq_prd" 		value="${productDto.seq_prd}"	/>
 <input type="hidden" id="sequence"		name="sequence" />
-<input type="hidden" id="cd_ctg_pet" 	name="cd_ctg_pet"	value="${productDto.cd_ctg_pet}"/>
 <input type="hidden" id="species" 		name="species"		value="${productDto.species}"/>
 <input type="hidden" id="pet_items" 	name="pet_items" 	value="${productDto.pet_items}"/>
 		<%@ include file="/include/bfc/navi.jsp" %>

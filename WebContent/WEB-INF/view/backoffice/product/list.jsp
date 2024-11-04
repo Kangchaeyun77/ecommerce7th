@@ -99,7 +99,6 @@
 <input type="hidden" id="currentPage"	name="currentPage"	value="${paging.currentPage}" />
 <input type="hidden" id="seq_prd"		name="seq_prd" 		value="${paging.seq_prd}" />
 <input type="hidden" id="sequence"		name="sequence" />
-<input type="hidden" id="cd_ctg_pet" 	name="cd_ctg_pet"	value="${paging.cd_ctg_pet}"/>
 <input type="hidden" id="pet_items" 	name="pet_items" 	value="${paging.pet_items}"/>
 <input type="hidden" id="count_stock" 	name="count_stock" 	value="${paging.count_stock}"/>
 		<%@ include file="/include/bfc/navi.jsp" %>

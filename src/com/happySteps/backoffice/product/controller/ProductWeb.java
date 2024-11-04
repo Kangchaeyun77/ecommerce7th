@@ -276,12 +276,11 @@ public class ProductWeb extends Common {
 		ModelAndView mav = new ModelAndView("redirect:/error.web");
 		
 		try {
-			pagingDto.setRegister(Integer.parseInt(getSession(request, "SEQ_MNG")));
 			
 			PagingListDto pagingListDto = productSrvc.list(pagingDto);
-	    	
-	    	mav.addObject("paging", pagingListDto.getPaging());
-            mav.addObject("list", pagingListDto.getList());
+			
+			mav.addObject("paging", pagingListDto.getPaging());
+			mav.addObject("list", pagingListDto.getList());
 			
 			mav.setViewName("backoffice/product/list");
 		}
