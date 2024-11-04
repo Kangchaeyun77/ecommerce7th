@@ -30,7 +30,6 @@
 	<meta http-equiv="pragma" content="no-cache" />
 	<%@ include file="/include/front/header.jsp" %>
 	<%@ include file="/include/front/top.jsp" %>
-	<link rel="stylesheet" href="/css/gnb.css">
 	<title>동물 입양공고 조회</title>
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 	<style>
@@ -107,7 +106,7 @@
 	</nav>
 	<section class="content">
 	<nav>
-	<%@ include file="/include/front/lnbAdap.jsp" %>
+	<%@ include file="/include/front/gnbAdap.jsp" %>
 	</nav>
 		<img src="/images/adap_benner.png" alt="입양페이지 공지" style="width: 100%; height: 40%; object-fit: cover; float: center; margin-left: 10px; margin-bottom: 10px; margin-top: 20px;"/>
 	<div>
@@ -139,13 +138,13 @@
 	
 			<label>시군구:</label>
 			<select id="sigungu">
-			<option value="all">		전체</option>
+			<option value="all">		전체			</option>
 			<!-- 시군구 옵션 추가 -->
 			</select><br>
 	
 			<label>종류:</label>
 			<select id="type">
-				<option value="all">전체	</option>
+				<option value="all">전체		</option>
 				<option value="dog">개		</option>
 				<option value="cat">고양이	</option>
 				<option value="else">기타	</option>
