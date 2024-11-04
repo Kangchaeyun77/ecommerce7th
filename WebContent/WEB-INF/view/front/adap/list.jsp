@@ -22,7 +22,6 @@
 %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" trimDirectiveWhitespaces="true" %>
 <%@ page info="/WEB-INF/view/front/adap/list.jsp" %>
-<%@ taglib prefix="plutozoneUtilTag"	uri="/WEB-INF/tld/com.plutozone.util.tld" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -45,6 +44,7 @@
 			padding: 10px; /* 카드 내부 여백 */
 			border: 1px solid #ccc; /* 카드 경계선 */
 			border-radius: 5px; /* 카드 모서리 둥글게 */
+			transition: transform 0.3s ease, box-shadow 0.3s ease; /* 부드러운 전환 효과 */
 		}
 		.animal-card img {
 			width: 100%; /* 이미지 너비 100%로 설정 */
@@ -52,17 +52,24 @@
 			object-fit: cover; /* 이미지 비율 유지 */
 			border-radius: 5px; /* 이미지 모서리 둥글게 */
 		}
+		
+		.animal-card:hover {
+		transform: translateY(-5px); /* 마우스를 올렸을 때 위로 이동 */
+		box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2); /* 그림자 강도 증가 */
+	}
 	</style>
 	<script>
+	//API 데이터를 가져오는 함수
 	$(document).ready(function() {
 		fetchAnimalData(); // 데이터 가져오기 함수 호출
-
+		fetchAnimalData(${paging.currentPage}); // 현재 페이지 데이터 가져오기
 		function fetchAnimalData() {
 			$.ajax({
 				url: '/front/adap/list.web', // 데이터 요청 URL
 				method: 'POST',
 				contentType: 'application/json',
 				dataType: 'json',
+				//data: JSON.stringify({ currentPage: currentPage }), 
 				data: JSON.stringify({}), // 요청 데이터
 				success: function(response) {
 					if (response.AbdmAnimalProtect) {
@@ -98,7 +105,6 @@
 <body>
 <form id="frmMain" method="POST">
 <input type="hidden" name="cd_bbs_type" id="cd_bbs_type" />
-<input type="hidden" id="currentPage"	name="currentPage"	value="${paging.currentPage}" />
 <div class="container">
 	<header>
 	</header>
@@ -113,7 +119,6 @@
 		<div style="border: 1px solid red; margin-top: 20px;">
 			<label>날짜:</label>
 			<input type="date" id="startDate"> ~ <input type="date" id="endDate"><br>
-	
 			<label>시도:</label>
 			<select id="sigun">
 			<option value="all">		전체			</option>
@@ -138,13 +143,13 @@
 	
 			<label>시군구:</label>
 			<select id="sigungu">
-			<option value="all">		전체			</option>
+			<option value="all">		전체</option>
 			<!-- 시군구 옵션 추가 -->
 			</select><br>
 	
 			<label>종류:</label>
 			<select id="type">
-				<option value="all">전체		</option>
+				<option value="all">전체	</option>
 				<option value="dog">개		</option>
 				<option value="cat">고양이	</option>
 				<option value="else">기타	</option>
@@ -162,17 +167,27 @@
 			<input type="text" id="registrationNumber">
 	
 			<button onclick="searchAnimals()">조회</button>
-			
+			<br>
+			<br>
+			<br>
 			<!-- 카드 리스트 부분 -->
 			<div class="card-container" id="animalList">
 				
 			</div>
 		</div>
 	</div>
-			<div class="center-container"  style= "display: flex; justify-content: center;">
-				<plutozoneUtilTag:page styleID="front_image" currentPage="${paging.currentPage}" linePerPage="${paging.linePerPage}" totalLine="${paging.totalLine}" scriptFunction="goPage" />
-			</div>
-	<br/>
+	<div class="card-container"></div>
+			<br/>
+		<div style="display: flex; justify-content: center;">
+			<span class="pageNavi_front_image">
+				<img src="/images/btn/btn_pageFirst.gif" border="0" alt="처음으로" onclick="goToPage(1)" />&nbsp;
+				<img src="/images/btn/btn_pagePrev.gif" border="0" alt="이전페이지" onclick="changePage(-1)" />&nbsp;
+				<strong id="current-page">1</strong>&nbsp;
+				<img src="/images/btn/btn_pageNext.gif" border="0" alt="다음페이지" onclick="changePage(1)" />&nbsp;
+				<img src="/images/btn/btn_pageLast.gif" border="0" alt="마지막으로" onclick="goToPage(totalPages)" />&nbsp;
+			</span>
+		</div>
+			<br/>
 	</section>
 	<footer>
 		<%@ include file="/include/front/footer.jsp" %>
