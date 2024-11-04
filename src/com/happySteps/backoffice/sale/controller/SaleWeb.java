@@ -34,7 +34,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.support.MessageSourceAccessor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.happySteps.backoffice.common.Common;
@@ -280,9 +279,9 @@ public class SaleWeb extends Common {
 			saleDto.setRegister(Integer.parseInt(getSession(request, "SEQ_MNG")));
 			
 			// 이미지(대표)
-			String pathBase		= dynamicProperties.getMessage("seller.upload.path", "[UNDEFINED]");
-			String maxSize		= dynamicProperties.getMessage("seller.upload.file.max5MB"			, "[UNDEFINED]");
-			String allowedExt	= dynamicProperties.getMessage("seller.upload.file.extension.image"	, "[UNDEFINED]");
+			String pathBase		= dynamicProperties.getMessage("backoffice.upload.path", "[UNDEFINED]");
+			String maxSize		= dynamicProperties.getMessage("backoffice.upload.file.max5MB"			, "[UNDEFINED]");
+			String allowedExt	= dynamicProperties.getMessage("backoffice.upload.file.extension.image"	, "[UNDEFINED]");
 			
 			int countFile = 0;
 			if (null != fileUploadDto.getFiles()) countFile = fileUploadDto.getFiles().size();
@@ -392,7 +391,7 @@ public class SaleWeb extends Common {
 		ModelAndView mav = new ModelAndView("redirect:/error.web");
 		
 		try {
-			
+
 			saleDto.setRegister(Integer.parseInt(getSession(request, "SEQ_MNG")));
 			
 			SaleDto _saleDto = saleSrvc.select(saleDto);

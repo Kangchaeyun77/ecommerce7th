@@ -64,15 +64,16 @@
 			(#{seq_sle}, #{seq_prd}, #{sle_nm}, #{desces}, #{species}, #{pet_items}, #{price_sale}, #{cd_state_sale}, #{img}, #{dt_sale_start}, TO_DATE(#{dt_sale_end}, 'YYYY-MM-DD HH24:MI:SS'), SYSDATE, #{register})
 	</insert>
 	
-	<select id="listPrd" parameterType="saleDto" resultType="saleDto">
+	<select id="listPrd" parameterType="productDto" resultType="saleDto">
 		SELECT
 			SEQ_PRD
 			, PRD_NM
+			, SPECIES
+			, PET_ITEMS
 		FROM
 			TB_PRD
 		WHERE
 			CD_STATE_PRD	= 1
-			AND REGISTER	= #{register}
 		ORDER BY	
 			DT_REG DESC
 	</select>
@@ -92,16 +93,14 @@
 		FROM
 			TB_SLE
 		WHERE
-			REGISTER		= #{register}
-			AND SEQ_SLE		= #{seq_sle}
+			SEQ_SLE = #{seq_sle}
 	</select>
 	
 	<select id="count" parameterType="pagingDto" resultType="java.lang.Integer">
 		SELECT
 			COUNT(ROWNUM)
 		FROM
-			TB_SLE sle INNER JOIN TB_PRD prd ON sle.SEQ_PRD = prd.SEQ_PRD
-		WHERE
+			TB_SLE
 			<include refid="where" />
 	</select>
 	
@@ -111,18 +110,17 @@
 		FROM
 			(
 			SELECT
-				/*+ first_rows(10) */ ROW_NUMBER() OVER (ORDER BY sle.DT_REG DESC) rnum
-				, sle.SEQ_SLE
-				, sle.SLE_NM
-				, sle.SPECIES
-				, sle.PET_ITEMS
-				, sle.DESCES
-				, sle.CD_STATE_SALE
-				, sle.PRICE_SALE
-				, TO_CHAR(sle.DT_REG, 'YYYY-MM-DD') dt_reg
+				/*+ first_rows(10) */ ROW_NUMBER() OVER (ORDER BY DT_REG DESC) rnum
+				, SEQ_SLE
+				, SLE_NM
+				, SPECIES
+				, PET_ITEMS
+				, DESCES
+				, CD_STATE_SALE
+				, PRICE_SALE
+				, TO_CHAR(DT_REG, 'YYYY-MM-DD') dt_reg
 			FROM
-				TB_SLE sle INNER JOIN TB_PRD prd ON sle.SEQ_PRD = prd.SEQ_PRD
-			WHERE
+				TB_SLE
 				<include refid="where" />
 			)
 		<![CDATA[
@@ -134,29 +132,18 @@
 	</select>
 	
 	<sql id="where">
-			sle.REGISTER = #{register}
-		<if test="species != null and species != 0">
+		WHERE 1=1
+		<if test="cd_state_sale != '0' and cd_state_sale != ''">
+			AND CD_STATE_SALE = #{cd_state_sale}
+		</if>
+		<if test="species != '0' and species != ''">
 			AND SPECIES = #{species}
 		</if>
 		<if test="searchWord != null and searchWord != ''">
-			<if test="searchKey == 'sle_nm'">
+			<if test="searchKey == 'prd_nm'">
 				AND SLE_NM LIKE '%' || #{searchWord} || '%'
 			</if>
-			<if test="searchKey == 'sle_desces'">
-				AND SLE_DESCES LIKE '%' || #{searchWord} || '%'
-			</if>
-			<if test="searchKey == 'sle_desces_and_nm'">
-				AND (SLE_NM LIKE '%' || #{searchWord} || '%' OR DESCES LIKE '%' || #{searchWord} || '%')
-			</if>
 		</if>
-		<choose>
-			<when test="cd_state_sale != null and cd_state_sale != 0">
-				AND sle.CD_STATE_SALE = #{cd_state_sale}
-			</when>
-			<otherwise>
-				AND sle.CD_STATE_SALE IN (1, 2, 9)
-			</otherwise>
-		</choose>
 	</sql>
 	
 	<select id="sequence" resultType="java.lang.Integer">

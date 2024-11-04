@@ -14,6 +14,9 @@
 			<if test="species != null and species != ''">
 			, SPECIES = #{species}
 			</if>
+			<if test="pet_items != null and species != ''">
+			, PET_ITEMS = #{pet_items}
+			</if>
 			<if test="price_cost != null and price_cost != ''">
 			, PRICE_COST = #{price_cost}
 			</if>
@@ -111,7 +114,6 @@
 				AND PRD_NM LIKE '%' || #{searchWord} || '%'
 			</if>
 		</if>
-		
 	</sql>
 	
 	<select id="sequence" resultType="java.lang.Integer">

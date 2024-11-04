@@ -77,8 +77,6 @@
 <input type="hidden" id="seq_sle"		name="seq_sle" 		value="${saleDto.seq_sle}"/>
 <input type="hidden" id="sequence"		name="sequence" />
 <input type="hidden" id="cd_state_sale" name="cd_state_sale"value="${saleDto.cd_state_sale}"/>
-<input type="hidden" id="cd_ctg_pet" 	name="cd_ctg_pet"	value="${saleDto.cd_ctg_pet}"/>
-<input type="hidden" id="species" 		name="species" 		value="${saleDto.species}"/>
 <input type="hidden" id="pet_items" 	name="pet_items" 	value="${saleDto.pet_items}"/>
 		<%@ include file="/include/bfc/navi.jsp" %>
 			<div class="right_col" role="main">
@@ -94,7 +92,7 @@
 						<tr>
 							<th>카테고리</th>
 							<td>
-								동물: ${saleDto.species}/ 상품: ${saleDto.pet_items}
+								동물: ${saleDto.species} / 상품: ${saleDto.pet_items}
 							</td>
 						</tr>
 						<tr>
@@ -112,7 +110,10 @@
 						<tr>
 							<th>판매 상태</th>
 							<td>
-								${saleDto.cd_state_sale}
+								<c:if test="${saleDto.cd_state_sale == '1'}">판매중</c:if>
+								<c:if test="${saleDto.cd_state_sale == '2'}">판매중지</c:if>
+								<c:if test="${saleDto.cd_state_sale == '3'}">반려</c:if>
+								<c:if test="${saleDto.cd_state_sale == '9'}">재고소진</c:if>
 							</td>
 						</tr>
 						<tr>

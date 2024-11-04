@@ -99,9 +99,6 @@
 <input type="hidden" id="currentPage"	name="currentPage"	value="${paging.currentPage}" />
 <input type="hidden" id="seq_sle"		name="seq_sle" 		value="${paging.seq_sle}"/>
 <input type="hidden" id="sequence"		name="sequence" />
-<input type="hidden" id="cd_ctg_pet" 	name="cd_ctg_pet"	value="${paging.cd_ctg_pet}"/>
-<input type="hidden" id="species" 		name="species"		value="${paging.species}"/>
-<input type="hidden" id="pet_items" 	name="pet_items" 	value="${paging.pet_items}"/>
 		<%@ include file="/include/bfc/navi.jsp" %>
 			<div class="right_col" role="main">
 			<!-- top tiles -->
@@ -152,10 +149,14 @@
 										<a href="/console/sale/view.web?seq_sle=${list.seq_sle}">${list.sle_nm} </a>
 									</td>
 									<td>
-										${list.cd_state_sale}
+										<c:if test="${list.cd_state_sale == '1'}">판매중</c:if>
+										<c:if test="${list.cd_state_sale == '2'}">판매중지</c:if>
+										<c:if test="${list.cd_state_sale == '3'}">반려</c:if>
+										<c:if test="${list.cd_state_sale == '9'}">재고소진</c:if>
+										
 									</td>
 									<td>
-										동물: ${list.species}/ 상품: ${list.pet_items}
+										동물: ${list.species} / 상품: ${list.pet_items}
 									</td>
 									<td>
 										<fmt:formatNumber value="${list.price_sale}" type="number" />
