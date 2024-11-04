@@ -139,13 +139,13 @@
 	
 			<label>시군구:</label>
 			<select id="sigungu">
-			<option value="all">		전체			</option>
+			<option value="all">		전체</option>
 			<!-- 시군구 옵션 추가 -->
 			</select><br>
 	
 			<label>종류:</label>
 			<select id="type">
-				<option value="all">전체		</option>
+				<option value="all">전체	</option>
 				<option value="dog">개		</option>
 				<option value="cat">고양이	</option>
 				<option value="else">기타	</option>
