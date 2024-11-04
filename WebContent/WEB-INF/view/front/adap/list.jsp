@@ -1,13 +1,13 @@
 <%
 /**
  * YOU ARE STRICTLY PROHIBITED TO COPY, DISCLOSE, DISTRIBUTE, MODIFY OR USE THIS PROGRAM
- * IN PART OR AS A WHOLE WITHOUT THE PRIOR WRITTEN CONSENT OF HIMEDIA.CO.KR.
- * HIMEDIA.CO.KR OWNS THE INTELLECTUAL PROPERTY RIGHTS IN AND TO THIS PROGRAM.
- * COPYRIGHT (C) 2024 HIMEDIA.CO.KR ALL RIGHTS RESERVED.
+ * IN PART OR AS A WHOLE WITHOUT THE PRIOR WRITTEN CONSENT OF HAPPYSTEPS.COM.
+ * HAPPYSTEPS.COM OWNS THE INTELLECTUAL PROPERTY RIGHTS IN AND TO THIS PROGRAM.
+ * COPYRIGHT (C) 2024 HAPPYSTEPS.COM ALL RIGHTS RESERVED.
  *
- * 하기 프로그램에 대한 저작권을 포함한 지적재산권은 himedia.co.kr에 있으며,
- * himedia.co.kr이 명시적으로 허용하지 않는 사용, 복사, 변경 및 제 3자에 의한 공개, 배포는 엄격히 금지되며
- * himedia.co.kr의 지적재산권 침해에 해당된다.
+ * 하기 프로그램에 대한 저작권을 포함한 지적재산권은 HAPPYSTEPS.COM에 있으며,
+ * HAPPYSTEPS.COM이 명시적으로 허용하지 않는 사용, 복사, 변경 및 제 3자에 의한 공개, 배포는 엄격히 금지되며
+ * HAPPYSTEPS.COM의 지적재산권 침해에 해당된다.
  * Copyright (C) 2024 happySteps All Rights Reserved.
  *
  *
@@ -59,8 +59,30 @@
 	</style>
 	<script>
 	
+	function viewAnimalDetail(animalId) {
+	    const form = document.createElement('form');
+	    form.method = 'POST';
+	    form.action = '/front/adap/view.web';
+
+	    const input = document.createElement('input');
+	    input.type = 'hidden';
+	    input.name = 'pblancId';
+	    input.value = animalId;
+
+	    form.appendChild(input);
+	    document.body.appendChild(form);
+	    form.submit();
+	}
+	
+	function viewAnimalDetail(animalId) {
+	    // 상세보기 페이지로 이동
+	    window.location.href = '/front/adap/view.web?pblancId=' + animalId;
+	}
+	
 	let currentPage = 1; // 전역 변수로 현재 페이지를 정의
 	let totalPages = 10; // 예시로 최대 페이지 수를 10으로 설정. 실제 데이터에 따라 수정 필요.
+	const itemsPerPage = 20; // 페이지당 보여줄 항목 수
+
 
 	function changePage(direction) {
 		currentPage += direction; // 페이지 변경
@@ -85,11 +107,13 @@
 			success: function(response) {
 				if (response.AbdmAnimalProtect) {
 					let items = response.AbdmAnimalProtect[1].row; // 데이터 배열
+					const listTotalCount = response.LIST_TOTAL_COUNT; // 전체 개수
 					let html = ''; // 카드 HTML을 저장할 변수
 
 					items.forEach(function(item) {
 						// 카드 HTML 생성
-						html += '<div class="animal-card">';
+						//html += '<div class="animal-card">';
+						 html += '<div class="animal-card" onclick="viewAnimalDetail(\'' + (item.PBLANC_IDNTFY_NO || '') + '\')">'; // 여기 수정
 						html += '<img src="' + (item.IMAGE_COURS || '') + '" alt="동물 이미지">';
 						html += '<p><strong>공고번호:</strong> ' + (item.PBLANC_IDNTFY_NO || '') + '</p>';
 						html += '<p><strong>품종:</strong> ' + (item.SPECIES_NM || '') + '</p>';
@@ -100,8 +124,11 @@
 					});
 					
 					$('#animalList').html(html); // 동물 목록 업데이트
+					// 공고 총 갯수 업데이트
+					$('#total-count').text(response.totalCount || 0); // 응답에서 총 갯수를 가져와서 표시
 				} else {
 					$('#animalList').html('<p>데이터가 없습니다.</p>'); // 데이터 없음 메시지
+					$('#total-count').text('0'); // 총 갯수도 0으로 초기화
 				}
 			},
 			error: function(xhr, status, error) {
@@ -187,6 +214,7 @@
 			<br>
 			<br>
 			<br>
+			 <p><strong>공고 총 갯수:</strong> <span id="total-count">0</span></p>
 			<!-- 카드 리스트 부분 -->
 			<div class="card-container" id="animalList">
 				

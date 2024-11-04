@@ -165,7 +165,7 @@
 		<div class="section-header d-md-flex justify-content-between align-items-center mb-3">
 			<h2 class="display-3 fw-normal">Best selling products</h2>
 			<div>
-				<a href="#" class="btn btn-outline-dark btn-lg text-uppercase fs-6 rounded-1">
+				<a href="/front/sale/shop/index.web" class="btn btn-outline-dark btn-lg text-uppercase fs-6 rounded-1">
 					 전체 인기상품 보러가기
 					 <span class="arrow-text">→</span> <!-- 화살표 텍스트 -->
 					 <!-- 
@@ -185,10 +185,10 @@
 						New
 					</div> -->
 					<div class="card position-relative">
-						<a href="single-product.html"><img src="../images/item5.jpg" class="img-fluid rounded-4" alt="image"></a>
+						<a href="single-product.html"><img src="/images/temporary/its.png" class="img-fluid rounded-4" alt="image"></a>
 						<div class="card-body p-0">
 							<a href="single-product.html">
-							<span class="card-title pt-4 m-0">Grey hoodie</span>
+							<span class="card-title pt-4 m-0">이츠독 순면 쁘띠미뇽 필로우</span>
 							<!-- h3대신 span로 대체 
 								<h3 class="card-title pt-4 m-0">Grey hoodie</h3>
 							-->
@@ -213,7 +213,7 @@
 								    ⭐️
 								    5.0
 								</span>
-								<h3 class="secondary-font text-primary">$18.00</h3>
+								<h3 class="secondary-font text-primary">19,000원</h3>
 					<div class="d-flex flex-wrap mt-3">
 						<a href="#" class="btn-cart me-3 px-3 pt-2 pb-2" style="font-family: 'Nunito', sans-serif; display: flex; align-items: center; justify-content: center; font-size: 14px;"> <!-- Nunito로 글씨체 변경 -->
 						    <span class="text-uppercase m-0">Add to Cart</span>
@@ -243,10 +243,10 @@
 						New
 					</div> -->
 					<div class="card position-relative">
-						<a href="single-product.html"><img src="../images/item6.jpg" class="img-fluid rounded-4" alt="image"></a>
+						<a href="single-product.html"><img src="/images/temporary/catpound.png" class="img-fluid rounded-4" alt="image"></a>
 						<div class="card-body p-0">
 							<a href="single-product.html">
-								<span class="card-title pt-4 m-0">Grey hoodie</span>
+								<span class="card-title pt-4 m-0">펫파운드 우주펫 캡슐하우스</span>
 							</a>
 
 							<div class="card-text">
@@ -268,7 +268,7 @@
 								    ⭐️
 								    5.0
 								</span>
-								<h3 class="secondary-font text-primary">$18.00</h3>
+								<h3 class="secondary-font text-primary">27,900원</h3>
 					<div class="d-flex flex-wrap mt-3">
 						<a href="#" class="btn-cart me-3 px-3 pt-2 pb-2" style="font-family: 'Nunito', sans-serif; display: flex; align-items: center; justify-content: center; font-size: 14px;"> <!-- Nunito로 글씨체 변경 -->
 						    <span class="text-uppercase m-0">Add to Cart</span>
@@ -295,13 +295,13 @@
 
 				<div class="swiper-slide">
 					<div class="z-1 position-absolute rounded-3 m-3 px-3 border border-dark-subtle">
-						Sale
+						
 					</div>
 					<div class="card position-relative">
-						<a href="single-product.html"><img src="../images/item7.jpg" class="img-fluid rounded-4" alt="image"></a>
+						<a href="single-product.html"><img src="/images/temporary/ham.png" class="img-fluid rounded-4" alt="image"></a>
 						<div class="card-body p-0">
 							<a href="single-product.html">
-							<span class="card-title pt-4 m-0">Grey hoodie</span>
+							<span class="card-title pt-4 m-0">[타핏] 도넛 은신처<br></span>
 							<!-- h3대신 span로 대체 
 								<h3 class="card-title pt-4 m-0">Grey hoodie</h3>
 							-->
@@ -326,7 +326,7 @@
 								    ⭐️
 								    5.0
 								</span>
-								<h3 class="secondary-font text-primary">$18.00</h3>
+								<h3 class="secondary-font text-primary">13,000원</h3>
 					<div class="d-flex flex-wrap mt-3">
 						<a href="#" class="btn-cart me-3 px-3 pt-2 pb-2" style="font-family: 'Nunito', sans-serif; display: flex; align-items: center; justify-content: center; font-size: 14px;"> <!-- Nunito로 글씨체 변경 -->
 						    <span class="text-uppercase m-0">Add to Cart</span>
@@ -355,10 +355,10 @@
 						New
 					</div> -->
 					<div class="card position-relative">
-						<a href="single-product.html"><img src="../images/item8.jpg" class="img-fluid rounded-4" alt="image"></a>
+						<a href="single-product.html"><img src="/images/temporary/ham1.png" class="img-fluid rounded-4" alt="image"></a>
 						<div class="card-body p-0">
 							<a href="single-product.html">
-							<span class="card-title pt-4 m-0">Grey hoodie</span>
+							<span class="card-title pt-4 m-0">[타핏] 원목 멀티룸 은신처 2룸형</span>
 							<!-- h3대신 span로 대체 
 								<h3 class="card-title pt-4 m-0">Grey hoodie</h3>
 							-->
@@ -384,7 +384,7 @@
 								    5.0
 								</span>
 
-								<h3 class="secondary-font text-primary">$18.00</h3>
+								<h3 class="secondary-font text-primary">19,800원</h3>
 					<div class="d-flex flex-wrap mt-3">
 						<a href="#" class="btn-cart me-3 px-3 pt-2 pb-2" style="font-family: 'Nunito', sans-serif; display: flex; align-items: center; justify-content: center; font-size: 14px;"> <!-- Nunito로 글씨체 변경 -->
 						    <span class="text-uppercase m-0">Add to Cart</span>
@@ -414,10 +414,10 @@
 						-10%
 					</div>
 					<div class="card position-relative">
-						<a href="single-product.html"><img src="../images/item3.jpg" class="img-fluid rounded-4" alt="image"></a>
+						<a href="single-product.html"><img src="/images/temporary/2.png" class="img-fluid rounded-4" alt="image"></a>
 						<div class="card-body p-0">
 							<a href="single-product.html">
-							<span class="card-title pt-4 m-0">Grey hoodie</span>
+							<span class="card-title pt-4 m-0">초대형 극사실 바위은신처</span>
 							<!-- h3대신 span로 대체 
 								<h3 class="card-title pt-4 m-0">Grey hoodie</h3>
 							-->
@@ -443,7 +443,7 @@
 								    5.0
 								</span>
 
-								<h3 class="secondary-font text-primary">$18.00</h3>
+								<h3 class="secondary-font text-primary">35,000원</h3>
 					<div class="d-flex flex-wrap mt-3">
 						<a href="#" class="btn-cart me-3 px-3 pt-2 pb-2" style="font-family: 'Nunito', sans-serif; display: flex; align-items: center; justify-content: center; font-size: 14px;"> <!-- Nunito로 글씨체 변경 -->
 						    <span class="text-uppercase m-0">Add to Cart</span>
@@ -1340,7 +1340,7 @@
 			<div class="section-header d-md-flex justify-content-between align-items-center mb-3">
 				<h2 class="display-3 fw-normal" style="font-family: 'Arial Rounded MT Bold', 'Nunito', sans-serif;">입양공고💌</h2>
 				<div>
-					<a href="/front/community/board/adap/list.jsp" class="btn btn-outline-dark btn-lg text-uppercase fs-6 rounded-1">
+					<a href="/front/adap/list.web" class="btn btn-outline-dark btn-lg text-uppercase fs-6 rounded-1">
 						입양 공고 목록 바로가기
 						<!-- <svg width="24" height="24" viewBox="0 0 24 24" class="mb-1">
 							<use xlink:href="#arrow-right"></use>

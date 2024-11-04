@@ -55,7 +55,52 @@ public class AdapApi extends Common {
 	/** Logger */
 	private static Logger logger = LoggerFactory.getLogger(AdapApi.class);
 
-	
+    /**
+     * POST 방식으로만 외부 API와 통신하여 JSON 응답을 받는 메서드
+     * @param requestJson 요청할 JSON 데이터
+     * @return 외부 API의 응답
+     */
+    @RequestMapping(value = "/front/adap/view.web", method = RequestMethod.POST)
+    public ResponseEntity<String> viewAdap(@RequestBody String requestJson) {
+        String apiUrl = "https://openapi.gg.go.kr/AbdmAnimalProtect?KEY=e705ae67f910466d9eef16b2618fa1c2&Type=json&pIndex=1&Size=20";
+        String responseJson;
+
+        logger.debug("API 호출 시작: {}", apiUrl);
+        try {
+            // HttpURLConnection을 사용한 POST 요청 구현
+            HttpURLConnection connection = (HttpURLConnection) new URL(apiUrl).openConnection();
+            connection.setRequestMethod("POST");
+            connection.setRequestProperty("Content-Type", "application/json");
+            connection.setDoOutput(true);
+
+            // 요청 본문에 JSON 데이터를 씁니다.
+            try (OutputStream os = connection.getOutputStream()) {
+                byte[] input = requestJson.getBytes("utf-8");
+                os.write(input, 0, input.length);
+            }
+
+            // 응답을 읽기
+            try (BufferedReader br = new BufferedReader(new InputStreamReader(connection.getInputStream(), "utf-8"))) {
+                StringBuilder response = new StringBuilder();
+                String responseLine;
+                while ((responseLine = br.readLine()) != null) {
+                    response.append(responseLine.trim());
+                }
+                responseJson = response.toString();
+            }
+
+            logger.debug("API 호출 성공, 응답: {}", responseJson);
+            return ResponseEntity.ok(responseJson);
+
+        } catch (RuntimeException e) {
+            logger.error("API 호출 중 RuntimeException 발생, 상태 코드: {}, 메시지: {}", e.getMessage());
+            return ResponseEntity.status(500).body("{\"error\":\"" + e.getMessage() + "\"}");
+        } catch (Exception e) {
+            logger.error("API 호출 중 오류 발생", e);
+            return ResponseEntity.status(500).body("{\"error\":\"" + e.getMessage() + "\"}");
+        }
+    }
+
 
 	/**
 	* 외부 API와 통신하여 JSON 응답을 받는 메서드
