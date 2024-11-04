@@ -48,11 +48,10 @@
 		}
 		.animal-card img {
 			width: 100%; /* 이미지 너비 100%로 설정 */
-			height: auto; /* 비율에 맞게 높이 조정 */
+			height: 200px; /* 비율에 맞게 높이 조정 */
 			object-fit: cover; /* 이미지 비율 유지 */
 			border-radius: 5px; /* 이미지 모서리 둥글게 */
 		}
-		
 		.animal-card:hover {
 		transform: translateY(-5px); /* 마우스를 올렸을 때 위로 이동 */
 		box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2); /* 그림자 강도 증가 */
