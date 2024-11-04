@@ -66,54 +66,64 @@
 		}
 	</style>
 	<script>
-	$(document).ready(function() {
-	    $.ajax({
-	        url: '/front/adap/list.web',
-	        method: 'POST',
-	        contentType: 'application/json', // JSON 데이터 전송을 위한 설정
-	        dataType: 'json',
-	        data: JSON.stringify({}), // 요청할 JSON 데이터가 필요하다면 여기에 추가
-	        success: function(response) {
-	            console.log('API 호출 성공:', response);
-	            
-	            // API 응답 데이터 처리
-	            console.log(response.AbdmAnimalProtect[1].row)
-	            if (response.AbdmAnimalProtect) {
-	                let items = response.AbdmAnimalProtect[1].row;
-	                let html = '<table class="table">';
-	                html += '<thead><tr>';
-	                html += '<th>접수번호</th>';
-	                html += '<th>품종</th>';
-	                html += '<th>발견장소</th>';
-	                html += '<th>발견날짜</th>';
-	                html += '</tr></thead>';
-	                html += '<tbody>';
-	                
-	                items.forEach(function(item) {
-	                    html += '<tr>';
-	                    html += '<td>' + (item.REGIST_NO || '') + '</td>';
-	                    html += '<td>' + (item.SPECIES_NM || '') + '</td>';
-	                    html += '<td>' + (item.DISCVRY_PLC_INFO || '') + '</td>';
-	                    html += '<td>' + (item.RECEPT_DE || '') + '</td>'; // 발견날짜는 Recept Date를 사용
-	                    html += '</tr>';
-	                });
-	                
-	                html += '</tbody></table>';
-	                $('#animalList').html(html);
-	            } else {
-	                $('#animalList').html('<p>데이터가 없습니다.</p>');
-	            }
-	        },
-	        error: function(xhr, status, error) {
-	            console.error('API 호출 실패:', {
-	                status: xhr.status,
-	                statusText: xhr.statusText,
-	                responseText: xhr.responseText
-	            });
-	            $('#responseContainer').html('<p>오류 발생: ' + error + '<br>상태 코드: ' + xhr.status + '</p>');
-	        }
-	    });
-	});
+    $(document).ready(function() {
+        // 페이지 로드 시 동물 정보를 자동으로 조회
+        fetchAnimalData();
+
+        // AJAX 요청을 통해 동물 정보를 가져오는 함수
+        function fetchAnimalData() {
+            $.ajax({
+                url: '/front/adap/list.web',
+                method: 'POST',
+                contentType: 'application/json', // JSON 데이터 전송을 위한 설정
+                dataType: 'json',
+                data: JSON.stringify({}), // 요청할 JSON 데이터가 필요하다면 여기에 추가
+                success: function(response) {
+                    console.log('API 호출 성공:', response);
+                    
+                    // API 응답 데이터 처리
+                    if (response.AbdmAnimalProtect) {
+                        let items = response.AbdmAnimalProtect[1].row;
+                        let html = '<table class="table">';
+                        html += '<thead><tr>';
+                        html += '<th>이미지</th>'; // 이미지 열 추가
+                        html += '<th>공고번호</th>';
+                        html += '<th>품종</th>';
+                        html += '<th>성별</th>';
+                        html += '<th>발견장소</th>';
+                        html += '<th>특징</th>';
+                        html += '</tr></thead>';
+                        html += '<tbody>';
+                        
+                        items.forEach(function(item) {
+                            html += '<tr>';
+                            // 이미지 추가
+                            html += '<td><img src="' + (item.IMAGE_COURS) + '" alt="동물 이미지" style="width: 100px; height: auto;"></td>';
+                            html += '<td>' + (item.PBLANC_IDNTFY_NO || '') + '</td>';
+                            html += '<td>' + (item.SPECIES_NM || '') + '</td>';
+                            html += '<td>' + (item.SEX_NM || '') + '</td>';
+                            html += '<td>' + (item.DISCVRY_PLC_INFO || '') + '</td>';
+                            html += '<td>' + (item.SFETR_INFO || '') + '</td>';
+                            html += '</tr>';
+                        });
+                        
+                        html += '</tbody></table>';
+                        $('#animalList').html(html);
+                    } else {
+                        $('#animalList').html('<p>데이터가 없습니다.</p>');
+                    }
+                },
+                error: function(xhr, status, error) {
+                    console.error('API 호출 실패:', {
+                        status: xhr.status,
+                        statusText: xhr.statusText,
+                        responseText: xhr.responseText
+                    });
+                    $('#animalList').html('<p>오류 발생: ' + error + '<br>상태 코드: ' + xhr.status + '</p>');
+                }
+            });
+        }
+    });
 	<%--
 	function displayAnimals() {
 	    const container = document.getElementById("animalList");
@@ -224,7 +234,7 @@
 
 		<label>성별:</label>
 		<select id="gender">
-			<option value="">전체</option>
+			<option value="all">전체</option>
 			<option value="M">수컷</option>
 			<option value="F">암컷</option>
 			<option value="Q">미상</option>
