@@ -31,42 +31,120 @@
 		<title>동물 입양공고 조회</title>
 		<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 	<style>
-		.card-container {
-			display: flex;
-			flex-wrap: wrap;
-			justify-content: center; /* 중앙 정렬 */
-			gap: 16px; /* 카드 간격 */
-			margin-top: 20px;
-		}
+/* 검색 영역 스타일 */
+.search-form {
+    display: flex;
+    justify-content: flex-start;
+    gap: 5px;
+}
 
-		.animal-card {
-			border: 1px solid #ddd;
-			border-radius: 8px;
-			padding: 16px;
-			width: 200px; /* 카드 너비 설정 */
-			box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-			text-align: center;
-		}
+.search-form select,
+.search-form input[type="text"],
+.search-form input[type="submit"] {
+    font-size: 14px;
+    border: 0;
+    border-radius: 15px;
+    outline: none;
+    background-color: #F5F5F5;
+}
 
-		.animal-card img {
-			max-width: 100%;
-			height: auto;
-			border-radius: 8px;
-			margin-bottom: 10px;
-		}
+.search-form select {
+    width: 100px;
+}
 
-		.animal-card p {
-			margin: 4px 0;
-			font-size: 14px;
-			color: #333;
-		}
+.search-form input[type="text"] {
+    width: 150px;
+}
 
-		.animal-card strong {
-			font-weight: bold;
-		}
+/* 카드 컨테이너 스타일 */
+.card-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    justify-items: center;
+    flex-wrap: wrap;
+    margin: 30px;
+    margin-left: 0px;
+}
+
+/* 개별 카드 스타일 */
+.animal-card {
+    background-color: white;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 20px;
+    width: 250px;
+    text-align: center;
+    transition: transform 0.3s ease-in-out;
+}
+
+.animal-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+}
+
+/* 카드 내용 스타일 */
+.info-item {
+    font-size: 21px;
+    font-weight: bold;
+    margin: 20px;
+}
+
+/* 이미지 컨테이너는 유지 */
+.image-container {
+    width: 100%;
+    height: 200px;
+    overflow: hidden;
+}
+
+.animal-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
 	</style>
 	<script>
-    $(document).ready(function() {
+	$(document).ready(function() {
+	    fetchAnimalData(); // 데이터 가져오기 함수 호출
+
+	    function fetchAnimalData() {
+	        $.ajax({
+	            url: '/front/adap/list.web', // 데이터 요청 URL
+	            method: 'POST',
+	            contentType: 'application/json',
+	            dataType: 'json',
+	            data: JSON.stringify({}), // 요청 데이터
+	            success: function(response) {
+	                if (response.AbdmAnimalProtect) {
+	                    let items = response.AbdmAnimalProtect[1].row; // 데이터 배열
+	                    let html = ''; // 카드 HTML을 저장할 변수
+
+	                    items.forEach(function(item) {
+	                        // 카드 HTML 생성
+	                        html += '<div class="animal-card">';
+	                        html += '<img src="' + (item.IMAGE_COURS || '') + '" alt="동물 이미지">';
+	                        html += '<p><strong>공고번호:</strong> ' + (item.PBLANC_IDNTFY_NO || '') + '</p>';
+	                        html += '<p><strong>품종:</strong> ' + (item.SPECIES_NM || '') + '</p>';
+	                        html += '<p><strong>성별:</strong> ' + (item.SEX_NM || '') + '</p>';
+	                        html += '<p><strong>발견장소:</strong> ' + (item.DISCVRY_PLC_INFO || '') + '</p>';
+	                        html += '<p><strong>특징:</strong> ' + (item.SFETR_INFO || '') + '</p>';
+	                        html += '</div>'; // 카드 닫기
+	                    });
+	                    
+	                    $('#animalList').html(html); // 동물 목록 업데이트
+	                } else {
+	                    $('#animalList').html('<p>데이터가 없습니다.</p>'); // 데이터 없음 메시지
+	                }
+	            },
+	            error: function(xhr, status, error) {
+	                console.error('API 호출 실패:', error);
+	                $('#animalList').html('<p>오류 발생: ' + error + '<br>상태 코드: ' + xhr.status + '</p>'); // 오류 메시지
+	            }
+	        });
+	    }
+	});
+	<%--
+	    $(document).ready(function() {
         // 페이지 로드 시 동물 정보를 자동으로 조회
         fetchAnimalData();
 
@@ -124,55 +202,6 @@
             });
         }
     });
-	<%--
-	function displayAnimals() {
-	    const container = document.getElementById("animalList");
-	    container.innerHTML = ''; // 기존 내용을 지우기
-
-	    // 하드코딩된 동물 데이터
-	    const animals = [
-	        {
-	            thumb_image_cours: "/images/blog-lg2.jpg",
-	            species_nm: "강아지",
-	            pblanc_idntfy_no: "20230001",
-	            sex_nm: "수컷",
-	            discvry_plc_info: "서울",
-	            partclr_matr: "귀여운 강아지입니다."
-	        },
-	        {
-	            thumb_image_cours: "/images/banner-img3.png",
-	            species_nm: "고양이",
-	            pblanc_idntfy_no: "20230002",
-	            sex_nm: "암컷",
-	            discvry_plc_info: "부산",
-	            partclr_matr: "장난기 많은 고양이입니다."
-	        }
-	    ];
-	    animals.forEach(animal => {
-	        console.log('현재 처리중인 동물:', animal); // 전체 동물 객체 로깅
-	        console.log('종류:', animal.species_nm); // species_nm 값 확인
-
-	        const card = document.createElement("div");
-	        card.className = "animal-card";
-	        
-	        const cardContent = 
-	            '<img src="' + animal.thumb_image_cours + '" alt="동물 이미지" style="width: 100%; height: auto;">' +
-	            '<p><strong>종류:</strong> ' + animal.species_nm + '</p>' +
-	            '<p><strong>공고번호:</strong> ' + animal.pblanc_idntfy_no + '</p>' +
-	            '<p><strong>성별:</strong> ' + animal.sex_nm + '</p>' +
-	            '<p><strong>발견장소:</strong> ' + animal.discvry_plc_info + '</p>' +
-	            '<p><strong>특징:</strong> ' + animal.partclr_matr + '</p>';
-	        
-	        card.innerHTML = cardContent;
-	        console.log('생성된 카드 HTML:', cardContent);
-
-	        container.appendChild(card);
-	    });
-	}
-
-	document.addEventListener("DOMContentLoaded", () => {
-	    displayAnimals();
-	});
 	--%>
 	</script>
 </head>
@@ -184,14 +213,16 @@
 	</header>
 	<nav>
 	</nav>
-	<section class="content" style="display: flex; justify-content: space-between; margin-top: 20px;">
+	<section class="content">
+	<%--
 	<nav>
 	<%@ include file="/include/front/lnbAdap.jsp" %>
 	</nav>
-	<article>
-	<%-- 
+
+
 		<img src="/images/adap_benner.png" alt="입양페이지 공지" style="width: auto; height: 40%; object-fit: cover; float: center; margin-left: 10px; margin-bottom: 10px; margin-top: 20px;"/>
-	--%>
+	 --%>
+	<div>
 	<div style="border: 1px solid red; margin-top: 20px;">
 		<label>날짜:</label>
 		<input type="date" id="startDate"> ~ <input type="date" id="endDate"><br>
@@ -245,13 +276,15 @@
 
 		<button onclick="searchAnimals()">조회</button>
 		
-			<!-- 동물 카드 리스트 -->
-			<div class="card-container" id="animalList">
-			<!-- 카드가 여기에 표시됩니다. -->
-			</div>
+		<!-- 카드 리스트 부분 -->
+		<div class="card-container">
+		    <ul class="animals-list" id="animalList">
+		        <!-- 카드가 여기에 표시됩니다. -->
+		    </ul>
+		</div>
 		
 	</div>
-	</article>
+	</div>
 </section>
 	<footer>
 		<%@ include file="/include/front/footer.jsp" %>
