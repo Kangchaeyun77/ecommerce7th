@@ -59,46 +59,64 @@
 	}
 	</style>
 	<script>
-	//API 데이터를 가져오는 함수
-	$(document).ready(function() {
-		fetchAnimalData(); // 데이터 가져오기 함수 호출
-		fetchAnimalData(${paging.currentPage}); // 현재 페이지 데이터 가져오기
-		function fetchAnimalData() {
-			$.ajax({
-				url: '/front/adap/list.web', // 데이터 요청 URL
-				method: 'POST',
-				contentType: 'application/json',
-				dataType: 'json',
-				//data: JSON.stringify({ currentPage: currentPage }), 
-				data: JSON.stringify({}), // 요청 데이터
-				success: function(response) {
-					if (response.AbdmAnimalProtect) {
-						let items = response.AbdmAnimalProtect[1].row; // 데이터 배열
-						let html = ''; // 카드 HTML을 저장할 변수
+	
+	let currentPage = 1; // 전역 변수로 현재 페이지를 정의
+	let totalPages = 10; // 예시로 최대 페이지 수를 10으로 설정. 실제 데이터에 따라 수정 필요.
 
-						items.forEach(function(item) {
-							// 카드 HTML 생성
-							html += '<div class="animal-card">';
-							html += '<img src="' + (item.IMAGE_COURS || '') + '" alt="동물 이미지">';
-							html += '<p><strong>공고번호:</strong> ' + (item.PBLANC_IDNTFY_NO || '') + '</p>';
-							html += '<p><strong>품종:</strong> ' + (item.SPECIES_NM || '') + '</p>';
-							html += '<p><strong>성별:</strong> ' + (item.SEX_NM || '') + '</p>';
-							html += '<p><strong>발견장소:</strong> ' + (item.DISCVRY_PLC_INFO || '') + '</p>';
-							html += '<p><strong>특징:</strong> ' + (item.SFETR_INFO || '') + '</p>';
-							html += '</div>'; // 카드 닫기
-						});
-						
-						$('#animalList').html(html); // 동물 목록 업데이트
-					} else {
-						$('#animalList').html('<p>데이터가 없습니다.</p>'); // 데이터 없음 메시지
-					}
-				},
-				error: function(xhr, status, error) {
-					console.error('API 호출 실패:', error);
-					$('#animalList').html('<p>오류 발생: ' + error + '<br>상태 코드: ' + xhr.status + '</p>'); // 오류 메시지
-				}
-			});
+	function changePage(direction) {
+		currentPage += direction; // 페이지 변경
+
+		// 페이지 범위 체크
+		if (currentPage < 1) {
+			currentPage = 1; // 최소 페이지 1
+		} else if (currentPage > totalPages) {
+			currentPage = totalPages; // 최대 페이지 제한
 		}
+
+		fetchAnimalData(currentPage); // 변경된 페이지에 대한 데이터 요청
+	}
+
+	function fetchAnimalData(page) {
+		$.ajax({
+			url: '/front/adap/list.web', // 데이터 요청 URL
+			method: 'POST',
+			contentType: 'application/json',
+			dataType: 'json',
+			data: JSON.stringify({ pageIndex: page }), // 요청 데이터
+			success: function(response) {
+				if (response.AbdmAnimalProtect) {
+					let items = response.AbdmAnimalProtect[1].row; // 데이터 배열
+					let html = ''; // 카드 HTML을 저장할 변수
+
+					items.forEach(function(item) {
+						// 카드 HTML 생성
+						html += '<div class="animal-card">';
+						html += '<img src="' + (item.IMAGE_COURS || '') + '" alt="동물 이미지">';
+						html += '<p><strong>공고번호:</strong> ' + (item.PBLANC_IDNTFY_NO || '') + '</p>';
+						html += '<p><strong>품종:</strong> ' + (item.SPECIES_NM || '') + '</p>';
+						html += '<p><strong>성별:</strong> ' + (item.SEX_NM || '') + '</p>';
+						html += '<p><strong>발견장소:</strong> ' + (item.DISCVRY_PLC_INFO || '') + '</p>';
+						html += '<p><strong>특징:</strong> ' + (item.SFETR_INFO || '') + '</p>';
+						html += '</div>'; // 카드 닫기
+					});
+					
+					$('#animalList').html(html); // 동물 목록 업데이트
+				} else {
+					$('#animalList').html('<p>데이터가 없습니다.</p>'); // 데이터 없음 메시지
+				}
+			},
+			error: function(xhr, status, error) {
+				console.error('API 호출 실패:', error);
+				$('#animalList').html('<p>오류 발생: ' + error + '<br>상태 코드: ' + xhr.status + '</p>'); // 오류 메시지
+			}
+		});
+	}
+	function updatePagination() {
+		// 현재 페이지와 총 페이지 수를 표시
+		$('#current-page').text(currentPage + ' / ' + totalPages);
+	}
+	$(document).ready(function() {
+		fetchAnimalData(currentPage); // 첫 페이지 데이터 가져오기
 	});
 	</script>
 </head>
@@ -182,7 +200,7 @@
 			<span class="pageNavi_front_image">
 				<img src="/images/btn/btn_pageFirst.gif" border="0" alt="처음으로" onclick="goToPage(1)" />&nbsp;
 				<img src="/images/btn/btn_pagePrev.gif" border="0" alt="이전페이지" onclick="changePage(-1)" />&nbsp;
-				<strong id="current-page">1</strong>&nbsp;
+				<strong id="current-page"></strong>&nbsp;
 				<img src="/images/btn/btn_pageNext.gif" border="0" alt="다음페이지" onclick="changePage(1)" />&nbsp;
 				<img src="/images/btn/btn_pageLast.gif" border="0" alt="마지막으로" onclick="goToPage(totalPages)" />&nbsp;
 			</span>
