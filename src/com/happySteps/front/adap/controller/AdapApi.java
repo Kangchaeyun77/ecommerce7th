@@ -76,7 +76,7 @@ public class AdapApi extends Common {
 	            logger.error("요청 본문 파싱 중 오류 발생", e);
 	        }
 
-	        String apiUrl = "https://openapi.gg.go.kr/AbdmAnimalProtect?KEY=e705ae67f910466d9eef16b2618fa1c2&Type=json&pIndex=" + pageIndex + "&Size=100";
+	        String apiUrl = "https://openapi.gg.go.kr/AbdmAnimalProtect?KEY=e705ae67f910466d9eef16b2618fa1c2&Type=json&pIndex=" + pageIndex + "&pSize=20";
 
 	        logger.debug("API 호출 시작: {}", apiUrl);
 	        try {
