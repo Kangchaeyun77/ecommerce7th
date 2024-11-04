@@ -57,7 +57,7 @@
 							<h2 class="banner-title display-1 fw-normal">Best choice <br>
 							<span class="text-primary">강아지 용품</span>
 							</h2>
-							<a href="#" class="btn btn-outline-dark btn-lg text-uppercase fs-6 rounded-1">
+							<a href="/front/sale/shop/list.web?cd_ctg_pet=1" class="btn btn-outline-dark btn-lg text-uppercase fs-6 rounded-1">
 								바로가기
 								<!-- 
 								<svg width="24" height="24" viewBox="0 0 24 24" class="mb-1">
@@ -79,7 +79,7 @@
 			<h2 class="banner-title display-1 fw-normal">Best choice <br>
 				<span class="text-primary">고양이 용품</span>
 			</h2>
-			<a href="#" class="btn btn-outline-dark btn-lg text-uppercase fs-6 rounded-1">
+			<a href="/front/sale/shop/list.web?cd_ctg_pet=2" class="btn btn-outline-dark btn-lg text-uppercase fs-6 rounded-1">
 				바로가기
 			</a>
 		</div>
@@ -96,7 +96,7 @@
 			<h2 class="banner-title display-1 fw-normal">Best choice <br>
 				<span class="text-primary">햄스터 용품</span>
 			</h2>
-			<a href="#" class="btn btn-outline-dark btn-lg text-uppercase fs-6 rounded-1">
+			<a href="/front/sale/shop/list.web?cd_ctg_pet=3" class="btn btn-outline-dark btn-lg text-uppercase fs-6 rounded-1">
 				바로가기
 			</a>
 		</div>
@@ -113,7 +113,7 @@
 			<h2 class="banner-title display-1 fw-normal">Best choice <br>
 				<span class="text-primary">파충류 용품</span>
 			</h2>
-			<a href="#" class="btn btn-outline-dark btn-lg text-uppercase fs-6 rounded-1">
+			<a href="/front/sale/shop/list.web?cd_ctg_pet=4" class="btn btn-outline-dark btn-lg text-uppercase fs-6 rounded-1">
 				바로가기
 			</a>
 			</div>
@@ -130,29 +130,29 @@
 	<div class="container my-3 py-5">
 		<div class="row my-5">
 			<div class="col text-center">
-				<a href="#" class="categories-item">
+				<a href="/front/sale/shop/index.web" class="categories-item">
 				<img src="../images/categories-item/all.png" class="img-fluid">
 				<!--이전코드
 					<iconify-icon class="category-icon" icon="ph:cat"></iconify-icon> -->
 				</a>
 			</div>
 			<div class="col text-center">
-				<a href="#" class="categories-item">
+				<a href="/front/sale/shop/list.web?cd_ctg_pet=1" class="categories-item">
 					<img src="../images/categories-item/dogShop.png" class="img-fluid">	
 				</a>
 			</div>
 			<div class="col text-center">
-				<a href="#" class="categories-item">
+				<a href="/front/sale/shop/list.web?cd_ctg_pet=2" class="categories-item">
 					<img src="../images/categories-item/catShop.png" class="img-fluid">
 				</a>
 			</div>
 			<div class="col text-center">
-				<a href="#" class="categories-item">
+				<a href="/front/sale/shop/list.web?cd_ctg_pet=3" class="categories-item">
 					<img src="../images/categories-item/hamsterShop.png" class="img-fluid">
 				</a>
 			</div>
 			<div class="col text-center">
-				<a href="#" class="categories-item">
+				<a href="/front/sale/shop/list.web?cd_ctg_pet=4" class="categories-item">
 					<img src="../images/categories-item/reptilesShop.png" class="img-fluid">
 				</a>
 			</div>
