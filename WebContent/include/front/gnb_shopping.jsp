@@ -49,10 +49,10 @@
 		<nav class="gnb" >
 			<span >
 				<a href="/front/sale/shop/index.web">전체</a>
-				<a href="javascript:goList(1)">강아지</a>
-				<a href="javascript:goList(2)">고양이</a>
-				<a href="javascript:goList(3)">햄스터</a>
-				<a href="javascript:goList(4)">파충류</a>
+				<a href="/front/sale/shop/list.web?cd_ctg_pet=1">강아지</a>
+				<a href="/front/sale/shop/list.web?cd_ctg_pet=2">고양이</a>
+				<a href="/front/sale/shop/list.web?cd_ctg_pet=3">햄스터</a>
+				<a href="/front/sale/shop/list.web?cd_ctg_pet=4">파충류</a>
 			</span>
 		</nav>
 	</body>
