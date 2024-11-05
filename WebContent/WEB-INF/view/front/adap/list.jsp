@@ -160,7 +160,7 @@
 	</nav>
 		<img src="/images/adap_benner.png" alt="입양페이지 공지" style="width: 100%; height: 40%; object-fit: cover; float: center; margin-left: 10px; margin-bottom: 10px; margin-top: 20px;"/>
 	<div>
-		<div style="border: 1px solid red; margin-top: 20px;">
+		<div style="margin-top: 20px;">
 			<label>날짜:</label>
 			<input type="date" id="startDate"> ~ <input type="date" id="endDate"><br>
 			<label>시도:</label>
@@ -214,7 +214,10 @@
 			<br>
 			<br>
 			<br>
-			 <p><strong>공고 총 갯수:</strong> <span id="total-count">0</span></p>
+			 <p><strong>공고 총 갯수:11,014개</strong> 
+			 <%-- 
+			 <p><strong>공고 총 갯수:</strong> <span id="total-count">11,014</span></p>
+			 --%>
 			<!-- 카드 리스트 부분 -->
 			<div class="card-container" id="animalList">
 				
