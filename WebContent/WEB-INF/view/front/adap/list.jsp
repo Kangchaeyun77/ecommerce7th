@@ -59,26 +59,41 @@
 	</style>
 	<script>
 	
-	function viewAnimalDetail(animalId) {
-	    const form = document.createElement('form');
-	    form.method = 'POST';
-	    form.action = '/front/adap/view.web';
-
-	    const input = document.createElement('input');
-	    input.type = 'hidden';
-	    input.name = 'pblancId';
-	    input.value = animalId;
-
-	    form.appendChild(input);
-	    document.body.appendChild(form);
-	    form.submit();
+	function viewAnimalDetail(animalId, sigunCd, sigunNm, stateNm, pblancBeginDe, pblancEndDe, speciesNm, shterNm) {
+		// AJAX를 통해 상세 정보를 요청합니다.
+		$.ajax({
+			url: '/front/adap/view.json', // 상세 정보 요청 URL
+			method: 'POST',
+			contentType: 'application/json',
+			data: JSON.stringify({
+				PBLANC_IDNTFY_NO: animalId, 	// 동물 ID
+				SIGUN_CD: sigunCd, 				// 시군코드
+				SIGUN_NM: sigunNm, 				// 시군명
+				STATE_NM: stateNm,				// 상태
+				PBLANC_BEGIN_DE: pblancBeginDe, // 공고시작일자
+				PBLANC_END_DE: pblancEndDe,		// 공고종료일자
+				SPECIES_NM: speciesNm, 			// 품종
+				SHTER_NM: shterNm 				// 보호소명
+			}),
+			success: function(response) {
+				// API 호출 성공 시, response에 대한 처리를 합니다.
+				if (response) {
+					// 서버에서 받은 데이터를 view.jsp에 넘겨주는 방법
+					const detailPageUrl = `/front/adap/view.web?PBLANC_IDNTFY_NO=${animalId}&SIGUN_CD=${sigunCd}&SIGUN_NM=${sigunNm}&STATE_NM=${stateNm}&PBLANC_BEGIN_DE=${pblancBeginDe}&PBLANC_END_DE=${pblancEndDe}&SPECIES_NM=${speciesNm}&SHTER_NM=${shterNm}`;
+					// const detailPageUrl = `/front/adap/view.web`;
+					// URL로 리다이렉션
+					window.location.href = detailPageUrl; 
+				} else {
+					alert('상세 정보를 가져오는 데 실패했습니다.');
+				}
+			},
+			error: function(xhr, status, error) {
+				console.error('API 호출 실패:', error);
+				alert('상세 정보를 가져오는 데 오류가 발생했습니다.');
+			}
+		});
 	}
-	
-	function viewAnimalDetail(animalId) {
-	    // 상세보기 페이지로 이동
-	    window.location.href = '/front/adap/view.web?pblancId=' + animalId;
-	}
-	
+
 	let currentPage = 1; // 전역 변수로 현재 페이지를 정의
 	let totalPages = 10; // 예시로 최대 페이지 수를 10으로 설정. 실제 데이터에 따라 수정 필요.
 	const itemsPerPage = 20; // 페이지당 보여줄 항목 수
@@ -99,7 +114,7 @@
 
 	function fetchAnimalData(page) {
 		$.ajax({
-			url: '/front/adap/list.web', // 데이터 요청 URL
+			url: '/front/adap/list.json', // 데이터 요청 URL
 			method: 'POST',
 			contentType: 'application/json',
 			dataType: 'json',
@@ -113,7 +128,10 @@
 					items.forEach(function(item) {
 						// 카드 HTML 생성
 						//html += '<div class="animal-card">';
-						 html += '<div class="animal-card" onclick="viewAnimalDetail(\'' + (item.PBLANC_IDNTFY_NO || '') + '\')">'; // 여기 수정
+						html += '<div class="animal-card" onclick="viewAnimalDetail(\'' + (item.PBLANC_IDNTFY_NO || '') 
+							 + '\', \'' + (item.SIGUN_CD || '') + '\', \'' + (item.SIGUN_NM || '') 
+							 + '\', \'' + (item.STATE_NM || '') + '\', \'' + (item.PBLANC_BEGIN_DE || '') + '\', \'' 
+							 + (item.PBLANC_END_DE || '') + '\', \'' + (item.SPECIES_NM || '') + '\', \'' + (item.SHTER_NM || '') + '\')">';
 						html += '<img src="' + (item.IMAGE_COURS || '') + '" alt="동물 이미지">';
 						html += '<p><strong>공고번호:</strong> ' + (item.PBLANC_IDNTFY_NO || '') + '</p>';
 						html += '<p><strong>품종:</strong> ' + (item.SPECIES_NM || '') + '</p>';

@@ -84,7 +84,7 @@
 		window.onload = function() {
 			// POST로 animalId 가져오기
 			console.log("11111")
-			const animalId = document.getElementById('cd_bbs_type').value; // 숨겨진 입력 필드에서 ID 가져오기
+			const animalId = document.getElementById('animalId').value; // 숨겨진 입력 필드에서 ID 가져오기
 			viewAnimalDetail(animalId); 
 		};
 	</script>
@@ -100,8 +100,12 @@
 				<h1>상세 정보</h1>
 				<table>
 					<tbody>
+					<tr>
+						<th>공고번호</th>
+							<td id="pblanc_idntfy_no"></td>
+						</tr>
 						<tr>
-							<th>종류</th>
+							<th>품종</th>
 							<td id="species_nm"></td>
 						</tr>
 						<tr>
@@ -119,11 +123,11 @@
 							<td id="age_info"></td>
 							<th>체중</th>
 							<td id="bdwgh_info"></td>
-							<th>구조시 특징</th>
+							<th>동물의 특이사항</th>
 							<td id="sfetr_info"></td>
 						</tr>
 						<tr>
-							<th>특징(사회성)</th>
+							<th>특징</th>
 							<td id="partclr_matr" colspan="3"></td>
 						</tr>
 						<tr>

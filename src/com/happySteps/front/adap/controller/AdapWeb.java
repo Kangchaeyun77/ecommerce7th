@@ -25,15 +25,14 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
-
 import com.happySteps.front.common.Common;
-import com.happySteps.front.common.component.SessionCmpn;
+
 import com.happySteps.front.common.dto.PagingDto;
-import com.happySteps.front.common.dto.PagingListDto;
+
 
 /**
  * @version 1.0.0
@@ -47,7 +46,35 @@ import com.happySteps.front.common.dto.PagingListDto;
 public class AdapWeb extends Common {
 	/** Logger */
 	private static Logger logger = LoggerFactory.getLogger(AdapWeb.class);
+	
+	
+	/**
+	 * @param request [요청 서블릿]
+	 * @param response [응답 서블릿]
+	 * @return ModelAndView
+	 * 
+	 * @since 2024-11-01
+	 * <p>DESCRIPTION: 입양공고 상세페이지</p>
+	 * <p>IMPORTANT:</p>
+	 * <p>EXAMPLE:</p>
+	 */
+	
+	@RequestMapping(value = "/front/adap/view.web")
+	public ModelAndView view(HttpServletRequest request, HttpServletResponse response, PagingDto pagingDto) {
 		
+		ModelAndView mav = new ModelAndView("redirect:/error.web");
+		
+		try {
+				mav.setViewName("front/adap/view");
+		}
+		catch (Exception e) {
+			logger.error("[" + this.getClass().getName() + ".list()] " + e.getMessage(), e);
+		}
+		finally {}
+		
+		return mav;
+	}
+	
 	/**
 	 * @param request [요청 서블릿]
 	 * @param response [응답 서블릿]
