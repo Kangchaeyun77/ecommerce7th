@@ -53,11 +53,14 @@
 			TB_PRD
 		SET
 			FLG_DELETE		= 'Y'
+			, CD_STATE_PRD	= '2'
 			, DT_UPT		= SYSDATE
 			, UPDATER		= #{updater}
 		WHERE
 			SEQ_PRD = #{seq_prd}
+		
 	</update>
+	
 	
 	<insert id="insert" parameterType="productDto">
 		INSERT INTO TB_PRD
@@ -71,6 +74,7 @@
 			COUNT(ROWNUM)
 		FROM
 			TB_PRD
+		WHERE
 			<include refid="where" />
 	</select>
 	
@@ -91,6 +95,7 @@
 				, TO_CHAR(DT_REG, 'YYYY-MM-DD') dt_reg
 			FROM
 				TB_PRD
+			WHERE
 				<include refid="where" />
 			)
 		<![CDATA[
@@ -102,7 +107,7 @@
 	</select>
 	
 	<sql id="where">
-		WHERE 1=1
+		FLG_DELETE	='N'
 		<if test="cd_state_prd != '0' and cd_state_prd != ''">
 			AND CD_STATE_PRD = #{cd_state_prd}
 		</if>

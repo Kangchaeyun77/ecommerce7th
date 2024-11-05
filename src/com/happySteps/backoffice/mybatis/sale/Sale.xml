@@ -10,8 +10,7 @@
 			, DT_UPT		= SYSDATE
 			, UPDATER		= #{updater}
 		WHERE
-			REGISTER		= #{register}
-			AND SEQ_SLE		= #{seq_sle}
+			SEQ_SLE		= #{seq_sle}
 	</update>
 	
 	<update id="re" parameterType="saleDto">
@@ -22,8 +21,7 @@
 			, DT_UPT		= SYSDATE
 			, UPDATER		= #{updater}
 		WHERE
-			REGISTER		= #{register}
-			AND SEQ_SLE		= #{seq_sle}
+			SEQ_SLE		= #{seq_sle}
 	</update>
 	
 	<update id="stop" parameterType="saleDto">
@@ -34,8 +32,7 @@
 			, DT_UPT		= SYSDATE
 			, UPDATER		= #{updater}
 		WHERE
-			REGISTER		= #{register}
-			AND SEQ_SLE		= #{seq_sle}
+			SEQ_SLE		= #{seq_sle}
 	</update>
 	
 	<update id="update" parameterType="saleDto">
@@ -53,8 +50,7 @@
 			, DT_REG		= SYSDATE
 			, UPDATER		= #{updater}
 		WHERE
-			REGISTER		= #{register}
-			AND SEQ_SLE		= #{seq_sle}
+			SEQ_SLE		= #{seq_sle}
 	</update>
 	
 	<insert id="insert" parameterType="saleDto">
@@ -71,9 +67,10 @@
 			, SPECIES
 			, PET_ITEMS
 		FROM
-			TB_PRD
+			TB_PRD	tb_prd
 		WHERE
 			CD_STATE_PRD	= 1
+			AND tb_prd.FLG_DELETE	= 'N'
 		ORDER BY	
 			DT_REG DESC
 	</select>
@@ -140,7 +137,7 @@
 			AND SPECIES = #{species}
 		</if>
 		<if test="searchWord != null and searchWord != ''">
-			<if test="searchKey == 'prd_nm'">
+			<if test="searchKey == 'sle_nm'">
 				AND SLE_NM LIKE '%' || #{searchWord} || '%'
 			</if>
 		</if>
