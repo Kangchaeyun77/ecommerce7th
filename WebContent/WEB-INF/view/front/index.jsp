@@ -1473,8 +1473,8 @@
 </section>
 -->
 <!-- 하단에 있는 사진영역(인스타표시) -->
-<section id="insta" class="my-5">
-	<div class="row g-0 py-5">
+<section id="insta" class="my-5 d-flex justify-content-center">
+	<div class="row g-3 py-5 justify-content-center">
 		<div class="col instagram-item text-center position-relative">
 			<div class="icon-overlay d-flex justify-content-center position-absolute">
 				<!--  <iconify-icon class="text-white" icon="la:instagram"></iconify-icon>-->
