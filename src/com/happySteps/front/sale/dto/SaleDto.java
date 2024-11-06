@@ -183,6 +183,4 @@ public class SaleDto {
 	public void setSearchWord(String searchWord) {
 		this.searchWord = searchWord;
 	}
-	
-	
 }

@@ -20,6 +20,9 @@
  */
 package com.happySteps.front.sale.service;
 
+
+import java.util.List;
+
 import javax.inject.Inject;
 
 import org.springframework.stereotype.Service;
@@ -44,6 +47,14 @@ public class SaleSrvc {
 
 	@Inject
 	SaleDao saleDao;
+	
+	
+	public List<SaleDto> getRandomProducts(PagingDto pagingDto) {
+		return saleDao.randomList(pagingDto);
+	}
+	public List<SaleDto> getRandomProducts2(PagingDto pagingDto) {
+		return saleDao.randomList2(pagingDto);
+	}
 	
 	/**
 	 * @param pagingDto [게시판 빈]

@@ -20,6 +20,9 @@
  */
 package com.happySteps.front.main.controller;
 
+import java.util.List;
+
+import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -29,7 +32,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.happySteps.front.common.dto.PagingDto;
+import com.happySteps.front.common.dto.PagingListDto;
 import com.happySteps.front.main.controller.MainWeb;
+import com.happySteps.front.sale.dto.SaleDto;
+import com.happySteps.front.sale.service.SaleSrvc;
+
 
 /**
  * @version 1.0.0
@@ -41,6 +49,10 @@ import com.happySteps.front.main.controller.MainWeb;
  */
 @Controller("com.happySteps.front.main.controller.MainWeb")
 public class MainWeb {
+	
+	@Inject
+	private SaleSrvc saleSrvc;
+	
 	/** Logger */
 	private static Logger logger = LoggerFactory.getLogger(MainWeb.class);
 	/**
@@ -80,11 +92,17 @@ public class MainWeb {
 	 * <p>EXAMPLE:</p>
 	 */
 	@RequestMapping(value = "/front/index.web")
-	public ModelAndView index(HttpServletRequest request, HttpServletResponse response) {
+	public ModelAndView index(HttpServletRequest request, HttpServletResponse response, PagingDto pagingDto) {
 		
 		ModelAndView mav = new ModelAndView("redirect:/error.web");
 		
 		try {
+			List<SaleDto> randomProducts = saleSrvc.getRandomProducts(pagingDto);
+			mav.addObject("randomProducts", randomProducts);
+			
+			List<SaleDto> randomProducts2 = saleSrvc.getRandomProducts2(pagingDto);
+			mav.addObject("randomProducts2", randomProducts2);
+			
 			mav.setViewName("front/index");
 		}
 		catch (Exception e) {
