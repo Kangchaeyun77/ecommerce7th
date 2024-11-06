@@ -23,7 +23,7 @@
 	</listener>
 	<context-param>
 		<param-name>log4jConfigLocation</param-name>
-		<param-value>/WEB-INF/conf/local/log4j.xml</param-value>
+		<param-value>/WEB-INF/conf/${common.mode}/log4j.xml</param-value>
 	</context-param>
 	
 	<listener>
@@ -31,7 +31,7 @@
 	</listener>
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
-		<param-value>/WEB-INF/conf/local/spring-context-resource.xml</param-value>
+		<param-value>/WEB-INF/conf/${common.mode}/spring-context-resource.xml</param-value>
 	</context-param>
 	
 	<servlet>
