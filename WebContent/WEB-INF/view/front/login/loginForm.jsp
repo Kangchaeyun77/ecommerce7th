@@ -35,6 +35,11 @@
 		.left, .center, .right {
 		  width: 33%;
 		}
+				/* 로고 이미지 스타일 */
+		header img {
+			width: 300px;
+			height: 200px;
+		}
 	</style>
 	<script>
 		window.onload = function () {
@@ -109,11 +114,11 @@
 <form id="frmMain" name="frmMain" method="POST">
 <!-- <form id="frmMain" method="POST" action="/loginProc.jsp"> -->
 <div class="container">
-	<header style="display: flex; justify-content: center; align-items: center; height: 120px;">
-<div style="position: relative; height: 200px; overflow: hidden; margin-top: 50px;">
-		<a href="/front/"><img src="/images/logo/logo3.png" alt="로고" style="width: 300px; height: 250px; object-fit: cover; "/></a>
-</div>
-	</header>
+		<header style="display: flex; justify-content: center; align-items: center; height: 120px;">
+			<div style="position: relative; height: 200px; overflow: hidden; margin-top: 50px;">
+				<a href="/front/"><img src="/images/logo/logo3.png" alt="로고"></a>
+			</div>
+		</header>
 	
 	<section class="content" style="display: flex; justify-content: center; align-items: flex-start; height: 100vh;" >
 		<nav></nav>
