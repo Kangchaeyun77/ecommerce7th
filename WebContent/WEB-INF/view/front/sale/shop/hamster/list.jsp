@@ -94,7 +94,22 @@
 	<%@ include file="/include/front/gnb_shopping.jsp" %>
 </div>
 <script>
+
+		<c:if test="${empty sessionScope.SEQ_MBR}">
+		var isLogin = false;
+		</c:if>
+		
+		<c:if test="${not empty sessionScope.SEQ_MBR}">
+		var isLogin = true;
+		</c:if>
+		
 		function goWriteForm(value) {
+			
+			if (!isLogin) {
+				alert("로그인이 필요합니다!");
+				window.location.href ='/front/login/loginForm.web';
+				return;
+			}
 			
 			var frmMain = document.getElementById("frmMain");
 			

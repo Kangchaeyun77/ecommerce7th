@@ -149,7 +149,7 @@
 			</c:forEach>
 			<c:if test="${empty sessionScope.SEQ_MBR}">
 				<script type="text/javascript">
-					window.location.href = '/front/member/login.jsp'; // 로그인 페이지로 이동
+					window.location.href = '/front/login/loginForm.web'; // 로그인 페이지로 이동
 				</script>
 				<p style="text-align:center">회원 정보가 없습니다. 로그인을 해주세요.</p>
 			</c:if>

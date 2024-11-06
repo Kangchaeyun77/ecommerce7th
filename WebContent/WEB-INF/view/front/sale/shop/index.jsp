@@ -98,6 +98,13 @@
 	<%@ include file="/include/front/gnb_shopping.jsp" %>
 </div>
 <script>
+	<c:if test="${empty sessionScope.SEQ_MBR}">
+	var isLogin = false;
+	</c:if>
+	
+	<c:if test="${not empty sessionScope.SEQ_MBR}">
+	var isLogin = true;
+	</c:if>
 	
 	function goPage(value) {
 		
@@ -116,6 +123,13 @@
 	}
 
 	function goWriteForm(value) {
+		
+		if (!isLogin) {
+			alert("로그인이 필요합니다!");
+			window.location.href ='/front/login/loginForm.web';
+			return;
+		}
+		
 		var frmMain = document.getElementById("frmMain");
 		
 		document.getElementById("seq_sle").value = value;
@@ -206,15 +220,14 @@
 												5.0
 											</span>
 											<h3 class="secondary-font text-primary"><fmt:formatNumber value="${list.price_sale}" pattern="#,###" />원</h3>
-												<div class="d-flex flex-wrap mt-3">
-													<a href="javascript:addToCart(${list.seq_sle}, ${list.seq_prd}, '${list.sle_nm}', ${list.price_sale}, '${list.img}');" 
-														class="btn-cart me-3 px-3 pt-2 pb-2" style="display: flex; align-items: center; justify-content: center; font-size: 18px;">
+											<div class="d-flex flex-wrap mt-3">
+												<a href="javascript:addToCart(${list.seq_sle}, ${list.seq_prd}, '${list.sle_nm}', ${list.price_sale}, '${list.img}');" class="btn-cart me-3 px-3 pt-2 pb-2" style="display: flex; align-items: center; justify-content: center; font-size: 18px;">
 													<span class="text-uppercase m-0">장바구니</span>
+												</a>
+													<a href="#" class="btn-wishlist px-4 pt-3" style="display: inline-block; border: 1px solid #ccc; border-radius: 5px; text-decoration: none; text-align: center; padding: 10px;" onclick="toggleHeart(this)">
+														<span class="fs-5" style="color: black; font-size: 20px; line-height: 1;">&#9825;</span>
 													</a>
-														<a href="#" class="btn-wishlist px-4 pt-3" style="display: inline-block; border: 1px solid #ccc; border-radius: 5px; text-decoration: none; text-align: center; padding: 10px;" onclick="toggleHeart(this)">
-															<span class="fs-5" style="color: black; font-size: 20px; line-height: 1;">&#9825;</span>
-														</a>
-												 </div>
+											</div>
 										</div>
 									</div>
 								</div>

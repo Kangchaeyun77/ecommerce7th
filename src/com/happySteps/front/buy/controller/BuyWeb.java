@@ -151,10 +151,14 @@ public class BuyWeb extends Common{
 		
 		ModelAndView mav = new ModelAndView("redirect:/error.web");
 		
-		//logger.debug("내가 확인");
-		
 		try {
-pagingDto.setRegister(Integer.parseInt(getSession(request, "SEQ_MBR")));
+			
+			if (request.getSession().getAttribute("SEQ_MBR") == null) {
+				mav.setViewName("/front/login/loginForm");
+				return mav;
+			}
+			
+			pagingDto.setRegister(Integer.parseInt(getSession(request, "SEQ_MBR")));
 			
 			SaleDto _saleDto = saleSrvc.select(saleDto);
 			mav.addObject("saleDto"		, _saleDto);

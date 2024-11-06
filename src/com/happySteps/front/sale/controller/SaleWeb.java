@@ -76,15 +76,7 @@ public class SaleWeb extends Common {
 		ModelAndView mav = new ModelAndView("redirect:/error.web");
 		
 		try {
-			
-			// 세션이 없을 경우는 로그인 페이지로 보냄
-			if (!sessionCmpn.isSession(request)) {
-				request.setAttribute("script"	, "alert('로그인이 필요합니다!');");
-				request.setAttribute("redirect"	, "/front/login/loginForm.web");
-				mav.setViewName("forward:/servlet/result.web");
-			}
-			else {
-				
+
 				if (pagingDto.getCd_ctg_pet() == 1) {
 					mav.setViewName("front/sale/shop/dog/list");
 				}
@@ -106,7 +98,7 @@ public class SaleWeb extends Common {
 				
 				mav.addObject("paging"	, pagingListDto.getPaging());
 				mav.addObject("list"	, pagingListDto.getList());
-			}
+
 		}
 		catch (Exception e) {
 			logger.error("[" + this.getClass().getName() + ".list()] " + e.getMessage(), e);
