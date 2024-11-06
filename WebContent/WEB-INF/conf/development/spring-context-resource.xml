@@ -98,8 +98,8 @@
 		<qualifier value="txBackoffice" />
 	</bean>
 	
-	<bean name="dsCommon" class="org.apache.commons.dbcp2.BasicDataSource" destroy-method="close">
-		<!-- From database.propeties -->
+<!-- 	<bean name="dsCommon" class="org.apache.commons.dbcp2.BasicDataSource" destroy-method="close">
+		From database.propeties
 		<property name="driverClassName" value="${common.driver}" />
 		<property name="url" value="${common.url}" />
 		<property name="username" value="${common.user}" />
@@ -115,7 +115,7 @@
 	<bean id="txCommon" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
 		<property name="dataSource" ref="dsCommon" />
 		<qualifier value="txCommon" />
-	</bean>
+	</bean> -->
 	
 	<bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
 		<property name="host" value="smtp.naver.com" />
