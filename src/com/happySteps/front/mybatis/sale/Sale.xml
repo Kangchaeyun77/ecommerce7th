@@ -66,6 +66,7 @@
 		SELECT
 			SEQ_SLE
 			, SEQ_PRD
+			, CD_CTG_PET
 			, SLE_NM
 			, PRICE_SALE
 			, IMG
