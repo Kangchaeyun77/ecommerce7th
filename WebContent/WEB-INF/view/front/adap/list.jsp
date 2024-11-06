@@ -59,6 +59,7 @@
 	</style>
 	<script>
 	
+	<%--
 	function viewAnimalDetail(animalId, sigunCd, sigunNm, stateNm, pblancBeginDe, pblancEndDe, speciesNm, shterNm) {
 		// AJAX를 통해 상세 정보를 요청합니다.
 		$.ajax({
@@ -79,9 +80,9 @@
 				// API 호출 성공 시, response에 대한 처리를 합니다.
 				if (response) {
 					// 서버에서 받은 데이터를 view.jsp에 넘겨주는 방법
-					const detailPageUrl = `/front/adap/view.web?PBLANC_IDNTFY_NO=${animalId}&SIGUN_CD=${sigunCd}&SIGUN_NM=${sigunNm}&STATE_NM=${stateNm}&PBLANC_BEGIN_DE=${pblancBeginDe}&PBLANC_END_DE=${pblancEndDe}&SPECIES_NM=${speciesNm}&SHTER_NM=${shterNm}`;
-					// const detailPageUrl = `/front/adap/view.web`;
+					 const detailPageUrl = `/front/adap/view.web?PBLANC_IDNTFY_NO=${animalId || ''}&SIGUN_CD=${sigunCd || ''}&SIGUN_NM=${sigunNm || ''}&STATE_NM=${stateNm || ''}&PBLANC_BEGIN_DE=${pblancBeginDe || ''}&PBLANC_END_DE=${pblancEndDe || ''}&SPECIES_NM=${speciesNm || ''}&SHTER_NM=${shterNm || ''}`;
 					// URL로 리다이렉션
+					console.log(detailPageUrl);
 					window.location.href = detailPageUrl; 
 				} else {
 					alert('상세 정보를 가져오는 데 실패했습니다.');
@@ -93,7 +94,7 @@
 			}
 		});
 	}
-
+--%>
 	let currentPage = 1; // 전역 변수로 현재 페이지를 정의
 	let totalPages = 10; // 예시로 최대 페이지 수를 10으로 설정. 실제 데이터에 따라 수정 필요.
 	const itemsPerPage = 20; // 페이지당 보여줄 항목 수
@@ -162,6 +163,82 @@
 	$(document).ready(function() {
 		fetchAnimalData(currentPage); // 첫 페이지 데이터 가져오기
 	});
+	
+	function viewAnimalDetail(animalId, sigunCd, sigunNm, stateNm, pblancBeginDe, pblancEndDe, speciesNm, shterNm) {
+		// URL 파라미터로 전달할 데이터를 인코딩
+		const params = new URLSearchParams({
+			PBLANC_IDNTFY_NO: animalId || '',
+			SIGUN_CD: sigunCd || '',
+			SIGUN_NM: sigunNm || '',
+			STATE_NM: stateNm || '',
+			PBLANC_BEGIN_DE: pblancBeginDe || '',
+			PBLANC_END_DE: pblancEndDe || '',
+			SPECIES_NM: speciesNm || '',
+			SHTER_NM: shterNm || ''
+		});
+		
+		// view.jsp로 이동
+		window.location.href = `/front/adap/view.web?` + params.toString();
+	}
+
+	// view.jsp에 추가할 코드
+	$(document).ready(function() {
+		// URL에서 파라미터 가져오기
+		const urlParams = new URLSearchParams(window.location.search);
+		const animalId = urlParams.get('PBLANC_IDNTFY_NO');
+		
+		if (animalId) {
+			// AJAX 요청을 통해 상세 정보를 가져오기
+			$.ajax({
+				url: '/front/adap/view.json',
+				method: 'POST',
+				contentType: 'application/json',
+				data: JSON.stringify({
+					PBLANC_IDNTFY_NO: animalId,
+					SIGUN_CD: urlParams.get('SIGUN_CD'),
+					SIGUN_NM: urlParams.get('SIGUN_NM'),
+					STATE_NM: urlParams.get('STATE_NM'),
+					PBLANC_BEGIN_DE: urlParams.get('PBLANC_BEGIN_DE'),
+					PBLANC_END_DE: urlParams.get('PBLANC_END_DE'),
+					SPECIES_NM: urlParams.get('SPECIES_NM'),
+					SHTER_NM: urlParams.get('SHTER_NM')
+				}),
+				success: function(response) {
+					if (response && response.AbdmAnimalProtect && response.AbdmAnimalProtect[1].row[0]) {
+						const data = response.AbdmAnimalProtect[1].row[0];
+						
+						// 데이터 바인딩
+						$('#pblanc_idntfy_no').text(data.PBLANC_IDNTFY_NO || '');
+						$('#species_nm').text(data.SPECIES_NM || '');
+						$('#color_nm').text(data.COLOR_NM || '');
+						$('#sex_nm').text(data.SEX_NM || '');
+						$('#neut_yn').text(data.NEUT_YN || '');
+						$('#age_info').text(data.AGE_INFO || '');
+						$('#bdwgh_info').text(data.BDWGH_INFO || '');
+						$('#sfetr_info').text(data.SFETR_INFO || '');
+						$('#partclr_matr').text(data.PARTCLR_MATR || '');
+						$('#discvry_plc_info').text(data.DISCVRY_PLC_INFO || '');
+						$('#recept_de').text(data.RECEPT_DE || '');
+						$('#shter_nm').text(data.SHTER_NM || '');
+						$('#shter_telno').text(data.SHTER_TELNO || '');
+						$('#protect_plc').text(data.PROTECT_PLC || '');
+						$('#jurisd_inst_nm').text(data.JURISD_INST_NM || '');
+						$('#chrgpsn_nm').text(data.CHRGPSN_NM || '');
+						$('#chrgpsn_contct_no').text(data.CHRGPSN_CONTCT_NO || '');
+					} else {
+						alert('상세 정보를 가져오는 데 실패했습니다.');
+					}
+				},
+				error: function(xhr, status, error) {
+					console.error('API 호출 실패:', error);
+					alert('상세 정보를 가져오는 데 오류가 발생했습니다.');
+				}
+			});
+		} else {
+			//alert('동물 정보를 찾을 수 없습니다.');
+		}
+	});
+	
 	</script>
 </head>
 <body>

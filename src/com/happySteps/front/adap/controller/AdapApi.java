@@ -33,7 +33,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -77,8 +76,9 @@ public class AdapApi extends Common {
 	 * @param Pblanc_idntfy_no 공고 번호
 	 * @return view
 	 */
+	/*
 	public String showAnimalDetails(Model model, String Pblanc_idntfy_no) {
-		String apiUrl = "https://openapi.gg.go.kr/AbdmAnimalProtect?KEY=e705ae67f910466d9eef16b2618fa1c2&Type=json&pIndex=1&pSize=1"; // 수정된 pSize
+		String apiUrl = "https://openapi.gg.go.kr/AbdmAnimalProtect?KEY=e705ae67f910466d9eef16b2618fa1c2&Type=json&pIndex=1&pSize=1";
 		String responseJson;
 
 		try {
@@ -139,9 +139,9 @@ public class AdapApi extends Common {
 		}
 
 		// JSP 뷰로 이동
-		return "view"; // view.jsp로 포워딩
+		return "/front/adap/view.web"; // view.jsp로 포워딩
 	}
-
+*/
 	
 	/**
 	 * POST 방식으로만 외부 API와 통신하여 JSON 응답을 받는 메서드
