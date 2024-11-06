@@ -42,6 +42,19 @@ import com.happySteps.front.sale.dto.SaleDto;
 @Repository("com.happySteps.front.sale.dao.SaleDao")
 public class SaleDao extends BaseDao {
 	
+	public List<SaleDto> randomDog(PagingDto pagingDto) {
+		return sqlSessionFront.selectList("com.happySteps.front.mybatis.sale.Sale.randomDog", pagingDto);
+	}
+	public List<SaleDto> randomCat(PagingDto pagingDto) {
+		return sqlSessionFront.selectList("com.happySteps.front.mybatis.sale.Sale.randomCat", pagingDto);
+	}
+	public List<SaleDto> randomHamster(PagingDto pagingDto) {
+		return sqlSessionFront.selectList("com.happySteps.front.mybatis.sale.Sale.randomHamster", pagingDto);
+	}
+	public List<SaleDto> randomReptile(PagingDto pagingDto) {
+		return sqlSessionFront.selectList("com.happySteps.front.mybatis.sale.Sale.randomReptile", pagingDto);
+	}
+	
 	public List<SaleDto> randomList2(PagingDto pagingDto) {
 		return sqlSessionFront.selectList("com.happySteps.front.mybatis.sale.Sale.randomList2", pagingDto);
 	}

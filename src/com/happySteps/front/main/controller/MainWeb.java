@@ -33,7 +33,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.happySteps.front.common.dto.PagingDto;
-import com.happySteps.front.common.dto.PagingListDto;
 import com.happySteps.front.main.controller.MainWeb;
 import com.happySteps.front.sale.dto.SaleDto;
 import com.happySteps.front.sale.service.SaleSrvc;
@@ -102,6 +101,15 @@ public class MainWeb {
 			
 			List<SaleDto> randomProducts2 = saleSrvc.getRandomProducts2(pagingDto);
 			mav.addObject("randomProducts2", randomProducts2);
+			
+			List<SaleDto> randomDog = saleSrvc.getRandomDog(pagingDto);
+			mav.addObject("randomDog", randomDog);
+			List<SaleDto> randomCat = saleSrvc.getRandomCat(pagingDto);
+			mav.addObject("randomCat", randomCat);
+			List<SaleDto> randomHamster = saleSrvc.getRandomHamster(pagingDto);
+			mav.addObject("randomHamster", randomHamster);
+			List<SaleDto> randomReptile = saleSrvc.getRandomReptile(pagingDto);
+			mav.addObject("randomReptile", randomReptile);
 			
 			mav.setViewName("front/index");
 		}

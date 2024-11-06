@@ -55,6 +55,18 @@ public class SaleSrvc {
 	public List<SaleDto> getRandomProducts2(PagingDto pagingDto) {
 		return saleDao.randomList2(pagingDto);
 	}
+	public List<SaleDto> getRandomDog(PagingDto pagingDto) {
+		return saleDao.randomDog(pagingDto);
+	}
+	public List<SaleDto> getRandomCat(PagingDto pagingDto) {
+		return saleDao.randomCat(pagingDto);
+	}
+	public List<SaleDto> getRandomHamster(PagingDto pagingDto) {
+		return saleDao.randomHamster(pagingDto);
+	}
+	public List<SaleDto> getRandomReptile(PagingDto pagingDto) {
+		return saleDao.randomReptile(pagingDto);
+	}
 	
 	/**
 	 * @param pagingDto [게시판 빈]

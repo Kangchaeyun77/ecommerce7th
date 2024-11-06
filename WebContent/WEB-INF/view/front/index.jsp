@@ -36,40 +36,54 @@
 	<title>HappySteps - 행복한발걸음</title>
 </head>
 <body>
-<header>
-	<%@ include file="/include/front/header.jsp" %>
-</header>
-<top>
-	<%@ include file="/include/front/top.jsp" %>
-</top>
-<script>
-function addToCart(seqSle, seqPrd, sleNm, price, img) {
+	<header>
+		<%@ include file="/include/front/header.jsp" %>
+	</header>
+	<top>
+		<%@ include file="/include/front/top.jsp" %>
+	</top>
+	<script>
+		<c:if test="${empty sessionScope.SEQ_MBR}">
+		var isLogin = false;
+		</c:if>
+		
+		<c:if test="${not empty sessionScope.SEQ_MBR}">
+		var isLogin = true;
+		</c:if>
+		
+		function addToCart(seqSle, seqPrd, sleNm, price, img) {
 
-	const data = {
-		seq_sle: seqSle,
-		seq_prd: seqPrd, 
-		sle_nm: sleNm,
-		price: price,
-		count: 1, // 기본 수량 1로 설정
-		img: img
-	};
-
-	$.ajax({
-		url: '/front/basket/addItem.web', 
-		type: 'POST',
-		contentType: 'application/json',
-		data: JSON.stringify(data),
-		success: function(response) {
-			if (confirm('상품이 장바구니에 추가되었습니다. 장바구니 페이지로 이동할까요?')) {
-				window.location.href ='/front/basket/index.web';
+			if (!isLogin) {
+				alert("로그인이 필요합니다!");
+				window.location.href ='/front/login/loginForm.web';
+				return;
 			}
-		},
-		error: function(xhr, status, error) {
-			alert('장바구니 추가 중 오류가 발생했습니다.');
+
+			const data = {
+				seq_sle: seqSle,
+				seq_prd: seqPrd, 
+				sle_nm: sleNm,
+				price: price,
+				count: 1, // 기본 수량 1로 설정
+				img: img
+			};
+		
+			$.ajax({
+				url: '/front/basket/addItem.web', 
+				type: 'POST',
+				contentType: 'application/json',
+				data: JSON.stringify(data),
+				success: function(response) {
+					if (confirm('상품이 장바구니에 추가되었습니다. 장바구니 페이지로 이동할까요?')) {
+						window.location.href ='/front/basket/index.web';
+					}
+				},
+				error: function(xhr, status, error) {
+					alert('장바구니 추가 중 오류가 발생했습니다.');
+				}
+			});
 		}
-	});
-}
-</script>
+	</script>
 <!-- 슬라이드 배너 영역(첫페이지) -->
 <section id="banner" style="background: #F9F3EC;">
 	<div class="container">
@@ -319,6 +333,7 @@ function addToCart(seqSle, seqPrd, sleNm, price, img) {
 
 <section id="Popular" class="my-5">
 	<div class="container my-5 py-5">
+	
 		<div class="section-header d-md-flex justify-content-between align-items-center">
 			<h2 class="display-3 fw-normal" style="font-size: 55px;">품목별 추천 상품</h2><%--Popular products --%>
 			<div class="mb-4 mb-md-0">
@@ -342,386 +357,150 @@ function addToCart(seqSle, seqPrd, sleNm, price, img) {
 				</a>
 			</div>
 		</div>
-       <div class="isotope-container row">
-
-        <div class="item cat col-md-4 col-lg-3 my-4">
-          <div class="card position-relative">
-            <a href="single-product.html"><img src="/images/temporary/cat1.png" class="img-fluid rounded-4" alt="image"></a>
-            <div class="card-body p-0">
-              <a href="single-product.html">
-               <span class="card-title pt-4 m-0">로얄캐닌 인도어 4kg</span>
-				<!-- <h3 class="card-title pt-4 m-0">Grey hoodie</h3> -->
-              </a>
-
-              <div class="card-text">
-              				<!-- 
-							<span class="rating secondary-font">
-									<iconify-icon icon="clarity:star-solid" class="text-primary"></iconify-icon>
-									<iconify-icon icon="clarity:star-solid" class="text-primary"></iconify-icon>
-									<iconify-icon icon="clarity:star-solid" class="text-primary"></iconify-icon>
-									<iconify-icon icon="clarity:star-solid" class="text-primary"></iconify-icon>
-									<iconify-icon icon="clarity:star-solid" class="text-primary"></iconify-icon>
-									5.0
-								</span>
-								 -->
-								<span class="rating secondary-font">
-									⭐️
-									⭐️
-									⭐️
-									⭐️
-									⭐️
-									5.0
-								</span>
-
-				<h3 class="secondary-font text-primary">55,800원</h3>
-
-				<div class="d-flex flex-wrap mt-3">
-						<a href="#" class="btn-cart me-3 px-3 pt-2 pb-2" style="font-family: 'Nunito', sans-serif; display: flex; align-items: center; justify-content: center; font-size: 14px;"> <!-- Nunito로 글씨체 변경 -->
-						    <span class="text-uppercase m-0">Add to Cart</span>
-						</a>
-						    <a href="#" class="btn-wishlist px-4 pt-3" style="display: inline-block; border: 1px solid #ccc; border-radius: 5px; text-decoration: none; text-align: center; padding: 10px; font-family: 'Nunito', sans-serif;"> <!-- Nunito로 글씨체 변경 -->
-						        <span  class="fs-5" style="color: black; font-size: 20px; line-height: 1;">❤︎</span>
-						        <!--  
-						            <iconify-icon icon="fluent:heart-28-filled" class="fs-5"></iconify-icon>
-						        -->
-							</a>
-				</div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="item dog col-md-4 col-lg-3 my-4">
-          <div class="card position-relative">
-            <a href="single-product.html"><img src="/images/temporary/dog1.png" class="img-fluid rounded-4" alt="image"></a>
-            <div class="card-body p-0">
-              <a href="single-product.html">
-              <span class="card-title pt-4 m-0">에코 7 센시티브솔루션 (램)</span>
-				<!-- <h3 class="card-title pt-4 m-0">Grey hoodie</h3> -->
-              </a>
-
-              <div class="card-text">
-                				<!-- 
-							<span class="rating secondary-font">
-									<iconify-icon icon="clarity:star-solid" class="text-primary"></iconify-icon>
-									<iconify-icon icon="clarity:star-solid" class="text-primary"></iconify-icon>
-									<iconify-icon icon="clarity:star-solid" class="text-primary"></iconify-icon>
-									<iconify-icon icon="clarity:star-solid" class="text-primary"></iconify-icon>
-									<iconify-icon icon="clarity:star-solid" class="text-primary"></iconify-icon>
-									5.0
-								</span>
-								 -->
-								<span class="rating secondary-font">
-								    ⭐️
-								    ⭐️
-								    ⭐️
-								    ⭐️
-								    ⭐️
-								    5.0
-								</span>
-                <h3 class="secondary-font text-primary">16,000원</h3>
-
-			<div class="d-flex flex-wrap mt-3">
-					<a href="#" class="btn-cart me-3 px-3 pt-2 pb-2" style="font-family: 'Nunito', sans-serif; display: flex; align-items: center; justify-content: center; font-size: 14px;"> <!-- Nunito로 글씨체 변경 -->
-					    <span class="text-uppercase m-0">Add to Cart</span>
-					</a>
-					    <a href="#" class="btn-wishlist px-4 pt-3" style="display: inline-block; border: 1px solid #ccc; border-radius: 5px; text-decoration: none; text-align: center; padding: 10px; font-family: 'Nunito', sans-serif;"> <!-- Nunito로 글씨체 변경 -->
-					        <span class="fs-5 style=" color: black; font-size: 20px; line-height: 1;">❤︎</span>
-					        <!--  
-					            <iconify-icon icon="fluent:heart-28-filled" class="fs-5"></iconify-icon>
-					        -->
-					    </a>
-			</div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="item hamster col-md-4 col-lg-3 my-4">
-          <div class="card position-relative">
-            <a href="single-product.html"><img src="/images/temporary/ham11.png" class="img-fluid rounded-4" alt="image"></a>
-            <div class="card-body p-0">
-              <a href="single-product.html">
-               <span class="card-title pt-4 m-0">그레이트 믹스 골든 600g</span>
-				<!-- <h3 class="card-title pt-4 m-0">Grey hoodie</h3> -->
-              </a>
-
-              <div class="card-text">
-              				<!-- 
-							<span class="rating secondary-font">
-									<iconify-icon icon="clarity:star-solid" class="text-primary"></iconify-icon>
-									<iconify-icon icon="clarity:star-solid" class="text-primary"></iconify-icon>
-									<iconify-icon icon="clarity:star-solid" class="text-primary"></iconify-icon>
-									<iconify-icon icon="clarity:star-solid" class="text-primary"></iconify-icon>
-									<iconify-icon icon="clarity:star-solid" class="text-primary"></iconify-icon>
-									5.0
-								</span>
-								 -->
-								<span class="rating secondary-font">
-								    ⭐️
-								    ⭐️
-								    ⭐️
-								    ⭐️
-								    ⭐️
-								    5.0
-								</span>
-                <h3 class="secondary-font text-primary">12,000원</h3>
-
-			<div class="d-flex flex-wrap mt-3">
-					<a href="#" class="btn-cart me-3 px-3 pt-2 pb-2" style="font-family: 'Nunito', sans-serif; display: flex; align-items: center; justify-content: center; font-size: 14px;"> <!-- Nunito로 글씨체 변경 -->
-					    <span class="text-uppercase m-0">Add to Cart</span>
-					</a>
-					    <a href="#" class="btn-wishlist px-4 pt-3" style="display: inline-block; border: 1px solid #ccc; border-radius: 5px; text-decoration: none; text-align: center; padding: 10px; font-family: 'Nunito', sans-serif;"> <!-- Nunito로 글씨체 변경 -->
-					        <span  class="fs-5" style="color: black; font-size: 20px; line-height: 1;">❤︎</span>
-					        <!--  
-					            <iconify-icon icon="fluent:heart-28-filled" class="fs-5"></iconify-icon>
-					        -->
-					    </a>
-			</div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="item reptile col-md-4 col-lg-3 my-4">
-          <div class="card position-relative">
-            <a href="single-product.html"><img src="/images/temporary/rep1.png" class="img-fluid rounded-4" alt="image"></a>
-            <div class="card-body p-0">
-              <a href="single-product.html">
-                <span class="card-title pt-4 m-0">아마존젤리/벌크(400P)</span>
-				<!-- <h3 class="card-title pt-4 m-0">Grey hoodie</h3> -->
-              </a>
-              <div class="card-text">
-               				<!-- 
-							<span class="rating secondary-font">
-									<iconify-icon icon="clarity:star-solid" class="text-primary"></iconify-icon>
-									<iconify-icon icon="clarity:star-solid" class="text-primary"></iconify-icon>
-									<iconify-icon icon="clarity:star-solid" class="text-primary"></iconify-icon>
-									<iconify-icon icon="clarity:star-solid" class="text-primary"></iconify-icon>
-									<iconify-icon icon="clarity:star-solid" class="text-primary"></iconify-icon>
-									5.0
-								</span>
-								 -->
-								<span class="rating secondary-font">
-								    ⭐️
-								    ⭐️
-								    ⭐️
-								    ⭐️
-								    ⭐️
-								    5.0
-								</span>
-                <h3 class="secondary-font text-primary">35,000원</h3>
-
-	<div class="d-flex flex-wrap mt-3">
-			<a href="#" class="btn-cart me-3 px-3 pt-2 pb-2" style="font-family: 'Nunito', sans-serif; display: flex; align-items: center; justify-content: center; font-size: 14px;"> <!-- Nunito로 글씨체 변경 -->
-			    <span class="text-uppercase m-0">Add to Cart</span>
-			</a>
-			    <a href="#" class="btn-wishlist px-4 pt-3" style="display: inline-block; border: 1px solid #ccc; border-radius: 5px; text-decoration: none; text-align: center; padding: 10px; font-family: 'Nunito', sans-serif;"> <!-- Nunito로 글씨체 변경 -->
-			        <span style="color: black; font-size: 20px; line-height: 1;">❤︎</span>
-			        <!--  
-			            <iconify-icon icon="fluent:heart-28-filled" class="fs-5"></iconify-icon>
-			        -->
-			    </a>
-			</div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="item reptile col-md-4 col-lg-3 my-4">
-          <div class="card position-relative">
-            <a href="single-product.html"><img src="/images/temporary/rep3.png" class="img-fluid rounded-4" alt="image"></a>
-            <div class="card-body p-0">
-              <a href="single-product.html">
-                <span class="card-title pt-4 m-0">엑소테라 채집통 (특대)</span>
-				<!-- <h3 class="card-title pt-4 m-0">Grey hoodie</h3> -->
-              </a>
-
-              <div class="card-text">
-              				<!-- 
-							<span class="rating secondary-font">
-									<iconify-icon icon="clarity:star-solid" class="text-primary"></iconify-icon>
-									<iconify-icon icon="clarity:star-solid" class="text-primary"></iconify-icon>
-									<iconify-icon icon="clarity:star-solid" class="text-primary"></iconify-icon>
-									<iconify-icon icon="clarity:star-solid" class="text-primary"></iconify-icon>
-									<iconify-icon icon="clarity:star-solid" class="text-primary"></iconify-icon>
-									5.0
-								</span>
-								 -->
-								<span class="rating secondary-font">
-								    ⭐️
-								    ⭐️
-								    ⭐️
-								    ⭐️
-								    ⭐️
-								    5.0
-								</span>
-
-                <h3 class="secondary-font text-primary">16,000원</h3>
-
-	<div class="d-flex flex-wrap mt-3">
-			<a href="#" class="btn-cart me-3 px-3 pt-2 pb-2" style="font-family: 'Nunito', sans-serif; display: flex; align-items: center; justify-content: center; font-size: 14px;"> <!-- Nunito로 글씨체 변경 -->
-			    <span class="text-uppercase m-0">Add to Cart</span>
-			</a>
-			    <a href="#" class="btn-wishlist px-4 pt-3" style="display: inline-block; border: 1px solid #ccc; border-radius: 5px; text-decoration: none; text-align: center; padding: 10px; font-family: 'Nunito', sans-serif;"> <!-- Nunito로 글씨체 변경 -->
-			        <span style="color: black; font-size: 20px; line-height: 1;">❤︎</span>
-			        <!--  
-			            <iconify-icon icon="fluent:heart-28-filled" class="fs-5"></iconify-icon>
-			        -->
-			    </a>
-			</div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="item cat col-md-4 col-lg-3 my-4">
-          <div class="card position-relative">
-            <a href="single-product.html"><img src="/images/temporary/cat2.png" class="img-fluid rounded-4" alt="image"></a>
-            <div class="card-body p-0">
-              <a href="single-product.html">
-                <span class="card-title pt-4 m-0">웰니스 코어 시그니쳐 셀렉트</span>
-				<!-- <h3 class="card-title pt-4 m-0">Grey hoodie</h3> -->
-              </a>
-
-              <div class="card-text">
-              				<!-- 
-							<span class="rating secondary-font">
-									<iconify-icon icon="clarity:star-solid" class="text-primary"></iconify-icon>
-									<iconify-icon icon="clarity:star-solid" class="text-primary"></iconify-icon>
-									<iconify-icon icon="clarity:star-solid" class="text-primary"></iconify-icon>
-									<iconify-icon icon="clarity:star-solid" class="text-primary"></iconify-icon>
-									<iconify-icon icon="clarity:star-solid" class="text-primary"></iconify-icon>
-									5.0
-								</span>
-								 -->
-								<span class="rating secondary-font">
-								    ⭐️
-								    ⭐️
-								    ⭐️
-								    ⭐️
-								    ⭐️
-								    5.0
-								</span>
-
-                <h3 class="secondary-font text-primary">2,900원</h3>
-
-	<div class="d-flex flex-wrap mt-3">
-			<a href="#" class="btn-cart me-3 px-3 pt-2 pb-2" style="font-family: 'Nunito', sans-serif; display: flex; align-items: center; justify-content: center; font-size: 14px;"> <!-- Nunito로 글씨체 변경 -->
-			    <span class="text-uppercase m-0">Add to Cart</span>
-			</a>
-			    <a href="#" class="btn-wishlist px-4 pt-3" style="display: inline-block; border: 1px solid #ccc; border-radius: 5px; text-decoration: none; text-align: center; padding: 10px; font-family: 'Nunito', sans-serif;"> <!-- Nunito로 글씨체 변경 -->
-			        <span style="color: black; font-size: 20px; line-height: 1;">❤︎</span>
-			        <!--  
-			            <iconify-icon icon="fluent:heart-28-filled" class="fs-5"></iconify-icon>
-			        -->
-			    </a>
-			</div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="item dog col-md-4 col-lg-3 my-4">
-          <div class="z-1 position-absolute rounded-3 m-3 px-3 border border-dark-subtle">
-            Sale
-          </div>
-          <div class="card position-relative">
-            <a href="single-product.html"><img src="/images/temporary/dog2.png" class="img-fluid rounded-4" alt="image"></a>
-            <div class="card-body p-0">
-              <a href="single-product.html">
-                 <span class="card-title pt-4 m-0">퓨어치킨 닭가슴살 100g</span>
-				<!-- <h3 class="card-title pt-4 m-0">Grey hoodie</h3> -->
-              </a>
-
-              <div class="card-text">
-               				<!-- 
-							<span class="rating secondary-font">
-									<iconify-icon icon="clarity:star-solid" class="text-primary"></iconify-icon>
-									<iconify-icon icon="clarity:star-solid" class="text-primary"></iconify-icon>
-									<iconify-icon icon="clarity:star-solid" class="text-primary"></iconify-icon>
-									<iconify-icon icon="clarity:star-solid" class="text-primary"></iconify-icon>
-									<iconify-icon icon="clarity:star-solid" class="text-primary"></iconify-icon>
-									5.0
-								</span>
-								 -->
-								<span class="rating secondary-font">
-								    ⭐️
-								    ⭐️
-								    ⭐️
-								    ⭐️
-								    ⭐️
-								    5.0
-								</span>
-                <h3 class="secondary-font text-primary">5,500원</h3>
-
-			<div class="d-flex flex-wrap mt-3">
-			<a href="#" class="btn-cart me-3 px-3 pt-2 pb-2" style="font-family: 'Nunito', sans-serif; display: flex; align-items: center; justify-content: center; font-size: 14px;"> <!-- Nunito로 글씨체 변경 -->
-			    <span class="text-uppercase m-0">Add to Cart</span>
-			</a>
-			    <a href="#" class="btn-wishlist px-4 pt-3" style="display: inline-block; border: 1px solid #ccc; border-radius: 5px; text-decoration: none; text-align: center; padding: 10px; font-family: 'Nunito', sans-serif;"> <!-- Nunito로 글씨체 변경 -->
-			        <span style="color: black; font-size: 20px; line-height: 1;">❤︎</span>
-			        <!--  
-			            <iconify-icon icon="fluent:heart-28-filled" class="fs-5"></iconify-icon>
-			        -->
-			    </a>
-			</div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="item hamster col-md-4 col-lg-3 my-4">
-          <!-- <div class="z-1 position-absolute rounded-3 m-3 px-3 border border-dark-subtle">
-            New
-          </div> -->
-          <div class="card position-relative">
-            <a href="single-product.html"><img src="/images/temporary/ham12.png" class="img-fluid rounded-4" alt="image"></a>
-            <div class="card-body p-0">
-              <a href="single-product.html">
-                 <span class="card-title pt-4 m-0">동결건조 이갈이 롤리팝 1P</span>
-				<!-- <h3 class="card-title pt-4 m-0">Grey hoodie</h3> -->
-              </a>
-
-              <div class="card-text">
-                				<!-- 
-							<span class="rating secondary-font">
-									<iconify-icon icon="clarity:star-solid" class="text-primary"></iconify-icon>
-									<iconify-icon icon="clarity:star-solid" class="text-primary"></iconify-icon>
-									<iconify-icon icon="clarity:star-solid" class="text-primary"></iconify-icon>
-									<iconify-icon icon="clarity:star-solid" class="text-primary"></iconify-icon>
-									<iconify-icon icon="clarity:star-solid" class="text-primary"></iconify-icon>
-									5.0
-								</span>
-								 -->
-								<span class="rating secondary-font">
-								    ⭐️
-								    ⭐️
-								    ⭐️
-								    ⭐️
-								    ⭐️
-								    5.0
-								</span>
-                <h3 class="secondary-font text-primary">950원</h3>
-
-			<div class="d-flex flex-wrap mt-3">
-			<a href="#" class="btn-cart me-3 px-3 pt-2 pb-2" style="font-family: 'Nunito', sans-serif; display: flex; align-items: center; justify-content: center; font-size: 14px;"> <!-- Nunito로 글씨체 변경 -->
-			    <span class="text-uppercase m-0">Add to Cart</span>
-			</a>
-			    <a href="#" class="btn-wishlist px-4 pt-3" style="display: inline-block; border: 1px solid #ccc; border-radius: 5px; text-decoration: none; text-align: center; padding: 10px; font-family: 'Nunito', sans-serif;"> <!-- Nunito로 글씨체 변경 -->
-			        <span style="color: black; font-size: 20px; line-height: 1;">❤︎</span>
-			        <!--  
-			            <iconify-icon icon="fluent:heart-28-filled" class="fs-5"></iconify-icon>
-			        -->
-			    </a>
-			</div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
+		<div class="isotope-container row">
+			<c:choose>
+				<c:when test="${empty randomDog}">
+					등록된 상품이 없습니다.
+				</c:when>
+				<c:otherwise>
+					<c:forEach items="${randomDog}" var="randomDog">
+							<div class="item dog col-md-4 col-lg-3 my-4">
+								<div class="card position-relative">
+									<a href="/front/buy/writeForm.web?seq_sle=${randomDog.seq_sle}">
+										<img src="${randomDog.img}" class="img-fluid rounded-4" alt="image">
+									</a>
+									<div class="card-body p-0">
+										<a href="/front/buy/writeForm.web?seq_sle=${randomDog.seq_sle}">
+											<span class="card-title pt-4 m-0">${randomDog.sle_nm}</span>
+										</a>
+										<div class="card-text">
+											<span class="rating secondary-font">
+												⭐️
+												⭐️
+												⭐️
+												⭐️
+												⭐️
+												5.0
+											</span>
+											<h3 class="secondary-font text-primary"><fmt:formatNumber value="${randomDog.price_sale}" pattern="#,###" />원</h3>
+											<div class="d-flex flex-wrap mt-3">
+												<a href="javascript:addToCart(${randomDog.seq_sle}, ${randomDog.seq_prd}, '${randomDog.sle_nm}', ${randomDog.price_sale}, '${randomDog.img}');" class="btn-cart me-3 px-3 pt-2 pb-2" style="font-family: 'Nunito', sans-serif; display: flex; align-items: center; justify-content: center; font-size: 14px;"> <!-- Nunito로 글씨체 변경 -->
+													<span class="text-uppercase m-0">장바구니</span>
+												</a>
+												<a href="#" class="btn-wishlist px-4 pt-3" style="display: inline-block; border: 1px solid #ccc; border-radius: 5px; text-decoration: none; text-align: center; padding: 10px; font-family: 'Nunito', sans-serif;"> <!-- Nunito로 글씨체 변경 -->
+													<span  class="fs-5" style="color: black; font-size: 20px; line-height: 1;">❤︎</span>
+												</a>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+					</c:forEach>
+					<c:forEach items="${randomCat}" var="randomCat">
+							<div class="item cat col-md-4 col-lg-3 my-4">
+								<div class="card position-relative">
+									<a href="/front/buy/writeForm.web?seq_sle=${randomCat.seq_sle}">
+										<img src="${randomCat.img}" class="img-fluid rounded-4" alt="image">
+									</a>
+									<div class="card-body p-0">
+										<a href="/front/buy/writeForm.web?seq_sle=${randomCat.seq_sle}">
+											<span class="card-title pt-4 m-0">${randomCat.sle_nm}</span>
+										</a>
+										<div class="card-text">
+											<span class="rating secondary-font">
+												⭐️
+												⭐️
+												⭐️
+												⭐️
+												⭐️
+												5.0
+											</span>
+											<h3 class="secondary-font text-primary"><fmt:formatNumber value="${randomCat.price_sale}" pattern="#,###" />원</h3>
+											<div class="d-flex flex-wrap mt-3">
+												<a href="javascript:addToCart(${randomCat.seq_sle}, ${randomCat.seq_prd}, '${randomCat.sle_nm}', ${randomCat.price_sale}, '${randomCat.img}');" class="btn-cart me-3 px-3 pt-2 pb-2" style="font-family: 'Nunito', sans-serif; display: flex; align-items: center; justify-content: center; font-size: 14px;"> <!-- Nunito로 글씨체 변경 -->
+													<span class="text-uppercase m-0">장바구니</span>
+												</a>
+												<a href="#" class="btn-wishlist px-4 pt-3" style="display: inline-block; border: 1px solid #ccc; border-radius: 5px; text-decoration: none; text-align: center; padding: 10px; font-family: 'Nunito', sans-serif;"> <!-- Nunito로 글씨체 변경 -->
+													<span  class="fs-5" style="color: black; font-size: 20px; line-height: 1;">❤︎</span>
+												</a>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+					</c:forEach>
+					<c:forEach items="${randomHamster}" var="randomHamster">
+							<div class="item hamster col-md-4 col-lg-3 my-4">
+								<div class="card position-relative">
+									<a href="/front/buy/writeForm.web?seq_sle=${randomHamster.seq_sle}">
+										<img src="${randomHamster.img}" class="img-fluid rounded-4" alt="image">
+									</a>
+									<div class="card-body p-0">
+										<a href="/front/buy/writeForm.web?seq_sle=${randomHamster.seq_sle}">
+											<span class="card-title pt-4 m-0">${randomHamster.sle_nm}</span>
+										</a>
+										<div class="card-text">
+											<span class="rating secondary-font">
+												⭐️
+												⭐️
+												⭐️
+												⭐️
+												⭐️
+												5.0
+											</span>
+											<h3 class="secondary-font text-primary"><fmt:formatNumber value="${randomHamster.price_sale}" pattern="#,###" />원</h3>
+											<div class="d-flex flex-wrap mt-3">
+												<a href="javascript:addToCart(${randomHamster.seq_sle}, ${randomHamster.seq_prd}, '${randomHamster.sle_nm}', ${randomHamster.price_sale}, '${randomHamster.img}');" class="btn-cart me-3 px-3 pt-2 pb-2" style="font-family: 'Nunito', sans-serif; display: flex; align-items: center; justify-content: center; font-size: 14px;"> <!-- Nunito로 글씨체 변경 -->
+													<span class="text-uppercase m-0">장바구니</span>
+												</a>
+												<a href="#" class="btn-wishlist px-4 pt-3" style="display: inline-block; border: 1px solid #ccc; border-radius: 5px; text-decoration: none; text-align: center; padding: 10px; font-family: 'Nunito', sans-serif;"> <!-- Nunito로 글씨체 변경 -->
+													<span  class="fs-5" style="color: black; font-size: 20px; line-height: 1;">❤︎</span>
+												</a>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+					</c:forEach>
+					<c:forEach items="${randomReptile}" var="randomReptile">
+							<div class="item reptile col-md-4 col-lg-3 my-4">
+								<div class="card position-relative">
+									<a href="/front/buy/writeForm.web?seq_sle=${randomReptile.seq_sle}">
+										<img src="${randomReptile.img}" class="img-fluid rounded-4" alt="image">
+									</a>
+									<div class="card-body p-0">
+										<a href="/front/buy/writeForm.web?seq_sle=${randomReptile.seq_sle}">
+											<span class="card-title pt-4 m-0">${randomReptile.sle_nm}</span>
+										</a>
+										<div class="card-text">
+											<span class="rating secondary-font">
+												⭐️
+												⭐️
+												⭐️
+												⭐️
+												⭐️
+												5.0
+											</span>
+											<h3 class="secondary-font text-primary"><fmt:formatNumber value="${randomReptile.price_sale}" pattern="#,###" />원</h3>
+											<div class="d-flex flex-wrap mt-3">
+												<a href="javascript:addToCart(${randomReptile.seq_sle}, ${randomReptile.seq_prd}, '${randomReptile.sle_nm}', ${randomReptile.price_sale}, '${randomReptile.img}');" class="btn-cart me-3 px-3 pt-2 pb-2" style="font-family: 'Nunito', sans-serif; display: flex; align-items: center; justify-content: center; font-size: 14px;"> <!-- Nunito로 글씨체 변경 -->
+													<span class="text-uppercase m-0">장바구니</span>
+												</a>
+												<a href="#" class="btn-wishlist px-4 pt-3" style="display: inline-block; border: 1px solid #ccc; border-radius: 5px; text-decoration: none; text-align: center; padding: 10px; font-family: 'Nunito', sans-serif;"> <!-- Nunito로 글씨체 변경 -->
+													<span  class="fs-5" style="color: black; font-size: 20px; line-height: 1;">❤︎</span>
+												</a>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+					</c:forEach>
+				</c:otherwise>	
+			</c:choose>
+			
+		</div>
+	</div>
+</section>
   
   
 <!-- 인기상품 아래 배너 -->

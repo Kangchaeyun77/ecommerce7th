@@ -1,7 +1,100 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.happySteps.front.mybatis.sale.Sale">
-	
+
+		<select id="randomDog" parameterType="pagingDto" resultType="saleDto">
+			SELECT 
+				*
+			FROM (
+				SELECT 
+					ROW_NUMBER() OVER (ORDER BY DBMS_RANDOM.VALUE) rnum
+					,SEQ_SLE
+					,SLE_NM
+					,SPECIES
+					,IMG
+					,PRICE_SALE
+				FROM 
+					TB_SLE
+				WHERE 
+					CD_STATE_SALE = 1
+					AND SPECIES = 1
+				) 
+			<![CDATA[
+			WHERE 
+				rnum <= 2
+			]]>
+		</select>
+		
+		<select id="randomCat" parameterType="pagingDto" resultType="saleDto">
+			SELECT 
+				*
+			FROM (
+				SELECT 
+					ROW_NUMBER() OVER (ORDER BY DBMS_RANDOM.VALUE) rnum,
+					SEQ_SLE,
+					SLE_NM,
+					SPECIES,
+					IMG,
+					PRICE_SALE
+				FROM 
+					TB_SLE
+				WHERE 
+					CD_STATE_SALE = 1
+					AND SPECIES = 2
+				) 
+			<![CDATA[
+			WHERE 
+				rnum <= 2
+			]]>
+		</select>
+		
+		<select id="randomHamster" parameterType="pagingDto" resultType="saleDto">
+			SELECT 
+				*
+			FROM (
+				SELECT 
+					ROW_NUMBER() OVER (ORDER BY DBMS_RANDOM.VALUE) rnum,
+					SEQ_SLE,
+					SLE_NM,
+					SPECIES,
+					IMG,
+					PRICE_SALE
+				FROM 
+					TB_SLE
+				WHERE 
+					CD_STATE_SALE = 1
+					AND SPECIES = 3
+				) 
+			<![CDATA[
+			WHERE 
+				rnum <= 2
+			]]>
+		</select>
+		
+		<select id="randomReptile" parameterType="pagingDto" resultType="saleDto">
+			SELECT 
+				*
+			FROM (
+				SELECT 
+					ROW_NUMBER() OVER (ORDER BY DBMS_RANDOM.VALUE) rnum,
+					SEQ_SLE,
+					SLE_NM,
+					SPECIES,
+					IMG,
+					PRICE_SALE
+				FROM 
+					TB_SLE
+				WHERE 
+					CD_STATE_SALE = 1
+					AND SPECIES = 4
+				) 
+			<![CDATA[
+			WHERE 
+				rnum <= 2
+			]]>
+		</select>
+		
+
 		<select id="randomList2" parameterType="pagingDto" resultType="saleDto">
 		SELECT
 			*
@@ -11,16 +104,11 @@
 				, SEQ_SLE
 				, SLE_NM
 				, IMG
-				, DESCES
-				, DESCES_IMG
-				, CD_STATE_SALE
 				, PRICE_SALE
-				, TO_CHAR(DT_REG, 'YYYY-MM-DD') dt_reg
 			FROM
 				TB_SLE
 			WHERE
 				CD_STATE_SALE = 1
-				<include refid="where" />
 		)
 		<![CDATA[
 		WHERE rnum <= 5
@@ -36,16 +124,11 @@
 				, SEQ_SLE
 				, SLE_NM
 				, IMG
-				, DESCES
-				, DESCES_IMG
-				, CD_STATE_SALE
 				, PRICE_SALE
-				, TO_CHAR(DT_REG, 'YYYY-MM-DD') dt_reg
 			FROM
 				TB_SLE
 			WHERE
 				CD_STATE_SALE = 1
-				<include refid="where" />
 		)
 		<![CDATA[
 		WHERE rnum <= 5
