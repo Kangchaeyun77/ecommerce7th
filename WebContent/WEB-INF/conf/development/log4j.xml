@@ -63,7 +63,7 @@
 	<!-- 3. Define Loggers -->
 	<root>
 		<!-- [2015-12-23][pluto@plutozone.com][REPORT: Define Logger Priority Level(all > trace > debug > info > warn > error > fatal > off)] -->
-		<priority value="all" />
+		<priority value="info" />
 		<!-- <priority value="warn" /> -->
 		
 		<!-- 1-1. For CONSOLE Appender -->
