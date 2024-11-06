@@ -162,7 +162,7 @@
 			        <option value="sle_desces" <c:if test="${paging.searchKey == 'sle_desces'}">selected</c:if>>상품설명</option>
 			        <option value="sle_desces_and_nm" <c:if test="${paging.searchKey == 'sle_desces_and_nm'}">selected</c:if>>상품명 및 설명</option>
 			    </select>
-				<input type="text" name="searchWord" id="searchWord" value="${paging.searchWord}"/ ><input type="submit" value="검색"/>
+				<input type="text" name="searchWord" id="searchWord" value="${paging.searchWord}" /><input type="submit" value="검색"/>
 			</div>
 			<div class="brdInfo">전체 ${paging.totalLine}개[${paging.currentPage}/${paging.totalPage} 페이지]</div>
 				<div class="product-container" style="display: flex; flex-wrap: wrap; margin: 30px; margin-left: 0px">
@@ -172,7 +172,7 @@
 						</c:when>
 						<c:otherwise>
 							<c:forEach items="${list}" var="list">
-								<div class="product"><a href="javascript:goView(${list.seq_sle});">
+								<div class="product"><a href="javascript:goWriteForm(${list.seq_sle});">
 									<img src="${list.img}" class="img-fluid rounded-4" alt="image"></a>
 									<div>
 										<div class="product_name">
