@@ -1,23 +1,23 @@
 <%
 /**
  * YOU ARE STRICTLY PROHIBITED TO COPY, DISCLOSE, DISTRIBUTE, MODIFY OR USE THIS PROGRAM
- * IN PART OR AS A WHOLE WITHOUT THE PRIOR WRITTEN CONSENT OF HIMEDIA.CO.KR.
- * HIMEDIA.CO.KR OWNS THE INTELLECTUAL PROPERTY RIGHTS IN AND TO THIS PROGRAM.
- * COPYRIGHT (C) 2024 HIMEDIA.CO.KR ALL RIGHTS RESERVED.
+ * IN PART OR AS A WHOLE WITHOUT THE PRIOR WRITTEN CONSENT OF happySteps.com.
+ * happySteps.com OWNS THE INTELLECTUAL PROPERTY RIGHTS IN AND TO THIS PROGRAM.
+ * COPYRIGHT (C) 2024 happySteps.com ALL RIGHTS RESERVED.
  *
- * 하기 프로그램에 대한 저작권을 포함한 지적재산권은 himedia.co.kr에 있으며,
- * himedia.co.kr이 명시적으로 허용하지 않는 사용, 복사, 변경 및 제 3자에 의한 공개, 배포는 엄격히 금지되며
- * himedia.co.kr의 지적재산권 침해에 해당된다.
- * Copyright (C) 2024 himedia.co.kr All Rights Reserved.
+ * 하기 프로그램에 대한 저작권을 포함한 지적재산권은 happySteps.com에 있으며,
+ * happySteps.com이 명시적으로 허용하지 않는 사용, 복사, 변경 및 제 3자에 의한 공개, 배포는 엄격히 금지되며
+ * happySteps.com의 지적재산권 침해에 해당된다.
+ * Copyright (C) 2024 happySteps.com All Rights Reserved.
  *
  *
- * Program		: kr.co.himedia.ecommerce
+ * Program		: com.happySteps
  * Description	:
  * Environment	: JRE 1.7 or more
  * File			:
  * Notes		:
  * History		: [NO][Programmer][Description]
- *				: [20240808142000][hyebongssss@himedia.co.kr][CREATE: Initial Release]
+ *				: [20241106102900][kbs@happySteps.com][CREATE: Initial Release]
  */
 %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" trimDirectiveWhitespaces="true" %>
@@ -170,7 +170,7 @@
 	</c:if>
 
 	<%
-	// [2024-10-17][pluto@himedia.co.kr][INSERT: Payup 신규 연동 규격서를 기반으로 한 결제 연동 예제]
+	// [2024-11-06][kbs@happySteps.com][INSERT: Payup 신규 연동 규격서를 기반으로 한 결제 연동 예제]
 	%>
 
 	// 인증 완료 시 콜백 함수(해당 함수명, 폼 아이디 등 절대 변경 금지)
@@ -254,16 +254,6 @@
 
 	function goList(value) {
 		var frmMain = document.getElementById("frmMain");
-
-		// value가 숫자인지 확인하고 정수로 변환
-		var intValue = parseInt(value, 10);
-
-		// intValue가 NaN일 경우 0으로 설정
-		if (isNaN(intValue)) {
-			intValue = 1; // 기본값으로 1을 설정
-		}
-
-		document.getElementById("cd_ctg_pet").value = intValue;
 		
 		frmMain.action = "/front/sale/shop/list.web";
 		frmMain.submit();
@@ -346,6 +336,7 @@
 <input type="hidden" name="buyList[0].seq_sle" 			value="${saleDto.seq_sle}" />
 <input type="hidden" name="buyList[0].seq_prd" 			value="${saleDto.seq_prd}" />
 <input type="hidden" name="buyList[0].sle_nm" 			value="${saleDto.sle_nm}" />
+<input type="hidden" name="cd_ctg_pet" 					value="${saleDto.cd_ctg_pet}" />
 <div class="container">
 	<div style="text-align: center;">
 	<%@ include file="/include/front/gnb_shopping.jsp" %>
@@ -365,17 +356,17 @@
 					</div>
 					<div class="rating_star">
 						<span class="rating secondary-font">
-						    ⭐️
-						    ⭐️
-						    ⭐️
-						    ⭐️
-						    ⭐️
-						    5.0
+							⭐️
+							⭐️
+							⭐️
+							⭐️
+							⭐️
+							5.0
 						</span>
 						<a href="#">
 						<span class="reviews">상품후기</span>
 						</a>
-		        	</div>
+					</div>
 					<div class="quantity-container" style="margin: 90px; margin-left: 0px ">
 						<button type="button" onclick="changeQuantity(-1)" class="circular-button">-</button>
 						<input type="text" id="count" name="buyList[0].count" value="1" style="text-align: center;" oninput="validateInput(this)">
@@ -384,7 +375,7 @@
 				</div>
 			</div>
 			<div class="button-container" style="text-align:center; padding-top:30px; padding-bottom:60px">
-				<button class="button list-button"	type="button"	onclick="javascript:goList();">목록</button>
+				<button class="button list-button"	type="button"	onclick="javascript:goList(${saleDto.cd_ctg_pet});">목록</button>
 				<button class="button buy-button"	type="button"	onclick="javascript:order();">구매</button>
 				<button class="button cart-button"	type="button"	onclick="javascript:addToCart(${saleDto.seq_sle}, ${saleDto.seq_prd}, '${saleDto.sle_nm}', ${saleDto.price_sale}, '${saleDto.img}');">장바구니</button>
 			</div>
@@ -408,7 +399,7 @@
 				</ul>
 			</div>
 			<div id="details" class="tabcontent" style="text-align: center;">
-			    <img src="${saleDto.desces_img}" style="display: inline-block; margin: 0 auto;" />
+				<img src="${saleDto.desces_img}" style="display: inline-block; margin: 0 auto;" />
 			</div>
 		
 			<div id="delivery" class="tabcontent">
@@ -456,28 +447,28 @@
 			</div>
 		
 			<div id="reviews" class="tabcontent">
-		        <h3>상품후기</h3>
-		        <p>여기에 상품 후기가 표시됩니다.</p>
-		        <a href="javascript:goReview();" style="color: #DEAD6F; font-weight: bold; text-decoration: none;">상품 리뷰 작성하기></a>
-				<div class="rating_star">		        	
+				<h3>상품후기</h3>
+				<p>여기에 상품 후기가 표시됩니다.</p>
+				<a href="javascript:goReview();" style="color: #DEAD6F; font-weight: bold; text-decoration: none;">상품 리뷰 작성하기></a>
+				<div class="rating_star">					
 					<span class="rating secondary-font">
-					    ⭐️
-					    ⭐️
-					    ⭐️
-					    ⭐️
-					    ⭐️
-					    5.0
+						⭐️
+						⭐️
+						⭐️
+						⭐️
+						⭐️
+						5.0
 					</span>
-		        </div>
-		    </div>
+				</div>
+			</div>
 		
 			<div id="inquiries" class="tabcontent" style="margin-left: auto; margin-right: auto">
-		        <h3>상품문의</h3>
-		        <br/>
-		        <a href="javascript:goWriteForm();" style="color: #DEAD6F; font-weight: bold; text-decoration: none;">상품문의하기></a>
-		        <a href="/front/sale/shop/writeForm.web" style="color: #DEAD6F; font-weight: bold; text-decoration: none;">?상품문의하기></a>
-		        <br/>
-		        <div class="brdSearchArea" >
+				<h3>상품문의</h3>
+				<br/>
+				<a href="javascript:goWriteForm();" style="color: #DEAD6F; font-weight: bold; text-decoration: none;">상품문의하기></a>
+				<a href="/front/sale/shop/writeForm.web" style="color: #DEAD6F; font-weight: bold; text-decoration: none;">?상품문의하기></a>
+				<br/>
+				<div class="brdSearchArea" >
 					<select name="searchKey">
 						<option value="title"<c:if test="${paging.searchKey == 'title'}"> selected</c:if>>제목</option>
 						<option value="contents"<c:if test="${paging.searchKey == 'contents'}"> selected</c:if>>내용</option>

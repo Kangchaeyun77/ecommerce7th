@@ -20,7 +20,6 @@
  */
 package com.happySteps.front.sale.controller;
 
-import java.util.List;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
@@ -29,17 +28,14 @@ import javax.servlet.http.HttpServletResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.support.MessageSourceAccessor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.happySteps.front.common.Common;
 import com.happySteps.front.common.component.SessionCmpn;
 import com.happySteps.front.common.dto.PagingDto;
 import com.happySteps.front.common.dto.PagingListDto;
-import com.happySteps.front.sale.dto.SaleDto;
 import com.happySteps.front.sale.service.SaleSrvc;
 
 /**
@@ -58,9 +54,6 @@ public class SaleWeb extends Common {
 	
 	@Inject
 	private SaleSrvc saleSrvc;
-	
-	@Autowired
-	private MessageSourceAccessor dynamicProperties;
 	
 	@Autowired
 	SessionCmpn sessionCmpn;
@@ -82,25 +75,15 @@ public class SaleWeb extends Common {
 		
 		ModelAndView mav = new ModelAndView("redirect:/error.web");
 		
-		
-		logger.debug("내가 확인");
-		
 		try {
 			
 			// 세션이 없을 경우는 로그인 페이지로 보냄
 			if (!sessionCmpn.isSession(request)) {
 				request.setAttribute("script"	, "alert('로그인이 필요합니다!');");
-				request.setAttribute("redirect"	, "/");
+				request.setAttribute("redirect"	, "/front/login/loginForm.web");
 				mav.setViewName("forward:/servlet/result.web");
 			}
 			else {
-				if (pagingDto.getCd_ctg_pet() == 1)
-					pagingDto.setRegister(Integer.parseInt(getSession(request, "SEQ_MBR")));
-				
-				PagingListDto pagingListDto = saleSrvc.list(pagingDto);
-				
-				mav.addObject("paging"	, pagingListDto.getPaging());
-				mav.addObject("list"	, pagingListDto.getList());
 				
 				if (pagingDto.getCd_ctg_pet() == 1) {
 					mav.setViewName("front/sale/shop/dog/list");
@@ -115,9 +98,14 @@ public class SaleWeb extends Common {
 					mav.setViewName("front/sale/shop/reptile/list");
 				}
 				else {
-					request.setAttribute("redirect"	, "/");
+					request.setAttribute("redirect"	, "/front/index.web");
 					mav.setViewName("forward:/servlet/result.web");
 				}
+				
+				PagingListDto pagingListDto = saleSrvc.list(pagingDto);
+				
+				mav.addObject("paging"	, pagingListDto.getPaging());
+				mav.addObject("list"	, pagingListDto.getList());
 			}
 		}
 		catch (Exception e) {
@@ -139,23 +127,22 @@ public class SaleWeb extends Common {
 	 * <p>EXAMPLE:</p>
 	 */
 	@RequestMapping(value = "/front/sale/shop/index.web")
-	public ModelAndView index(HttpServletRequest request, HttpServletResponse response,
-			PagingDto pagingDto) {
-		
-	    ModelAndView mav = new ModelAndView("redirect:/error.web");
+	public ModelAndView index(HttpServletRequest request, HttpServletResponse response,	PagingDto pagingDto) {
 
-	    try {
-	    	PagingListDto pagingListDto = saleSrvc.list(pagingDto);
-	    	
-	    	mav.addObject("paging", pagingListDto.getPaging());
-            mav.addObject("list", pagingListDto.getList());
-            
-            mav.setViewName("/front/sale/shop/index");
-            
-	    } catch (Exception e) {
-	        logger.error("[" + this.getClass().getName() + ".index()] " + e.getMessage(), e);
-	    } finally {}
+		ModelAndView mav = new ModelAndView("redirect:/error.web");
 
-	    return mav;
+		try {
+			PagingListDto pagingListDto = saleSrvc.list(pagingDto);
+			
+			mav.addObject("paging", pagingListDto.getPaging());
+			mav.addObject("list", pagingListDto.getList());
+
+			mav.setViewName("/front/sale/shop/index");
+
+		} catch (Exception e) {
+			logger.error("[" + this.getClass().getName() + ".index()] " + e.getMessage(), e);
+		} finally {}
+
+		return mav;
 	}
 }

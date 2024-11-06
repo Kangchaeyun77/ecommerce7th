@@ -32,7 +32,7 @@ public class PagingDto {
 	
 	private int totalLine		= 0;	// 전체 라인(행) 수
 	private int totalPage		= 0;	// 전체 페이지 수 = 전체 라인(행) 수 / 페이징할 라인수
-	private int linePerPage	= 10;	// 페이징할 라인수
+	private int linePerPage	= 12;	// 페이징할 라인수
 	private int currentPage	= 1;	// 현재 페이지
 	
 	private String searchKey	= "";	// 검색키(예: 타이틀, 내용, 타이틀+내용)
