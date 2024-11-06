@@ -43,14 +43,6 @@
 	<%@ include file="/include/front/top.jsp" %>
 </top>
 <script>
-function goWriteForm(value) {
-	var frmMain = document.getElementById("frmMain");
-	
-	document.getElementById("seq_sle").value = value;
-	frmMain.action = "/front/buy/writeForm.web";
-	
-	frmMain.submit();
-}
 function addToCart(seqSle, seqPrd, sleNm, price, img) {
 
 	const data = {
@@ -219,9 +211,11 @@ function addToCart(seqSle, seqPrd, sleNm, price, img) {
 						<c:forEach items="${randomProducts}" var="product">
 						<div class="swiper-slide">
 							<div class="card position-relative">
-								<a href="javascript:goWriteForm(${product.seq_sle});"><img src="${product.img}" class="img-fluid rounded-4" alt="image"></a>
+								<a href="/front/buy/writeForm.web?seq_sle=${product.seq_sle}">
+									<img src="${product.img}" class="img-fluid rounded-4" alt="image">
+								</a>
 								<div class="card-body p-0">
-									<a href="javascript:goWriteForm(${product.seq_sle});">
+									<a href="/front/buy/writeForm.web?seq_sle=${product.seq_sle}">
 									<span><strong>${product.sle_nm}</strong></span>
 									</a>
 									<div class="card-text">
@@ -284,9 +278,11 @@ function addToCart(seqSle, seqPrd, sleNm, price, img) {
 						<c:forEach items="${randomProducts2}" var="product2">
 						<div class="swiper-slide">
 							<div class="card position-relative">
-								<a href="javascript:goWriteForm(${product2.seq_sle});"><img src="${product2.img}" class="img-fluid rounded-4" alt="image"></a>
+								<a href="/front/buy/writeForm.web?seq_sle=${product2.seq_sle}">
+									<img src="${product2.img}" class="img-fluid rounded-4" alt="image">
+								</a>
 								<div class="card-body p-0">
-									<a href="javascript:goWriteForm(${product2.seq_sle});">
+									<a href="/front/buy/writeForm.web?seq_sle=${product2.seq_sle}">
 									<span><strong>${product2.sle_nm}</strong></span>
 									</a>
 									<div class="card-text">
