@@ -40,7 +40,7 @@ integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJ
 --%>
 </head>
 <body>
-<div class="container py-2" style="height: 270px;">
+<div class="container py-2" style="height: 100%;">
 	<div class="row py-4 pb-0 pb-sm-4 align-items-center" style="align-items:center;">
 		<!-- 로고 영역 -->
 		<div class="col-sm-4 col-lg-3 text-center text-sm-start">
