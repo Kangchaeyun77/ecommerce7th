@@ -51,14 +51,19 @@ public class SaleDto {
 	private int species			= 0;	// [동물 카테고리] 강아지(1), 고양이(2), 햄스터(3), 파충류(4)
 	private int pet_items			= 0;	// 판매 상품 카테고리 : 사료(x1), 간식(x2), 하우스(x3), 기타(x4)
 	private String prd_nm				= "";
-	
+	private int price_cost			= 0;
 	
 	private String searchKey		= "";
 	private String searchWord		= "";
 	
 	
 	
-	
+	public int getPrice_cost() {
+		return price_cost;
+	}
+	public void setPrice_cost(int price_cost) {
+		this.price_cost = price_cost;
+	}
 	public String getPrd_nm() {
 		return prd_nm;
 	}

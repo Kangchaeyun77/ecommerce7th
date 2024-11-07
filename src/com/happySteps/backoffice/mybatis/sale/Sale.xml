@@ -66,6 +66,7 @@
 			, PRD_NM
 			, SPECIES
 			, PET_ITEMS
+			, PRICE_COST
 		FROM
 			TB_PRD	tb_prd
 		WHERE

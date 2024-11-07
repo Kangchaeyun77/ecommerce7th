@@ -147,6 +147,7 @@
 	<input type="hidden" id="seq_sle" name="seq_sle" value="${saleDto.seq_sle}"/>
 	<input type="hidden" id="pet_items" name="pet_items" value="${saleDto.pet_items}" />
 	<input type="hidden" id="species" name="species" value="${saleDto.species}" />
+	<input type="hidden" id="price_cost" name="price_cost" value="${saleDto.price_cost}" />
 	
 	<%@ include file="/include/bfc/navi.jsp" %>
 	<div class="right_col" role="main">
@@ -164,7 +165,7 @@
 							<select style="width: 80%" id="seq_prd" name="seq_prd" onchange="updatePetItems(this)">
 								<option value="">상품 선택</option>
 								<c:forEach items="${listPrd}" var="product">
-									<option value="${product.seq_prd}" data-species="${product.species}" data-pet-items="${product.pet_items}">
+									<option value="${product.seq_prd}" data-species="${product.species}" data-pet-items="${product.pet_items}" data-price-cost="${product.price_cost}">
 										${product.prd_nm}
 									</option>
 								</c:forEach>
@@ -197,7 +198,9 @@
 				<tr>
 					<th>판매 가격</th>
 					<td>
-						<input type="text" id="price_sale" name="price_sale" style="width:100px; text-align:right" required/>원
+						<input type="text" id="price_sale" name="price_sale" style="width:100px; text-align:right" required/>원 // 
+						<span id="selectedPrice">원가: <span id="priceCostValue"></span> </span>
+						// 권장 판매가격 : <span id="recommendedPrice"></span>
 					</td>
 				</tr>
 				<tr>
@@ -254,24 +257,32 @@
 		const selectedOption = selectElement.options[selectElement.selectedIndex];
 		
 		if (selectedOption.value === "") {
-			// 기본 옵션일 경우 값을 비우고, 상태 메시지 초기화
 			document.getElementById("species").value = ""; 
 			document.getElementById("pet_items").value = ""; 
+			document.getElementById("price_cost").value = ""; 
+
 			document.getElementById('speciesValue').innerText = "종류 없음";
 			document.getElementById('petItemsValue').innerText = "아이템 없음";
-			return; // 선택이 없으므로 함수를 종료
+			document.getElementById('priceCostValue').innerText = "원가 없음";
+			document.getElementById('recommendedPrice').innerText = "권장 판매가격 없음";
+			return;
 		}
 		
 		const species = selectedOption.getAttribute('data-species');
 		const petItems = selectedOption.getAttribute('data-pet-items');
+		const priceCost = parseFloat(selectedOption.getAttribute('data-price-cost'));
 
-		// species와 pet_items 값을 hidden input에 저장
-		document.getElementById("species").value = species; // species 값을 hidden input에 저장
-		document.getElementById("pet_items").value = petItems; // pet_items 값을 hidden input에 저장
+		document.getElementById("species").value = species; 
+		document.getElementById("pet_items").value = petItems; 
+		document.getElementById("price_cost").value = priceCost;
 
-		// species와 pet_items 값을 span에 표시
 		document.getElementById('speciesValue').innerText = species || "종류 없음";
 		document.getElementById('petItemsValue').innerText = petItems || "아이템 없음";
+		document.getElementById('priceCostValue').innerText = priceCost || "원가 없음";
+
+		// 권장 판매가격을 계산하여 표시
+		const recommendedPrice = priceCost ? (priceCost * 1.5) : "권장 판매가격 없음";
+		document.getElementById('recommendedPrice').innerText = recommendedPrice;
 	}
 
 	function writeProc() {
