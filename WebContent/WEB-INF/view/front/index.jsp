@@ -616,7 +616,7 @@
 						</a>
 						<div class="card-text">
 							<p class="blog-paragraph fs-6">발견장소: 경기도 남양주시 화도읍 창현로 53 <br>특징: 주인 기다리는 예쁜 반려견</p>
-							<a href="#" class="blog-read">보러가기</a>
+							<%-- <a href="#" class="blog-read">보러가기</a>--%>
 						</div>
 					</div>
 				</div>
@@ -637,7 +637,7 @@
 						</a>
 						<div class="card-text">
 							<p class="blog-paragraph fs-6">발견장소: 광주시 쌍령동 일대 <br>특징: 11-3, 50일령, 저체온, 야윔, 따뜻한 돌봄이 필요</p>
-							<a href="#" class="blog-read">보러가기</a>
+							<%-- <a href="#" class="blog-read">보러가기</a>--%>
 						</div>
 					</div>
 				</div>
@@ -658,7 +658,7 @@
 						</a>
 						<div class="card-text">
 							<p class="blog-paragraph fs-6">발견장소: 기흥구 어정로 128 어정역<br>특징: 귀여운 아이</p>
-							<a href="#" class="blog-read">보러가기</a>
+							<%--<a href="#" class="blog-read">보러가기</a>--%>
 						</div>
 					</div>
 				</div>
