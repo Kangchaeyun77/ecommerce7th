@@ -126,20 +126,23 @@
 					const listTotalCount = response.LIST_TOTAL_COUNT; // 전체 개수
 					let html = ''; // 카드 HTML을 저장할 변수
 
-					items.forEach(function(item) {
+					items.forEach(function(item, index) {
 						// 카드 HTML 생성
 						//html += '<div class="animal-card">';
-						html += '<div class="animal-card" onclick="viewAnimalDetail(\'' + (item.PBLANC_IDNTFY_NO || '') 
-							 + '\', \'' + (item.SIGUN_CD || '') + '\', \'' + (item.SIGUN_NM || '') 
-							 + '\', \'' + (item.STATE_NM || '') + '\', \'' + (item.PBLANC_BEGIN_DE || '') + '\', \'' 
-							 + (item.PBLANC_END_DE || '') + '\', \'' + (item.SPECIES_NM || '') + '\', \'' + (item.SHTER_NM || '') + '\')">';
-						html += '<img src="' + (item.IMAGE_COURS || '') + '" alt="동물 이미지">';
-						html += '<p><strong>공고번호:</strong> ' + (item.PBLANC_IDNTFY_NO || '') + '</p>';
-						html += '<p><strong>품종:</strong> ' + (item.SPECIES_NM || '') + '</p>';
-						html += '<p><strong>성별:</strong> ' + (item.SEX_NM || '') + '</p>';
-						html += '<p><strong>발견장소:</strong> ' + (item.DISCVRY_PLC_INFO || '') + '</p>';
-						html += '<p><strong>특징:</strong> ' + (item.SFETR_INFO || '') + '</p>';
-						html += '</div>'; // 카드 닫기
+						html += '<div class="animal-card" id="' + '" onclick="viewAnimalDetail(\'' 
+						+ (item.PBLANC_IDNTFY_NO || '') + '\', \'' + (item.SIGUN_CD || '') + '\', \'' 
+						+ (item.SIGUN_NM || '') + '\', \'' + (item.STATE_NM || '') + '\', \'' 
+						+ (item.PBLANC_BEGIN_DE || '') + '\', \'' + (item.PBLANC_END_DE || '') + '\', \'' 
+						+ (page || 1) + '\', \'' + (index+1) + '\', \'' 
+						+ (item.SPECIES_NM || '') + '\', \'' + (item.SHTER_NM || '') + '\')">';
+							html += '<img src="' + (item.IMAGE_COURS || '') + '" alt="동물 이미지">';
+							html += '<p><strong>공고번호:</strong> ' + (item.PBLANC_IDNTFY_NO || '') + '</p>';
+							html += '<p><strong>품종:</strong> ' + (item.SPECIES_NM || '') + '</p>';
+							html += '<p><strong>성별:</strong> ' + (item.SEX_NM || '') + '</p>';
+							html += '<p><strong>발견장소:</strong> ' + (item.DISCVRY_PLC_INFO || '') + '</p>';
+							html += '<p><strong>특징:</strong> ' + (item.SFETR_INFO || '') + '</p>';
+							html += '<p><strong>페이지:</strong> ' + page + ', <strong>번호:</strong> ' + (index + 1) + '</p>'; // 페이지와 인덱스 정보 표시
+							html += '</div>'; // 카드 닫기
 					});
 					
 					$('#animalList').html(html); // 동물 목록 업데이트
@@ -164,7 +167,8 @@
 		fetchAnimalData(currentPage); // 첫 페이지 데이터 가져오기
 	});
 	
-	function viewAnimalDetail(animalId, sigunCd, sigunNm, stateNm, pblancBeginDe, pblancEndDe, speciesNm, shterNm) {
+	function viewAnimalDetail(animalId, sigunCd, sigunNm, stateNm, pblancBeginDe, pblancEndDe, page, index , speciesNm, shterNm) {
+		//alert('sldkjfbsdkjlsd'+'|||||'+page+'||||||'+index+'||||||');
 		// URL 파라미터로 전달할 데이터를 인코딩
 		const params = new URLSearchParams({
 			PBLANC_IDNTFY_NO: animalId || '',
@@ -174,7 +178,9 @@
 			PBLANC_BEGIN_DE: pblancBeginDe || '',
 			PBLANC_END_DE: pblancEndDe || '',
 			SPECIES_NM: speciesNm || '',
-			SHTER_NM: shterNm || ''
+			SHTER_NM: shterNm || '',
+			index: index || 1,
+			page: page || 1
 		});
 		
 		// view.jsp로 이동
@@ -186,6 +192,7 @@
 		// URL에서 파라미터 가져오기
 		const urlParams = new URLSearchParams(window.location.search);
 		const animalId = urlParams.get('PBLANC_IDNTFY_NO');
+		console.log('1212')
 		
 		if (animalId) {
 			// AJAX 요청을 통해 상세 정보를 가져오기
@@ -201,7 +208,9 @@
 					PBLANC_BEGIN_DE: urlParams.get('PBLANC_BEGIN_DE'),
 					PBLANC_END_DE: urlParams.get('PBLANC_END_DE'),
 					SPECIES_NM: urlParams.get('SPECIES_NM'),
-					SHTER_NM: urlParams.get('SHTER_NM')
+					SHTER_NM: urlParams.get('SHTER_NM'),
+					index: urlParams.get('index'),
+					page: urlParams.get('page')
 				}),
 				success: function(response) {
 					if (response && response.AbdmAnimalProtect && response.AbdmAnimalProtect[1].row[0]) {
