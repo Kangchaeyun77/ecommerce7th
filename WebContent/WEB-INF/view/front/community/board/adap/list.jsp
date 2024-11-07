@@ -107,6 +107,12 @@
 				<input type="submit" value="검색"/>
 			</div>
 			<div class="brdInfo">전체 ${paging.totalLine}개[${paging.currentPage}/${paging.totalPage} 페이지]</div>
+			<br>
+			<div>입양 후기를 보실 수 있습니다
+				 HappySteps를 통해 입양하신 분들은 누구나! 입양후기를 올려주세요. 
+				 가족이 되어 즐겁게 지내시는 모습, 입양 전후 사진, 특이한 버릇, 입양 후 가장 좋은 점 등 입양을 망설이시거나 고민하시는 분들께 좋은 선물이 될 수 있습니다.
+			</div>
+			<br>
 			<table class="headTop_01" style="width: 900px; margin-left: auto; margin-right: auto">
 				<tr>
 					<th style="width: 5%">NO</th>
