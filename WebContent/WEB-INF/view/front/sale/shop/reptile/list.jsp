@@ -76,8 +76,15 @@
         }
         .product_name {
         	font-size: 21px;
-        	font-weight: bold;
-        	margin : 20px;
+		    font-weight: bold;
+		    height: 60px; /* 두 줄 텍스트 표시 높이로 설정 */
+		    margin: 20px 0;
+		    overflow: hidden;
+		    text-overflow: ellipsis;
+		    white-space: normal; /* 줄바꿈 허용 */
+		    display: -webkit-box;
+		    -webkit-line-clamp: 2; /* 두 줄까지만 표시 */
+		    -webkit-box-orient: vertical;
         }
 	</style>
 </head>
@@ -191,7 +198,7 @@
 								<c:forEach items="${list}" var="list" >
 									<div class="product">
 										<a href="javascript:goWriteForm(${list.seq_sle});" >
-										<img src="${list.img}" class="img-fluid rounded-4" alt="image"></a>
+										<img src="${list.img}" class="img-fluid rounded-4" style="width: 208px; height: 208px; object-fit: cover;" alt="image"></a>
 										<div>
 											<div class="product_name">
 												<a href="javascript:goWriteForm(${list.seq_sle});">
