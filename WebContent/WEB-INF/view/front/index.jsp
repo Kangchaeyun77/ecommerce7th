@@ -171,31 +171,34 @@
  <section id="categories">
 	<div class="container my-3 py-5">
 		<div class="row my-5">
-			<div class="col text-center">
+			<div class="col-12 col-sm-6 col-md-4 col-lg-2 text-center">
 				<a href="/front/sale/shop/index.web" class="categories-item">
-				<img src="../images/categories-item/all.png" class="img-fluid">
-				<!--이전코드
-					<iconify-icon class="category-icon" icon="ph:cat"></iconify-icon> -->
+					<img src="../images/categories-item/all.png" class="img-fluid">
 				</a>
 			</div>
-			<div class="col text-center">
+			<div class="col-12 col-sm-6 col-md-4 col-lg-2 text-center">
 				<a href="/front/sale/shop/list.web?cd_ctg_pet=1" class="categories-item">
 					<img src="../images/categories-item/dogShop.png" class="img-fluid">	
 				</a>
 			</div>
-			<div class="col text-center">
+			<div class="col-12 col-sm-6 col-md-4 col-lg-2 text-center">
 				<a href="/front/sale/shop/list.web?cd_ctg_pet=2" class="categories-item">
 					<img src="../images/categories-item/catShop.png" class="img-fluid">
 				</a>
 			</div>
-			<div class="col text-center">
+			<div class="col-12 col-sm-6 col-md-4 col-lg-2 text-center">
 				<a href="/front/sale/shop/list.web?cd_ctg_pet=3" class="categories-item">
 					<img src="../images/categories-item/hamsterShop.png" class="img-fluid">
 				</a>
 			</div>
-			<div class="col text-center">
+			<div class="col-12 col-sm-6 col-md-4 col-lg-2 text-center">
 				<a href="/front/sale/shop/list.web?cd_ctg_pet=4" class="categories-item">
 					<img src="../images/categories-item/reptilesShop.png" class="img-fluid">
+				</a>
+			</div>
+			<div class="col-12 col-sm-6 col-md-4 col-lg-2 text-center">
+				<a href="/front/sale/shop/list.web?cd_ctg_pet=5" class="categories-item">
+					<img src="../images/categories-item/fishShop.png" class="img-fluid">
 				</a>
 			</div>
 		</div>
