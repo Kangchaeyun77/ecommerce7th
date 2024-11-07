@@ -105,7 +105,6 @@ nav.gnb {
 	<span>
 		<a href="/front/adap/about.web" class="menugnb">입양안내</a>
 		<a href="/front/adap/list.web" class="menugnb">입양공고 보기</a>
-		<a href="#" class="menugnb">동물보호센터</a>
-		<a href="#" class="menugnb">민간보호센터</a>
+		
 	</span>
 </nav>

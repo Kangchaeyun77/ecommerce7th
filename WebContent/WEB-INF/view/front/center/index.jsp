@@ -46,12 +46,14 @@
 		<%@ include file="/include/front/header.jsp" %>
 		<%@ include file="/include/front/top.jsp" %>
 	</header>
-	<section class="content">
-		<nav>
+		<section class="content" style="display: flex; justify-content: space-between; margin-top: 20px;">
+	<nav>
 			<%@ include file="/include/front/lnbCenter.jsp" %>
-		</nav>
+	</nav>
+	<article style="flex: 1; padding-right: 20px;">
+		<img src="/images/center.png" alt="고객센터 페이지 이미지" style="width: auto; height: 150px; object-fit: cover; float: center; margin-left: 50px; margin-bottom: 10px; margin-top: 20px;"/>
+	</article>
 		<article class="txtCenter">
-			여기는 "고객센터" 페이지입니다.
 		</article>
 		<aside></aside>
 	</section>
