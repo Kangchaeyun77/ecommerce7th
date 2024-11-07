@@ -229,7 +229,7 @@
 						<div class="swiper-slide">
 							<div class="card position-relative">
 								<a href="/front/buy/writeForm.web?seq_sle=${product.seq_sle}">
-									<img src="${product.img}" class="img-fluid rounded-4" alt="image">
+									<img src="${product.img}" class="img-fluid rounded-4" style="width: 300px; height: 300px; object-fit: cover;" alt="image">
 								</a>
 								<div class="card-body p-0">
 									<a href="/front/buy/writeForm.web?seq_sle=${product.seq_sle}">
@@ -296,7 +296,7 @@
 						<div class="swiper-slide">
 							<div class="card position-relative">
 								<a href="/front/buy/writeForm.web?seq_sle=${product2.seq_sle}">
-									<img src="${product2.img}" class="img-fluid rounded-4" alt="image">
+									<img src="${product2.img}" class="img-fluid rounded-4" style="width: 300px; height: 300px; object-fit: cover;" alt="image">
 								</a>
 								<div class="card-body p-0">
 									<a href="/front/buy/writeForm.web?seq_sle=${product2.seq_sle}">
@@ -370,11 +370,11 @@
 							<div class="item dog col-md-4 col-lg-3 my-4">
 								<div class="card position-relative">
 									<a href="/front/buy/writeForm.web?seq_sle=${randomDog.seq_sle}">
-										<img src="${randomDog.img}" class="img-fluid rounded-4" alt="image">
+										<img src="${randomDog.img}" class="img-fluid rounded-4" style="width: 300px; height: 300px; object-fit: cover;" alt="image">
 									</a>
 									<div class="card-body p-0">
 										<a href="/front/buy/writeForm.web?seq_sle=${randomDog.seq_sle}">
-											<span class="card-title pt-4 m-0">${randomDog.sle_nm}</span>
+											<span class="card-title pt-4 m-0"><strong>${randomDog.sle_nm}</strong></span>
 										</a>
 										<div class="card-text">
 											<span class="rating secondary-font">
@@ -403,11 +403,11 @@
 							<div class="item cat col-md-4 col-lg-3 my-4">
 								<div class="card position-relative">
 									<a href="/front/buy/writeForm.web?seq_sle=${randomCat.seq_sle}">
-										<img src="${randomCat.img}" class="img-fluid rounded-4" alt="image">
+										<img src="${randomCat.img}" class="img-fluid rounded-4" style="width: 300px; height: 300px; object-fit: cover;" alt="image">
 									</a>
 									<div class="card-body p-0">
 										<a href="/front/buy/writeForm.web?seq_sle=${randomCat.seq_sle}">
-											<span class="card-title pt-4 m-0">${randomCat.sle_nm}</span>
+											<span class="card-title pt-4 m-0"><strong>${randomCat.sle_nm}</strong></span>
 										</a>
 										<div class="card-text">
 											<span class="rating secondary-font">
@@ -436,11 +436,11 @@
 							<div class="item hamster col-md-4 col-lg-3 my-4">
 								<div class="card position-relative">
 									<a href="/front/buy/writeForm.web?seq_sle=${randomHamster.seq_sle}">
-										<img src="${randomHamster.img}" class="img-fluid rounded-4" alt="image">
+										<img src="${randomHamster.img}" class="img-fluid rounded-4" style="width: 300px; height: 300px; object-fit: cover;" alt="image">
 									</a>
 									<div class="card-body p-0">
 										<a href="/front/buy/writeForm.web?seq_sle=${randomHamster.seq_sle}">
-											<span class="card-title pt-4 m-0">${randomHamster.sle_nm}</span>
+											<span class="card-title pt-4 m-0"><strong>${randomHamster.sle_nm}</strong></span>
 										</a>
 										<div class="card-text">
 											<span class="rating secondary-font">
@@ -469,11 +469,11 @@
 							<div class="item reptile col-md-4 col-lg-3 my-4">
 								<div class="card position-relative">
 									<a href="/front/buy/writeForm.web?seq_sle=${randomReptile.seq_sle}">
-										<img src="${randomReptile.img}" class="img-fluid rounded-4" alt="image">
+										<img src="${randomReptile.img}" class="img-fluid rounded-4" style="width: 300px; height: 300px; object-fit: cover;" alt="image">
 									</a>
 									<div class="card-body p-0">
 										<a href="/front/buy/writeForm.web?seq_sle=${randomReptile.seq_sle}">
-											<span class="card-title pt-4 m-0">${randomReptile.sle_nm}</span>
+											<span class="card-title pt-4 m-0"><strong>${randomReptile.sle_nm}</strong></span>
 										</a>
 										<div class="card-text">
 											<span class="rating secondary-font">
