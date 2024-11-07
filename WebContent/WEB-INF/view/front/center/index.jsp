@@ -25,7 +25,6 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<link rel="stylesheet" type="text/css" title="common stylesheet" href="/css/layoutSubmain.css" />
 	<link rel="stylesheet" href="/css/lnb.css">
 	<style></style>
 	<script>

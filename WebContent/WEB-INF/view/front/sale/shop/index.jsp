@@ -210,32 +210,33 @@
 						</c:when>
 						<c:otherwise>
 							<c:forEach items="${list}" var="list">
-								<div class="product">
-									<a href="javascript:goWriteForm(${list.seq_sle});">
-									<img src="${list.img}" class="img-fluid rounded-4" style="width: 208px; height: 208px; object-fit: cover;" alt="image">
-									</a>
+								<div class="product"><a href="javascript:goWriteForm(${list.seq_sle});">
+									<img src="${list.img}" class="img-fluid rounded-4" style="width: 208px; height: 208px; object-fit: cover;" alt="image"></a>
 									<div>
-										<a href="javascript:goWriteForm(${list.seq_sle});">
-										<span><strong>${list.sle_nm}</strong></span>
-										</a>
+										<div class="product_name">
+											<a href="javascript:goWriteForm(${list.seq_sle});">
+											<span>${list.sle_nm}</span>
+											</a>
+										</div>
 										<div class="card-text">
-											<span class="rating star" >
-												⭐️
-												⭐️
-												⭐️
-												⭐️
-												⭐️
-												5.0
+											<span class="rating secondary-font">
+											    ⭐️
+											    ⭐️
+											    ⭐️
+											    ⭐️
+											    ⭐️
+											    5.0
 											</span>
 											<h3 class="secondary-font text-primary"><fmt:formatNumber value="${list.price_sale}" pattern="#,###" />원</h3>
-											<div class="d-flex flex-wrap mt-3">
-												<a href="javascript:addToCart(${list.seq_sle}, ${list.seq_prd}, '${list.sle_nm}', ${list.price_sale}, '${list.img}');" class="btn-cart me-3 px-3 pt-2 pb-2" style="display: flex; align-items: center; justify-content: center; font-size: 18px;">
-													<span class="text-uppercase m-0">장바구니</span>
-												</a>
-													<a href="#" class="btn-wishlist px-4 pt-3" style="display: inline-block; border: 1px solid #ccc; border-radius: 5px; text-decoration: none; text-align: center; padding: 10px;" onclick="toggleHeart(this)">
-														<span class="fs-5" style="color: black; font-size: 20px; line-height: 1;">&#9825;</span>
+												<div class="d-flex flex-wrap mt-3">
+													<a href="javascript:addToCart(${list.seq_sle}, ${list.seq_prd}, '${list.sle_nm}', ${list.price_sale}, '${list.img}');"  
+														class="btn-cart me-3 px-3 pt-2 pb-2" style="display: flex; align-items: center; justify-content: center; font-size: 18px;">
+													    <span class="text-uppercase m-0">장바구니</span>
 													</a>
-											</div>
+													    <a href="#" class="btn-wishlist px-4 pt-3" style="display: inline-block; border: 1px solid #ccc; border-radius: 5px; text-decoration: none; text-align: center; padding: 10px;" onclick="toggleHeart(this)">
+														    <span class="fs-5" style="color: black; font-size: 20px; line-height: 1;">&#9825;</span>
+														</a>
+												 </div>
 										</div>
 									</div>
 								</div>
