@@ -24,6 +24,4 @@
 			<ul>
 				<li><a href="/front/adap/about.web" class="menuLnb">입양안내</a></li>
 				<li><a href="/front/adap/list.web" class="menuLnb">입양공고</a></li>
-				<li><a href="#" class="menuLnb">동물보호센터</a></li>
-				<li><a href="#" class="menuLnb">민간보호센터</a></li>
 			</ul>
