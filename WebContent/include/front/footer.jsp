@@ -22,6 +22,7 @@
  %>
  <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" trimDirectiveWhitespaces="true" %>
  <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+ <link rel="stylesheet" href="/css/lnb.css">
  	<div class="container py-5 my-5">
  		<div class="row">
 
