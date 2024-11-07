@@ -53,6 +53,7 @@
 				<a href="/front/sale/shop/list.web?cd_ctg_pet=2">고양이</a>
 				<a href="/front/sale/shop/list.web?cd_ctg_pet=3">햄스터</a>
 				<a href="/front/sale/shop/list.web?cd_ctg_pet=4">파충류</a>
+				<a href="/front/sale/shop/list.web?cd_ctg_pet=5">물고기</a>
 			</span>
 		</nav>
 	</body>

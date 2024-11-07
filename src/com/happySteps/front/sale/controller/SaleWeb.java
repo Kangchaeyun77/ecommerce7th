@@ -89,6 +89,9 @@ public class SaleWeb extends Common {
 				else if (pagingDto.getCd_ctg_pet() == 4) {
 					mav.setViewName("front/sale/shop/reptile/list");
 				}
+				else if (pagingDto.getCd_ctg_pet() == 5) {
+					mav.setViewName("front/sale/shop/fish/list");
+				}
 				else {
 					request.setAttribute("redirect"	, "/front/index.web");
 					mav.setViewName("forward:/servlet/result.web");
