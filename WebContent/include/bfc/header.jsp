@@ -50,7 +50,7 @@
 	<!-- Custom Theme Style -->
 	<link href="/bfc/build/css/custom.min.css" rel="stylesheet">
 	
-	<%	Object sessionUser = session.getAttribute("NICKNAME");		
+	<%	Object sessionUser = session.getAttribute("SEQ_MNG");		
 		if (sessionUser == null) { %>
 			<script type="text/javascript">
 				 window.location.href = "/console/login/loginForm.web";
