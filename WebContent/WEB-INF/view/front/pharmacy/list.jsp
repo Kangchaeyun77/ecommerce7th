@@ -33,7 +33,7 @@
 </head>
 <body>
     <h2>동물약국 위치</h2>
-    <div id="map" style="width:100%; height:400px;"></div>
+    <div id="map" style="width:50%; height:400px;"></div>
     
    	<script type="text/javascript" src="https://dapi.kakao.com/v2/maps/sdk.js?appkey=a7ec31ab3c618a568058eac5c18b76e2"></script>
 	<script>
@@ -48,7 +48,7 @@
 		window.onload = function () {
 			   const preloader = document.querySelector('.preloader-wrapper');
 			    if (preloader) {
-			      preloader.style.display = 'none'; // 또는 preloader.remove();로 완전히 제거 가능
+			    	 preloader.remove(); // 또는 preloader.remove();로 완전히 제거 가능
 			    }
 		    var map = new kakao.maps.Map(container, options); 
 		}
