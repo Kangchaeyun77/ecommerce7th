@@ -111,6 +111,8 @@
 					</li>
 					<li class="nav-item">
 						<a href="/front/adap/index.web" class="nav-link">입양</a>
+					<li class="nav-item">
+						<a href="/front/pharmacy/index.web" class="nav-link">약국/병원</a>
 					</li>
 					<li class="nav-item">
 						<a href="/front/donation/index.web" class="nav-link">후원</a>
