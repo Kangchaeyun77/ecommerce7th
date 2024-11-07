@@ -36,6 +36,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -150,22 +151,33 @@ public class AdapApi extends Common {
 	 */
 	@RequestMapping(value = "/front/adap/view.json", method = RequestMethod.POST)
 	public ResponseEntity<String> viewAdap(@RequestBody String requestJson) {
-		String apiUrlTemplate = "https://openapi.gg.go.kr/AbdmAnimalProtect?KEY=e705ae67f910466d9eef16b2618fa1c2&Type=json&pIndex=1&pSize=1";
+		String apiUrlTemplate = "https://openapi.gg.go.kr/AbdmAnimalProtect?KEY=e705ae67f910466d9eef16b2618fa1c2&Type=json&pIndex=%s&pSize=%s";
+		
 		// 요청 JSON에서 필요한 정보 추출
-		String sigunCd = extractJsonValue(requestJson, "sigunCd");
-		String stateNm = extractJsonValue(requestJson, "stateNm");
-		String pblancBeginDe = extractJsonValue(requestJson, "pblancBeginDe");
-		String pblancEndDe = extractJsonValue(requestJson, "pblancEndDe");
-		String speciesNm = extractJsonValue(requestJson, "speciesNm");
-		String shterNm = extractJsonValue(requestJson, "shterNm");
+		String page = extractJsonValue(requestJson, "page");
+		String index = extractJsonValue(requestJson, "index");
+		//String sigunCd = extractJsonValue(requestJson, "sigunCd");
+		//String stateNm = extractJsonValue(requestJson, "stateNm");
+		//String pblancBeginDe = extractJsonValue(requestJson, "pblancBeginDe");
+		//String pblancEndDe = extractJsonValue(requestJson, "pblancEndDe");
+		//String speciesNm = extractJsonValue(requestJson, "speciesNm");
+		//String shterNm = extractJsonValue(requestJson, "shterNm");
 
 		// 로그로 추출된 파라미터 값 확인
 		logger.debug("Extracted parameters: SIGUN_CD={}, STATE_NM={}, PBLANC_BEGIN_DE={}, PBLANC_END_DE={}, SPECIES_NM={}, SHTER_NM={}");
 
 		// API URL 생성
-		String apiUrl = String.format("%s&SIGUN_CD=%s&STATE_NM=%s&PBLANC_BEGIN_DE=%s&PBLANC_END_DE=%s&SPECIES_NM=%s&SHTER_NM=%s",
-	            apiUrlTemplate, sigunCd, stateNm, pblancBeginDe, pblancEndDe, speciesNm, shterNm);
+//		String apiUrl = String.format("%s&SIGUN_CD=%s&STATE_NM=%s&PBLANC_BEGIN_DE=%s&PBLANC_END_DE=%s&SPECIES_NM=%s&SHTER_NM=%s",
+//	            apiUrlTemplate, sigunCd, stateNm, pblancBeginDe, pblancEndDe, speciesNm, shterNm);
 
+		String apiUrl = String.format(apiUrlTemplate, index, page) ;
+//			    + "&SIGUN_CD=" + sigunCd 
+//			    + "&STATE_NM=" + stateNm 
+//			    + "&PBLANC_BEGIN_DE=" + pblancBeginDe 
+//			    + "&PBLANC_END_DE=" + pblancEndDe 
+//			    + "&SPECIES_NM=" + speciesNm 
+//			    + "&SHTER_NM=" + shterNm;
+		
 		String responseJson;
 		logger.debug("API 호출 시작: {}", apiUrl);
 		try {
@@ -197,7 +209,7 @@ public class AdapApi extends Common {
 				responseJson = response.toString();
 			}
 
-			logger.debug("API 호출 성공, 응답: {}", responseJson);
+			//logger.debug("API 호출 성공, 응답: {}", responseJson);
 			
 			return ResponseEntity.ok(responseJson);
 

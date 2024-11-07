@@ -69,6 +69,10 @@ $(document).ready(function() {
 							window.location.search);
 					const animalId = urlParams
 							.get('PBLANC_IDNTFY_NO');
+					const page = urlParams
+							.get('page');
+					const index = urlParams
+							.get('index');
 
 					if (animalId) {
 						// AJAX 요청
@@ -76,7 +80,9 @@ $(document).ready(function() {
 									method : 'POST',
 									contentType : 'application/json',
 									data : JSON.stringify({
-												PBLANC_IDNTFY_NO : animalId
+												PBLANC_IDNTFY_NO : animalId,
+												page : page,
+												index : index
 											}),
 									success : function(response) {
 										if (response
