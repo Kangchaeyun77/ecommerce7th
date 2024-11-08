@@ -353,62 +353,62 @@ a {
 /* 6.1 Header
 --------------------------------------------------------------*/
 /* Preloader */
-.preloader-wrapper {
-	width: 100%;                      /* 너비: 100% */
-	height: 100vh;                   /* 높이: 전체 화면 높이 */
-	margin: 0 auto;                  /* 중앙 정렬을 위한 마진 */
-	position: absolute;               /* 절대 위치 설정 */
-	top: 0;                          /* 상단에 배치 */
-	left: 0;                         /* 좌측에 배치 */
-	z-index: 111;                    /* 겹침 순서 설정 */
-	background: #fff;                /* 배경색: 흰색 */
+/* .preloader-wrapper {
+	width: 100%;                      너비: 100%
+	height: 100vh;                   높이: 전체 화면 높이
+	margin: 0 auto;                  중앙 정렬을 위한 마진
+	position: absolute;               절대 위치 설정
+	top: 0;                          상단에 배치
+	left: 0;                         좌측에 배치
+	z-index: 111;                    겹침 순서 설정
+	background: #fff;                배경색: 흰색
 }
 
 .preloader-wrapper .preloader {
-	margin: 20% auto 0;              /* 위쪽 여백: 20%, 중앙 정렬 */
-	transform: translateZ(0);        /* GPU 가속을 위한 변환 */
+	margin: 20% auto 0;              위쪽 여백: 20%, 중앙 정렬
+	transform: translateZ(0);        GPU 가속을 위한 변환
 }
 
 .preloader:before,
 .preloader:after {
-	content: '';                     /* 가상 요소를 위한 내용 */
-	position: absolute;              /* 절대 위치 설정 */
-	top: 0;                         /* 상단에 배치 */
+	content: '';                     가상 요소를 위한 내용
+	position: absolute;              절대 위치 설정
+	top: 0;                         상단에 배치
 }
 
 .preloader:before,
 .preloader:after,
 .preloader {
-	border-radius: 50%;              /* 원형 모양 설정 */
-	width: 2em;                      /* 너비: 2em */
-	height: 2em;                     /* 높이: 2em */
-	animation: animation 1.2s infinite ease-in-out; /* 애니메이션 설정 */
+	border-radius: 50%;              원형 모양 설정
+	width: 2em;                      너비: 2em
+	height: 2em;                     높이: 2em
+	animation: animation 1.2s infinite ease-in-out; 애니메이션 설정
 }
 
 .preloader {
-	animation-delay: -0.16s;         /* 애니메이션 지연 설정 */
+	animation-delay: -0.16s;         애니메이션 지연 설정
 }
 
 .preloader:before {
-	left: -3.5em;                    /* 왼쪽 위치: -3.5em */
-	animation-delay: -0.32s;         /* 애니메이션 지연 설정 */
+	left: -3.5em;                    왼쪽 위치: -3.5em
+	animation-delay: -0.32s;         애니메이션 지연 설정
 }
 
 .preloader:after {
-	left: 3.5em;                     /* 오른쪽 위치: 3.5em */
+	left: 3.5em;                     오른쪽 위치: 3.5em
 }
 
 @keyframes animation {
 	0%,
 	80%,
 	100% {
-		box-shadow: 0 2em 0 -1em var(--accent-color); /* 그림자 설정 */
+		box-shadow: 0 2em 0 -1em var(--accent-color); 그림자 설정
 	}
 
 	40% {
-		box-shadow: 0 2em 0 0 var(--accent-color);   /* 그림자 설정 */
+		box-shadow: 0 2em 0 0 var(--accent-color);   그림자 설정
 	}
-}
+} */
 
 
 /* Search Bar Style
