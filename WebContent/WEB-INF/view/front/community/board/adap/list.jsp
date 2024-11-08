@@ -132,51 +132,50 @@
 			<div style="grid-column: span 2; text-align: center;">등록된 글이 없습니다.</div>
 		</c:when>
 		<c:otherwise>
-					<c:forEach items="${list}" var="list">
-							<div class="card">
-									<%-- <div class="card-image">
-								<img src="${item.imageUrl}" alt="이미지" style="width: 100%; height: 100%; object-fit: cover; border-radius: 8px;" />
-								</div>
-									--%>
-								<div class="card-content">
-									내용:${list.content}
-									<div class="card-title">
-										<a href="javascript:goView(${list.seq_bbs});">${list.title}</a>
-									</div>
-									<div class="card-meta">
-										작성자: ${list.nickname} | 등록일: ${list.dt_reg}
-									</div>
-									<div class="card-description">
-										${list.content}
-									</div>
-									<div class="card-tags">
-										테그: ${list.tag}
-										<div class="icon-cd_ctg_pet" style="display: flex; justify-content: center; align-items: flex-start; flex-direction: column;">
-											<c:choose>
-												<c:when test="${list.cd_ctg_pet == 1}">
-													<img src="/images/icon/community/dog.png" alt="Dog" style="width: 10%; height: 10%;" />
-												</c:when>
-												<c:when test="${list.cd_ctg_pet == 2}">
-													<img src="/images/icon/community/cat.png" alt="Cat" style="width: 10%; height: 10%;" />
-												</c:when>
-												<c:when test="${list.cd_ctg_pet == 3}">
-													<img src="/images/icon/community/hamster.png" alt="Hamster" style="width: 10%; height: 10%;" />
-												</c:when>
-												<c:when test="${list.cd_ctg_pet == 4}">
-													<img src="/images/icon/community/reptile.png" alt="Reptile" style="width: 10%; height: 10%;" />
-												</c:when>
-												<c:otherwise>
-													<img src="/images/icon/community/default.png" alt="Default Pet" style="width: 10%; height: 10%;" />
-												</c:otherwise>
-											</c:choose>
-										</div>
-									</div>
-								</div>
+			<c:forEach items="${list}" var="list">
+				<div class="card">
+					<div class="card-image">
+					<img src="http://localhost:8080/image/sale/${list.file_save}" alt="이미지" style="width: 100%; height: 100%; object-fit: cover; border-radius: 8px;" />
+					</div>
+					<div class="card-content">
+						내용:${list.content}
+						<div class="card-title">
+							<a href="javascript:goView(${list.seq_bbs});">${list.title}</a>
+						</div>
+						<div class="card-meta">
+							작성자: ${list.nickname} | 등록일: ${list.dt_reg}
+						</div>
+						<div class="card-description">
+							${list.content}
+						</div>
+						<div class="card-tags">
+							테그: ${list.tag}
+							<div class="icon-cd_ctg_pet" style="display: flex; justify-content: center; align-items: flex-start; flex-direction: column;">
+								<c:choose>
+									<c:when test="${list.cd_ctg_pet == 1}">
+										<img src="/images/icon/community/dog.png" alt="Dog" style="width: 10%; height: 10%;" />
+									</c:when>
+									<c:when test="${list.cd_ctg_pet == 2}">
+										<img src="/images/icon/community/cat.png" alt="Cat" style="width: 10%; height: 10%;" />
+									</c:when>
+									<c:when test="${list.cd_ctg_pet == 3}">
+										<img src="/images/icon/community/hamster.png" alt="Hamster" style="width: 10%; height: 10%;" />
+									</c:when>
+									<c:when test="${list.cd_ctg_pet == 4}">
+										<img src="/images/icon/community/reptile.png" alt="Reptile" style="width: 10%; height: 10%;" />
+									</c:when>
+									<c:otherwise>
+										<img src="/images/icon/community/default.png" alt="Default Pet" style="width: 10%; height: 10%;" />
+									</c:otherwise>
+								</c:choose>
 							</div>
-						</c:forEach>
-					</c:otherwise>
-				</c:choose>
-			</div>
+						</div>
+					</div>
+				</div>
+			</c:forEach>
+		</c:otherwise>
+	</c:choose>
+</div>
 			<br/>
 			<div style="display: flex; justify-content: center;">
 			<plutozoneUtilTag:page styleID="front_image" currentPage="${paging.currentPage}" linePerPage="${paging.linePerPage}" totalLine="${paging.totalLine}" scriptFunction="goPage" />
