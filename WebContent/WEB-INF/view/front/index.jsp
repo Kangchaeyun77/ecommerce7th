@@ -206,9 +206,9 @@
 </section>
 <section id="bestselling" class="my-5 overflow-hidden">
 	<div class="container py-5 mb-5">
-
 		<div class="section-header d-md-flex justify-content-between align-items-center mb-3">
-			<h2 class="display-3 fw-normal" style="font-size: 55px">오늘의 쇼핑 제안🛍️</h2><%--Best selling products --%>
+			<h2 class="display-3 fw-normal" style="font-size: 55px">오늘의 쇼핑 제안🛍️<span style="font-size: 15px;"> 👉슬라이드해서 상품보기</span><%--Best selling products --%>
+			</h2>
 			<div>
 				<a href="/front/sale/shop/index.web" class="btn btn-outline-dark btn-lg text-uppercase fs-6 rounded-1">
 					전체 상품 보러가기
@@ -274,7 +274,7 @@
 
 		<div class="section-header d-md-flex justify-content-between align-items-center mb-3">
 			<h2 class="display-3 fw-normal" style="font-size: 55px;">
-			지금 이 상품이 필요하신가요?<span style="font-size: 20px;"> 💡광고</span>
+			지금 이 상품이 필요하신가요?<span style="font-size: 15px;"> 💡광고 👉슬라이드해서 상품보기</span>
 			</h2>
 		<div>
 			<a href="/front/sale/shop/index.web" class="btn btn-outline-dark btn-lg text-uppercase fs-6 rounded-1">
