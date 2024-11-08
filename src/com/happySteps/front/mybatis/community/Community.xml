@@ -302,7 +302,10 @@
 				, (SELECT tb_reply.SEQ_BBS FROM TB_BBS tb_reply WHERE tb_reply.SEQ_BBS_PARENT = TB_BBS.SEQ_BBS) seq_reply
 				, DECODE(CD_CTG_PET, 1, '강아지', 2, '고양이', 3, '햄스터', 4, '파충류 및 양서류', 5, '기타', '미정') CTG_NM
 				, TITLE
+				, NICKNAME
+				, TAG
 				, FILE_ORIG
+				, CD_CTG_PET
 				, DECODE(LOWER(SUBSTR(FILE_ORIG, INSTR(FILE_ORIG, '.', -1, 1) + 1))
 					, 'xlsx', 'xls'
 					, 'xls'	, 'xls'

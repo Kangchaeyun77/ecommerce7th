@@ -33,7 +33,22 @@
 	<link rel="stylesheet" type="text/css" href="/css/communityTable.css" />
 	<link rel="stylesheet" href="/css/brdSearchArea.css">
 	<title>커뮤니티 입양글 목록</title>
-	<style></style>
+	<style>
+	 .container { width: 100%; max-width: 1200px; margin: 0 auto; padding: 20px; }
+  .content { display: flex; flex-direction: column; align-items: center; }
+  .brdSearchArea { display: flex; justify-content: center; align-items: center; margin-bottom: 20px; }
+  .brdInfo { text-align: center; margin-bottom: 20px; }
+  
+  /* 카드 레이아웃 스타일 */
+  .card-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; width: 100%; }
+  .card { display: flex; border: 3px solid #ddd; padding: 15px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); }
+  .card-image { width: 120px; height: 120px; background-color: #f0f0f0; border-radius: 8px; margin-right: 15px; }
+  .card-content { display: flex; flex-direction: column; justify-content: space-between; }
+  .card-title { font-weight: bold; font-size: 1.1em; margin-bottom: 8px; }
+  .card-meta { font-size: 0.9em; color: #888; margin-bottom: 8px; }
+  .card-description { font-size: 0.9em; margin-bottom: 8px; }
+  .card-tags { font-size: 0.8em; color: #555; }
+	</style>
 	<script>
 		function download(type, sequence) {
 			
@@ -94,8 +109,6 @@
 <input type="hidden" name="currentPage"	id="currentPage" value="${paging.currentPage}" />
 <div class="container">
 	<section class="content">
-		<nav>
-		</nav>
 		<article class="txtCenter">
 			<div class="brdSearchArea" style="display: flex; justify-content: center; align-items: center;">
 				<select name="searchKey" id="searchKey">
@@ -106,45 +119,64 @@
 				<input type="text" name="searchWord" id="searchWord" value="${paging.searchWord}" />
 				<input type="submit" value="검색"/>
 			</div>
-			<div class="brdInfo">전체 ${paging.totalLine}개[${paging.currentPage}/${paging.totalPage} 페이지]</div>
 			<br>
 			<div>입양 후기를 보실 수 있습니다
 				 HappySteps를 통해 입양하신 분들은 누구나! 입양후기를 올려주세요. 
 				 가족이 되어 즐겁게 지내시는 모습, 입양 전후 사진, 특이한 버릇, 입양 후 가장 좋은 점 등 입양을 망설이시거나 고민하시는 분들께 좋은 선물이 될 수 있습니다.
 			</div>
 			<br>
-			<table class="headTop_01" style="width: 900px; margin-left: auto; margin-right: auto">
-				<tr>
-					<th style="width: 5%">NO</th>
-					<th>제목</th>
-					<th style="width: 20%">등록일</th>
-				</tr>
-				<c:choose>
-					<c:when test="${empty list}">
-						<tr>
-							<td colspan="3">등록된 글이 없습니다.</td>
-						</tr>
-					</c:when>
-					<c:otherwise>
-						<c:forEach items="${list}" var="list">
-						<tr>
-							<td>
-								${list.rnum}
-							</td>
-							<td style="text-align: left">
-								<c:if test="${list.flg_top == 'Y'}">[커뮤니티 공지] </c:if>
-								<a href="javascript:goView(${list.seq_bbs});">
-									${list.title}
-								</a>
-							</td>
-							<td>
-								${list.dt_reg}
-							</td>
-						</tr>
+			<div class="brdInfo">전체 ${paging.totalLine}개 [${paging.currentPage}/${paging.totalPage} 페이지]</div>
+		<div class="card-grid">
+	<c:choose>
+		<c:when test="${empty list}">
+			<div style="grid-column: span 2; text-align: center;">등록된 글이 없습니다.</div>
+		</c:when>
+		<c:otherwise>
+					<c:forEach items="${list}" var="list">
+							<div class="card">
+									<%-- <div class="card-image">
+								<img src="${item.imageUrl}" alt="이미지" style="width: 100%; height: 100%; object-fit: cover; border-radius: 8px;" />
+								</div>
+									--%>
+								<div class="card-content">
+									내용:${list.content}
+									<div class="card-title">
+										<a href="javascript:goView(${list.seq_bbs});">${list.title}</a>
+									</div>
+									<div class="card-meta">
+										작성자: ${list.nickname} | 등록일: ${list.dt_reg}
+									</div>
+									<div class="card-description">
+										${list.content}
+									</div>
+									<div class="card-tags">
+										테그: ${list.tag}
+										<div class="icon-cd_ctg_pet" style="display: flex; justify-content: center; align-items: flex-start; flex-direction: column;">
+											<c:choose>
+												<c:when test="${list.cd_ctg_pet == 1}">
+													<img src="/images/icon/community/dog.png" alt="Dog" style="width: 10%; height: 10%;" />
+												</c:when>
+												<c:when test="${list.cd_ctg_pet == 2}">
+													<img src="/images/icon/community/cat.png" alt="Cat" style="width: 10%; height: 10%;" />
+												</c:when>
+												<c:when test="${list.cd_ctg_pet == 3}">
+													<img src="/images/icon/community/hamster.png" alt="Hamster" style="width: 10%; height: 10%;" />
+												</c:when>
+												<c:when test="${list.cd_ctg_pet == 4}">
+													<img src="/images/icon/community/reptile.png" alt="Reptile" style="width: 10%; height: 10%;" />
+												</c:when>
+												<c:otherwise>
+													<img src="/images/icon/community/default.png" alt="Default Pet" style="width: 10%; height: 10%;" />
+												</c:otherwise>
+											</c:choose>
+										</div>
+									</div>
+								</div>
+							</div>
 						</c:forEach>
 					</c:otherwise>
 				</c:choose>
-			</table>
+			</div>
 			<br/>
 			<div style="display: flex; justify-content: center;">
 			<plutozoneUtilTag:page styleID="front_image" currentPage="${paging.currentPage}" linePerPage="${paging.linePerPage}" totalLine="${paging.totalLine}" scriptFunction="goPage" />
