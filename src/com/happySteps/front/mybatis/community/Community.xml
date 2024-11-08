@@ -304,6 +304,7 @@
 				, TITLE
 				, NICKNAME
 				, TAG
+				, FILE_SAVE
 				, FILE_ORIG
 				, CD_CTG_PET
 				, DECODE(LOWER(SUBSTR(FILE_ORIG, INSTR(FILE_ORIG, '.', -1, 1) + 1))
