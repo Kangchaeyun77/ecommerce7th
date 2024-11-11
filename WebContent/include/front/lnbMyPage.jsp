@@ -26,5 +26,5 @@
 				<li><a href="/front/member/passwd/modifyForm.web" class="menuLnb">비밀번호 변경</a></li>
 				<li><a href="/front/buy/history.web" class="menuLnb">구매 이력</a></li>
 				<li><a href="javascript:goList(3);" class="menuLnb">문의 이력</a></li>
-				<li><a href="" class="menuLnb">회원탈퇴</a></li>
+				<li><a href="/front/myPage/exitForm.web" class="menuLnb">회원탈퇴</a></li>
 			</ul>

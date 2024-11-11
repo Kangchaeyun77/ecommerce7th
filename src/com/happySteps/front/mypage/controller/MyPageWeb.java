@@ -42,6 +42,34 @@ import com.happySteps.front.mypage.controller.MyPageWeb;
 public class MyPageWeb extends Common {
 	/** Logger */
 	private static Logger logger = LoggerFactory.getLogger(MyPageWeb.class);
+	
+	/**
+	 * @param request [요청 서블릿]
+	 * @param response [응답 서블릿]
+	 * @return ModelAndView
+	 * 
+	 * @since 2024-11-11
+	 * <p>DESCRIPTION: 회원 탈퇴 폼</p>
+	 * <p>IMPORTANT:</p>
+	 * <p>EXAMPLE:</p>
+	 */
+	@RequestMapping(value = "/front/myPage/exitForm.web")
+	public ModelAndView registerForm(HttpServletRequest request, HttpServletResponse response) {
+		
+		
+		ModelAndView mav = new ModelAndView("redirect:/error.web");
+		
+		try {
+			mav.setViewName("front/myPage/exitForm");
+		}
+		catch (Exception e) {
+			logger.error("[" + this.getClass().getName() + ".exitForm()] " + e.getMessage(), e);
+		}
+		finally {}
+		
+		return mav;
+	}
+	
 	/**
 	 * @param request [요청 서블릿]
 	 * @param response [응답 서블릿]
