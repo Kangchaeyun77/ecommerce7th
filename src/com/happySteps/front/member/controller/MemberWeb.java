@@ -93,10 +93,13 @@ public class MemberWeb extends Common {
 			memberDto.setEmail(URLDecoder.decode(memberDto.getEmail()));
 			
 			if (memberSrvc.newPasswd(memberDto)) {
+				
+				
 				request.setAttribute("script"	, "alert('이메일 인증이 완료되어 정상적으로 서비스를 이용할 있습니다.');");
 				request.setAttribute("redirect"	, "/front/login/loginForm.web");
 			}
 			else {
+				// [2024-09-19][hyeen103@gmail.com][TODO: 10분 이내에 인증되지 않은 이메일이므로 '#' + SEQ_MBR + '_' + EMAIL 패턴으로 업데이트]
 				request.setAttribute("script"	, "alert('회원 가입 재시도 또는 고객센터에 문의하세요!');");
 				request.setAttribute("redirect"	, "/");
 			}
@@ -173,17 +176,28 @@ public class MemberWeb extends Common {
 	            // 가입 축하 이메일 발송 
 	            EmailDto emailDto = new EmailDto();
 	            emailDto.setSender(dynamicProperties.getMessage("email.sender.mail"));
-	            emailDto.setTo(new String[]{memberDto.getEmail()});
+	            emailDto.setTo(new String[]{email});
 	            emailDto.setSubject("임시비밀번호");
-	            emailDto.setMessage("<b>임시 비밀번호</b>: " 
+	            emailDto.setMessage("<b>url을 클릭해주세요!</b> " 
 	            		+ "http://127.0.0.1:8080/front/member/confirmEmail.web?Passwd=" + temporaryPassword 
-	            + "</br>");
+	            + "</br>"
+	            + "임시비밀번호로 로그인 후 비밀번호를 재설정해주세요."
+	            + "</br>"
+	            + "임시비밀번호는" + temporaryPassword + "입니다!"
+	            );
+	            emailCmpn.send(emailDto);
 	            
-	            mav.addObject("foundPasswd", HSwithSHA.encode(memberDto.getPasswd()));
+	            //mav.addObject("temporaryPassword", HSwithSHA.encode(memberDto.getPasswd()));
+	            mav.addObject("temporaryPassword", HSwithSHA.encode(memberDto.getPasswd()));
 	            
 	            mav.setViewName("front/login/loginForm"); // ID를 보여줄 JSP 페이지로 리디렉션
 	            
+	            logger.debug("이메일은?"+ aes.encode(email));
+	            logger.debug("이름은?"+ aes.encode(name));
+	            logger.debug("아이디는?"+ aes.encode(id));
+	            
 	            logger.debug("비밀번호?="+memberDto.getPasswd());
+	            logger.debug(temporaryPassword);
 	        }
 	        else {
 	            logger.debug("다시 한번 확인해주세요.");
@@ -191,7 +205,7 @@ public class MemberWeb extends Common {
 	        }
 	    } 
 	    catch (Exception e) {
-	        logger.error("[" + this.getClass().getName() + ".findIdProc()] " + e.getMessage(), e);
+	        logger.error("[" + this.getClass().getName() + ".findPasswdProc()] " + e.getMessage(), e);
 	    } 
 	    return mav;
 	}
