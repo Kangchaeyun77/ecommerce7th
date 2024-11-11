@@ -109,7 +109,7 @@
 				<input type="submit" value="검색"/>
 			</div>
 			<div class="brdInfo">전체 ${paging.totalLine}개[${paging.currentPage}/${paging.totalPage} 페이지]</div>
-			<table class="headTop_01" style="width: 900px; margin-left: auto; margin-right: auto">
+			<table class="headTop_01" style="width: 90%; margin-left: auto; margin-right: auto">
 				<tr>
 					<th style="width: 5%">NO</th>
 					<th>제목</th>
