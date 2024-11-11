@@ -25,43 +25,12 @@
  <link rel="stylesheet" href="/css/lnb.css">
  	<div class="container py-5 my-5">
  		<div class="row">
-
- 			<div class="col-md-3">
+ 			<div class="col-12 col-md-5">
  				<div class="footer-menu">
- 					<img src="/images/logo/logo2.png" alt="logo">
- 					<p class="blog-paragraph fs-6 mt-3">방문해주셔서 감사합니다</p>
- 					<div class="social-links">
- 						<ul class="d-flex list-unstyled gap-2">
- 							<li class="social">
- 								<a href="#">
- 									<iconify-icon class="social-icon" icon="ri:facebook-fill"></iconify-icon>
- 								</a>
- 							</li>
- 							<li class="social">
- 								<a href="#">
- 									<iconify-icon class="social-icon" icon="ri:twitter-fill"></iconify-icon>
- 								</a>
- 							</li>
- 							<li class="social">
- 								<a href="#">
- 									<iconify-icon class="social-icon" icon="ri:pinterest-fill"></iconify-icon>
- 								</a>
- 							</li>
- 							<li class="social">
- 								<a href="#">
- 									<iconify-icon class="social-icon" icon="ri:instagram-fill"></iconify-icon>
- 								</a>
- 							</li>
- 							<li class="social">
- 								<a href="#">
- 									<iconify-icon class="social-icon" icon="ri:youtube-fill"></iconify-icon>
- 								</a>
- 							</li>
- 						</ul>
- 					</div>
+ 					<img src="/images/logo/logo4.png"  alt="logo">
  				</div>
  			</div>
- 			<div class="col-md-3">
+ 			<div class="col-12 col-md-3">
  				<div class="footer-menu">
  					<h3>Quick Links</h3>
  					<ul class="container">
@@ -83,7 +52,7 @@
  					</ul>
  				</div>
  			</div>
- 			<div class="col-md-3">
+ 			<div class="col-12 col-md-3">
  				<div class="footer-menu">
  					<h3>Help Center</h3>
  					<ul class="container">
@@ -105,19 +74,6 @@
  					</ul>
  				</div>
  			</div>
- 			<div class="col-md-3">
- 				<div>
- 					<h3>Our Newsletter</h3>
- 					<p class="blog-paragraph fs-6">HappySteps 블로그 구독!</p>
- 					<div class="search-bar border rounded-pill border-dark-subtle px-2">
- 						<form class="text-center d-flex align-items-center" action="" method="">
- 							<input type="text" class="form-control border-0 bg-transparent" placeholder="Enter your email here" />
- 							<iconify-icon class="send-icon" icon="tabler:location-filled"></iconify-icon>
- 						</form>
- 					</div>
- 				</div>
- 			</div>
-
  		</div>
  	</div>
 
