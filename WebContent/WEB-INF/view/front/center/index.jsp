@@ -49,8 +49,8 @@
 	<nav>
 			<%@ include file="/include/front/lnbCenter.jsp" %>
 	</nav>
-	<article style="flex: 1; padding-right: 20px;">
-		<img src="/images/center.png" alt="고객센터 페이지 이미지" style="width: auto; height: 150px; object-fit: cover; float: center; margin-left: 50px; margin-bottom: 10px; margin-top: 20px;"/>
+	<article style="flex: 1;">
+	    <img src="/images/center.png" alt="고객센터 페이지 이미지" style="width: 90%; height: auto; object-fit: cover; margin-left: 50px; margin-bottom: 10px; margin-top: 20px;"/>
 	</article>
 		<article class="txtCenter">
 		</article>
