@@ -83,13 +83,13 @@
 							</td>
 							<td>
 								<c:choose>
-								<c:when test="${list.cd_state_delivery == ''}">등록중(N)</c:when>
-								<c:when test="${list.cd_state_delivery == 'C'}">확인중(C)</c:when>
-								<c:when test="${list.cd_state_delivery == 'P'}">배송준비중(P)</c:when>
-								<c:when test="${list.cd_state_delivery == 'D'}">배송중(D)</c:when>
-								<c:when test="${list.cd_state_delivery == 'Y'}">배송완료(Y)</c:when>
-								<c:otherwise>오류</c:otherwise>
-							</c:choose>
+									<c:when test="${list.cd_state_delivery == 'C'}">주문확인중</c:when>
+									<c:when test="${list.cd_state_delivery == 'P'}">배송준비중</c:when>
+									<c:when test="${list.cd_state_delivery == 'D'}">배송중</c:when>
+									<c:when test="${list.cd_state_delivery == 'Y'}">배송완료</c:when>
+									<c:when test="${list.cd_state_delivery == 'R'}">반품및취소</c:when>
+									<c:otherwise>오류</c:otherwise>
+								</c:choose>
 							</td>
 						</tr>
 						</c:forEach>
