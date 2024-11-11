@@ -44,8 +44,8 @@
 	<nav>
 	<%@ include file="/include/front/lnbAdap.jsp" %>
 	</nav>
-	<article style="flex: 1; padding-right: 20px;">
-		<img src="/images/adap.png" alt="입양페이지 이미지" style="width: 25%; height: 300px; object-fit: cover; float: center; margin-left: 300px; margin-bottom: 10px; margin-top: 20px;"/>
+	<article style="flex: 1; display: flex; justify-content: center; align-items: center;">
+		<img src="/images/adap.png" alt="입양페이지 이미지" style="width: 45%; float: center;"/>
 	</article>
 </section>
 	<footer>
