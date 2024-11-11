@@ -83,19 +83,21 @@ public class MemberWeb extends Common {
 	 * <p>IMPORTANT:</p>
 	 * <p>EXAMPLE:</p>
 	 */
-	@SuppressWarnings("deprecation")
 	@RequestMapping(value = "/front/member/confirmEmail.web")
 	public ModelAndView confirmEmail(HttpServletRequest request, HttpServletResponse response, MemberDto memberDto) {
 		
 		ModelAndView mav = new ModelAndView("redirect:/error.web");
-		
+
 		try {
-			memberDto.setEmail(URLDecoder.decode(memberDto.getEmail()));
+			logger.debug(">>> " + memberDto.getPasswd());
+			logger.debug(">>> " + memberDto.getId());
+			logger.debug(">>> " + memberDto.getEmail());
+			logger.debug(">>> " + memberDto.getMbr_nm());
 			
+			memberDto.setPasswd(HSwithSHA.encode(memberDto.getPasswd()));
 			if (memberSrvc.newPasswd(memberDto)) {
-				
-				
-				request.setAttribute("script"	, "alert('이메일 인증이 완료되어 정상적으로 서비스를 이용할 있습니다.');");
+				logger.debug("OK");
+				request.setAttribute("script"	, "alert('임시 비밀번호로 로그인 후 비밀번호를 재설정 해주세요!');");
 				request.setAttribute("redirect"	, "/front/login/loginForm.web");
 			}
 			else {
@@ -175,19 +177,23 @@ public class MemberWeb extends Common {
 	            logger.debug("temporaryPassword=" +temporaryPassword);
 	            // 가입 축하 이메일 발송 
 	            EmailDto emailDto = new EmailDto();
+	            
 	            emailDto.setSender(dynamicProperties.getMessage("email.sender.mail"));
 	            emailDto.setTo(new String[]{email});
 	            emailDto.setSubject("임시비밀번호");
-	            emailDto.setMessage("<b>url을 클릭해주세요!</b> " 
-	            		+ "http://127.0.0.1:8080/front/member/confirmEmail.web?Passwd=" + temporaryPassword 
+	            emailDto.setMessage("<b>하기 URL을 클릭해주세요!</b> " 
+	            		+ "<a href='http://127.0.0.1:8080/front/member/confirmEmail.web?Passwd=" + temporaryPassword + "&" +
+	            		"id=" + aes.encode(id) + "&" +
+	                    "email=" + aes.encode(email) + "&" +
+	                    "mbr_nm=" + aes.encode(name)
+	            		+ "'>URL 링크</a>"
 	            + "</br>"
 	            + "임시비밀번호로 로그인 후 비밀번호를 재설정해주세요."
 	            + "</br>"
 	            + "임시비밀번호는" + temporaryPassword + "입니다!"
 	            );
 	            emailCmpn.send(emailDto);
-	            
-	            //mav.addObject("temporaryPassword", HSwithSHA.encode(memberDto.getPasswd()));
+
 	            mav.addObject("temporaryPassword", HSwithSHA.encode(memberDto.getPasswd()));
 	            
 	            mav.setViewName("front/login/loginForm"); // ID를 보여줄 JSP 페이지로 리디렉션

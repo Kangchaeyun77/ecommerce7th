@@ -82,7 +82,7 @@
 				</tr>
 				<tr>
 					<th>이메일</th>
-					<td><input type="text" id="email" name="email" value="plutomsw@gmail.com" maxlength="16" required style="border: none; border-left: 2px solid #dead6f; padding: 5px; outline: none; width: 200px;"/></td>
+					<td><input type="text" id="email" name="email" value="plutomsw@gmail.com" maxlength="18" required style="border: none; border-left: 2px solid #dead6f; padding: 5px; outline: none; width: 200px;"/></td>
 				</tr>
 				<tr>
 				<td colspan="2" style="text-align:center;border-bottom:0px;padding-top: 10px">
