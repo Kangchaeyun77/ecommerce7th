@@ -73,6 +73,56 @@ public class BuyWeb extends Common{
 	@Inject
 	BoardSrvc boardSrvc;
 	
+	@RequestMapping(value = "/front/buy/goConfirm.web")
+	public ModelAndView goConfirm(HttpServletRequest request, HttpServletResponse response, BuyDto buyDto) {
+		
+		ModelAndView mav = new ModelAndView("redirect:/error.web");
+		
+		try {
+
+			if (buySrvc.goConfirm(buyDto)) {
+				request.setAttribute("script"	, "alert('구매 확정 되었습니다.');");
+				request.setAttribute("redirect"	, "/front/buy/history.web");
+			}
+			else {
+				request.setAttribute("script"	, "alert('시스템 관리자에게 문의하세요!');");
+				request.setAttribute("redirect"	, "/");
+			}
+			mav.setViewName("forward:/servlet/result.web");
+		}
+		catch (Exception e) {
+			logger.error("[" + this.getClass().getName() + ".goConfirm()] " + e.getMessage(), e);
+		}
+		finally {}
+		
+		return mav;
+	}
+	
+	@RequestMapping(value = "/front/buy/goCancle.web")
+	public ModelAndView goCancle(HttpServletRequest request, HttpServletResponse response, BuyDto buyDto) {
+		
+		ModelAndView mav = new ModelAndView("redirect:/error.web");
+		
+		try {
+
+			if (buySrvc.goCancle(buyDto)) {
+				request.setAttribute("script"	, "alert('취소,반품요청 되었습니다.');");
+				request.setAttribute("redirect"	, "/front/buy/history.web");
+			}
+			else {
+				request.setAttribute("script"	, "alert('시스템 관리자에게 문의하세요!');");
+				request.setAttribute("redirect"	, "/");
+			}
+			mav.setViewName("forward:/servlet/result.web");
+		}
+		catch (Exception e) {
+			logger.error("[" + this.getClass().getName() + ".goCancle()] " + e.getMessage(), e);
+		}
+		finally {}
+		
+		return mav;
+	}
+	
 	@RequestMapping(value = "/front/buy/writeProc.web")
 	public ModelAndView writeProc(HttpServletRequest request, HttpServletResponse response, BuyDetailListDto buyDetailListDto) {
 		

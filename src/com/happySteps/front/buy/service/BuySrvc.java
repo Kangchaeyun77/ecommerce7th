@@ -54,6 +54,47 @@ public class BuySrvc {
 	@Inject
 	PayDao payDao;
 	
+	/**
+	 * @return boolean
+	 * 
+	 * @since 2024-11-11
+	 * <p>DESCRIPTION: 반품및취소(처리)</p>
+	 * <p>IMPORTANT:</p>
+	 * <p>EXAMPLE:</p>
+	 */
+	@Transactional("txBackoffice")
+	public boolean goCancle(BuyDto buyDto) {
+		
+		int result = buyDao.goCancle(buyDto);
+		
+		if (result >= 1) return true;
+		else {
+			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+			return false;
+		}
+	}
+	
+	/**
+	 * @return boolean
+	 * 
+	 * @since 2024-11-11
+	 * <p>DESCRIPTION: 주문확정(처리)</p>
+	 * <p>IMPORTANT:</p>
+	 * <p>EXAMPLE:</p>
+	 */
+	@Transactional("txBackoffice")
+	public boolean goConfirm(BuyDto buyDto) {
+		
+		int result = buyDao.goConfirm(buyDto);
+		
+		if (result >= 1) return true;
+		else {
+			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+			return false;
+		}
+	}
+	
+	
 	@Transactional("txFront")
 	public int insertByOrderNum(BuyMasterDto buyMasterDto, ArrayList<BuyDetailDto> listBuyDetailDto, String num_order) {
 			

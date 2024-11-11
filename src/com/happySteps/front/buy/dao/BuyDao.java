@@ -42,6 +42,13 @@ import com.happySteps.front.common.dto.PagingDto;
 @Service("com.happySteps.front.buy.dao.BuyDao")
 public class BuyDao extends BaseDao{
 	
+	public int goConfirm(BuyDto buyDto) {
+		return sqlSessionFront.update("com.happySteps.front.mybatis.buy.Buy.goConfirm", buyDto);
+	}
+	public int goCancle(BuyDto buyDto) {
+		return sqlSessionFront.update("com.happySteps.front.mybatis.buy.Buy.goCancle", buyDto);
+	}
+	
 	public int update(BuyMasterDto buyMasterDto) {
 		return sqlSessionFront.update("com.happySteps.front.mybatis.buy.BuyMaster.update", buyMasterDto);
 	}

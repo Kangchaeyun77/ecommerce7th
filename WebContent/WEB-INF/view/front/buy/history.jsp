@@ -33,13 +33,34 @@
 	<link rel="stylesheet" type="text/css" title="common stylesheet" href="/css/table.css" />
 	<link rel="stylesheet" href="/css/lnb.css">
 	<style></style>
-	<script></script>
+	<script>
+	
+	function goCancle(seq_buy_mst) {
+		
+		if (confirm("주문을 취소 또는 반품 하시겠습니까?")) {
+			var frmMain = document.getElementById("frmMain");
+			document.getElementById("seq_buy_mst").value = seq_buy_mst;
+			frmMain.action="/front/buy/goCancle.web";
+			frmMain.submit();
+		}
+	}
+	
+	function goConfirm(seq_buy_mst) {
+		
+		if (confirm("구매를 확정 하시겠습니까?")) {
+			var frmMain = document.getElementById("frmMain");
+			document.getElementById("seq_buy_mst").value = seq_buy_mst;
+			frmMain.action="/front/buy/goConfirm.web";
+			frmMain.submit();
+		}
+	}
+	
+	</script>
 </head>
 <body>
 <form id="frmMain" method="POST">
+<input type="hidden" id="seq_buy_mst" name="seq_buy_mst" />
 <div class="container">
-	<nav>
-	</nav>
 	<section class="content">
 		<nav>
 			<%@ include file="/include/front/lnbMyPage.jsp" %>
@@ -53,11 +74,12 @@
 					<th style="width: 10%">구매 가격</th>
 					<th style="width: 8%">구매 수량</th>
 					<th style="width: 10%">구매일</th>
+					<th style="width: 8%">배송 상태</th>
 				</tr>
 				<c:choose>
 					<c:when test="${empty list}">
 						<tr>
-							<td colspan="5">등록된 글이 없습니다.</td>
+							<td colspan="6">등록된 글이 없습니다.</td>
 						</tr>
 					</c:when>
 					<c:otherwise>
@@ -79,6 +101,23 @@
 							</td>
 							<td>
 								${list.dt_reg}
+							</td>
+							<td>
+								<c:choose>
+									<c:when test="${list.cd_state_delivery == 'C'}">주문확인중	<button type="button"	onclick="javascript:goCancle(${list.seq_buy_mst});">주문취소</button></c:when>
+									<c:when test="${list.cd_state_delivery == 'P'}">배송준비중	<button type="button"	onclick="javascript:goCancle(${list.seq_buy_mst});">주문취소</button></c:when>
+									<c:when test="${list.cd_state_delivery == 'D'}">배송중		<button type="button"	onclick="javascript:goCancle(${list.seq_buy_mst});">반품요청</button></c:when>
+									<c:when test="${list.cd_state_delivery == 'Y'}">배송완료	
+										<c:if test="${list.cd_state_buy == ''}">
+											<button type="button"	onclick="javascript:goConfirm(${list.seq_buy_mst});">구매확정</button>
+										</c:if>
+										<c:if test="${list.cd_state_buy == 'Y'}">
+											<span style="font-size: 13px; color:blue; bold"><br>구매확정완료</span>
+										</c:if>
+									</c:when>
+									<c:when test="${list.cd_state_delivery == 'R'}">반품및취소	</c:when>
+									<c:otherwise>오류</c:otherwise>
+								</c:choose>
 							</td>
 						</tr>
 						</c:forEach>

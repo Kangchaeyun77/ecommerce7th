@@ -44,7 +44,15 @@ public class BuyDto {
 	private int register					= 0;	// 등록자
 	private String dt_upt					= "";	// 수정일시
 	private int updater					= 0;	// 수정자
+	private String cd_state_buy				= "";	// 구매상태코드
 	
+	
+	public String getCd_state_buy() {
+		return cd_state_buy;
+	}
+	public void setCd_state_buy(String cd_state_buy) {
+		this.cd_state_buy = cd_state_buy;
+	}
 	public int getSeq_buy_dtl() {
 		return seq_buy_dtl;
 	}
