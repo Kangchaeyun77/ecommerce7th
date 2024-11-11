@@ -34,7 +34,7 @@
 	<form id="frmMain">
 		<div class="container">
 			<article class="txtCenter">
-				<div style="position: relative; height: 400px; overflow: hidden; margin-top: 10px;">
+				<div style="position: relative; height: 500px; margin: 30px;">
 					<a href="/front/"></a>
 					<header>
 					<div style="text-align: center;">	
@@ -45,10 +45,10 @@
 					</header>
 				</div>
 				<div style="text-align: center;">
-					<img src="/images/about.png" style="width: 50%; height: auto;">
+					<img src="/images/about.png" style="width: 75%; height: auto; margin: 20px;">
 				</div>
 				<br>
-				<div style="text-align: left; width: 50%; height: auto; margin: 0 auto;">
+				<div style="text-align: left; width: 75%; height: auto; margin: 0 auto;">
 					<p>안녕하세요, 따뜻한 마음으로 <strong>반려동물과 유기동물을 사랑하는 여러분!</strong></p>
 					<p>저희 이커머스 플랫폼에 <strong>오신 것을 진심으로 환영합니다.</strong> 저희 플랫폼은 단순히 상품을 구매하는 곳을 넘어, 반려동물과 유기동물의 행복한 삶을 함께 만들어가는 특별한 공간입니다.</p>
 					<p>반려동물은 우리에게 한결같은 사랑과 위로를 주는 소중한 친구입니다. 그리고 그 친구들의 행복이 곧 우리의 행복이라고 믿고 있기에, 저희는 반려동물의 삶의 질을 높이고, 유기동물에게 따뜻한 가정을 제공하기 위해 최선을 다하고 있습니다.</p>
