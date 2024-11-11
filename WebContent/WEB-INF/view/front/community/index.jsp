@@ -35,7 +35,7 @@
 	<form id="frmMain">
 		<div class="container">
 			<article class="txtCenter">
-			<div style="position: relative; height: 400px; overflow: hidden; margin-top: 10px;">
+			<div style="position: relative; height: auto; margin-top: 10px;">
 					<a href="/front/"></a>
 			<header>
 					<div style="text-align: center;">	
@@ -46,7 +46,7 @@
 			</header>
 				</div>
 				<div style="text-align: center;">
-					<img src="/images/community.png" style="width: 50%; height: auto;">
+					<img src="/images/community.png" style="width: 80%; height: auto; margin-top: 15%;">
 				</div>
 				<br>
 			</article>
