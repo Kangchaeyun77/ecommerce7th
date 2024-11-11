@@ -63,7 +63,7 @@
 <form id="frmMain" name="frmMain" method="POST">
 
 <header style="display: flex; justify-content: center; align-items: center; height: 120px margin-top = 50px;">
-		<a href="/front/"><img src="/images/logo/logo3.png" alt="로고" style="width: 300px; height: 250px; object-fit: cover; "/></a>
+		<a href="/front/"><img src="/images/logo/logo3.png" alt="로고" style="width: 85%; height: auto; object-fit: cover; "/></a>
 </header>
 
 <section class="content" style="display: flex; justify-content: center; align-items: flex-start; height: 100vh;" >
@@ -95,10 +95,10 @@
 				</td>
 				</tr>
 			</table>
-			<table style="width: 28.5%;">
+			<table style="width:100%;">
 				<tr>
-					<td style="text-align:left;border-top:0px; padding: 5px; white-space: nowrap;"><a href="/front/member/termAgreeForm.web">[회원 가입]</a></td>
-					<td style="text-align:right;border-top:0px; padding: 5px; white-space: nowrap;"><a href="/front/login/loginForm.web">[로그인 하기]</a></td>
+					<td style="text-align:center;border-top:0px; padding: 5px; white-space: nowrap;"><a href="/front/member/termAgreeForm.web">[회원 가입]</a></td>
+					<td style="text-align:center;border-top:0px; padding: 5px; white-space: nowrap;"><a href="/front/login/loginForm.web">[로그인 하기]</a></td>
 				</tr>
 			</table>
 		</article>

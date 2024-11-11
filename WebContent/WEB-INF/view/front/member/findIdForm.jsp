@@ -39,29 +39,6 @@
 		}
 	</style>
 	<script>
-	<%--
-	    function findIdForm() {
-	        var frmMain = document.getElementById("frmMain");
-	        
-	        // 사용자가 입력한 이름과 이메일 값을 가져옵니다.
-	        var mbr_nm = document.getElementById("findNm").value; // 실제 이름을 입력받는 input 요소의 ID입니다.
-	        var email = document.getElementById("findEmail").value; // 이메일을 입력받는 input 요소의 ID입니다.
-			
-	        // hidden input 필드에 값을 설정합니다. (이 부분은 불필요할 수도 있습니다)
-	        document.getElementById("findNm").value = mbr_nm;
-	        document.getElementById("findEmail").value = email;
-	
-	        // 입력된 값들을 콘솔에 출력하여 확인합니다.
-	        console.log("name:", mbr_nm);
-	        console.log("email:", email);
-	
-	        alert("아이디를 찾아줘");
-	
-	        // action 설정 후 폼을 제출합니다.
-	        frmMain.action = "/front/member/findIdProc.web";
-	        frmMain.submit();
-	    }
-	    --%>
 	    function findIdForm(value) {
 	        var frmMain = document.getElementById("frmMain");
 	    	
@@ -91,7 +68,7 @@
 <!-- <form id="frmMain" method="POST" action="/loginProc.jsp"> -->
 <div class="container">
 	<header style="display: flex; justify-content: center; align-items: center; height: 120px margin-top = 50px;">
-		<a href="/front/"><img src="/images/logo/logo3.png" alt="로고" style="width: 300px; height: 250px; object-fit: cover; "/></a>
+		<a href="/front/"><img src="/images/logo/logo3.png" alt="로고" style="width: 85%; height: auto; object-fit: cover; "/></a>
 	</header>
 	
 	<section class="content" style="display: flex; justify-content: center; align-items: flex-start; height: 100vh;">
@@ -128,9 +105,9 @@
 			</tr>
 			<tr>
 				<td style="text-align: center">
-					<a href="/front/member/registerForm.jsp">[회원가입하기]</a>
-					<a href="/front/member/findPasswdForm.jsp">[비밀번호 찾기]</a>
-					<a href="/front/login/loginForm.jsp">[로그인]</a>
+					<a href="/front/member/findPasswdForm.web">[비밀번호 찾기]</a>
+					<a href="/front/login/loginForm.web">[로그인]</a>
+					<a href="/front/member/termAgreeForm.web">[회원가입하기]</a>
 				</td>
 				
 			</tr>

@@ -115,8 +115,8 @@
 <!-- <form id="frmMain" method="POST" action="/loginProc.jsp"> -->
 <div class="container">
 		<header style="display: flex; justify-content: center; align-items: center; height: 120px;">
-			<div style="position: relative; height: 200px; overflow: hidden; margin-top: 50px;">
-				<a href="/front/"><img src="/images/logo/logo3.png" alt="로고"></a>
+			<div style="position: relative; margin-top: 90px;">
+				<a href="/front/"><img src="/images/logo/logo3.png" style="width: 85%; height: auto; object-fit: cover; alt="로고"></a>
 			</div>
 		</header>
 	
