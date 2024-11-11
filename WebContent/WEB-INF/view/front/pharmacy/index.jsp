@@ -45,7 +45,7 @@
 	<%@ include file="/include/front/lnbHospital.jsp" %>-
 	</nav>
 	<article style="flex: 1; padding-right: 20px;">
-		<img src="/images/hos.png" alt="약국/병원 페이지 이미지" style="width: auto; height: 150px; object-fit: cover; float: center; margin-left: 50px; margin-bottom: 10px; margin-top: 20px;"/>
+		<img src="/images/hos.png" alt="약국/병원 페이지 이미지" style="width: 90%;  margin-left: 50px; margin-bottom: 10px; margin-top: 20px;"/>
 	</article>
 </section>
 	<footer>
