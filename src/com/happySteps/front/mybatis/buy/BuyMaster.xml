@@ -17,7 +17,7 @@
 		INSERT INTO TB_BUY_MST
 			(SEQ_BUY_MST, SEQ_MBR, BUY_INFO, BUY_COUNT, BUY_PRICE, FLG_DELETE, CD_STATE_PAY, CD_STATE_DELIVERY, DT_REG, REGISTER)
 		VALUES
-			(#{seq_buy_mst}, #{seq_mbr}, #{buy_info}, #{buy_count}, #{buy_price}, 'N', NULL, NULL, SYSDATE, #{seq_mbr})
+			(#{seq_buy_mst}, #{seq_mbr}, #{buy_info}, #{buy_count}, #{buy_price}, 'N', NULL, 'C', SYSDATE, #{seq_mbr})
 	</insert>
 	
 	<select id="list" parameterType="pagingDto" resultType="buyMasterDto">

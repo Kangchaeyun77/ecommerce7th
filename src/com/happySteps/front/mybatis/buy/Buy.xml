@@ -53,7 +53,7 @@
 			TB_BUY_DTL
 		) dtl ON mst.SEQ_BUY_MST = dtl.SEQ_BUY_MST AND dtl.RN = 1
 	WHERE
-		mst.SEQ_MBR = 41
+		mst.SEQ_MBR = #{seq_mbr}
 		AND mst.CD_STATE_PAY = 'Y'
 	ORDER BY 
 		mst.SEQ_BUY_MST DESC
