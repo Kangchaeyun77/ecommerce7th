@@ -483,7 +483,7 @@
 				</ul>
 			</div>
 			<div id="details" class="tabcontent" style="text-align: center;">
-				<img src="${saleDto.desces_img}" style="display: inline-block; margin: 0 auto;" />
+				<img src="${saleDto.desces_img}" style="display: inline-block; width:100%; margin: 0 auto;" />
 			</div>
 			<div id="delivery" class="tabcontent">
 			    <h3 style="color: #333; font-weight: bold; margin-bottom: 15px;">배송안내</h3>
