@@ -22,6 +22,7 @@
  */
 package com.happySteps.front.interfaces.controller;
 
+
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -315,9 +316,22 @@ public class PayupWeb extends Common {
 						session.setAttribute("NUM_ORDER"	, num_order);
 						session.setAttribute("AMOUNT"		, "100");
 						
+						String serverUrl = "";
+						if (staticProperties.getProperty("common.mode", "[UNDEFINED]").equalsIgnoreCase("LOCAL")) {
+							serverUrl = "http://119.71.96.251:"
+										+ staticProperties.getProperty("common.server.port", "[UNDEFINED]");
+						}
+						else if (staticProperties.getProperty("common.mode", "[UNDEFINED]").equalsIgnoreCase("DEVELOPMENT")) {
+							 // moon(8080), jupiter(8081), saturn(8082), uranus(8083)
+							serverUrl = "http://moon.plutozone.com";
+						}
+						else {
+							serverUrl = "[UNDEFINED]";
+						}
+						
 						/** 모바일에서는 pay()가 아닌 receive()로 응답을 처리 */
 						if (Request.isDevice(request, "mobile")) {
-							returnMap.put("returnUrl"	,"http://119.71.96.251:" + staticProperties.getProperty("common.server.port", "[UNDEFINED]") + "/front/interface/payup/receive.api");
+							returnMap.put("returnUrl", serverUrl + "/front/interface/payup/receive.api");
 						}
 						else returnMap.put("returnUrl", "");
 					}
