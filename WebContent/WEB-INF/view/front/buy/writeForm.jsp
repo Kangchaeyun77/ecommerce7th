@@ -271,7 +271,7 @@
 				else {
 					alert(responseObject.responseMsg);
 				}
-				location.href="/front/sale/shop/index";
+				location.href="/front/index";
 			},
 			error: function(error) {
 				alert("연동 에러");
@@ -295,7 +295,7 @@
 				
 				if (responseObject.responseCode != "0000") {
 					alert(responseObject.responseMsg + "[" + responseObject.responseCode + "]");
-					location.href="/front/sale/shop/index";
+					location.href="/front/index";
 				}
 				else {
 					var data = {
