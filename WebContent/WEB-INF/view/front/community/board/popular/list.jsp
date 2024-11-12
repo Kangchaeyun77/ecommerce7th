@@ -98,8 +98,8 @@
 	<section class="content">
 		<nav>
 		</nav>
-		<article class="txtCenter">
-			<div class="brdSearchArea" style="display: flex; justify-content: center; align-items: center;">
+		<article class="txtCenter" style="margin: 30px;">
+			<div class="brdSearchArea" style="display: flex; justify-content: center; align-items: center; width:100%;">
 				<select name="searchKey" id="searchKey">
 					<option value="title"<c:if test="${paging.searchKey == 'title'}"> selected</c:if>>제목</option>
 					<option value="contents"<c:if test="${paging.searchKey == 'contents'}"> selected</c:if>>내용</option>
@@ -108,8 +108,8 @@
 				<input type="text" name="searchWord" id="searchWord" value="${paging.searchWord}" />
 				<input type="submit" value="검색"/>
 			</div>
-			<div class="brdInfo">전체 ${paging.totalLine}개[${paging.currentPage}/${paging.totalPage} 페이지]</div>
-			<table class="headTop_01" style="width: 90%; margin-left: auto; margin-right: auto">
+			<div class="brdInfo" style="margin: 20px; margin-left: 10%; margin-bottom: 10px">전체 ${paging.totalLine}개[${paging.currentPage}/${paging.totalPage} 페이지]</div>
+			<table class="headTop_01" style="width: 80%; margin-left: auto; margin-right: auto">
 				<tr>
 					<th style="width: 5%">NO</th>
 					<th>제목</th>

@@ -48,6 +48,25 @@
   .card-meta { font-size: 0.9em; color: #888; margin-bottom: 8px; }
   .card-description { font-size: 0.9em; margin-bottom: 8px; }
   .card-tags { font-size: 0.8em; color: #555; }
+  
+  .adoption-review {
+	    background-color: #f9f9f9; /* 부드러운 배경색 */
+	    border: 2px solid #a0a0a0; /* 테두리 색상 */
+	    border-radius: 10px; /* 모서리를 둥글게 */
+	    padding: 20px; /* 내부 여백 */
+	    font-family: 'Arial', sans-serif; /* 글꼴 스타일 */
+	    font-size: 16px; /* 글자 크기 */
+	    line-height: 1.6; /* 줄 간격 */
+	    color: #333; /* 글자 색상 */
+	    max-width: 600px; /* 최대 너비 */
+	    margin: 20px auto; /* 가운데 정렬 */
+	    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* 그림자 효과 */
+	}
+	
+	.adoption-review strong {
+	    color: #007bff; /* 강조할 글자 색상 */
+	    font-weight: bold;
+	}
 	</style>
 	<script>
 		function download(type, sequence) {
@@ -120,9 +139,10 @@
 				<input type="submit" value="검색"/>
 			</div>
 			<br>
-			<div>입양 후기를 보실 수 있습니다
-				 HappySteps를 통해 입양하신 분들은 누구나! 입양후기를 올려주세요. 
-				 가족이 되어 즐겁게 지내시는 모습, 입양 전후 사진, 특이한 버릇, 입양 후 가장 좋은 점 등 입양을 망설이시거나 고민하시는 분들께 좋은 선물이 될 수 있습니다.
+			<div class="adoption-review">
+			    입양 후기를 보실 수 있습니다.<br>
+			    HappySteps를 통해 입양하신 분들은 누구나! 입양후기를 올려주세요.<br>
+			    가족이 되어 즐겁게 지내시는 모습, 입양 전후 사진, 특이한 버릇, 입양 후 가장 좋은 점 등 입양을 망설이시거나 고민하시는 분들께 좋은 선물이 될 수 있습니다.
 			</div>
 			<br>
 			<div class="brdInfo">전체 ${paging.totalLine}개 [${paging.currentPage}/${paging.totalPage} 페이지]</div>
