@@ -158,21 +158,21 @@
 				<tr>
 					<th>성명(*)</th>
 					<td>
-						<input value="명성완" type="text" id="mng_nm" name="mng_nm" required />
+						<input value="김관리" type="text" id="mng_nm" name="mng_nm" required />
 					</td>
 				</tr>
 				<tr>
 					<th>이메일(*)</th>
 					<td>
-						<input value="kbs123@happySteps.com" type="text" id="email" name="email" required />
+						<input value="rhksflwk@happySteps.com" type="text" id="email" name="email" required />
 					</td>
 				</tr>
 				<tr>
 					<th>연락처(*)</th>
 					<td>
 						<input value="010" type="text" id="phone1" name="phone1" maxlength="3"     style="text-align:center;width:30px" required oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" />
-						 - <input value="9947" type="text" id="phone2" name="phone2" maxlength="4" style="text-align:center;width:40px" required oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" />
-						 - <input value="1973" type="text" id="phone3" name="phone3" maxlength="4" style="text-align:center;width:40px" required oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" />
+						 - <input value="1122" type="text" id="phone2" name="phone2" maxlength="4" style="text-align:center;width:40px" required oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" />
+						 - <input value="2233" type="text" id="phone3" name="phone3" maxlength="4" style="text-align:center;width:40px" required oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" />
 					</td>
 				</tr>
 				<tr>
