@@ -22,6 +22,7 @@
  */
 package com.happySteps.front.interfaces.component;
 
+
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
@@ -109,6 +110,11 @@ public class PayupCmpn {
 		//logger.debug("[" + this.getClass().getName() + ".JsonApi()] userAgent=" + userAgent);
 		
 		try {
+			// [2024-11-11][pluto@himedia.co.kr][REPORT: 30초(연결/읽기/쓰기)]
+			client.newBuilder().setConnectTimeout$okhttp(30000);
+			client.newBuilder().setReadTimeout$okhttp(30000);
+			client.newBuilder().setWriteTimeout$okhttp(30000);
+
 			Response response = client.newCall(request).execute();
 			returnMap = objectMapper.readValue(response.body().string(), Map.class);
 		}
@@ -168,6 +174,11 @@ public class PayupCmpn {
 		//logger.debug("[" + this.getClass().getName() + ".JsonApi()] userAgent=" + userAgent);
 		
 		try {
+			// [2024-11-11][pluto@himedia.co.kr][REPORT: 30초(연결/읽기/쓰기)]
+			client.newBuilder().setConnectTimeout$okhttp(30000);
+			client.newBuilder().setReadTimeout$okhttp(30000);
+			client.newBuilder().setWriteTimeout$okhttp(30000);
+
 			Response response = client.newCall(request).execute();
 			returnMap = objectMapper.readValue(response.body().string(), Map.class);
 		}

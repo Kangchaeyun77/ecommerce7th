@@ -93,7 +93,7 @@ public class ManagerWeb extends Common {
 			
 			if (managerSrvc.update(managerDto)) {
 				request.setAttribute("script"	, "alert('적용되었습니다.');");
-				request.setAttribute("redirect"	, "/console/users/member/list.web");
+				request.setAttribute("redirect"	, "/console/users/manager/list.web");
 			}
 			else {
 				request.setAttribute("script"	, "alert('시스템 관리자에게 문의하세요!');");
