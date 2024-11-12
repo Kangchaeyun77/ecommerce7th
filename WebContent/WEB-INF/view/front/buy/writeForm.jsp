@@ -156,6 +156,82 @@
 		.reviews {
 			font-size:16px;
 		}
+		#reviewContent {
+		    width: 100%;           /* 전체 너비 */
+		    height: 150px;         /* 높이를 크게 설정하여 댓글 창처럼 보이게 */
+		    padding: 10px;         /* 텍스트 주변에 여유 공간을 줍니다 */
+		    font-size: 16px;       /* 글씨 크기를 적당히 설정 */
+		    border: 1px solid #ddd; /* 테두리를 가볍게 지정 */
+		    border-radius: 5px;    /* 모서리를 둥글게 */
+		    resize: vertical;      /* 사용자가 높이를 조정할 수 있게 설정 */
+		    box-sizing: border-box; /* padding을 포함해 정확한 너비와 높이를 유지 */
+		}
+		#submitReviewButton {
+		    background-color: #DEAD6F;  /* 버튼 배경색 */
+		    color: white;               /* 텍스트 색상 */
+		    padding: 10px 20px;         /* 패딩으로 버튼 크기를 키우기 */
+		    font-size: 16px;            /* 폰트 크기 */
+		    border: none;               /* 테두리 제거 */
+		    border-radius: 5px;         /* 모서리를 둥글게 */
+		    cursor: pointer;            /* 마우스 오버 시 커서가 포인터로 변경 */
+		    transition: background-color 0.3s; /* 호버 효과에 부드러운 전환 추가 */
+		}
+		.reviews-table {
+		    width: 100%;
+		    border-collapse: collapse;
+		    margin-top: 20px;
+		}
+		
+		.reviews-table th, .reviews-table td {
+		    border: 1px solid #ddd;
+		    padding: 8px;
+		    text-align: center;
+		}
+		
+		.reviews-table th {
+		    background-color: #f2f2f2;
+		    font-weight: bold;
+		}
+		
+		.reviews-table tr:nth-child(even) {
+		    background-color: #f9f9f9;
+		}
+		
+		.reviews-table tr:hover {
+		    background-color: #f1f1f1;
+		}
+		/* 공통 버튼 스타일 */
+	    .button {
+	        padding: 10px 20px;
+	        font-size: 16px;
+	        border: none;
+	        border-radius: 5px;
+	        cursor: pointer;
+	        background-color: #DEAD6F; /* 버튼 기본 색상 */
+	        color: white;
+	    }
+	
+	    /* 목록 버튼 스타일 */
+	    .list-button {
+	        background-color: #DEAD6F; /* 동일한 색상 */
+	    }
+	
+	    /* 구매 버튼 스타일 */
+	    .buy-button {
+	        background-color: #DEAD6F; /* 동일한 색상 */
+	    }
+	
+	    /* 장바구니 버튼 스타일 */
+	    .cart-button {
+	        background-color: #DEAD6F; /* 동일한 색상 */
+	    }
+	
+	    /* 버튼 컨테이너 스타일 */
+	    .button-container {
+	        text-align: center;
+	        padding-top: 30px;
+	        padding-bottom: 60px;
+	    }
 	</style>
 	<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 	<script src="https://standard.testpayup.co.kr/assets/js/payup_standard_dev-1.0.js"></script>
@@ -252,6 +328,15 @@
 		frmMain.submit();
 	}
 
+	function goWriteForm() {
+		
+		document.getElementById("cd_bbs_type").value = 3;
+		
+		frmMain.action="/front/center/board/writeForm.web";
+		
+		frmMain.submit();
+	}
+	
 	function goList(value) {
 		var frmMain = document.getElementById("frmMain");
 		
@@ -351,7 +436,6 @@
 					<div class="product-info">
 						<h1 class="product-name">${saleDto.sle_nm}</h1>
 						<p class="product-description">${saleDto.desces}</p>
-						<p class="product-price"><fmt:formatNumber value="${productDto.price_cost}" pattern="#,###" />원가</p>
 						<p class="sale-price">할인가: <fmt:formatNumber value="${saleDto.price_sale}" pattern="#,###" />원</p>
 					</div>
 					<div class="rating_star">
@@ -391,65 +475,59 @@
 						교환 및 반품안내
 					</li>
 					<li style="margin-right: 20px;" class="tablinks" onclick="openTab(event, 'reviews')">
-						상품후기 <strong>(0)</strong>
+						상품후기 <strong>(3)</strong>
 					</li>
 					<li style="margin-right: 20px;" class="tablinks" onclick="openTab(event, 'inquiries')">
-						상품문의 <strong>(0)</strong>
+						상품문의 <strong>(${paging.totalLine})</strong>
 					</li>
 				</ul>
 			</div>
 			<div id="details" class="tabcontent" style="text-align: center;">
 				<img src="${saleDto.desces_img}" style="display: inline-block; margin: 0 auto;" />
 			</div>
-		
 			<div id="delivery" class="tabcontent">
-				<h3>배송안내</h3>
-				<p>배송안내
-					- 배송비 : 기본배송료는 3,000원 입니다. (도서,산간,오지 일부지역은 배송비가 추가될 수 있습니다)  
-					<br>
-					40,000원 이상 구매시 무료배송입니다.
-					<br>
-					일부 부피가 큰 제품의 경우 제품당 5,000원의 추가 배송비가 부과됩니다.
-					<br>
-					- 본 상품의 평균 배송일은 2~3일입니다.
-					<br>
-					  (입금 확인 후) 설치 상품의 경우 다소 늦어질수 있습니다.
-					<br>
-					  [배송예정일은 주문시점(주문순서)에 따른 유동성이 발생하므로 평균 배송일과는 차이가 발생할 수 있습니다.]
-					<br>
-					
-					- 본 상품의 배송 가능일은 2~3일 입니다. 
-					<br>
-					  배송 가능일이란 본 상품을 주문 하신 고객님들께 상품 배송이 가능한 기간을 의미합니다. 
-					<br>
-					  (단, 연휴 및 공휴일은 기간 계산시 제외하며 현금 주문일 경우 입금일 기준 입니다.)</p>
+			    <h3 style="color: #333; font-weight: bold; margin-bottom: 15px;">배송안내</h3>
+			    <p style="line-height: 1.6;">
+			        <span style="font-weight: bold; color: #007acc;">배송비</span> : 기본배송료는 <strong>3,000원</strong> 입니다. (도서, 산간, 오지 일부지역은 추가 배송비가 발생할 수 있습니다)  
+			        <br><br>
+			        <strong>40,000원</strong> 이상 구매 시 무료배송입니다.
+			        <br><br>
+			        일부 부피가 큰 제품의 경우 제품당 <strong>5,000원</strong>의 추가 배송비가 부과됩니다.
+			        <br><br>
+			        <span style="font-weight: bold; color: #007acc;">평균 배송일</span> : 본 상품의 평균 배송일은 <strong>2~3일</strong>입니다. <br>
+			        (입금 확인 후) 설치 상품의 경우 다소 늦어질 수 있습니다.
+			        <br><br>
+			        <small style="color: #666;">[배송예정일은 주문 시점에 따라 유동성이 있을 수 있으며, 평균 배송일과 차이가 발생할 수 있습니다.]</small>
+			        <br><br>
+			        
+			        <span style="font-weight: bold; color: #007acc;">배송 가능일</span> : 본 상품의 배송 가능일은 <strong>2~3일</strong> 입니다.<br>
+			        배송 가능일은 고객님께 상품 배송이 가능한 기간을 의미합니다. <br>
+			        (단, 연휴 및 공휴일은 기간 계산 시 제외되며, 현금 주문일 경우 입금일 기준입니다.)
+			    </p>
 			</div>
 		
 			<div id="returns" class="tabcontent">
-				<h3>교환 및 반품안내</h3>
-				<p>교환 및 반품안내
-					- 상품 택(tag)제거 또는 개봉으로 상품 가치 훼손 시에는 상품수령후 7일 이내라도 교환 및 반품이 불가능합니다.
-					<br>
-					- 저단가 상품, 일부 특가 상품은 고객 변심에 의한 교환, 반품은 고객께서 배송비를 부담하셔야 합니다(제품의 하자,배송오류는 제외)
-					<br>
-					- 일부 상품은 신모델 출시, 부품가격 변동 등 제조사 사정으로 가격이 변동될 수 있습니다.
-					<br>
-					- 신발의 경우, 실외에서 착화하였거나 사용흔적이 있는 경우에는 교환/반품 기간내라도 교환 및 반품이 불가능 합니다.
-					<br>
-					- 수제화 중 개별 주문제작상품(굽높이,발볼,사이즈 변경)의 경우에는 제작완료, 인수 후에는 교환/반품기간내라도 교환 및 반품이 불가능 합니다. 
-					<br>
-					- 수입,명품 제품의 경우, 제품 및 본 상품의 박스 훼손, 분실 등으로 인한 상품 가치 훼손 시 교환 및 반품이 불가능 하오니, 양해 바랍니다.
-					<br>
-					- 일부 특가 상품의 경우, 인수 후에는 제품 하자나 오배송의 경우를 제외한 고객님의 단순변심에 의한 교환, 반품이 불가능할 수 있사오니, 각 상품의 상품상세정보를 꼭 참조하십시오. 
-					<br>
-					환불안내
-					- 상품 청약철회 가능기간은 상품 수령일로 부터 7일 이내 입니다.</p>
+			    <h3 style="color: #333; font-weight: bold; margin-bottom: 15px;">교환 및 반품안내</h3>
+			    <p style="line-height: 1.6;">
+			        <span style="font-weight: bold; color: #007acc;">교환 및 반품 안내</span>
+			        <ul style="padding-left: 20px;">
+			            <li>상품 택(tag) 제거 또는 개봉으로 상품 가치가 훼손된 경우, <strong>수령 후 7일 이내</strong>라도 교환 및 반품이 불가능합니다.</li><br>
+			            <li>저단가 상품 및 일부 특가 상품은 고객 변심에 의한 교환/반품 시 배송비를 고객님께서 부담하셔야 합니다. (단, 제품의 하자 또는 배송 오류는 제외)</li><br>
+			            <li>일부 상품의 가격은 신모델 출시 또는 제조사의 사정으로 변동될 수 있습니다.</li><br>
+			            <li>신발의 경우 실외 착화나 사용 흔적이 있을 시 교환/반품 기간 내라도 교환 및 반품이 불가능합니다.</li><br>
+			            <li>수제화와 같은 개별 주문 제작 상품(굽 높이, 발볼, 사이즈 변경 포함)은 제작 완료 후 교환 및 반품이 불가능합니다.</li><br>
+			            <li>수입/명품 제품의 경우, 제품 및 박스 훼손 시 교환 및 반품이 불가능하오니 주의 바랍니다.</li><br>
+			            <li>특가 상품의 경우, 단순 변심에 의한 교환/반품이 제한될 수 있으므로 각 상품의 상세정보를 참조하십시오.</li>
+			        </ul>
+			        <br>
+			        
+			        <span style="font-weight: bold; color: #007acc;">환불 안내</span><br>
+			        - 상품 청약 철회 가능 기간은 <strong>상품 수령일로부터 7일 이내</strong>입니다.
+			    </p>
 			</div>
 		
 			<div id="reviews" class="tabcontent">
-				<h3>상품후기</h3>
-				<p>여기에 상품 후기가 표시됩니다.</p>
-				<a href="javascript:goReview();" style="color: #DEAD6F; font-weight: bold; text-decoration: none;">상품 리뷰 작성하기></a>
+				<h3 style="color: #333; font-weight: bold; margin-bottom: 15px;">상품후기</h3>
 				<div class="rating_star">					
 					<span class="rating secondary-font">
 						⭐️
@@ -460,13 +538,45 @@
 						5.0
 					</span>
 				</div>
+				<div id="review-section" style="margin-top: 10px">
+				    <form id="reviewForm">
+				        <textarea id="reviewContent" placeholder="상품 후기를 작성해보세요!"></textarea>
+				        <button type="button" onclick="submitReview()" id="submitReviewButton">상품 후기 작성</button>
+				    </form>
+				</div>
+				<div id="reviewsList">
+				    <table class="reviews-table">
+				        <thead>
+				            <tr>
+				                <th>작성자</th>
+				                <th>내용</th>
+				                <th>작성일</th>
+				            </tr>
+				        </thead>
+				        <tbody>
+				            <tr>
+				                <td>***023</td>
+				                <td>이 제품 정말 좋아요! 강력 추천합니다.</td>
+				                <td>2024-10-01</td>
+				            </tr>
+				            <tr>
+				                <td>***dkf</td>
+				                <td>품질이 매우 만족스럽고 배송도 빨라서 좋았습니다.</td>
+				                <td>2024-10-02</td>
+				            </tr>
+				            <tr>
+				                <td>***f11</td>
+				                <td>가성비 최고! 꼭 구매하세요.</td>
+				                <td>2024-10-03</td>
+				            </tr>
+				        </tbody>
+				    </table>
+				</div>
 			</div>
 		
 			<div id="inquiries" class="tabcontent" style="margin-left: auto; margin-right: auto">
-				<h3>상품문의</h3>
-				<br/>
+				<h3 style="color: #333; font-weight: bold; margin-bottom: 15px;">상품문의</h3>
 				<a href="javascript:goWriteForm();" style="color: #DEAD6F; font-weight: bold; text-decoration: none;">상품문의하기></a>
-				<a href="/front/sale/shop/writeForm.web" style="color: #DEAD6F; font-weight: bold; text-decoration: none;">?상품문의하기></a>
 				<br/>
 				<div class="brdSearchArea" >
 					<select name="searchKey">
@@ -477,7 +587,7 @@
 					<input type="text" name="searchWord" id="searchWord" value="${paging.searchWord}" /> <input type="submit" value="검색"/>
 				</div>
 				<br/>
-					<table style="width: 1200px; margin-left: auto; margin-right: auto">
+					<table style="width: 100%; margin-left: auto; margin-right: auto">
 						<tr>
 						</tr>
 						<c:choose>
