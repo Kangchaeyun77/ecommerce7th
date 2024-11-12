@@ -95,13 +95,18 @@
 			</table>
 			<table>
 			<tr>
-				<td style="text-align: center">
-					<c:choose>
-						<c:when test="${not empty foundId}">
-							<plutozoneUtilTag:masking text="${foundId}" letter="*" count="4" mode="right" />
-						</c:when>
-					</c:choose>
-				</td>
+				<c:choose>
+			    	<c:when test="${not empty foundId}">
+			    		<td style="text-align: center; padding: 15px; background-color: #f9f4e7; border: 1px solid #dead6f; border-radius: 5px;">
+			                <p style="font-size: 20px; color: #dead6f; font-weight: bold; margin: 0;">
+			                    <plutozoneUtilTag:masking text="${foundId}" letter="*" count="4" mode="right" />
+			                </p>
+			                <p style="font-size: 14px; color: #777; margin-top: 15px;">
+			                    아이디를 확인해 주세요!
+			                </p>
+			            </td>
+		            </c:when>
+		        </c:choose>
 			</tr>
 			<tr>
 				<td style="text-align: center">
