@@ -30,6 +30,10 @@
 	<script type="text/javascript" src="/js/jquery-3.7.1.min.js"></script>
 	<style></style>
 	<script>
+	function goMyPage() {
+		window.location.href = "/front/myPage/index.web";
+	}
+
 	</script>
 </head>
 <body>
