@@ -48,7 +48,12 @@ public class Common {
 		HttpSession session = request.getSession(false);
 		value = (String) session.getAttribute(key);
 		
-		if (value == null) value = "[UNDEFINED]";
+		if (value == null) {
+			
+			value = "[UNDEFINED]";
+			
+			if (key.equals("SEQ_MBR")) value = "0";
+		}
 		
 		return value;
 	}
