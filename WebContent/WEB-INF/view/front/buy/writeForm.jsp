@@ -45,7 +45,10 @@
 		
 		.product-detail {
 			display: flex;
-			padding: 80px;
+			padding: 20px;
+			margin-top: 40px;
+			justify-content: space-between; /* 두 요소를 좌우에 배치 */
+			align-items: flex-start; /* 세로 정렬을 상단에 맞춤 */
 		}
 		
 		.product-image {
@@ -97,12 +100,6 @@
 		.item_goods_tab li.on a {
 			font-weight: bold; /* 선택된 항목 강조 (필요에 따라 조정) */
 		}
-		.product-detail {
-			display: flex;
-			justify-content: space-between; /* 두 요소를 좌우에 배치 */
-			align-items: flex-start; /* 세로 정렬을 상단에 맞춤 */
-		}
-		
 		.product-image {
 			flex: 1; /* 이미지 영역의 크기를 조정 (필요에 따라 변경 가능) */
 		}
@@ -451,9 +448,9 @@
 						<span class="reviews">상품후기</span>
 						</a>
 					</div>
-					<div class="quantity-container" style="margin: 90px; margin-left: 0px ">
+					<div class="quantity-container" style="margin: 55px; margin-left: 0px ">
 						<button type="button" onclick="changeQuantity(-1)" class="circular-button">-</button>
-						<input type="text" id="count" name="buyList[0].count" value="1" style="text-align: center;" oninput="validateInput(this)">
+						<input type="text" id="count" name="buyList[0].count" value="1" style="text-align: center; width:60px; " oninput="validateInput(this)">
 						<button type="button" onclick="changeQuantity(1)" class="circular-button">+</button>
 					</div>
 				</div>
