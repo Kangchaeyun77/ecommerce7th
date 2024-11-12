@@ -540,11 +540,8 @@ public class MemberWeb extends Common {
 		boolean nickDuplicate = true;
 		
 		try {
-			// 대칭키 암호화(AES-256)
-			String staticKey	= staticProperties.getProperty("front.enc.user.aes256.key", "[UNDEFINED]");
-			SKwithAES aes		= new SKwithAES(staticKey);
 			
-			memberDto.setNickname(aes.encode(memberDto.getNickname()));
+			memberDto.setNickname(memberDto.getNickname());
 			
 			int count = memberSrvc.selectNickDuplicate(memberDto);
 			
