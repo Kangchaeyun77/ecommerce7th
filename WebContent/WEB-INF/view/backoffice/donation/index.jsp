@@ -48,7 +48,7 @@
 				</tr>
 				<tr><td>1</td><td>cjftn131</td><td>김철수</td><td>7,000원</td><td>일반후원</td><td>202401010001</td></tr>
 				<tr><td>2</td><td>dudgml991</td><td>이영희</td><td>12,000원</td><td>보호소후원</td><td>202401010002</td></tr>
-				<tr><td>3</td><td>93wlgnsdl/td><td>박지훈</td><td>5,000원</td><td>일반후원</td><td>202402100001</td></tr>
+				<tr><td>3</td><td>93wlgnsdl</td><td>박지훈</td><td>5,000원</td><td>일반후원</td><td>202402100001</td></tr>
 				<tr><td>4</td><td>00alstn00</td><td>최민수</td><td>10,000원</td><td>보호소후원</td><td>202402310001</td></tr>
 				<tr><td>5</td><td>tnqlsdlekd</td><td>정수빈</td><td>8,000원</td><td>일반후원</td><td>202403010001</td></tr>
 				<tr><td>6</td><td>1alwjd1</td><td>장미정</td><td>15,000원</td><td>보호소후원</td><td>202403010002</td></tr>

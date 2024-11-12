@@ -53,6 +53,32 @@ public class StatisticsWeb extends Common {
 	@Inject
 	MemberSrvc memberSrvc;
 	
+	/**
+	 * @param request [요청 서블릿]
+	 * @param response [응답 서블릿]
+	 * @return ModelAndView
+	 * 
+	 * @since 2024-08-01
+	 * <p>DESCRIPTION:</p>
+	 * <p>IMPORTANT:</p>
+	 * <p>EXAMPLE:</p>
+	 */
+	@RequestMapping(value = "/console/statistics/sale.web")
+	public ModelAndView sale(HttpServletRequest request, HttpServletResponse response) {
+		
+		ModelAndView mav = new ModelAndView("redirect:/error.web");
+		
+		try {
+			
+			mav.setViewName("backoffice/statistics/sale");
+		}
+		catch (Exception e) {
+			logger.error("[" + this.getClass().getName() + ".sale()] " + e.getMessage(), e);
+		}
+		finally {}
+		
+		return mav;
+	}
 	
 	/**
 	 * @param request [요청 서블릿]
@@ -64,8 +90,8 @@ public class StatisticsWeb extends Common {
 	 * <p>IMPORTANT:</p>
 	 * <p>EXAMPLE:</p>
 	 */
-	@RequestMapping(value = "/console/statistics/index.web")
-	public ModelAndView index(HttpServletRequest request, HttpServletResponse response) {
+	@RequestMapping(value = "/console/statistics/member.web")
+	public ModelAndView member(HttpServletRequest request, HttpServletResponse response) {
 		
 		ModelAndView mav = new ModelAndView("redirect:/error.web");
 		
@@ -74,10 +100,10 @@ public class StatisticsWeb extends Common {
 			
 			mav.addObject("listMemberRegion", listMemberRegion);
 			
-			mav.setViewName("backoffice/statistics/index");
+			mav.setViewName("backoffice/statistics/member");
 		}
 		catch (Exception e) {
-			logger.error("[" + this.getClass().getName() + ".index()] " + e.getMessage(), e);
+			logger.error("[" + this.getClass().getName() + ".member()] " + e.getMessage(), e);
 		}
 		finally {}
 		
