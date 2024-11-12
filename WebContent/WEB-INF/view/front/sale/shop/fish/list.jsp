@@ -174,7 +174,7 @@
 <div class="container" id="content">
 	<section class="content">
 		<article class="txtCenter">
-			<div class="brdSearchArea" style="margin: 30px; margin-left: 0px">
+			<div class="brdSearchArea" style="margin: 60px; margin-left: 100px; margin-bottom: 15px">
 				<select id="pet_items" name="pet_items" required >
 			        <option value="0" <c:if test="${paging.pet_items == 0}">selected</c:if>>전체</option>
 			        <option value="51" <c:if test="${paging.pet_items == 51}">selected</c:if>>사료</option>
@@ -189,8 +189,8 @@
 			    </select>
 				<input type="text" name="searchWord" id="searchWord" value="${paging.searchWord}"/><input type="submit" value="검색"/>
 			</div>
-			<div class="brdInfo">전체 ${paging.totalLine}개[${paging.currentPage}/${paging.totalPage} 페이지]</div>
-				<div class="product-container" style="display: flex; flex-wrap: wrap; margin: 30px; margin-left: 0px">
+			<div class="brdInfo" style="margin: 20px; margin-left: 100px; margin-bottom: 10px">전체 ${paging.totalLine}개[${paging.currentPage}/${paging.totalPage} 페이지]</div>
+				<div class="product-container" style="display: flex; justify-content: center; align-items: center; flex-wrap: wrap; gap: 20px; width: 100%; margin: 50px 0;">
 					<c:choose>
 						<c:when test="${empty list}">
 							등록된 상품이 없습니다.
