@@ -46,7 +46,7 @@
 		.product-detail {
 			display: flex;
 			padding: 20px;
-			margin-top: 40px;
+			margin-top: 50px;
 			justify-content: space-between; /* 두 요소를 좌우에 배치 */
 			align-items: flex-start; /* 세로 정렬을 상단에 맞춤 */
 		}
@@ -104,9 +104,6 @@
 			flex: 1; /* 이미지 영역의 크기를 조정 (필요에 따라 변경 가능) */
 		}
 		
-		.product-biginfo {
-			flex: 2; /* 정보 영역의 크기를 조정 (필요에 따라 변경 가능) */
-		}
 		.product-count input[type="number"],
 		.product-count input[type="submit"] {
 			font-size: 20px; /* 글씨 크기 조정 */
@@ -425,11 +422,11 @@
 	</div>
 	<section class="content">
 		<article class="txtCenter">
-			<div class="product-detail" style="display: flex; justify-content: center; align-items: top; margin: 10px;">
+			<div class="product-detail" style="display: flex; justify-content: center; align-items: top; margin: 30px;">
 				<div class="product-image">
 					<img src="${saleDto.img}" class="img-fluid rounded-4" />
 				</div>
-				<div class="product-biginfo" style="flex: 1; text-align: left;">
+				<div class="product-biginfo" style="flex: 1; text-align: left; margin-left: 40px">
 					<div class="product-info">
 						<h1 class="product-name">${saleDto.sle_nm}</h1>
 						<p class="product-description">${saleDto.desces}</p>
