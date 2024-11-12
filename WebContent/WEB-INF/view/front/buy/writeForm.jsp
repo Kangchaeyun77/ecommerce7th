@@ -271,7 +271,7 @@
 				else {
 					alert(responseObject.responseMsg);
 				}
-				location.href="/front/index";
+				location.href="/front/index.web";
 			},
 			error: function(error) {
 				alert("연동 에러");
@@ -295,7 +295,7 @@
 				
 				if (responseObject.responseCode != "0000") {
 					alert(responseObject.responseMsg + "[" + responseObject.responseCode + "]");
-					location.href="/front/index";
+					location.href="/front/index.web";
 				}
 				else {
 					var data = {
