@@ -88,31 +88,25 @@
 										<span class="fa fa-chevron-down"></span>
 									</a>
 									<ul class="nav child_menu">
-										<li>
-											<a>
-												상품관리 
-												<span class="fa fa-chevron-down"></span>
-											</a>
-											<ul class="nav child_menu">
-								                <li>
-								                    <a href="/console/product/list.web">상품 목록</a>
-								                </li>
-								                <li>
-								                    <a href="/console/sale/list.web">판매 목록</a>
-								                </li>
-								                <li>
-								                    <a href="#">상품 리뷰</a>
-								                </li>
-								            </ul>
-										</li>
-										<li>
-											<a href="/console/buy/history.web">주문관리</a>
-										</li>
-										<li>
-											<a href="#">후원관리</a>
-										</li>
+						                <li>
+						                    <a href="/console/product/list.web">상품 목록</a>
+						                </li>
+						                <li>
+						                    <a href="/console/sale/list.web">판매 목록</a>
+						                </li>
+						                <li>
+						                    <a href="#">상품 리뷰</a>
+						                </li>
 									</ul>
 								</li>
+								<li>
+									<a href="/console/buy/history.web">주문관리</a>
+								</li>
+								<li>
+									<a href="#">후원관리</a>
+								</li>
+							</ul>
+							<ul>
 								<li>
 									<a>
 										<i class="fa fa-bar-chart" style="color:#78dbfa"></i> 통계 
