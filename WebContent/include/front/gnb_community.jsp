@@ -4,9 +4,10 @@ nav.gnb {
 	display: flex;
 	justify-content: space-around; /* 가로 정렬 */
 	align-items: center; /* 세로 정렬 */
-	width: 100%;
+	width: 90%; /* 너비를 90%로 설정 */
 	padding: 10px 0;
-    background-color: #fff; /* 배경 색상 설정 */
+	background-color: #fff; /* 배경 색상 설정 */
+	margin: 0 auto; /* 가로로 중앙 정렬 */
 }
 
 	button, .write-button {
