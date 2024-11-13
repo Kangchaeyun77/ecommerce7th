@@ -27,19 +27,9 @@
 <head>
 	<%@ include file="/include/front/header.jsp" %>
 	<%@ include file="/include/front/top.jsp" %>
-	<link rel="stylesheet" type="text/css" title="common stylesheet" href="/css/layoutSubmain.css" />
 	<link rel="stylesheet" href="/css/lnb.css">
 	<style></style>
 	<script>
-		function goList(value) {
-			
-			var frmMain = document.getElementById("frmMain");
-			
-			document.getElementById("cd_bbs_type").value = value;
-			
-			frmMain.action="/front/center/board/list.web";
-			frmMain.submit();
-		}
 	</script>
 </head>
 <body>
@@ -48,15 +38,13 @@
 <div class="container">
 	<header>
 	</header>
+		<section class="content" style="display: flex; justify-content: space-between; margin-top: 20px;">
 	<nav>
-	</nav>
-	<section class="content">
-		<nav>
 			<%@ include file="/include/front/lnbMyPage.jsp" %>
-		</nav>
-		<article class="txtCenter">
-			여기는 "마이페이지" 페이지입니다.
-		</article>
+	</nav>
+	<article style="flex: 1;">
+	    <img src="/images/mypage_about.png" alt="마이 페이지 이미지" style="width: 90%; height: auto; object-fit: cover; margin-left: 50px; margin-bottom: 10px; margin-top: 20px;"/>
+	</article>
 		<aside></aside>
 	</section>
 	<footer>
