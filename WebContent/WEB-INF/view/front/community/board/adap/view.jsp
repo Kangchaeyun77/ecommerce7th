@@ -110,6 +110,7 @@
 						<c:out value="${communityDto.content}" escapeXml="false" />
 					</td>
 				</tr>
+				<%-- 
 				<c:if test="${communityDto.file_orig != ''}">
 				<tr>
 					<th>이미지</th>
@@ -120,6 +121,7 @@
 					</td>
 				</tr>
 				</c:if>
+				--%>
 			<tr>
 				<th>좋아요</th>
 				<td>
