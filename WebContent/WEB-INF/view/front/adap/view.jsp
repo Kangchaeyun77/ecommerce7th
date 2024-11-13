@@ -62,6 +62,15 @@
 		}
 </style>
 <script>
+
+function adapAnimal() {
+	if (confirm("입양하시겠습니까?")) {
+		// 사용자가 확인을 클릭한 경우, 지정된 URL로 이동
+		window.location.href = "/front/adap/list.web";
+	}
+	return false;
+}
+
 // 페이지 로드 시 데이터 가져오기
 $(document).ready(function() {
 					// URL에서 파라미터 가져오기
@@ -197,6 +206,8 @@ $(document).ready(function() {
 						</tr>
 					</tbody>
 				</table>
+				<br>
+					<input type="button" value="입양하기" style="width:200px" onClick="adapAnimal();"/>
 			</section>
 			<footer>
 				<%@ include file="/include/front/footer.jsp" %>
