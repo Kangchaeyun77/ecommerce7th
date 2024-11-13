@@ -29,6 +29,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.happySteps.front.common.Common;
@@ -48,60 +49,33 @@ public class PharmacyApi extends Common {
 	private static Logger logger = LoggerFactory.getLogger(PharmacyApi.class);
 
 	
-	@RequestMapping(value = "/front/pharmacy/data.json", produces = "application/json; charset=UTF-8")
-	@ResponseBody
-	public String getPharmacyDataString() {
-	    StringBuilder result = new StringBuilder();
+	 @RequestMapping(value = "/front/pharmacy/data.json", produces = "application/json; charset=UTF-8")
+	    @ResponseBody
+	    public String getPharmacyData(@RequestParam(defaultValue = "1") int pageIndex) {
+	        StringBuilder result = new StringBuilder();
 
-		try {
-			// API URL
-			String apiUrl = "https://openapi.gg.go.kr/AnimalPharmacy?KEY=33ad857277a64427bd66af7937619016&Type=json&bsn_state_nm=정상&pIndex=1&pSize=100";
-			URL url = new URL(apiUrl);
-			HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-			conn.setRequestMethod("GET");
+	        try {
+	            // API URL (동물약국 데이터)
+	            String apiUrl = "https://openapi.gg.go.kr/AnimalPharmacy?KEY=33ad857277a64427bd66af7937619016&Type=json&bsn_state_nm=정상&pIndex=" 
+	                            + pageIndex + "&pSize=100";
+	            URL url = new URL(apiUrl);
+	            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+	            conn.setRequestMethod("GET");
 
-			BufferedReader rd = new BufferedReader(new InputStreamReader(conn.getInputStream(), "UTF-8"));
-			String line;
-			while ((line = rd.readLine()) != null) {
-				result.append(line);
-			}
-			rd.close();
-		} catch (Exception e) {
-			e.printStackTrace();
-			logger.error("[" + this.getClass().getName() + ".getPharmacyData()] " + e.getMessage(), e);
-		}
+	            // API 응답 데이터 읽기
+	            try (BufferedReader rd = new BufferedReader(new InputStreamReader(conn.getInputStream(), "UTF-8"))) {
+	                String line;
+	                while ((line = rd.readLine()) != null) {
+	                    result.append(line);
+	                }
+	            }
+	        } catch (Exception e) {
+	            // 오류 발생 시 로깅
+	            logger.error("API 호출 실패: {}", e.getMessage(), e);
+	            return "{\"error\": \"데이터를 가져오는 데 실패했습니다.\"}";
+	        }
 
-		return result.toString(); // JSON 데이터를 반환
+	        // 응답 반환
+	        return result.toString(); 
+	    }
 	}
-	
-	/**
-	 * @param request [요청 서블릿]
-	 * @param response [응답 서블릿]
-	 * @return ModelAndView
-	 * 
-	 * @since 2024-11-06
-	 * <p>DESCRIPTION:동물약국 공공DB호출</p>
-	 * <p>IMPORTANT:</p>
-	 * <p>EXAMPLE:</p>
-	 */
-	public String getPharmacyData() {
-		StringBuilder result = new StringBuilder();
-		try {
-			String apiUrl = "https://openapi.gg.go.kr/AnimalPharmacy?KEY=33ad857277a64427bd66af7937619016&Type=json&bsn_state_nm=정상&pIndex=1&pSize=100";
-			URL url = new URL(apiUrl);
-			HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-			conn.setRequestMethod("GET");
-
-			BufferedReader rd = new BufferedReader(new InputStreamReader(conn.getInputStream(), "UTF-8"));
-			String line;
-			while ((line = rd.readLine()) != null) {
-				result.append(line);
-			}
-			rd.close();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		logger.debug("약국 공공DB API 호출 시작: {}", result);
-		return result.toString();
-	}
-}
