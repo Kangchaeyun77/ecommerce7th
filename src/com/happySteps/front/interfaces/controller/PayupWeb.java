@@ -88,7 +88,9 @@ public class PayupWeb extends Common {
 		ModelAndView mav = new ModelAndView();
 		
 		try {
-			
+			logger.info("-----------------------------------------------------");
+			logger.info("num_order = " + getSession(request, "NUM_ORDER"));
+			logger.info("-----------------------------------------------------");
 			boolean isResult	= false;
 			String num_order	= getSession(request, "NUM_ORDER");
 			String amount		= getSession(request, "AMOUNT");
@@ -124,9 +126,9 @@ public class PayupWeb extends Common {
 					authMap.put("amount"		, amount);
 					authMap.put("merchantId"	, "himedia");
 					Map<String,Object> authApiResult = payupCmpn.JsonApi(request, authUrl, authMap, token);
-					logger.debug("-----------------------------------------------------");
-					logger.debug("결제 승인 응답 : " + authApiResult.toString());
-					logger.debug("-----------------------------------------------------");
+					logger.info("-----------------------------------------------------");
+					logger.info("결제 승인 응답 : " + authApiResult.toString());
+					logger.info("-----------------------------------------------------");
 					
 					data = (Map<String, Object>) authApiResult.get("data");
 					// 결제 성공
@@ -314,7 +316,7 @@ public class PayupWeb extends Common {
 						
 						HttpSession session = request.getSession(false);
 						session.setAttribute("NUM_ORDER"	, num_order);
-						session.setAttribute("AMOUNT"		, "100");
+						session.setAttribute("AMOUNT"		, Integer.toString(TotalPrice));
 						
 						String serverUrl = "";
 						if (staticProperties.getProperty("common.mode", "[UNDEFINED]").equalsIgnoreCase("LOCAL")) {
@@ -329,11 +331,16 @@ public class PayupWeb extends Common {
 							serverUrl = "[UNDEFINED]";
 						}
 						
+						
 						/** 모바일에서는 pay()가 아닌 receive()로 응답을 처리 */
 						if (Request.isDevice(request, "mobile")) {
 							returnMap.put("returnUrl", serverUrl + "/front/interface/payup/receive.api");
 						}
 						else returnMap.put("returnUrl", "");
+						
+						logger.info("**************************************");
+						logger.info("returnUrl = " + returnMap.get("returnUrl"));
+						logger.info("**************************************");
 					}
 					else {
 						// 구매 정보 저장 실패
