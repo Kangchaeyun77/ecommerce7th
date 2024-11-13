@@ -42,7 +42,7 @@
 	</nav>
 	<section class="content" style="display: flex; justify-content: space-between; margin-top: 20px;">
 	<nav>
-	<%@ include file="/include/front/lnbHospital.jsp" %>-
+	<%@ include file="/include/front/lnbHospital.jsp" %>
 	</nav>
 	<article style="flex: 1; padding-right: 20px;">
 		<img src="/images/hos.png" alt="약국/병원 페이지 이미지" style="width: 90%;  margin-left: 50px; margin-bottom: 10px; margin-top: 20px;"/>

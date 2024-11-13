@@ -23,5 +23,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" trimDirectiveWhitespaces="true" %>
 			<ul>
 				<li><a href="/front/pharmacy/list.web" class="menuLnb">동물약국</a></li>
-				<li><a href="#" class="menuLnb">동물병원</a></li>
+				<li><a href="/front/pharmacy/hospital.web" class="menuLnb">동물병원</a></li>
 			</ul>

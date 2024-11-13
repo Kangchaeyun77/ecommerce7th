@@ -56,6 +56,32 @@ public class PharmacyWeb extends Common {
 	 * @return ModelAndView
 	 * 
 	 * @since 2024-11-06
+	 * <p>DESCRIPTION:동물병원 리스트</p>
+	 * <p>IMPORTANT:</p>
+	 * <p>EXAMPLE:</p>
+	 */
+	@RequestMapping(value = "/front/pharmacy/hospital.web")
+	public ModelAndView hospital(HttpServletRequest request, HttpServletResponse response) {
+		
+		ModelAndView mav = new ModelAndView("redirect:/error.web");
+		
+		try {
+			mav.setViewName("front/pharmacy/hospital");
+		}
+		catch (Exception e) {
+			logger.error("[" + this.getClass().getName() + ".hospital()] " + e.getMessage(), e);
+		}
+		finally {}
+		
+		return mav;
+	}
+	
+	/**
+	 * @param request [요청 서블릿]
+	 * @param response [응답 서블릿]
+	 * @return ModelAndView
+	 * 
+	 * @since 2024-11-06
 	 * <p>DESCRIPTION:동물약국 list연결</p>
 	 * <p>IMPORTANT:</p>
 	 * <p>EXAMPLE:</p>

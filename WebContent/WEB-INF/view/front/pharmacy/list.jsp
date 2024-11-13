@@ -33,9 +33,9 @@
 </head>
 <body>
     <h2>동물약국 위치</h2>
-    <div id="map" style="width:50%; height:400px;"></div>
-    
-   	<script type="text/javascript" src="https://dapi.kakao.com/v2/maps/sdk.js?appkey=a7ec31ab3c618a568058eac5c18b76e2"></script>
+	<div id="map" style="width:50%; height:400px; margin: 0 auto; display: block;"></div>
+	
+	<script type="text/javascript" src="https://dapi.kakao.com/v2/maps/sdk.js?appkey=a7ec31ab3c618a568058eac5c18b76e2"></script>
 	<script>
 		var container = document.getElementById('map');
 		var options = {
