@@ -157,6 +157,32 @@
 		        heart.style.color = 'red';  // 빨간색으로 변경
 		    }
 		}
+		function addToCart(seqSle, seqPrd, sleNm, price, img) {
+
+			const data = {
+				seq_sle: seqSle,
+				seq_prd: seqPrd, 
+				sle_nm: sleNm,
+				price: price,
+				count: 1, // 기본 수량 1로 설정
+				img: img
+			};
+
+			$.ajax({
+				url: '/front/basket/addItem.web', 
+				type: 'POST',
+				contentType: 'application/json',
+				data: JSON.stringify(data),
+				success: function(response) {
+					if (confirm('상품이 장바구니에 추가되었습니다. 장바구니 페이지로 이동할까요?')) {
+						window.location.href ='/front/basket/index.web';
+					}
+				},
+				error: function(xhr, status, error) {
+					alert('장바구니 추가 중 오류가 발생했습니다.');
+				}
+			});
+		}
 		<%--
 		function goShop(value) {
 			
