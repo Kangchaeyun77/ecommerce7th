@@ -72,17 +72,17 @@
 			<table class="headLeft_01" style="margin-top: 50px;" >
 				<tr>
 					<th>아이디</th>
-					<td><input type="text" id="id" name="id" value="plutomsw" maxlength="15" required style="border: none; border-left: 2px solid #dead6f; padding: 5px; outline: none; width: 200px;"/></td>
+					<td><input type="text" id="id" name="id"  maxlength="15" required style="border: none; border-left: 2px solid #dead6f; padding: 5px; outline: none; width: 200px;"/></td>
 					
 				</tr>
 				<tr>
 					<th>이름</th>
-					<td><input type="text" id="name" name="name" value="명성완" required style="border: none; border-left: 2px solid #dead6f; padding: 5px; outline: none; width: 200px;"/></td>
+					<td><input type="text" id="name" name="name"  required style="border: none; border-left: 2px solid #dead6f; padding: 5px; outline: none; width: 200px;"/></td>
 					
 				</tr>
 				<tr>
 					<th>이메일</th>
-					<td><input type="text" id="email" name="email" value="plutomsw@gmail.com" maxlength="18" required style="border: none; border-left: 2px solid #dead6f; padding: 5px; outline: none; width: 200px;"/></td>
+					<td><input type="text" id="email" name="email"  maxlength="18" required style="border: none; border-left: 2px solid #dead6f; padding: 5px; outline: none; width: 200px;"/></td>
 				</tr>
 				<tr>
 				<td colspan="2" style="text-align:center;border-bottom:0px;padding-top: 10px">
