@@ -131,8 +131,6 @@
 			</table>
 			<div style="display: flex; justify-content: right; margin-top: 20px;">
 				<input type="button" value="목록" style="width:15%; height:60px;" onclick="javascript:goList(5);" />
-				<input type="button" value="수정" style="width:15%" onclick="javascript:modifyForm(5);" /> 
-				<input type="button" value="삭제" style="width:15%" onclick="javascript:remove(9);" /> 
 			</div>
 			<hr>
 			<div style="font-size:30px; margin-top: 20px;">댓글 </div>
