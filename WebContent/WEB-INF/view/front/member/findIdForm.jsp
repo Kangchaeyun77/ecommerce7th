@@ -77,12 +77,12 @@
 			<table class="headLeft_01" style="margin-top: 120px;" >
 				<tr>
 					<th></th>
-					<td><input type="text" id="findNm" name="findNm" value="명성완" placeholder="이름을 입력하세요!" maxlength="6" required style="border: none; border-left: 2px solid #dead6f; padding: 5px; outline: none; width: 200px;"
+					<td><input type="text" id="findNm" name="findNm"  placeholder="이름을 입력하세요!" maxlength="6" required style="border: none; border-left: 2px solid #dead6f; padding: 5px; outline: none; width: 200px;"
 					/></td>
 				</tr>
 				<tr>
 					<th></th>
-					<td><input type="text" id="findEmail" name="findEmail" value="plutomsw@gmail.com" placeholder="이메일을 입력하세요!" maxlength="20" required style="border: none; border-left: 2px solid #dead6f; padding: 5px; outline: none; width: 200px;"/></td>
+					<td><input type="text" id="findEmail" name="findEmail"  placeholder="이메일을 입력하세요!" maxlength="20" required style="border: none; border-left: 2px solid #dead6f; padding: 5px; outline: none; width: 200px;"/></td>
 				</tr>
 				
 				<tr>

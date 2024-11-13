@@ -101,14 +101,6 @@
 					</td>
 				</tr>
 			<tr>
-				<th>이미지 업로드</th>
-				<td>
-					<div class="image-upload-container">
-					이미지영역
-					</div>
-				</td>
-			</tr>
-			<tr>
 				<th>좋아요</th>
 				<td>
 					<span id="likeElement" style="cursor: pointer; font-size: 24px;" onclick="toggleLike(${communityDto.seq_bbs})">🤍</span>

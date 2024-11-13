@@ -193,29 +193,29 @@
 				<tr>
 					<th style="width: 150px;">아이디(*)</th>
 					<td>
-						<input value="plutomsw" type="text" id="id" name="id" required />
+						<input type="text" id="id" name="id" required />
 						<input type="button" value="중복 찾기" style="width:100px" id="btnId" />
 					</td>
 				</tr>
 				<tr>
 					<th>비밀번호(*)</th>
-					<td><input value="12345678!a" type="password" id="passwd" name="passwd" required /></td>
+					<td><input type="password" id="passwd" name="passwd" required /></td>
 				</tr>
 				<tr>
 					<th>비밀번호 확인(*)</th>
-					<td><input value="12345678!a" type="password" id="passwd_" name="passwd_" required /></td>
+					<td><input  type="password" id="passwd_" name="passwd_" required /></td>
 				</tr>
 				<tr>
 					<th style="width: 150px;">닉네임(*)</th>
 					<td>
-						<input value="귀여운냥이" type="text" id="nickname" name="nickname" required />
+						<input type="text" id="nickname" name="nickname" required />
 						<input type="button" value="중복 찾기" style="width:100px" id="btnNick" />
 					</td>
 				</tr>
 				<tr>
 					<th>성명(*)</th>
 					<td>
-						<input value="명성완" type="text" id="mbr_nm" name="mbr_nm" required />
+						<input type="text" id="mbr_nm" name="mbr_nm" required />
 						 <input type="radio" name="gender" value="M" checked /> 남
 						 <input type="radio" name="gender" value="F" /> 여
 					</td>
@@ -223,9 +223,9 @@
 				<tr>
 					<th>연락처(*)</th>
 					<td>
-						<input value="010" type="text" id="phone1" name="phone1" maxlength="3"		style="text-align:center;width:50px" required oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" />
-						 - <input value="9947" type="text" id="phone2" name="phone2" maxlength="4" style="text-align:center;width:60px" required oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" />
-						 - <input value="1973" type="text" id="phone3" name="phone3" maxlength="4" style="text-align:center;width:60px" required oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" />
+						<input type="text" id="phone1" name="phone1" maxlength="3"		style="text-align:center;width:50px" required oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" />
+						 - <input type="text" id="phone2" name="phone2" maxlength="4" style="text-align:center;width:60px" required oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" />
+						 - <input type="text" id="phone3" name="phone3" maxlength="4" style="text-align:center;width:60px" required oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" />
 					</td>
 				</tr>
 				<tr>

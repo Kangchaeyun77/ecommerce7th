@@ -59,8 +59,8 @@
 		<nav></nav>
 		<article class="txtCenter">
 			<ul>
-				<li><a href="/front/">[프론트]</a></li>
-				<li><a href="/console/">[백엔드]</a></li>
+				<li><a href="/front/">[구매자]</a></li>
+				<li><a href="/console/">[관리자]</a></li>
 			</ul>
 		</article>
 		<aside></aside>

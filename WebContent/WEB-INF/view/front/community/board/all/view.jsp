@@ -38,15 +38,25 @@
 		document.addEventListener('DOMContentLoaded', () => {
 		var seq_bbs = "${communityDto.seq_bbs}"; 
 	});
+		function download(type, sequence) {
+			
+			var frmMain = document.getElementById("frmMain");
+			
+			frmMain.type.setAttribute("value", type);
+			frmMain.sequence.setAttribute("value", sequence);
+			frmMain.action = "/front/community/board/download.web";
+			frmMain.target = "frmBlank";
+			frmMain.submit();
+		}
 	</script>
-	<title>커뮤니티 모든글 상세보기</title>
+	<title>커뮤니티 전체게시판 상세보기</title>
 </head>
 <body>
 <form id="frmMain" method="POST">
 <input type="hidden" id="type"			name="type" />
 <input type="hidden" id="sequence"		name="sequence" />
 <input type="hidden" id="cd_ctg_pet"	name="cd_ctg_pet" 	value="${communityDto.cd_ctg_pet}" />
-<input type="hidden" id="cd_bbs_type"	name="cd_bbs_type"	value="${cd_bbs_type}" />
+<input type="hidden" id="cd_bbs_type"	name="cd_bbs_type"	value="${communityDto.cd_bbs_type}" />
 <input type="hidden" id="seq_mbr"		name="seq_mbr"		value="${seq_mbr}" />
 <input type="hidden" id="seq_bbs"		name="seq_bbs"		value="${communityDto.seq_bbs}" />
 <input type="hidden" id="cd_ctg"		name="cd_ctg" 		value="${communityDto.cd_ctg}" />  
@@ -74,11 +84,13 @@
 					</c:otherwise>
 				</c:choose>
 			</div>
-					<div class="tag-container">
-						테그: ${communityDto.tag}
-					</div>
-		<hr>
-			<table class="headLeft_01">
+		<table class="headLeft_01">
+			<tr>
+			<th class="tag-container">Tag: </th>
+				<td>
+				${communityDto.tag}
+				</td>
+			</tr>
 				<tr>
 					<th>작성자</th>
 					<td>
@@ -98,33 +110,27 @@
 						<c:out value="${communityDto.content}" escapeXml="false" />
 					</td>
 				</tr>
-			<tr>
-				<th>이미지 업로드</th>
-				<td>
-					<div class="image-upload-container">
-					이미지영역
-					</div>
-				</td>
-			</tr>
+				<%-- 
+				<c:if test="${communityDto.file_orig != ''}">
+				<tr>
+					<th>이미지</th>
+					<td>
+					<img src="http://localhost:8080/image/sale/${communityDto.file_save}" 
+					alt="image" class="img-fluid rounded-4" 
+					style="width: 208px; height: 208px; object-fit: cover;">
+					</td>
+				</tr>
+				</c:if>
+				--%>
 			<tr>
 				<th>좋아요</th>
 				<td>
 					<span id="likeElement" style="cursor: pointer; font-size: 24px;" onclick="toggleLike(${communityDto.seq_bbs})">🤍</span>
 				<%--	<span id="like_count">${communityDto.like_count}개</span> --%>
 				</td>
-			</tr>
-				<c:if test="${communityDto.file_orig != ''}">
-				<tr>
-					<th>첨부 파일</th>
-					<td>
-						<a href="javascript:download('BbsNotice', ${communityDto.seq_bbs});">다운로드</a>
-					</td>
-				</tr>
-				</c:if>
 			</table>
-			<div style="display: flex; justify-content: center; margin-top: 20px;">
-				<input type="button" value="목록" style="width:35%; height:60px;" onclick="javascript:goList();" />&nbsp;
-				<input type="button" value="수정" style="width:35%" onclick="javascript:modifyForm(5);" /> 
+			<div style="display: flex; justify-content: right; margin-top: 20px;">
+				<input type="button" value="목록" style="width:15%; height:60px;" onclick="javascript:goList(5);" />
 			</div>
 			<hr>
 			<div style="font-size:30px; margin-top: 20px;">댓글 </div>
@@ -135,7 +141,7 @@
 			<br>
 <h3>댓글 목록</h3>
 <hr>
-<div class="comment-list" id="commentListContainer" style="border: 1px solid red;">
+<div class="comment-list" id="commentListContainer">
 	<c:if test="${not empty commentList}">
 		<c:forEach var="comment" items="${commentList}">
 			<div class="comment-item" style="margin-left: <c:out value="${comment.depth * 20}"/>px;">

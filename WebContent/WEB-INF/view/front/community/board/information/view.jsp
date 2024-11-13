@@ -38,8 +38,18 @@
 		document.addEventListener('DOMContentLoaded', () => {
 		var seq_bbs = "${communityDto.seq_bbs}"; 
 	});
+		function download(type, sequence) {
+			
+			var frmMain = document.getElementById("frmMain");
+			
+			frmMain.type.setAttribute("value", type);
+			frmMain.sequence.setAttribute("value", sequence);
+			frmMain.action = "/front/community/board/download.web";
+			frmMain.target = "frmBlank";
+			frmMain.submit();
+		}
 	</script>
-	<title>커뮤니티 정보글 상세보기</title>
+	<title>커뮤니티 전체게시판 상세보기</title>
 </head>
 <body>
 <form id="frmMain" method="POST">
@@ -100,29 +110,24 @@
 						<c:out value="${communityDto.content}" escapeXml="false" />
 					</td>
 				</tr>
-			<tr>
-				<th>이미지 업로드</th>
-				<td>
-					<div class="image-upload-container">
-					이미지영역
-					</div>
-				</td>
-			</tr>
+				<%-- 
+				<c:if test="${communityDto.file_orig != ''}">
+				<tr>
+					<th>이미지</th>
+					<td>
+					<img src="http://localhost:8080/image/sale/${communityDto.file_save}" 
+					alt="image" class="img-fluid rounded-4" 
+					style="width: 208px; height: 208px; object-fit: cover;">
+					</td>
+				</tr>
+				</c:if>
+				--%>
 			<tr>
 				<th>좋아요</th>
 				<td>
 					<span id="likeElement" style="cursor: pointer; font-size: 24px;" onclick="toggleLike(${communityDto.seq_bbs})">🤍</span>
 				<%--	<span id="like_count">${communityDto.like_count}개</span> --%>
 				</td>
-			</tr>
-				<c:if test="${communityDto.file_orig != ''}">
-				<tr>
-					<th>첨부 파일</th>
-					<td>
-						<a href="javascript:download('BbsNotice', ${communityDto.seq_bbs});">다운로드</a>
-					</td>
-				</tr>
-				</c:if>
 			</table>
 			<div style="display: flex; justify-content: right; margin-top: 20px;">
 				<input type="button" value="목록" style="width:15%; height:60px;" onclick="javascript:goList(11);" />

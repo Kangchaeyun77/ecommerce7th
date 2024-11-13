@@ -100,14 +100,6 @@
 					</td>
 				</tr>
 			<tr>
-				<th>이미지 업로드</th>
-				<td>
-					<div class="image-upload-container">
-					이미지영역
-					</div>
-				</td>
-			</tr>
-			<tr>
 				<th>좋아요</th>
 				<td>
 					<span id="likeElement" style="cursor: pointer; font-size: 24px;" onclick="toggleLike(${communityDto.seq_bbs})">🤍</span>
@@ -123,8 +115,8 @@
 				</tr>
 				</c:if>
 			</table>
-			<div style="display: flex; justify-content: center; margin-top: 20px;">
-				<input type="button" value="목록" style="width:35%; height:60px;" onclick="javascript:goPopList(6);" />
+			<div style="display: flex; justify-content: right; margin-top: 20px;">
+				<input type="button" value="목록" style="width:15%; height:60px;" onclick="javascript:goList(6);" />
 			</div>
 			<hr>
 			<div style="font-size:30px; margin-top: 20px;">댓글 </div>
