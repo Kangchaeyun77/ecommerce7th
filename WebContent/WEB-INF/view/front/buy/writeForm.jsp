@@ -322,14 +322,6 @@
 		frmMain.submit();
 	}
 
-	function goWriteForm() {
-		
-		document.getElementById("cd_bbs_type").value = 3;
-		
-		frmMain.action="/front/center/board/writeForm.web";
-		
-		frmMain.submit();
-	}
 	
 	function goList(value) {
 		var frmMain = document.getElementById("frmMain");
@@ -502,12 +494,12 @@
 		
 			<div id="returns" class="tabcontent">
 			    <h3 style="color: #333; font-weight: bold; margin-bottom: 15px;">교환 및 반품안내</h3>
-			    <p style="line-height: 1.6;">
+			    <p style="line-height: 1.6">
 			        <span style="font-weight: bold; color: #007acc;">교환 및 반품 안내</span>
 			        <ul style="padding-left: 20px;">
 			            <li>상품 택(tag) 제거 또는 개봉으로 상품 가치가 훼손된 경우, <strong>수령 후 7일 이내</strong>라도 교환 및 반품이 불가능합니다.</li><br>
 			            <li>저단가 상품 및 일부 특가 상품은 고객 변심에 의한 교환/반품 시 배송비를 고객님께서 부담하셔야 합니다. (단, 제품의 하자 또는 배송 오류는 제외)</li><br>
-			            <li>일부 상품의 가격은 신모델 출시 또는 제조사의 사정으로 변동될 수 있습니다.</li><br>
+			            <li>일부 상품의 가격은 신모델 출시 또는 제조사의 사정으로 변동될 수 있습니다.</li><br/>
 			            <li>신발의 경우 실외 착화나 사용 흔적이 있을 시 교환/반품 기간 내라도 교환 및 반품이 불가능합니다.</li><br>
 			            <li>수제화와 같은 개별 주문 제작 상품(굽 높이, 발볼, 사이즈 변경 포함)은 제작 완료 후 교환 및 반품이 불가능합니다.</li><br>
 			            <li>수입/명품 제품의 경우, 제품 및 박스 훼손 시 교환 및 반품이 불가능하오니 주의 바랍니다.</li><br>
@@ -570,7 +562,7 @@
 		
 			<div id="inquiries" class="tabcontent" style="margin-left: auto; margin-right: auto">
 				<h3 style="color: #333; font-weight: bold; margin-bottom: 15px;">상품문의</h3>
-				<a href="javascript:goWriteForm();" style="color: #DEAD6F; font-weight: bold; text-decoration: none;">상품문의하기></a>
+				<a href="/front/center/board/list.web?cd_bbs_type=3" style="color: #DEAD6F; font-weight: bold; text-decoration: none;">상품문의하기></a>
 				<br/>
 				<div class="brdSearchArea" >
 					<select name="searchKey">
@@ -582,8 +574,6 @@
 				</div>
 				<br/>
 					<table style="width: 100%; margin-left: auto; margin-right: auto">
-						<tr>
-						</tr>
 						<c:choose>
 							<c:when test="${empty list}">
 								<tr>

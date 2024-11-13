@@ -466,7 +466,7 @@ public class BoardWeb extends Common {
 	 * <p>IMPORTANT:</p>
 	 * <p>EXAMPLE:</p>
 	 */
-	@RequestMapping(value = "/front/center/board/list.web", method = RequestMethod.POST)
+	@RequestMapping(value = "/front/center/board/list.web")
 	public ModelAndView list(HttpServletRequest request, HttpServletResponse response, PagingDto pagingDto) {
 		
 		ModelAndView mav = new ModelAndView("redirect:/error.web");
