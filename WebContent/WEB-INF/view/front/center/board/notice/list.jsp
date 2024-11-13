@@ -105,7 +105,7 @@
 				<tr>
 					<th style="width: 5%">NO</th>
 					<th>제목</th>
-					<th style="width: 5%">첨부</th>
+					<th style="width: 7%">첨부</th>
 					<th style="width: 10%">등록일</th>
 				</tr>
 				<c:choose>
