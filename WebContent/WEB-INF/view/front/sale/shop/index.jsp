@@ -91,6 +91,18 @@
 		    -webkit-line-clamp: 2; /* 두 줄까지만 표시 */
 		    -webkit-box-orient: vertical;
         }
+		        /* 모바일 대응 스타일 */
+		@media screen and (max-width: 768px) {
+		  /* 컨테이너 기본 여백 제거 */
+		  .container {
+		    padding: 10px;
+		  }
+		  @media screen and (max-width: 480px) {
+		  /* 작은 모바일 화면에서 상품 컨테이너 세로 배치 */
+		  .product {
+		    width: 100%;
+		  }
+		}
 	</style>
 </head>
 <body>
@@ -194,6 +206,7 @@
 					<option value="2" <c:if test="${paging.species == 2}">selected</c:if>>고양이</option>
 					<option value="3" <c:if test="${paging.species == 3}">selected</c:if>>햄스터</option>
 					<option value="4" <c:if test="${paging.species == 4}">selected</c:if>>파충류</option>
+					<option value="5" <c:if test="${paging.species == 5}">selected</c:if>>물고기</option>
 				</select>
 				<select name="searchKey">
 					<option value="sle_nm" <c:if test="${paging.searchKey == 'sle_nm'}">selected</c:if>>상품명</option>
