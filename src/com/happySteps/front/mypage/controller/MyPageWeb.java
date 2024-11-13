@@ -20,6 +20,7 @@
  */
 package com.happySteps.front.mypage.controller;
 
+import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -27,8 +28,11 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import com.happySteps.front.common.Common;
+import com.happySteps.front.member.dto.MemberDto;
+import com.happySteps.front.member.service.MemberSrvc;
 import com.happySteps.front.mypage.controller.MyPageWeb;
 /**
  * @version 1.0.0
@@ -43,6 +47,44 @@ public class MyPageWeb extends Common {
 	/** Logger */
 	private static Logger logger = LoggerFactory.getLogger(MyPageWeb.class);
 	
+	@Inject
+	private MemberSrvc memberSrvc;
+	
+	/**
+	 * @param request [요청 서블릿]
+	 * @param response [응답 서블릿]
+	 * @return ModelAndView
+	 * 
+	 * @since 2024-11-13
+	 * <p>DESCRIPTION: 회원 탈퇴 처리</p>
+	 * <p>IMPORTANT:</p>
+	 * <p>EXAMPLE:</p>
+	 */
+	@RequestMapping(value = "/front/myPage/exitProc.web")
+	public ModelAndView exitProc(HttpServletRequest request, HttpServletResponse response) {
+
+		ModelAndView mav = new ModelAndView("redirect:/error.web");
+
+		try {
+			// 세션에서 seq_mbr 값 가져오기
+			MemberDto memberDto = new MemberDto();
+			memberDto.setSeq_mbr(Integer.parseInt(getSession(request, "SEQ_MBR")));
+			mav.addObject("memberDto", memberDto);
+			// 서비스 호출
+			boolean result = memberSrvc.updateExit(memberDto);
+
+			// 성공 시 리다이렉트할 페이지 설정
+			if (result) {
+				request.getSession().invalidate();
+				mav.setViewName("redirect:/front/index.web");
+			}
+		} catch (Exception e) {
+			logger.error("[" + this.getClass().getName() + ".exitProc()] " + e.getMessage(), e);
+		}
+
+		return mav;
+	}
+	
 	/**
 	 * @param request [요청 서블릿]
 	 * @param response [응답 서블릿]
@@ -54,12 +96,14 @@ public class MyPageWeb extends Common {
 	 * <p>EXAMPLE:</p>
 	 */
 	@RequestMapping(value = "/front/myPage/exitForm.web")
-	public ModelAndView registerForm(HttpServletRequest request, HttpServletResponse response) {
+	public ModelAndView exitForm(HttpServletRequest request, HttpServletResponse response) {
 		
 		
 		ModelAndView mav = new ModelAndView("redirect:/error.web");
 		
 		try {
+			// 세션에서 seq_mbr 값 가져오기
+			mav.addObject("seq_mbr", Integer.parseInt(getSession(request, "SEQ_MBR")));
 			mav.setViewName("front/myPage/exitForm");
 		}
 		catch (Exception e) {

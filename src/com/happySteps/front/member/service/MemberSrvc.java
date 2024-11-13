@@ -67,6 +67,15 @@ public class MemberSrvc {
 		}
 	}
 	
+	@Transactional("txFront")
+	public boolean updateExit(MemberDto memberDto) {
+		
+		if (memberDao.updateExit(memberDto) == 1) return true;
+		else {
+			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+			return false;
+		}
+	}
 	public MemberDto findPasswd(MemberDto memberDto) {
 		return memberDao.findPasswd(memberDto);
 	}

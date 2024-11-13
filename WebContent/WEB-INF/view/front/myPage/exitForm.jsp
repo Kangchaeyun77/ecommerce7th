@@ -33,7 +33,30 @@
 	function goMyPage() {
 		window.location.href = "/front/myPage/index.web";
 	}
+	 //var memberDto = ${memberDto}
+	 
+function exit() {
+	if (confirm("정말로 탈퇴하시겠습니까?")) {
+		fetch(`/front/myPage/exitProc.web?seq_mbr=${seq_mbr}`, {
+			method: 'POST', 
+			credentials: 'include' 
+		})
+		.then(response => {
+			if (response.redirected) {
+				window.location.href = response.url; 
+			} else {
+				alert("탈퇴 처리가 실패했습니다.");
+			}
+		})
+		.catch(error => {
+			console.error("탈퇴 처리 중 오류:", error);
+			alert("탈퇴 처리 중 오류가 발생했습니다.");
+		});
 
+		return true;
+	}
+	return false;
+}
 	</script>
 </head>
 <body>
