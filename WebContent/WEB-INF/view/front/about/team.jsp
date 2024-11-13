@@ -29,13 +29,26 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<style>
+		.responsive-img {
+	    width: 60%;
+	    height: auto;
+	    object-fit: cover;
+	    max-width: 100%;
+	}
+	
+	@media (max-width: 768px) {
+	    .responsive-img {
+	        width: 100%;
+	        height: auto;
+	    }
+	}
 	</style>
 </head>
 <body>
 	<form id="frmMain">
 		<div class="container">
 			<article class="txtCenter">
-				<div style="position: relative; height: 400px; overflow: hidden; margin-top: 10px;">
+				<div style="position: relative; height: 400px; margin-top: 10px; margin-bottom: 130px;">
 					<a href="/front/">
 					</a>
 					<header>
@@ -48,7 +61,7 @@
 				</div>
 				<br>
 			<div style="text-align: center;">
-			<img src="/images/team.png" alt="조직도" style="width: 60%; height: 450px; object-fit: cover;"/>
+			    <img src="/images/team.png" alt="조직도" class="responsive-img" />
 			</div>
 			</article>
 		</div>		

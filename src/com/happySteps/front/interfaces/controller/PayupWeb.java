@@ -323,7 +323,7 @@ public class PayupWeb extends Common {
 						}
 						else if (staticProperties.getProperty("common.mode", "[UNDEFINED]").equalsIgnoreCase("DEVELOPMENT")) {
 							 // moon(8080), jupiter(8081), saturn(8082), uranus(8083)
-							serverUrl = "http://jupiter.plutozone.com";
+							serverUrl = "http://119.71.96.251:8081";
 						}
 						else {
 							serverUrl = "[UNDEFINED]";

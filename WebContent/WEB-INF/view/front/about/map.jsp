@@ -65,7 +65,7 @@
 	<form id="frmMain">
 		<div class="container">
 			<article class="txtCenter">
-				<div style="position: relative; height: 500px; margin-top: 10px;">
+				<div style="position: relative; height: 500px; margin-top: 10px; margin-bottom: 20px;">
 					<a href="/front/">
 					</a>
 					<header>

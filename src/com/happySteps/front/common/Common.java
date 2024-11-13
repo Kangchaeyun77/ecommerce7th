@@ -43,21 +43,13 @@ public class Common {
 	
 	protected static String getSession(HttpServletRequest request, String key) {
 		
-		logger.info("***********************************************************");
-		logger.info("[KEY] = " + key);
 		String value = "";
 		
 		HttpSession session = request.getSession(false);
 		value = (String) session.getAttribute(key);
 		
-		if (value == null) 	{
+		if (value == null) 	value = "[UNDEFINED]";
 			
-			value = "[UNDEFINED]";
-			
-			if (key.equals("SEQ_MBR")) value = "0";
-		}
-		logger.info("[VALUE] = " + value);
-		logger.info("***********************************************************");
 		return value;
 	}
 	

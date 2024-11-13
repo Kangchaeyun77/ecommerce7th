@@ -105,6 +105,60 @@
 		button[type="reset"] {
 			background-color: #D3D3D3
 		}
+		/* 기본 레이아웃 */
+.donation-form {
+    max-width: 40%;
+    margin: 20px auto;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+}
+
+/* 모바일 화면을 위한 반응형 설정 */
+@media (max-width: 768px) {
+    .donation-form {
+        max-width: 100%; /* 화면 너비에 맞게 크기 조정 */
+        padding: 15px;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    input[type="tel"],
+    input[type="number"],
+    button {
+        width: 100%; /* 입력 필드와 버튼이 화면에 맞게 너비 조정 */
+    }
+
+    .donation-form h2 {
+        font-size: 20px; /* 헤더 글자 크기 조정 */
+    }
+
+    fieldset {
+        padding: 15px; /* 폼 필드 여백 조정 */
+    }
+
+    button {
+        font-size: 14px; /* 버튼 글자 크기 조정 */
+    }
+}
+
+/* 아주 작은 화면 (모바일 세로 모드 등) */
+@media (max-width: 480px) {
+    .donation-form {
+        padding: 10px;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    input[type="tel"],
+    input[type="number"] {
+        padding: 3px; /* 더 작은 화면에서 여백을 키워서 사용 편의성 높이기 */
+    }
+
+    button {
+        padding: 12px; /* 버튼 크기 키우기 */
+    }
+}
 	</style>
 	<script></script>
 </head>

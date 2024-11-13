@@ -56,6 +56,22 @@
 		transform: translateY(-5px); /* 마우스를 올렸을 때 위로 이동 */
 		box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2); /* 그림자 강도 증가 */
 	}
+
+	/* 모바일 화면 (화면 너비 768px 이하) */
+	@media (max-width: 768px) {
+		.container {
+			padding: 5px;
+		}
+	
+		label, input, select, button {
+			width: 100%;
+			font-size: 14px;
+		}
+		.card-container {
+			flex-direction: column;
+			align-items: center;
+		}
+	}
 	</style>
 	<script>
 	
