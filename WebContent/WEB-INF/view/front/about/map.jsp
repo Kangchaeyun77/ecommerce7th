@@ -43,7 +43,7 @@
 		.map-container {
 			display: flex; /* Flexbox 사용 */
 			justify-content: center; /* 수평 가운데 정렬 */
-			margin: 20px 0; /* 위아래 여백 추가 */
+			margin: 60px 0; /* 위아래 여백 추가 */
 			width: 100%; /* 너비 100% 설정 */
 			position: relative; /* 부모 요소의 위치를 기준으로 설정 */
 		}
@@ -65,7 +65,7 @@
 	<form id="frmMain">
 		<div class="container">
 			<article class="txtCenter">
-				<div style="position: relative; height: 400px; overflow: hidden; margin-top: 10px;">
+				<div style="position: relative; height: 500px; margin-top: 10px;">
 					<a href="/front/">
 					</a>
 					<header>
@@ -77,6 +77,7 @@
 					</header>
 				</div>
 				<br>
+				<hr>
 				<div class="map-container">
 					<!-- 카카오맵 위치 -->
 					<div id="daumRoughmapContainer1728392491067" class="root_daum_roughmap root_daum_roughmap_landing"></div>
