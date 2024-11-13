@@ -101,10 +101,10 @@
 									</a>
 									<ul class="nav child_menu">
 										<li>
-											<a href="#">매출통계</a>
+											<a href="/console/statistics/sale.web">매출통계</a>
 										</li>
 										<li>
-											<a href="/console/statistics/index.web">회원통계</a>
+											<a href="/console/statistics/member.web">회원통계</a>
 										</li>
 										<li>
 											<a href="#">게시판통계</a>
@@ -118,7 +118,7 @@
 									</a>
 									<ul class="nav child_menu">
 										<li>
-											<a href="/console/users/member/list.web">후원관리</a>
+											<a href="/console/donation/index.web">후원관리</a>
 										</li>
 									</ul>
 								</li>
