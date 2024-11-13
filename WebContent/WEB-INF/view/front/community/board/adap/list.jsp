@@ -154,9 +154,11 @@
 		<c:otherwise>
 			<c:forEach items="${list}" var="list">
 				<div class="card">
+				<%--
 					<div class="card-image">
 					<img src="http://localhost:8080/image/sale/${list.file_save}" alt="이미지" style="width: 100%; height: 100%; object-fit: cover; border-radius: 8px;" />
 					</div>
+					 --%>
 					<div class="card-content">
 						내용:${list.content}
 						<div class="card-title">

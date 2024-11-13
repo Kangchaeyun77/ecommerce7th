@@ -135,7 +135,7 @@
 			<br>
 <h3>댓글 목록</h3>
 <hr>
-<div class="comment-list" id="commentListContainer" style="border: 1px solid red;">
+<div class="comment-list" id="commentListContainer">
 	<c:if test="${not empty commentList}">
 		<c:forEach var="comment" items="${commentList}">
 			<div class="comment-item" style="margin-left: <c:out value="${comment.depth * 20}"/>px;">
