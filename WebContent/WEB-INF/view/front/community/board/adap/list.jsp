@@ -171,7 +171,7 @@
 							${list.content}
 						</div>
 						<div class="card-tags">
-							테그: ${list.tag}
+							태그: ${list.tag}
 							<div class="icon-cd_ctg_pet" style="display: flex; justify-content: center; align-items: flex-start; flex-direction: column;">
 								<c:choose>
 									<c:when test="${list.cd_ctg_pet == 1}">
