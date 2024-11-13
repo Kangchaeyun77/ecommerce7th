@@ -35,7 +35,7 @@
 	<form id="frmMain">
 		<div class="container">
 			<article class="txtCenter">
-				<div style="position: relative; height: 400px; overflow: hidden; margin-top: 10px;">
+				<div style="position: relative; height: 400px; margin-top: 10px; margin-bottom: 20px;">
 					<a href="/front/">
 					</a>
 					<header>
@@ -48,7 +48,7 @@
 				</div>
 				<br>
 
-				<div style="text-align: center; padding: 20px; border-radius: 10px; margin-top: 10px;">
+				<div style="text-align: center; padding: 20px; border-radius: 10px; margin-top: 90px;">
 					<h2 style="font-size: 25px; color: #444;">미션 (Mission)</h2>
 					<p><strong>"반려동물과 유기동물의 행복한 삶을 함께 만들어가는 따뜻한 플랫폼"</strong></p>
 					<p>저희 플랫폼의 미션은 반려동물과 유기동물이 행복한 삶을 영위할 수 있도록 돕는 것입니다.<br> 반려동물에게는 최고의 케어와 애정을, 유기동물에게는 따뜻한 가정과 희망을 제공함으로써,<br> 사람들과 동물이 더불어 살아가는 세상을 만들어 나가는 것이 우리의 목표입니다.</p>

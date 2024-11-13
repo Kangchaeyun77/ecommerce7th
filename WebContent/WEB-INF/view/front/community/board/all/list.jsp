@@ -99,14 +99,14 @@
 		<nav>
 		</nav>
 		<article class="txtCenter" style="margin: 30px;">
-			<div class="brdSearchArea" style="display: flex; justify-content: center; align-items: center; width:100%;">
-				<select name="searchKey" id="searchKey">
-					<option value="title"<c:if test="${paging.searchKey == 'title'}"> selected</c:if>>제목</option>
-					<option value="contents"<c:if test="${paging.searchKey == 'contents'}"> selected</c:if>>내용</option>
-					<option value="title+contents"<c:if test="${paging.searchKey == 'title+contents'}"> selected</c:if>>제목 또는 내용</option>
-				</select>
-				<input type="text" name="searchWord" id="searchWord" value="${paging.searchWord}" />
-				<input type="submit" value="검색"/>
+			<div class="brdSearchArea" style="display: flex; justify-content: center; align-items: center; width: 100%;">
+			    <select name="searchKey" id="searchKey">
+			        <option value="title"<c:if test="${paging.searchKey == 'title'}"> selected</c:if>>제목</option>
+			        <option value="contents"<c:if test="${paging.searchKey == 'contents'}"> selected</c:if>>내용</option>
+			        <option value="title+contents"<c:if test="${paging.searchKey == 'title+contents'}"> selected</c:if>>제목 또는 내용</option>
+			    </select>
+			    <input type="text" name="searchWord" id="searchWord" value="${paging.searchWord}" />
+			    <input type="submit" value="검색"/>
 			</div>
 			<div class="brdInfo" style="margin: 20px; margin-left: 10%; margin-bottom: 10px">전체 ${paging.totalLine}개[${paging.currentPage}/${paging.totalPage} 페이지]</div>
 			<table class="headTop_01" style="width: 80%; margin-left: auto; margin-right: auto">
