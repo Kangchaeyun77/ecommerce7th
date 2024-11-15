@@ -1,4 +1,7 @@
-# kr.co.himedia.sn.ecommerce7th
+<div align=left> 
+
+![header](https://capsule-render.vercel.app/api?type=soft&color=auto&height=120&section=header&text=[HappySteps]%&fontSize=30)
+</div>
 
 ## 0. 팀 구성 및 저장소(GitHub)
 - 팀장: 강 채 윤
