@@ -111,3 +111,10 @@
 | **김 범 석**  | - 회원가입(약관동의,중복확인 및 무결성검사,데이터확인)<br>- 구매이력 확인<br>- 고객센터 관련 기능<br>- 장바구니 및 구매 기능(외부결제api연동)<br>- 관리자 기능 (회원 관리, 고객 지원, 통계)          |
 | **손 유 빈**  | - 상품 데이터 크롤링<br>- 문서 작성                                                                 |
                                                               
+<div align=left> 
+  
+![Footer](https://capsule-render.vercel.app/api?type=waving&color=auto&height=200&section=footer)
+
+
+</div>
+<!-- Stack Icon Refernces -->
